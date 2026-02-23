@@ -1,0 +1,6 @@
+project: metropolist.xcodeproj
+schemes:
+- metropolist
+retain_codable_properties: true
+report_exclude:
+- "*/SnapshotHelper.swift"

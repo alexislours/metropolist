@@ -1,0 +1,375 @@
+import CoreLocation
+import SwiftUI
+import TransitModels
+import UIKit
+
+@MainActor
+@Observable
+final class TravelFlowViewModel {
+    enum Step: Hashable {
+        case pickLine
+        case pickDestination
+        case pickVariant
+        case confirm
+        case success
+    }
+
+    struct NearbyStation: Identifiable {
+        var id: String {
+            station.sourceID
+        }
+
+        let station: TransitStation
+        let distance: CLLocationDistance
+        let lines: [TransitLine]
+    }
+
+    struct DestinationOption: Identifiable {
+        var id: String {
+            station.sourceID
+        }
+
+        let station: TransitStation
+        /// The variants that serve this station downstream from origin
+        let variants: [(variant: TransitRouteVariant, stop: TransitLineStop)]
+        /// Minimum stop order across all variants (for route-order sorting)
+        let minStopOrder: Int
+    }
+
+    struct VariantPreview {
+        let variant: TransitRouteVariant
+        /// Station names between origin and destination for this variant
+        let viaStationNames: [String]
+        let totalStops: Int
+    }
+
+    var path = NavigationPath()
+
+    // Step 1: Station picker
+    var isLoadingNearby = false
+    var nearbyStations: [NearbyStation] = []
+    var originStation: TransitStation?
+
+    // Step 2: Line picker
+    var stationLines: [TransitLine] = []
+    var selectedLine: TransitLine?
+
+    // Step 3: Destination picker
+    var destinationOptions: [DestinationOption] = []
+    var destinationStation: TransitStation?
+    var selectedVariant: TransitRouteVariant?
+
+    /// Step 3b: Variant disambiguation
+    var variantPreviews: [VariantPreview] = []
+
+    // Step 4: Confirm
+    var intermediateStops: [TransitLineStop] = []
+    var intermediateStationNames: [String: String] = [:]
+
+    // Step 5: Success
+    var recordedTravel: Travel?
+    var newStopsCompleted: Int = 0
+    var isProcessing = false
+    var celebrationEvent: CelebrationEvent?
+
+    // Errors
+    var errorMessage: String?
+    var showError = false
+
+    // Prefill
+    var prefillLine: TransitLine?
+    var prefillLineStations: [TransitStation] = []
+    var isLoadingLineStations = false
+
+    let dataStore: DataStore
+    let prefill: TravelFlowPrefill?
+
+    init(dataStore: DataStore, prefill: TravelFlowPrefill? = nil) {
+        self.dataStore = dataStore
+        self.prefill = prefill
+    }
+
+    // MARK: - Step 1: Load nearby stations
+
+    func loadNearbyStations() {
+        isLoadingNearby = true
+
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            do {
+                let userLocation = try await dataStore.locationService.requestLocationAsync()
+
+                let stations = try dataStore.transitService.nearbyStations(
+                    latitude: userLocation.coordinate.latitude,
+                    longitude: userLocation.coordinate.longitude,
+                    radiusDegrees: 0.01
+                )
+
+                // Sort by distance, take closest 15
+                let sorted = stations
+                    .map { station -> (TransitStation, CLLocationDistance) in
+                        let stationLoc = CLLocation(latitude: station.latitude, longitude: station.longitude)
+                        return (station, userLocation.distance(from: stationLoc))
+                    }
+                    .sorted { $0.1 < $1.1 }
+                    .prefix(15)
+
+                // Fetch lines for top stations
+                var nearby: [NearbyStation] = []
+                for (station, distance) in sorted {
+                    let lines = try dataStore.transitService.lines(forStationSourceID: station.sourceID)
+                    nearby.append(NearbyStation(station: station, distance: distance, lines: lines))
+                }
+
+                nearbyStations = nearby
+            } catch {
+                nearbyStations = []
+            }
+
+            isLoadingNearby = false
+        }
+    }
+
+    func searchStations(query: String) -> [TransitStation] {
+        guard !query.isEmpty else { return [] }
+        return (try? dataStore.transitService.searchStations(query: query)) ?? []
+    }
+
+    func linesForStation(_ sourceID: String) -> [TransitLine] {
+        (try? dataStore.transitService.lines(forStationSourceID: sourceID)) ?? []
+    }
+
+    // MARK: - Line-stop loading (for line prefill)
+
+    func loadLineStations() async {
+        guard let lineID = prefill?.lineSourceID else { return }
+        isLoadingLineStations = true
+        await Task.yield()
+
+        do {
+            prefillLine = try dataStore.transitService.line(bySourceID: lineID)
+
+            let variants = try dataStore.transitService.routeVariants(forLineSourceID: lineID)
+            // Pick the longest variant to get the most complete stop list
+            var longestStops: [TransitLineStop] = []
+            for variant in variants {
+                let stops = try dataStore.transitService.lineStops(forRouteVariantSourceID: variant.sourceID)
+                if stops.count > longestStops.count {
+                    longestStops = stops
+                }
+            }
+
+            let orderedStops = longestStops.sorted { $0.order < $1.order }
+
+            // Deduplicate by stationSourceID while preserving order
+            var seen = Set<String>()
+            var uniqueIDs: [String] = []
+            for stop in orderedStops where seen.insert(stop.stationSourceID).inserted {
+                uniqueIDs.append(stop.stationSourceID)
+            }
+
+            let stations = try dataStore.transitService.stations(bySourceIDs: uniqueIDs)
+            let stationMap = Dictionary(uniqueKeysWithValues: stations.map { ($0.sourceID, $0) })
+
+            // Preserve route order
+            prefillLineStations = uniqueIDs.compactMap { stationMap[$0] }
+        } catch {
+            prefillLineStations = []
+        }
+
+        isLoadingLineStations = false
+    }
+
+    func autoSelectOriginFromPrefill() {
+        guard let stationID = prefill?.stationSourceID else { return }
+        do {
+            if let station = try dataStore.transitService.station(bySourceID: stationID) {
+                selectOrigin(station)
+            }
+        } catch {
+            // Station not found — fall through to normal picker
+        }
+    }
+
+    // MARK: - Haptics
+
+    private func selectionHaptic() {
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
+    }
+
+    private func successHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+
+    // MARK: - Step 1 → 2: Select origin
+
+    func selectOrigin(_ station: TransitStation) {
+        selectionHaptic()
+        originStation = station
+        do {
+            stationLines = try dataStore.transitService.lines(forStationSourceID: station.sourceID)
+            if stationLines.isEmpty {
+                errorMessage = String(localized: "No lines serve this stop.", comment: "Travel flow: error when stop has no lines")
+                showError = true
+                originStation = nil
+                return
+            }
+
+            // Auto-select prefilled line if this station serves it
+            if let prefill, let prefilled = stationLines.first(where: { $0.sourceID == prefill.lineSourceID }) {
+                selectLine(prefilled)
+                return
+            }
+
+            if stationLines.count == 1 {
+                selectLine(stationLines[0])
+            } else {
+                path.append(Step.pickLine)
+            }
+        } catch {
+            errorMessage = String(localized: "Failed to load lines.", comment: "Travel flow: error loading lines for stop")
+            showError = true
+            originStation = nil
+        }
+    }
+
+    // MARK: - Step 2 → 3: Select line
+
+    var isLoadingDestinations = false
+
+    func selectLine(_ line: TransitLine) {
+        selectionHaptic()
+        selectedLine = line
+        isLoadingDestinations = true
+        path.append(Step.pickDestination)
+
+        Task { @MainActor [weak self] in
+            guard let self else { return }
+            do {
+                let options = try loadDestinationOptions(for: line)
+
+                guard !options.isEmpty else {
+                    errorMessage = String(
+                        localized: "No destinations found from this stop on this line.",
+                        comment: "Travel flow: error when no downstream stops exist"
+                    )
+                    showError = true
+                    selectedLine = nil
+                    path.removeLast()
+                    isLoadingDestinations = false
+                    return
+                }
+
+                destinationOptions = options
+            } catch {
+                errorMessage = String(
+                    localized: "Failed to load destinations.",
+                    comment: "Travel flow: error loading destination stops"
+                )
+                showError = true
+                selectedLine = nil
+                path.removeLast()
+            }
+            isLoadingDestinations = false
+        }
+    }
+
+    // MARK: - Step 3 → 4: Select destination
+
+    func selectDestination(_ option: DestinationOption) {
+        selectionHaptic()
+        destinationStation = option.station
+
+        let allPreviews = option.variants.compactMap { pair in
+            buildVariantPreview(pair.variant)
+        }
+
+        // Deduplicate variants that look identical to the user (same intermediate stations)
+        var seen = Set<String>()
+        let uniquePreviews = allPreviews.filter { preview in
+            let key = preview.viaStationNames.joined(separator: "|")
+            return seen.insert(key).inserted
+        }
+
+        if uniquePreviews.count <= 1 {
+            // Unambiguous — go straight to confirm
+            selectedVariant = (uniquePreviews.first ?? allPreviews.first)?.variant
+                ?? option.variants[0].variant
+            loadIntermediateStops()
+            path.append(Step.confirm)
+        } else {
+            variantPreviews = uniquePreviews
+            path.append(Step.pickVariant)
+        }
+    }
+
+    func selectVariant(_ variant: TransitRouteVariant) {
+        selectionHaptic()
+        selectedVariant = variant
+        loadIntermediateStops()
+        path.append(Step.confirm)
+    }
+
+    // MARK: - Step 4: Confirm
+
+    func confirmTravel() {
+        guard let line = selectedLine,
+              let variant = selectedVariant,
+              let origin = originStation,
+              let destination = destinationStation else { return }
+
+        isProcessing = true
+        do {
+            let stationIDs = intermediateStops.map(\.stationSourceID)
+            let existingCompletions = try dataStore.userService.completedStopIDs(forLineSourceID: line.sourceID)
+            let newCompletions = stationIDs.filter { !existingCompletions.contains($0) }.count
+
+            // Capture before snapshot for celebration diff
+            let beforeSnapshot = captureGamificationSnapshot(from: dataStore)
+
+            let travel = try dataStore.userService.recordTravel(
+                lineSourceID: line.sourceID,
+                routeVariantSourceID: variant.sourceID,
+                fromStationSourceID: origin.sourceID,
+                toStationSourceID: destination.sourceID,
+                intermediateStationSourceIDs: stationIDs
+            )
+            recordedTravel = travel
+            newStopsCompleted = newCompletions
+            dataStore.userDataVersion += 1
+
+            // Capture after snapshot and compute celebration
+            if let before = beforeSnapshot {
+                let after = captureGamificationSnapshot(from: dataStore)
+                if let after {
+                    celebrationEvent = GamificationDiffEngine.diff(before: before, after: after)
+                    dataStore.pendingCelebration = celebrationEvent
+                }
+            }
+
+            isProcessing = false
+            successHaptic()
+            path.append(Step.success)
+        } catch {
+            errorMessage = String(
+                localized: "Failed to record travel. Please try again.",
+                comment: "Travel flow: error saving travel record"
+            )
+            showError = true
+            isProcessing = false
+        }
+    }
+
+    // MARK: - Helpers
+
+    static func formatDistance(_ meters: CLLocationDistance) -> String {
+        if meters < 1000 {
+            return String(localized: "\(Int(meters)) m", comment: "Travel flow: distance in meters")
+        } else {
+            let kilometers = String(format: "%.1f", meters / 1000)
+            return String(localized: "\(kilometers) km", comment: "Travel flow: distance in kilometers")
+        }
+    }
+}

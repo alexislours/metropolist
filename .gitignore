@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Build
+DerivedData/
+build/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods
+Pods/
+
+fastlane/report.xml
+fastlane/screenshots
+fastlane/screenshots_ipad
+
+screenshot-plan.md
+metropolist/transit.store

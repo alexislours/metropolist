@@ -1,0 +1,190 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Capture App Store screenshots with mock data (2-at-a-time parallelism)"
+  lane :screenshots do
+    run_screenshots(
+      device_type: "iPhone 17 Pro Max",
+      output: "./screenshots",
+      sim_prefix: "Screenshot"
+    )
+  end
+
+  desc "Capture iPad App Store screenshots with mock data (2-at-a-time parallelism)"
+  lane :screenshots_ipad do
+    run_screenshots(
+      device_type: "iPad Pro 13-inch (M4)",
+      output: "./screenshots_ipad",
+      sim_prefix: "Screenshot-iPad"
+    )
+  end
+
+  private_lane :run_screenshots do |options|
+    device_type = options[:device_type]
+    output      = options[:output]
+    sim_prefix  = options[:sim_prefix]
+
+    project_root = File.expand_path("..", __dir__)
+    project = File.join(project_root, "metropolist.xcodeproj")
+    derived_data = File.join(project_root, "build")
+
+    runtime = "com.apple.CoreSimulator.SimRuntime.iOS-26-2"
+    cache_screenshots = File.expand_path("~/Library/Caches/tools.fastlane/screenshots")
+    concurrency = 2
+
+    languages = [
+      { lang: "en-US", locale: "en_US", test: "testScreenshots_EnUS" },
+      { lang: "fr-FR", locale: "fr_FR", test: "testScreenshots_FrFR" },
+    ]
+
+    FileUtils.rm_rf(output)
+    FileUtils.rm_rf(cache_screenshots)
+    FileUtils.mkdir_p(output)
+
+    # Look up the device type ID for simulator creation
+    device_type_id = nil
+    JSON.parse(`xcrun simctl list devicetypes -j`)["devicetypes"].each do |dt|
+      if dt["name"] == device_type
+        device_type_id = dt["identifier"]
+        break
+      end
+    end
+    UI.user_error!("Device type '#{device_type}' not found") unless device_type_id
+
+    # Build index of existing named screenshot simulators for reuse
+    existing_sims = {}
+    (JSON.parse(`xcrun simctl list devices -j`)["devices"][runtime] || []).each do |d|
+      existing_sims[d["name"]] = d["udid"]
+    end
+
+    # Build once for testing
+    UI.header("Building for testing...")
+    system(
+      "bash", "-o", "pipefail", "-c",
+      "xcodebuild build-for-testing " \
+      "-project '#{project}' -scheme metropolist " \
+      "-derivedDataPath '#{derived_data}' " \
+      "-destination 'generic/platform=iOS Simulator' " \
+      "ONLY_ACTIVE_ARCH=NO " \
+      "ARCHS=arm64 " \
+      "2>&1 | xcbeautify"
+    ) || UI.user_error!("build-for-testing failed")
+
+    xctestrun_files = Dir.glob("#{derived_data}/Build/Products/*.xctestrun")
+    UI.user_error!("No .xctestrun file found") if xctestrun_files.empty?
+    xctestrun = xctestrun_files.first
+    UI.message("Using xctestrun: #{File.basename(xctestrun)}")
+
+    booted_udids = []
+
+    begin
+      languages.each_slice(concurrency) do |batch|
+        sims = []
+
+        batch.each do |entry|
+          sim_name = "#{sim_prefix}-#{entry[:lang]}"
+
+          if existing_sims.key?(sim_name)
+            udid = existing_sims[sim_name]
+            UI.message("Reusing simulator #{sim_name} (#{udid})...")
+            system("xcrun simctl shutdown #{udid} 2>/dev/null")
+          else
+            udid = `xcrun simctl create "#{sim_name}" #{device_type_id} #{runtime}`.strip
+            UI.user_error!("Failed to create simulator for #{entry[:lang]}") if udid.empty?
+            existing_sims[sim_name] = udid
+            UI.message("Created simulator #{sim_name} (#{udid})")
+          end
+
+          # Write language/locale into the freshly-erased Preferences directory
+          prefs_dir = File.expand_path("~/Library/Developer/CoreSimulator/Devices/#{udid}/data/Library/Preferences")
+          FileUtils.mkdir_p(prefs_dir)
+
+          File.write(File.join(prefs_dir, ".GlobalPreferences.plist"), <<~XML)
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+            <plist version="1.0">
+            <dict>
+            \t<key>AppleLanguages</key>
+            \t<array>
+            \t\t<string>#{entry[:lang]}</string>
+            \t</array>
+            \t<key>AppleLocale</key>
+            \t<string>#{entry[:locale]}</string>
+            </dict>
+            </plist>
+          XML
+
+          booted_udids << udid
+          sims << { udid: udid, entry: entry }
+        end
+
+        # Boot simulators and apply status bar overrides before running tests
+        sims.each do |sim|
+          system("xcrun simctl boot #{sim[:udid]} 2>/dev/null")
+          system("xcrun simctl status_bar #{sim[:udid]} override --cellularBars 4")
+        end
+
+        # Spawn test processes in parallel
+        spawned = sims.map do |sim|
+          udid = sim[:udid]
+          entry = sim[:entry]
+          test_id = "metropolistUITests/ScreenshotTests/#{entry[:test]}"
+
+          UI.message("[#{entry[:lang]}] Running #{test_id} on #{udid}...")
+          pid = Process.spawn(
+            "bash", "-o", "pipefail", "-c",
+            "xcodebuild test-without-building " \
+            "-xctestrun '#{xctestrun}' " \
+            "-derivedDataPath '#{derived_data}' " \
+            "-destination 'platform=iOS Simulator,id=#{udid}' " \
+            "-only-testing:'#{test_id}' " \
+            "-parallel-testing-enabled NO " \
+            "2>&1 | xcbeautify --quiet"
+          )
+          { pid: pid, entry: entry, udid: udid }
+        end
+
+        # Wait for all processes in this batch to finish
+        spawned.each do |s|
+          _, status = Process.wait2(s[:pid])
+          if status.success?
+            UI.success("[#{s[:entry][:lang]}] completed")
+          else
+            UI.error("[#{s[:entry][:lang]}] test failed on #{s[:udid]}")
+          end
+        end
+
+        # Copy screenshots from cache for this batch's languages
+        if Dir.exist?(cache_screenshots)
+          batch.each do |entry|
+            lang_dir = File.join(cache_screenshots, entry[:lang])
+            if Dir.exist?(lang_dir)
+              dest = File.join(output, entry[:lang])
+              FileUtils.mkdir_p(dest)
+              FileUtils.cp_r("#{lang_dir}/.", dest)
+              UI.success("Copied screenshots for #{entry[:lang]}")
+            else
+              UI.important("No screenshots found for #{entry[:lang]} in cache")
+            end
+          end
+        end
+
+        # Shutdown simulators but keep them for reuse next run
+        sims.each do |sim|
+          system("xcrun simctl shutdown #{sim[:udid]} 2>/dev/null")
+          booted_udids.delete(sim[:udid])
+        end
+      end
+
+      UI.success("All screenshots captured in #{output}")
+      system("open #{output}")
+
+    ensure
+      # Shutdown any still-running simulators on failure
+      booted_udids.each do |udid|
+        system("xcrun simctl shutdown #{udid} 2>/dev/null")
+        UI.message("Shut down simulator #{udid}")
+      end
+    end
+  end
+end

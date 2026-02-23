@@ -1,0 +1,3 @@
+--swiftversion 6
+--exclude DerivedData,.build
+--disable wrapMultilineStatementBraces
