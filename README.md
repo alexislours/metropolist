@@ -1,4 +1,4 @@
-# Metropolist
+# Métropolist
 
 A native iOS app to explore, track, and complete every transit station in the Paris region (Île-de-France), with gamification, iCloud sync, and zero dependencies.
 
@@ -53,6 +53,6 @@ A native iOS app to explore, track, and complete every transit station in the Pa
 
 ## Localization
 
-Metropolist is localized in 2 languages:
+Métropolist is localized in 2 languages:
 
 English, French

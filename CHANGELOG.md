@@ -2,7 +2,7 @@
 
 ## 1.0.0 (2026022301) - 2026-02-23
 
-Metropolist is here! Explore, track, and complete every transit station in the Paris region.
+Métropolist is here! Explore, track, and complete every transit station in the Paris region.
 
 - Browse all Ile-de-France transit lines: Metro, RER, Train, Tram, Bus, Cable Car, Funicular, and more
 - Log travels and track visited stations across the network
