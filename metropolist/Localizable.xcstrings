@@ -1,2436 +1,2286 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "·" : {
-      "shouldTranslate" : false
+  "sourceLanguage": "en",
+  "strings": {
+    "·": {
+      "shouldTranslate": false
     },
-    "/ %lld" : {
-      "shouldTranslate" : false
+    "/ %lld": {
+      "shouldTranslate": false
     },
-    "%@ → %@" : {
-      "comment" : "Travel success: route summary",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ → %2$@"
+    "%@ → %@": {
+      "comment": "Travel success: route summary",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ → %2$@"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ → %2$@"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ → %2$@"
           }
         }
       }
     },
-    "%@ Badge" : {
-      "comment" : "Travel success: badge card title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Badge %@"
+    "%@ Badge": {
+      "comment": "Travel success: badge card title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Badge %@"
           }
         }
       }
     },
-    "%@ badge earned" : {
-      "comment" : "XP item: badge tier milestone"
+    "%@ badge earned": {
+      "comment": "XP item: badge tier milestone"
     },
-    "%@ km" : {
-      "comment" : "Travel flow: distance in kilometers",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ km"
+    "%@ km": {
+      "comment": "Travel flow: distance in kilometers",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ km"
           }
         }
       }
     },
-    "%lld" : {
-      "shouldTranslate" : false
+    "%lld": {
+      "shouldTranslate": false
     },
-    "%lld / %lld stops" : {
-      "comment" : "Statistics: stops visited out of total",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld / %2$lld stops"
+    "%lld / %lld stops": {
+      "comment": "Statistics: stops visited out of total",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld / %2$lld stops"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld / %2$lld arrêts"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld arrêts"
           }
         }
       }
     },
-    "%lld / %lld XP" : {
-      "comment" : "Profile: XP progress toward next level",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld / %2$lld XP"
+    "%lld / %lld XP": {
+      "comment": "Profile: XP progress toward next level",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld / %2$lld XP"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld / %2$lld XP"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld XP"
           }
         }
       }
     },
-    "%lld branches" : {
-      "comment" : "Line detail: branch count",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld branches"
+    "%lld categories": {
+      "comment": "Achievements: category count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld catégories"
           }
         }
       }
     },
-    "%lld categories" : {
-      "comment" : "Achievements: category count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld catégories"
+    "%lld connections": {
+      "comment": "Stop row: transfer connections count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld correspondances"
           }
         }
       }
     },
-    "%lld connections" : {
-      "comment" : "Stop row: transfer connections count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld correspondances"
+    "%lld day streak": {
+      "comment": "Statistics: current streak count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série de %lld jours"
           }
         }
       }
     },
-    "%lld day streak" : {
-      "comment" : "Statistics: current streak count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Série de %lld jours"
+    "%lld directions": {
+      "comment": "Line detail: fallback branch count\nStats: direction count for metro/tram"
+    },
+    "%lld intermediate stops": {
+      "comment": "Travel detail: intermediate stops count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld arrêts intermédiaires"
           }
         }
       }
     },
-    "%lld directions" : {
-      "comment" : "Line detail: fallback branch count\nStats: direction count for metro/tram"
-    },
-    "%lld intermediate stops" : {
-      "comment" : "Travel detail: intermediate stops count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld arrêts intermédiaires"
+    "%lld lines": {
+      "comment": "Station detail: connecting lines count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld lignes"
           }
         }
       }
     },
-    "%lld lines" : {
-      "comment" : "Station detail: connecting lines count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld lignes"
+    "%lld m": {
+      "comment": "Travel flow: distance in meters",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld m"
           }
         }
       }
     },
-    "%lld m" : {
-      "comment" : "Travel flow: distance in meters",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld m"
-          }
-        }
-      }
+    "%lld missions": {
+      "comment": "Stats: mission count for RER/Transilien"
     },
-    "%lld missions" : {
-      "comment" : "Stats: mission count for RER/Transilien"
+    "%lld new stations": {
+      "comment": "XP item: new unique stations visited"
     },
-    "%lld new badge%@" : {
-      "comment" : "Celebration: new badges earned count",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld new badge%2$@"
+    "%lld of %lld": {
+      "comment": "Achievements: unlocked count ratio\nBadges: earned count ratio",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld of %2$lld"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld nouveau badge%2$@"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld sur %2$lld"
           }
         }
       }
     },
-    "%lld new stations" : {
-      "comment" : "XP item: new unique stations visited"
-    },
-    "%lld new stops completed!" : {
-      "comment" : "Travel success: new unique stops count",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld nouveaux arrêts complétés !"
+    "%lld stops": {
+      "comment": "Line detail: stop count\nTravel detail: stops traveled count\nTravel flow: total stops count for direction\nTravel history: stops traveled count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld arrêts"
           }
         }
       }
     },
-    "%lld of %lld" : {
-      "comment" : "Achievements: unlocked count ratio\nBadges: earned count ratio",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld of %2$lld"
+    "%lld stops and %lld travels imported.": {
+      "comment": "Settings: import success message with counts",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld stops and %2$lld travels imported."
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld sur %2$lld"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld arrêts et %2$lld trajets importés."
           }
         }
       }
     },
-    "%lld stops" : {
-      "comment" : "Line detail: stop count\nTravel detail: stops traveled count\nTravel flow: total stops count for direction\nTravel history: stops traveled count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld arrêts"
+    "%lld terminus": {
+      "comment": "Stats: terminus count for bus/TER"
+    },
+    "%lld transit modes": {
+      "comment": "Badges: transit mode count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld modes de transport"
           }
         }
       }
     },
-    "%lld stops and %lld travels imported." : {
-      "comment" : "Settings: import success message with counts",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld stops and %2$lld travels imported."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld arrêts et %2$lld trajets importés."
+    "%lld travels": {
+      "comment": "Travel history: total travels count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld trajets"
           }
         }
       }
     },
-    "%lld stops traveled" : {
-      "comment" : "Travel success: total stops traveled count",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld arrêts parcourus"
+    "%lld trips": {
+      "comment": "Line detail: trip count\nStation detail: trip count",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld trajets"
           }
         }
       }
     },
-    "%lld terminus" : {
-      "comment" : "Stats: terminus count for bus/TER"
-    },
-    "%lld transit modes" : {
-      "comment" : "Badges: transit mode count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld modes de transport"
+    "%lld XP": {
+      "comment": "Profile: total XP count\nXP breakdown: amount",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld XP"
           }
         }
       }
     },
-    "%lld travels" : {
-      "comment" : "Travel history: total travels count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld trajets"
+    "%lld XP to Level %lld": {
+      "comment": "Travel success: teaser for next level",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld XP to Level %2$lld"
           }
         }
       }
     },
-    "%lld trips" : {
-      "comment" : "Line detail: trip count\nStation detail: trip count",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld trajets"
-          }
-        }
-      }
+    "%lld-day streak": {
+      "comment": "XP item: streak bonus"
     },
-    "%lld XP" : {
-      "comment" : "Profile: total XP count\nXP breakdown: amount",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld XP"
-          }
-        }
-      }
-    },
-    "%lld XP to Level %lld" : {
-      "comment" : "Travel success: teaser for next level",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld XP to Level %2$lld"
-          }
-        }
-      }
-    },
-    "%lld-day streak" : {
-      "comment" : "XP item: streak bonus"
-    },
-    "%lld/%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld"
+    "%lld/%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld/%2$lld"
           }
         }
       },
-      "shouldTranslate" : false
+      "shouldTranslate": false
     },
-    "%lld/%lld completed" : {
-      "comment" : "Line detail: completed stops fraction",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld completed"
+    "%lld/%lld completed": {
+      "comment": "Line detail: completed stops fraction",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld/%2$lld completed"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld/%2$lld terminés"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld terminés"
           }
         }
       }
     },
-    "%lld/%lld stops" : {
-      "comment" : "Badges: completed stops out of total stops\nProfile: completed stops out of total stops",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld stops"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld/%2$lld arrêts"
-          }
-        }
-      }
-    },
-    "%lld/%lld XP" : {
-      "comment" : "Travel success: XP progress within level",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld XP"
-          }
-        }
-      }
-    },
-    "%lld%%" : {
-      "shouldTranslate" : false
-    },
-    "→ %@" : {
-      "comment" : "Travel flow: direction indicator with destination",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "→ %@"
-          }
-        }
-      }
-    },
-    "+%lld XP" : {
-      "comment" : "Travel success: XP gained amount",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+%lld XP"
-          }
-        }
-      }
-    },
-    "1 year since first travel" : {
-      "comment" : "Achievement description: 1 year since first travel",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 an depuis le premier trajet"
-          }
-        }
-      }
-    },
-    "7-day streak" : {
-      "comment" : "Achievement description: 7-day streak",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Série de 7 jours"
-          }
-        }
-      }
-    },
-    "30-day streak" : {
-      "comment" : "Achievement description: 30-day streak",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Série de 30 jours"
-          }
-        }
-      }
-    },
-    "ABOUT" : {
-      "comment" : "Settings: about section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À PROPOS"
-          }
-        }
-      }
-    },
-    "Accessible" : {
-      "comment" : "Line detail: accessibility indicator\nStation detail: accessibility indicator",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accessible"
-          }
-        }
-      }
-    },
-    "Achievements" : {
-      "comment" : "Achievements: navigation title\nProfile: achievements tile title\nXP breakdown: achievement XP",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Succès"
-          }
-        }
-      }
-    },
-    "achievements unlocked" : {
-      "comment" : "Achievements: unlocked count subtitle",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "succès déverrouillés"
-          }
-        }
-      }
-    },
-    "Active" : {
-      "comment" : "Settings: iCloud status active",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actif"
-          }
-        }
-      }
-    },
-    "Airborne" : {
-      "comment" : "Achievement title: travel by cable car",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En plein vol"
-          }
-        }
-      }
-    },
-    "All" : {
-      "comment" : "Achievements: filter chip showing all categories\nBadges: filter chip showing all modes",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout"
-          }
-        }
-      }
-    },
-    "All Lines" : {
-      "comment" : "Lines: all lines divider label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toutes les lignes"
-          }
-        }
-      }
-    },
-    "All user data has been deleted." : {
-      "comment" : "Settings: data deleted confirmation message",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toutes les données utilisateur ont été supprimées."
-          }
-        }
-      }
-    },
-    "An error occurred." : {
-      "comment" : "Travel flow: generic error message",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une erreur est survenue."
-          }
-        }
-      }
-    },
-    "Audio" : {
-      "comment" : "Station detail: audible signals indicator",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio"
-          }
-        }
-      }
-    },
-    "Badges" : {
-      "comment" : "Badges: navigation title\nProfile: badges tile title\nStatistics: badges earned count label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Badges"
-          }
-        }
-      }
-    },
-    "badges earned" : {
-      "comment" : "Badges: earned count subtitle",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "badges obtenus"
-          }
-        }
-      }
-    },
-    "Branch" : {
-      "comment" : "Line detail: branch picker label",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Branche"
-          }
-        }
-      }
-    },
-    "Branches" : {
-      "comment" : "Settings: transit data branches label"
-    },
-    "Bronze" : {
-      "comment" : "Badge tier: bronze level",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bronze"
-          }
-        }
-      }
-    },
-    "Build" : {
-      "comment" : "Settings: build number label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build"
-          }
-        }
-      }
-    },
-    "Bus" : {
-      "comment" : "Transit mode: bus",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bus"
-          }
-        }
-      }
-    },
-    "Cable Car" : {
-      "comment" : "Transit mode: cable car",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Téléphérique"
-          }
-        }
-      }
-    },
-    "Cancel" : {
-      "comment" : "Settings: cancel delete action\nTravel history: cancel delete button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuler"
-          }
-        }
-      }
-    },
-    "Cartographer" : {
-      "comment" : "Achievement title: visit 500 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cartographe"
-          }
-        }
-      }
-    },
-    "Centurion" : {
-      "comment" : "Achievement title: record 100 travels",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Centurion"
-          }
-        }
-      }
-    },
-    "Checking" : {
-      "comment" : "Settings: iCloud status checking",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérification..."
-          }
-        }
-      }
-    },
-    "Choose a direction" : {
-      "comment" : "Nav title: choose direction for metro/tram\nTravel flow: fallback choose branch title"
-    },
-    "Choose a mission" : {
-      "comment" : "Nav title: choose mission for RER/Transilien"
-    },
-    "Choose a terminus" : {
-      "comment" : "Nav title: choose terminus for bus/TER"
-    },
-    "Collector" : {
-      "comment" : "Achievement title: complete 5 lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Collectionneur"
-          }
-        }
-      }
-    },
-    "Complete 5 lines" : {
-      "comment" : "Achievement description: complete 5 lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compléter 5 lignes"
-          }
-        }
-      }
-    },
-    "Complete 50% of the network" : {
-      "comment" : "Achievement description: complete 50% of network",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compléter 50 % du réseau"
-          }
-        }
-      }
-    },
-    "Complete a line at 100%" : {
-      "comment" : "Achievement description: complete first line",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compléter une ligne à 100 %"
-          }
-        }
-      }
-    },
-    "Complete all metro lines" : {
-      "comment" : "Achievement description: complete all metro lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compléter toutes les lignes de métro"
-          }
-        }
-      }
-    },
-    "Complete all RER lines" : {
-      "comment" : "Achievement description: complete all RER lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compléter toutes les lignes de RER"
-          }
-        }
-      }
-    },
-    "Complete all tram lines" : {
-      "comment" : "Achievement description: complete all tram lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compléter toutes les lignes de tramway"
-          }
-        }
-      }
-    },
-    "Completed" : {
-      "comment" : "Lines: completed lines section",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terminées"
-          }
-        }
-      }
-    },
-    "Completionist" : {
-      "comment" : "Achievement group: completionist category",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Complétionniste"
-          }
-        }
-      }
-    },
-    "Confirm journey" : {
-      "comment" : "Travel confirm: confirm button label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmer le trajet"
-          }
-        }
-      }
-    },
-    "Confirm travel" : {
-      "comment" : "Travel confirm: navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirmer le trajet"
-          }
-        }
-      }
-    },
-    "Contains information from the following databases by Île-de-France Mobilités, made available under the Open Database Licence (ODbL)." : {
-      "comment" : "Licences: ODbL attribution text",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Contient des informations issues des bases de données suivantes d'Île-de-France Mobilités, mises à disposition sous la licence Open Database Licence (ODbL)."
-          }
-        }
-      }
-    },
-    "Contains information from the following dataset by Île-de-France Mobilités, made available under Licence Ouverte v2.0 (Etalab)." : {
-      "comment" : "Licences: Etalab attribution text",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Contient des informations issues du jeu de données suivant d'Île-de-France Mobilités, mis à disposition sous la Licence Ouverte v2.0 (Etalab)."
-          }
-        }
-      }
-    },
-    "Could not access the selected file." : {
-      "comment" : "Settings: file access error message",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible d'accéder au fichier sélectionné."
-          }
-        }
-      }
-    },
-    "Curious" : {
-      "comment" : "Achievement title: visit 10 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Curieux"
-          }
-        }
-      }
-    },
-    "Data Deleted" : {
-      "comment" : "Settings: data deleted alert title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Données supprimées"
-          }
-        }
-      }
-    },
-    "DATA MANAGEMENT" : {
-      "comment" : "Settings: data management section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GESTION DES DONNÉES"
-          }
-        }
-      }
-    },
-    "Data Version" : {
-      "comment" : "Settings: transit data version label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Version des données"
-          }
-        }
-      }
-    },
-    "Database Size" : {
-      "comment" : "Settings: transit database size label"
-    },
-    "Dedication" : {
-      "comment" : "Achievement group: dedication category",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Assiduité"
-          }
-        }
-      }
-    },
-    "Delete" : {
-      "comment" : "Travel history: confirm delete button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer"
-          }
-        }
-      }
-    },
-    "Delete %lld travel%@?" : {
-      "comment" : "Travel history: delete confirmation title",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Delete %1$lld travel%2$@?"
+    "%lld/%lld stops": {
+      "comment": "Badges: completed stops out of total stops\nProfile: completed stops out of total stops",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld/%2$lld stops"
           }
         },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer %lld trajet%@ ?"
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld arrêts"
           }
         }
       }
     },
-    "Delete All" : {
-      "comment" : "Settings: confirm delete all button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout supprimer"
+    "%lld/%lld XP": {
+      "comment": "Travel success: XP progress within level",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld/%2$lld XP"
           }
         }
       }
     },
-    "Delete All User Data" : {
-      "comment" : "Settings: delete all user data button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer toutes les données utilisateur"
+    "%lld%%": {
+      "shouldTranslate": false
+    },
+    "→ %@": {
+      "comment": "Travel flow: direction indicator with destination",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "→ %@"
+          }
+        }
+      }
+    },
+    "+%lld XP": {
+      "comment": "Travel success: XP gained amount",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld XP"
+          }
+        }
+      }
+    },
+    "1 year since first travel": {
+      "comment": "Achievement description: 1 year since first travel",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 an depuis le premier trajet"
+          }
+        }
+      }
+    },
+    "7-day streak": {
+      "comment": "Achievement description: 7-day streak",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série de 7 jours"
+          }
+        }
+      }
+    },
+    "30-day streak": {
+      "comment": "Achievement description: 30-day streak",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série de 30 jours"
+          }
+        }
+      }
+    },
+    "ABOUT": {
+      "comment": "Settings: about section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À PROPOS"
+          }
+        }
+      }
+    },
+    "Accessible": {
+      "comment": "Line detail: accessibility indicator\nStation detail: accessibility indicator",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessible"
+          }
+        }
+      }
+    },
+    "Achievements": {
+      "comment": "Achievements: navigation title\nProfile: achievements tile title\nXP breakdown: achievement XP",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Succès"
+          }
+        }
+      }
+    },
+    "achievements unlocked": {
+      "comment": "Achievements: unlocked count subtitle",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "succès déverrouillés"
+          }
+        }
+      }
+    },
+    "Active": {
+      "comment": "Settings: iCloud status active",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actif"
+          }
+        }
+      }
+    },
+    "Airborne": {
+      "comment": "Achievement title: travel by cable car",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En plein vol"
+          }
+        }
+      }
+    },
+    "All": {
+      "comment": "Achievements: filter chip showing all categories\nBadges: filter chip showing all modes",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout"
+          }
+        }
+      }
+    },
+    "All Lines": {
+      "comment": "Lines: all lines divider label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les lignes"
+          }
+        }
+      }
+    },
+    "All user data has been deleted.": {
+      "comment": "Settings: data deleted confirmation message",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les données utilisateur ont été supprimées."
+          }
+        }
+      }
+    },
+    "An error occurred.": {
+      "comment": "Travel flow: generic error message",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une erreur est survenue."
+          }
+        }
+      }
+    },
+    "Audio": {
+      "comment": "Station detail: audible signals indicator",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Audio"
+          }
+        }
+      }
+    },
+    "Badges": {
+      "comment": "Badges: navigation title\nProfile: badges tile title\nStatistics: badges earned count label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Badges"
+          }
+        }
+      }
+    },
+    "badges earned": {
+      "comment": "Badges: earned count subtitle",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "badges obtenus"
+          }
+        }
+      }
+    },
+    "Branches": {
+      "comment": "Settings: transit data branches label"
+    },
+    "Bronze": {
+      "comment": "Badge tier: bronze level",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bronze"
+          }
+        }
+      }
+    },
+    "Build": {
+      "comment": "Settings: build number label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build"
+          }
+        }
+      }
+    },
+    "Bus": {
+      "comment": "Transit mode: bus",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bus"
+          }
+        }
+      }
+    },
+    "Cable Car": {
+      "comment": "Transit mode: cable car",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléphérique"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "comment": "Settings: cancel delete action\nTravel history: cancel delete button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        }
+      }
+    },
+    "Cartographer": {
+      "comment": "Achievement title: visit 500 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartographe"
+          }
+        }
+      }
+    },
+    "Centurion": {
+      "comment": "Achievement title: record 100 travels",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centurion"
+          }
+        }
+      }
+    },
+    "Checking": {
+      "comment": "Settings: iCloud status checking",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification..."
+          }
+        }
+      }
+    },
+    "Choose a direction": {
+      "comment": "Nav title: choose direction for metro/tram\nTravel flow: fallback choose branch title"
+    },
+    "Choose a mission": {
+      "comment": "Nav title: choose mission for RER/Transilien"
+    },
+    "Choose a terminus": {
+      "comment": "Nav title: choose terminus for bus/TER"
+    },
+    "Collector": {
+      "comment": "Achievement title: complete 5 lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collectionneur"
+          }
+        }
+      }
+    },
+    "Complete 5 lines": {
+      "comment": "Achievement description: complete 5 lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compléter 5 lignes"
+          }
+        }
+      }
+    },
+    "Complete 50% of the network": {
+      "comment": "Achievement description: complete 50% of network",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compléter 50 % du réseau"
           }
         }
       }
     },
-    "Delete All User Data?" : {
-      "comment" : "Settings: delete all data confirmation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer toutes les données utilisateur ?"
+    "Complete a line at 100%": {
+      "comment": "Achievement description: complete first line",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compléter une ligne à 100 %"
           }
         }
       }
     },
-    "Delete Failed" : {
-      "comment" : "Settings: delete error alert title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de la suppression"
+    "Complete all metro lines": {
+      "comment": "Achievement description: complete all metro lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compléter toutes les lignes de métro"
           }
         }
       }
     },
-    "Departure" : {
-      "comment" : "Station picker: navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Départ"
+    "Complete all RER lines": {
+      "comment": "Achievement description: complete all RER lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compléter toutes les lignes de RER"
           }
         }
       }
     },
-    "Dilettante" : {
-      "comment" : "Achievement title: travel on 10 different lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dilettante"
+    "Complete all tram lines": {
+      "comment": "Achievement description: complete all tram lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compléter toutes les lignes de tramway"
           }
         }
       }
     },
-    "Direction" : {
-      "comment" : "Branch label for metro/tram\nLine detail: fallback branch label\nTravel flow: fallback branch label"
+    "Completed": {
+      "comment": "Lines: completed lines section",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminées"
+          }
+        }
+      }
+    },
+    "Completionist": {
+      "comment": "Achievement group: completionist category",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complétionniste"
+          }
+        }
+      }
     },
-    "Discoverer" : {
-      "comment" : "Achievement title: visit 50 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Découvreur"
+    "Confirm journey": {
+      "comment": "Travel confirm: confirm button label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirmer le trajet"
           }
         }
       }
     },
-    "Done" : {
-      "comment" : "Travel history: exit selection mode\nTravel success: dismiss button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terminé"
+    "Confirm travel": {
+      "comment": "Travel confirm: navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirmer le trajet"
           }
         }
       }
     },
-    "Early Bird" : {
-      "comment" : "Achievement title: travel before 6 AM",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lève-tôt"
+    "Contains information from the following databases by Île-de-France Mobilités, made available under the Open Database Licence (ODbL).": {
+      "comment": "Licences: ODbL attribution text",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contient des informations issues des bases de données suivantes d'Île-de-France Mobilités, mises à disposition sous la licence Open Database Licence (ODbL)."
           }
         }
       }
     },
-    "Error" : {
-      "comment" : "Travel flow: error alert title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur"
+    "Contains information from the following dataset by Île-de-France Mobilités, made available under Licence Ouverte v2.0 (Etalab).": {
+      "comment": "Licences: Etalab attribution text",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contient des informations issues du jeu de données suivant d'Île-de-France Mobilités, mis à disposition sous la Licence Ouverte v2.0 (Etalab)."
           }
         }
       }
     },
-    "Explorer" : {
-      "comment" : "Achievement group: explorer category",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Explorateur"
+    "Could not access the selected file.": {
+      "comment": "Settings: file access error message",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d'accéder au fichier sélectionné."
           }
         }
       }
     },
-    "Export Data" : {
-      "comment" : "Settings: export data button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exporter les données"
+    "Curious": {
+      "comment": "Achievement title: visit 10 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curieux"
           }
         }
       }
     },
-    "Export Failed" : {
-      "comment" : "Settings: export error alert title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de l'exportation"
+    "Data Deleted": {
+      "comment": "Settings: data deleted alert title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Données supprimées"
           }
         }
       }
     },
-    "Failed to load destinations." : {
-      "comment" : "Travel flow: error loading destination stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec du chargement des destinations."
+    "DATA MANAGEMENT": {
+      "comment": "Settings: data management section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GESTION DES DONNÉES"
           }
         }
       }
     },
-    "Failed to load lines." : {
-      "comment" : "Travel flow: error loading lines for stop",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec du chargement des lignes."
+    "Data Version": {
+      "comment": "Settings: transit data version label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version des données"
           }
         }
       }
+    },
+    "Database Size": {
+      "comment": "Settings: transit database size label"
     },
-    "Failed to record travel. Please try again." : {
-      "comment" : "Travel flow: error saving travel record",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de l'enregistrement du trajet. Veuillez réessayer."
+    "Dedication": {
+      "comment": "Achievement group: dedication category",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assiduité"
           }
         }
       }
     },
-    "Finding nearby stops..." : {
-      "comment" : "Stop picker: nearby stops loading",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recherche d'arrêts à proximité..."
+    "Delete": {
+      "comment": "Travel history: confirm delete button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
           }
         }
       }
     },
-    "First Line" : {
-      "comment" : "Achievement title: complete first line",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Première ligne"
+    "Delete %lld travel%@?": {
+      "comment": "Travel history: delete confirmation title",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Delete %1$lld travel%2$@?"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer %lld trajet%@ ?"
+          }
         }
       }
     },
-    "First Steps" : {
-      "comment" : "Achievement title: record first travel",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premiers pas"
+    "Delete All": {
+      "comment": "Settings: confirm delete all button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout supprimer"
           }
         }
       }
     },
-    "Funambulist" : {
-      "comment" : "Achievement title: travel by funicular",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funambule"
+    "Delete All User Data": {
+      "comment": "Settings: delete all user data button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les données utilisateur"
           }
         }
       }
     },
-    "Funicular" : {
-      "comment" : "Transit mode: funicular railway",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funiculaire"
+    "Delete All User Data?": {
+      "comment": "Settings: delete all data confirmation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les données utilisateur ?"
           }
         }
       }
     },
-    "Gold" : {
-      "comment" : "Badge tier: gold level",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Or"
+    "Delete Failed": {
+      "comment": "Settings: delete error alert title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de la suppression"
           }
         }
       }
     },
-    "Great Discoverer" : {
-      "comment" : "Achievement title: visit 100 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grand explorateur"
+    "Departure": {
+      "comment": "Station picker: navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Départ"
           }
         }
       }
     },
-    "Half Network" : {
-      "comment" : "Achievement title: complete 50% of network",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moitié du réseau"
+    "Dilettante": {
+      "comment": "Achievement title: travel on 10 different lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dilettante"
           }
         }
       }
     },
-    "History" : {
-      "comment" : "Travel history: navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Historique"
+    "Direction": {
+      "comment": "Branch label for metro/tram\nLine detail: fallback branch label\nTravel flow: fallback branch label"
+    },
+    "Discoverer": {
+      "comment": "Achievement title: visit 50 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvreur"
           }
         }
       }
     },
-    "iCloud Sync" : {
-      "comment" : "Settings: iCloud sync feature title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronisation iCloud"
+    "Done": {
+      "comment": "Travel history: exit selection mode\nTravel success: dismiss button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
           }
         }
       }
     },
-    "ICLOUD SYNC" : {
-      "comment" : "Settings: iCloud sync section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SYNCHRONISATION ICLOUD"
+    "Early Bird": {
+      "comment": "Achievement title: travel before 6 AM",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lève-tôt"
           }
         }
       }
     },
-    "Ile-de-France Mobilites (IDFM)" : {
-      "comment" : "Settings: transit data provider attribution",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Île-de-France Mobilités (IDFM)"
+    "Error": {
+      "comment": "Travel flow: error alert title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erreur"
           }
         }
       }
     },
-    "Import Data" : {
-      "comment" : "Settings: import data button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importer les données"
+    "Explorer": {
+      "comment": "Achievement group: explorer category",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorateur"
           }
         }
       }
     },
-    "Import Failed" : {
-      "comment" : "Settings: import error alert title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de l'importation"
+    "Export Data": {
+      "comment": "Settings: export data button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporter les données"
           }
         }
       }
     },
-    "Import Successful" : {
-      "comment" : "Settings: import success alert title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importation réussie"
+    "Export Failed": {
+      "comment": "Settings: export error alert title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de l'exportation"
           }
         }
       }
     },
-    "In Progress" : {
-      "comment" : "Lines: in-progress lines section",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En cours"
+    "Failed to load destinations.": {
+      "comment": "Travel flow: error loading destination stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec du chargement des destinations."
           }
         }
       }
     },
-    "Jack of All Trades" : {
-      "comment" : "Achievement title: use 3 modes in one day",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touche-à-tout"
+    "Failed to load lines.": {
+      "comment": "Travel flow: error loading lines for stop",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec du chargement des lignes."
           }
         }
       }
     },
-    "Journey" : {
-      "comment" : "Travel detail: journey section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trajet"
+    "Failed to record travel. Please try again.": {
+      "comment": "Travel flow: error saving travel record",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de l'enregistrement du trajet. Veuillez réessayer."
           }
         }
       }
     },
-    "Journey recorded!" : {
-      "comment" : "Travel success: main title",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trajet enregistré !"
+    "Finding nearby stops...": {
+      "comment": "Stop picker: nearby stops loading",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche d'arrêts à proximité..."
           }
         }
       }
     },
-    "Journey Recorded!" : {
-      "comment" : "Travel success: main headline"
+    "First Line": {
+      "comment": "Achievement title: complete first line",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Première ligne"
+          }
+        }
+      }
     },
-    "Level %lld" : {
-      "comment" : "Profile: current level number\nProfile: next level number\nTravel success: current level label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Niveau %lld"
+    "First Steps": {
+      "comment": "Achievement title: record first travel",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiers pas"
           }
         }
       }
     },
-    "Level %lld reached!" : {
-      "comment" : "Travel success: level up announcement"
+    "Funambulist": {
+      "comment": "Achievement title: travel by funicular",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funambule"
+          }
+        }
+      }
     },
-    "Level %lld!" : {
-      "comment" : "Celebration: level up notification",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Niveau %lld !"
+    "Funicular": {
+      "comment": "Transit mode: funicular railway",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funiculaire"
           }
         }
       }
     },
-    "LICENCE OUVERTE v2.0 (ETALAB)" : {
-      "comment" : "Licences: Etalab section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "LICENCE OUVERTE v2.0 (ETALAB)"
+    "Gold": {
+      "comment": "Badge tier: gold level",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or"
           }
         }
       }
     },
-    "Line badge upgraded" : {
-      "comment" : "Travel success: badge card description"
+    "Great Discoverer": {
+      "comment": "Achievement title: visit 100 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grand explorateur"
+          }
+        }
+      }
     },
-    "Line completed!" : {
-      "comment" : "XP item: full line completion bonus"
+    "Half Network": {
+      "comment": "Achievement title: complete 50% of network",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moitié du réseau"
+          }
+        }
+      }
     },
-    "Line completions" : {
-      "comment" : "XP breakdown: line completion XP"
+    "History": {
+      "comment": "Travel history: navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historique"
+          }
+        }
+      }
     },
-    "Line discovery" : {
-      "comment" : "XP breakdown: first line XP"
+    "iCloud Sync": {
+      "comment": "Settings: iCloud sync feature title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronisation iCloud"
+          }
+        }
+      }
     },
-    "Line no longer exists" : {
-      "comment" : "Travel detail: line deleted fallback text",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La ligne n'existe plus"
+    "ICLOUD SYNC": {
+      "comment": "Settings: iCloud sync section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SYNCHRONISATION ICLOUD"
           }
         }
       }
     },
-    "Lines" : {
-      "comment" : "Lines: navigation title\nSettings: transit data lines label\nStation detail: connecting lines section header\nTab: lines list",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lignes"
+    "Ile-de-France Mobilites (IDFM)": {
+      "comment": "Settings: transit data provider attribution",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Île-de-France Mobilités (IDFM)"
           }
         }
       }
     },
-    "Lines completed" : {
-      "comment" : "Statistics: lines completed coverage row",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lignes terminées"
+    "Import Data": {
+      "comment": "Settings: import data button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer les données"
           }
         }
       }
     },
-    "Lines started" : {
-      "comment" : "Statistics: lines started coverage row",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lignes commencées"
+    "Import Failed": {
+      "comment": "Settings: import error alert title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de l'importation"
           }
         }
       }
     },
-    "Loading destinations..." : {
-      "comment" : "Travel flow: loading destinations indicator",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chargement des destinations..."
+    "Import Successful": {
+      "comment": "Settings: import success alert title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importation réussie"
           }
         }
       }
     },
-    "Loading stops..." : {
-      "comment" : "Station picker: loading line stops indicator",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chargement des arrêts..."
+    "In Progress": {
+      "comment": "Lines: in-progress lines section",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cours"
           }
         }
       }
     },
-    "Location access is not authorized." : {
-      "comment" : "Location service: permission denied error"
+    "Jack of All Trades": {
+      "comment": "Achievement title: use 3 modes in one day",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touche-à-tout"
+          }
+        }
+      }
     },
-    "Locked" : {
-      "comment" : "Badge tier: not yet earned",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verrouillé"
+    "Journey": {
+      "comment": "Travel detail: journey section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trajet"
           }
         }
       }
+    },
+    "Journey Recorded!": {
+      "comment": "Travel success: main headline"
     },
-    "Made with ♡ for Paris transit riders" : {
-      "comment" : "Settings: app tagline",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fait avec ♡ pour les voyageurs parisiens"
+    "Level %lld": {
+      "comment": "Profile: current level number\nProfile: next level number\nTravel success: current level label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niveau %lld"
           }
         }
       }
     },
-    "Marathoner" : {
-      "comment" : "Achievement title: record 500 travels",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marathonien"
+    "Level %lld reached!": {
+      "comment": "Travel success: level up announcement"
+    },
+    "LICENCE OUVERTE v2.0 (ETALAB)": {
+      "comment": "Licences: Etalab section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LICENCE OUVERTE v2.0 (ETALAB)"
           }
         }
       }
+    },
+    "Line badge upgraded": {
+      "comment": "Travel success: badge card description"
+    },
+    "Line completed!": {
+      "comment": "XP item: full line completion bonus"
+    },
+    "Line completions": {
+      "comment": "XP breakdown: line completion XP"
+    },
+    "Line discovery": {
+      "comment": "XP breakdown: first line XP"
     },
-    "Metro" : {
-      "comment" : "Transit mode: metro/subway",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Métro"
+    "Line no longer exists": {
+      "comment": "Travel detail: line deleted fallback text",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ligne n'existe plus"
           }
         }
       }
     },
-    "Metro King" : {
-      "comment" : "Achievement title: complete all metro lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Roi du Métro"
+    "Lines": {
+      "comment": "Lines: navigation title\nSettings: transit data lines label\nStation detail: connecting lines section header\nTab: lines list",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lignes"
           }
         }
       }
     },
-    "Mission" : {
-      "comment" : "Branch label for RER/Transilien"
+    "Lines completed": {
+      "comment": "Statistics: lines completed coverage row",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lignes terminées"
+          }
+        }
+      }
     },
-    "MODE BREAKDOWN" : {
-      "comment" : "Statistics: mode breakdown section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RÉPARTITION PAR MODE"
+    "Lines started": {
+      "comment": "Statistics: lines started coverage row",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lignes commencées"
           }
         }
       }
     },
-    "Nearby" : {
-      "comment" : "Stop picker: nearby stops section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À proximité"
+    "Loading destinations...": {
+      "comment": "Travel flow: loading destinations indicator",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement des destinations..."
           }
         }
       }
     },
-    "NETWORK COVERAGE" : {
-      "comment" : "Statistics: network coverage section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "COUVERTURE DU RÉSEAU"
+    "Loading stops...": {
+      "comment": "Station picker: loading line stops indicator",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement des arrêts..."
           }
         }
       }
     },
-    "New line discovered!" : {
-      "comment" : "XP item: first travel on line bonus"
+    "Location access is not authorized.": {
+      "comment": "Location service: permission denied error"
     },
-    "Night Owl" : {
-      "comment" : "Achievement title: travel on Noctilien line",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couche-tard"
+    "Locked": {
+      "comment": "Badge tier: not yet earned",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouillé"
           }
         }
       }
     },
-    "No Account" : {
-      "comment" : "Settings: iCloud status no account",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun compte"
+    "Made with ♡ for Paris transit riders": {
+      "comment": "Settings: app tagline",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fait avec ♡ pour les voyageurs parisiens"
           }
         }
       }
     },
-    "No destinations found from this stop on this line." : {
-      "comment" : "Travel flow: error when no downstream stops exist",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune destination trouvée depuis cet arrêt sur cette ligne."
+    "Marathoner": {
+      "comment": "Achievement title: record 500 travels",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marathonien"
           }
         }
       }
     },
-    "No lines serve this stop." : {
-      "comment" : "Travel flow: error when stop has no lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune ligne ne dessert cet arrêt."
+    "Metro": {
+      "comment": "Transit mode: metro/subway",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Métro"
           }
         }
       }
     },
-    "No travels recorded" : {
-      "comment" : "Statistics: empty mode breakdown\nTravel history: empty state title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun trajet enregistré"
+    "Metro King": {
+      "comment": "Achievement title: complete all metro lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roi du Métro"
           }
         }
       }
     },
-    "OK" : {
-      "comment" : "Travel flow: dismiss error button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
+    "Mission": {
+      "comment": "Branch label for RER/Transilien"
+    },
+    "MODE BREAKDOWN": {
+      "comment": "Statistics: mode breakdown section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RÉPARTITION PAR MODE"
           }
         }
       }
     },
-    "Omniscient" : {
-      "comment" : "Achievement title: visit 1000 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Omniscient"
+    "Nearby": {
+      "comment": "Stop picker: nearby stops section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À proximité"
           }
         }
       }
     },
-    "Only %lld more stops to %@ on Line %@!" : {
-      "comment" : "Travel success: teaser for next badge tier",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Only %1$lld more stops to %2$@ on Line %3$@!"
+    "NETWORK COVERAGE": {
+      "comment": "Statistics: network coverage section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COUVERTURE DU RÉSEAU"
           }
         }
       }
     },
-    "Open Data Licences" : {
-      "comment" : "Licences: navigation title\nSettings: open data licences link",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licences Open Data"
+    "New line discovered!": {
+      "comment": "XP item: first travel on line bonus"
+    },
+    "Night Owl": {
+      "comment": "Achievement title: travel on Noctilien line",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couche-tard"
           }
         }
       }
     },
-    "OPEN DATABASE LICENCE (ODbL)" : {
-      "comment" : "Licences: ODbL section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OPEN DATABASE LICENSE (ODbL)"
+    "No Account": {
+      "comment": "Settings: iCloud status no account",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun compte"
           }
         }
       }
     },
-    "OVERVIEW" : {
-      "comment" : "Statistics: overview section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "VUE D'ENSEMBLE"
+    "No destinations found from this stop on this line.": {
+      "comment": "Travel flow: error when no downstream stops exist",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune destination trouvée depuis cet arrêt sur cette ligne."
           }
         }
       }
     },
-    "Pick a line" : {
-      "comment" : "Travel flow: pick line navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisir une ligne"
+    "No lines serve this stop.": {
+      "comment": "Travel flow: error when stop has no lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune ligne ne dessert cet arrêt."
           }
         }
       }
     },
-    "Pick direction" : {
-      "comment" : "Travel flow: pick direction navigation title",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisir une direction"
+    "No travels recorded": {
+      "comment": "Statistics: empty mode breakdown\nTravel history: empty state title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun trajet enregistré"
           }
         }
       }
     },
-    "Profile" : {
-      "comment" : "Profile: navigation title\nTab: user profile",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profil"
+    "OK": {
+      "comment": "Travel flow: dismiss error button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         }
       }
     },
-    "Recent Travels" : {
-      "comment" : "Recent travels section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trajets récents"
+    "Omniscient": {
+      "comment": "Achievement title: visit 1000 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omniscient"
           }
         }
       }
     },
-    "RECENT TRAVELS" : {
-      "comment" : "Profile: recent travels section header",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TRAJETS RÉCENTS"
+    "Only %lld more stops to %@ on Line %@!": {
+      "comment": "Travel success: teaser for next badge tier",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Only %1$lld more stops to %2$@ on Line %3$@!"
           }
         }
       }
     },
-    "Record 100 travels" : {
-      "comment" : "Achievement description: record 100 travels",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrez 100 trajets"
+    "Open Data Licences": {
+      "comment": "Licences: navigation title\nSettings: open data licences link",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licences Open Data"
           }
         }
       }
     },
-    "Record 500 travels" : {
-      "comment" : "Achievement description: record 500 travels",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrez 500 trajets"
+    "OPEN DATABASE LICENCE (ODbL)": {
+      "comment": "Licences: ODbL section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OPEN DATABASE LICENSE (ODbL)"
           }
         }
       }
     },
-    "Record your first travel" : {
-      "comment" : "Achievement description: record first travel",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrez votre premier trajet"
+    "OVERVIEW": {
+      "comment": "Statistics: overview section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VUE D'ENSEMBLE"
           }
         }
       }
     },
-    "Regional Rail" : {
-      "comment" : "Transit mode: regional rail",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "TER"
+    "Pick a line": {
+      "comment": "Travel flow: pick line navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir une ligne"
           }
         }
       }
     },
-    "Regular" : {
-      "comment" : "Achievement title: 7-day streak",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Habitué"
+    "Profile": {
+      "comment": "Profile: navigation title\nTab: user profile",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil"
           }
         }
       }
     },
-    "Removed line" : {
-      "comment" : "Travel history: line no longer exists",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ligne supprimée"
+    "Recent Travels": {
+      "comment": "Recent travels section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trajets récents"
           }
         }
       }
     },
-    "RER" : {
-      "comment" : "Transit mode: RER regional express",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "RER"
+    "Record 100 travels": {
+      "comment": "Achievement description: record 100 travels",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrez 100 trajets"
           }
         }
       }
     },
-    "RER Master" : {
-      "comment" : "Achievement title: complete all RER lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maître du RER"
+    "Record 500 travels": {
+      "comment": "Achievement description: record 500 travels",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrez 500 trajets"
           }
         }
       }
     },
-    "Restricted" : {
-      "comment" : "Settings: iCloud status restricted",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restreint"
+    "Record your first travel": {
+      "comment": "Achievement description: record first travel",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrez votre premier trajet"
           }
         }
       }
     },
-    "Results (%lld)" : {
-      "comment" : "Station picker: search results count header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résultats (%lld)"
+    "Regional Rail": {
+      "comment": "Transit mode: regional rail",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TER"
           }
         }
       }
     },
-    "Search for a stop" : {
-      "comment" : "Stop picker: empty state title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rechercher un arrêt"
+    "Regular": {
+      "comment": "Achievement title: 7-day streak",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Habitué"
           }
         }
       }
     },
-    "Search lines" : {
-      "comment" : "Lines: search field prompt",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rechercher des lignes"
+    "Removed line": {
+      "comment": "Travel history: line no longer exists",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ligne supprimée"
           }
         }
       }
     },
-    "Search travels" : {
-      "comment" : "Travel history: search field prompt",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rechercher des trajets"
+    "RER": {
+      "comment": "Transit mode: RER regional express",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RER"
           }
         }
       }
     },
-    "Select" : {
-      "comment" : "Travel history: enter selection mode",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionner"
+    "RER Master": {
+      "comment": "Achievement title: complete all RER lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maître du RER"
           }
         }
       }
     },
-    "Settings" : {
-      "comment" : "Settings: navigation title\nTab: app settings",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réglages"
+    "Restricted": {
+      "comment": "Settings: iCloud status restricted",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restreint"
           }
         }
       }
     },
-    "Shuttle" : {
-      "comment" : "Transit mode: rail shuttle",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navette"
+    "Results (%lld)": {
+      "comment": "Station picker: search results count header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résultats (%lld)"
           }
         }
       }
     },
-    "Silver" : {
-      "comment" : "Badge tier: silver level",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argent"
+    "Search for a stop": {
+      "comment": "Stop picker: empty state title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher un arrêt"
           }
         }
       }
     },
-    "Since %@" : {
-      "comment" : "Profile: member since date\nStatistics: first travel date",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Depuis le %@"
+    "Search lines": {
+      "comment": "Lines: search field prompt",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des lignes"
           }
         }
       }
     },
-    "Start travel" : {
-      "comment" : "Line detail: start travel button\nStation detail: start travel button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Démarrer le trajet"
+    "Search travels": {
+      "comment": "Travel history: search field prompt",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des trajets"
           }
         }
       }
     },
-    "Stations" : {
-      "comment" : "XP breakdown: station XP"
+    "Select": {
+      "comment": "Travel history: enter selection mode",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sélectionner"
+          }
+        }
+      }
     },
-    "Statistics" : {
-      "comment" : "Profile: statistics link\nStatistics: navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statistiques"
+    "Settings": {
+      "comment": "Settings: navigation title\nTab: app settings",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
           }
         }
       }
     },
-    "STOP" : {
-      "comment" : "Stop detail: section label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ARRÊT"
+    "Shuttle": {
+      "comment": "Transit mode: rail shuttle",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Navette"
           }
         }
       }
     },
-    "Stop name" : {
-      "comment" : "Stop picker: search field prompt",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nom de l'arrêt"
+    "Silver": {
+      "comment": "Badge tier: silver level",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Argent"
           }
         }
       }
     },
-    "Stops" : {
-      "comment" : "Line detail: stops section header\nSettings: transit data stops label\nStation picker: line stops section header\nStatistics: stops count label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrêts"
+    "Since %@": {
+      "comment": "Profile: member since date\nStatistics: first travel date",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis le %@"
           }
         }
       }
     },
-    "Stops visited" : {
-      "comment" : "Statistics: stops visited coverage row",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrêts visités"
+    "Start travel": {
+      "comment": "Line detail: start travel button\nStation detail: start travel button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarrer le trajet"
           }
         }
       }
     },
-    "Streaks" : {
-      "comment" : "XP breakdown: streak XP"
+    "Stations": {
+      "comment": "XP breakdown: station XP"
     },
-    "Tap + to get started" : {
-      "comment" : "Travel history: empty state hint",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Appuyez sur + pour commencer"
+    "Statistics": {
+      "comment": "Profile: statistics link\nStatistics: navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statistiques"
           }
         }
       }
     },
-    "Terminus" : {
-      "comment" : "Branch label for bus/TER"
+    "STOP": {
+      "comment": "Stop detail: section label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ARRÊT"
+          }
+        }
+      }
     },
-    "This action cannot be undone." : {
-      "comment" : "Travel history: delete warning message",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette action est irréversible."
+    "Stop name": {
+      "comment": "Stop picker: search field prompt",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom de l'arrêt"
           }
         }
       }
     },
-    "This will permanently delete all your completed stops and travels. This action cannot be undone." : {
-      "comment" : "Settings: delete all data warning message",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cela supprimera définitivement tous vos arrêts et trajets terminés. Cette action est irréversible."
+    "Stops": {
+      "comment": "Line detail: stops section header\nSettings: transit data stops label\nStation picker: line stops section header\nStatistics: stops count label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêts"
           }
         }
       }
     },
-    "Tireless" : {
-      "comment" : "Achievement title: 30-day streak",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Infatigable"
+    "Stops visited": {
+      "comment": "Statistics: stops visited coverage row",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêts visités"
           }
         }
       }
     },
-    "Train" : {
-      "comment" : "Transit mode: train",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Transilien"
+    "Streaks": {
+      "comment": "XP breakdown: streak XP"
+    },
+    "Tap + to get started": {
+      "comment": "Travel history: empty state hint",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur + pour commencer"
           }
         }
       }
     },
-    "Tram" : {
-      "comment" : "Transit mode: tram/streetcar",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tramway"
+    "Terminus": {
+      "comment": "Branch label for bus/TER"
+    },
+    "This action cannot be undone.": {
+      "comment": "Travel history: delete warning message",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette action est irréversible."
           }
         }
       }
     },
-    "Tram Baron" : {
-      "comment" : "Achievement title: complete all tram lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Baron du Tram"
+    "This will permanently delete all your completed stops and travels. This action cannot be undone.": {
+      "comment": "Settings: delete all data warning message",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela supprimera définitivement tous vos arrêts et trajets terminés. Cette action est irréversible."
           }
         }
       }
     },
-    "TRANSIT DATA" : {
-      "comment" : "Settings: transit data section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DONNÉES DE TRANSPORT"
+    "Tireless": {
+      "comment": "Achievement title: 30-day streak",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Infatigable"
           }
         }
       }
     },
-    "Travel before 6 AM" : {
-      "comment" : "Achievement description: travel before 6 AM",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voyager avant 6h"
+    "Train": {
+      "comment": "Transit mode: train",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transilien"
           }
         }
       }
     },
-    "Travel by cable car" : {
-      "comment" : "Achievement description: travel by cable car",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voyager en téléphérique"
+    "Tram": {
+      "comment": "Transit mode: tram/streetcar",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tramway"
           }
         }
       }
     },
-    "Travel by funicular" : {
-      "comment" : "Achievement description: travel by funicular",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voyager en funiculaire"
+    "Tram Baron": {
+      "comment": "Achievement title: complete all tram lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baron du Tram"
           }
         }
       }
     },
-    "Travel Details" : {
-      "comment" : "Travel detail: navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Détails du trajet"
+    "TRANSIT DATA": {
+      "comment": "Settings: transit data section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DONNÉES DE TRANSPORT"
           }
         }
       }
     },
-    "Travel History" : {
-      "comment" : "Travel history: navigation title",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Historique des trajets"
+    "Travel before 6 AM": {
+      "comment": "Achievement description: travel before 6 AM",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voyager avant 6h"
           }
         }
       }
     },
-    "Travel on 10 different lines" : {
-      "comment" : "Achievement description: travel on 10 different lines",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voyager sur 10 lignes différentes"
+    "Travel by cable car": {
+      "comment": "Achievement description: travel by cable car",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voyager en téléphérique"
           }
         }
       }
     },
-    "Travel on a Noctilien line" : {
-      "comment" : "Achievement description: travel on Noctilien line",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voyager sur une ligne Noctilien"
+    "Travel by funicular": {
+      "comment": "Achievement description: travel by funicular",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voyager en funiculaire"
           }
         }
       }
     },
-    "Travel recorded" : {
-      "comment" : "XP item: base travel XP"
+    "Travel Details": {
+      "comment": "Travel detail: navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Détails du trajet"
+          }
+        }
+      }
     },
-    "Travels" : {
-      "comment" : "Statistics: travels count label\nXP breakdown: travel XP",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trajets"
+    "Travel on 10 different lines": {
+      "comment": "Achievement description: travel on 10 different lines",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voyager sur 10 lignes différentes"
           }
         }
       }
     },
-    "Travels and stops sync across your devices" : {
-      "comment" : "Settings: iCloud sync description",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les trajets et les arrêts sont synchronisés sur vos appareils"
+    "Travel on a Noctilien line": {
+      "comment": "Achievement description: travel on Noctilien line",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voyager sur une ligne Noctilien"
           }
         }
       }
+    },
+    "Travel recorded": {
+      "comment": "XP item: base travel XP"
     },
-    "Type a stop name to get started" : {
-      "comment" : "Stop picker: empty state description",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saisissez le nom d'un arrêt pour commencer"
+    "Travels": {
+      "comment": "Statistics: travels count label\nXP breakdown: travel XP",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trajets"
           }
         }
       }
     },
-    "Unavailable" : {
-      "comment" : "Settings: iCloud status unavailable",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Indisponible"
+    "Travels and stops sync across your devices": {
+      "comment": "Settings: iCloud sync description",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les trajets et les arrêts sont synchronisés sur vos appareils"
           }
         }
       }
     },
-    "Unknown" : {
-      "comment" : "Settings: iCloud status unknown",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inconnu"
+    "Type a stop name to get started": {
+      "comment": "Stop picker: empty state description",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saisissez le nom d'un arrêt pour commencer"
           }
         }
       }
     },
-    "Unknown stop" : {
-      "comment" : "Fallback name when stop cannot be resolved\nTravel detail: fallback name for missing stop",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrêt inconnu"
+    "Unavailable": {
+      "comment": "Settings: iCloud status unavailable",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indisponible"
           }
         }
       }
     },
-    "Use 3 transport modes in one day" : {
-      "comment" : "Achievement description: use 3 modes in one day",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utiliser 3 modes de transport en une journée"
+    "Unknown": {
+      "comment": "Settings: iCloud status unknown",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inconnu"
           }
         }
       }
     },
-    "Use every transport mode" : {
-      "comment" : "Achievement description: use every transport mode",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utiliser tous les modes de transport"
+    "Unknown stop": {
+      "comment": "Fallback name when stop cannot be resolved\nTravel detail: fallback name for missing stop",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêt inconnu"
           }
         }
       }
     },
-    "Variety" : {
-      "comment" : "Achievement group: variety category",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Variété"
+    "Use 3 transport modes in one day": {
+      "comment": "Achievement description: use 3 modes in one day",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser 3 modes de transport en une journée"
           }
         }
       }
     },
-    "Versatile" : {
-      "comment" : "Achievement title: use every transport mode",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Polyvalent"
+    "Use every transport mode": {
+      "comment": "Achievement description: use every transport mode",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser tous les modes de transport"
           }
         }
       }
     },
-    "Version" : {
-      "comment" : "Settings: app version label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Version"
+    "Variety": {
+      "comment": "Achievement group: variety category",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variété"
           }
         }
       }
     },
-    "Veteran" : {
-      "comment" : "Achievement title: 1 year since first travel",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vétéran"
+    "Versatile": {
+      "comment": "Achievement title: use every transport mode",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polyvalent"
           }
         }
       }
     },
-    "via %@" : {
-      "comment" : "Travel flow: intermediate stops via label",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "via %@"
+    "Version": {
+      "comment": "Settings: app version label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
           }
         }
       }
     },
-    "View All" : {
-      "comment" : "Travel history: view all link",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout voir"
+    "Veteran": {
+      "comment": "Achievement title: 1 year since first travel",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vétéran"
           }
         }
       }
     },
-    "View line" : {
-      "comment" : "Travel detail: view line button",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voir la ligne"
+    "View All": {
+      "comment": "Travel history: view all link",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout voir"
           }
         }
       }
     },
-    "Visit 10 stops" : {
-      "comment" : "Achievement description: visit 10 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visiter 10 arrêts"
+    "View line": {
+      "comment": "Travel detail: view line button",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir la ligne"
           }
         }
       }
     },
-    "Visit 50 stops" : {
-      "comment" : "Achievement description: visit 50 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visiter 50 arrêts"
+    "Visit 10 stops": {
+      "comment": "Achievement description: visit 10 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visiter 10 arrêts"
           }
         }
       }
     },
-    "Visit 100 stops" : {
-      "comment" : "Achievement description: visit 100 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visiter 100 arrêts"
+    "Visit 50 stops": {
+      "comment": "Achievement description: visit 50 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visiter 50 arrêts"
           }
         }
       }
     },
-    "Visit 500 stops" : {
-      "comment" : "Achievement description: visit 500 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visiter 500 arrêts"
+    "Visit 100 stops": {
+      "comment": "Achievement description: visit 100 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visiter 100 arrêts"
           }
         }
       }
     },
-    "Visit 1000 stops" : {
-      "comment" : "Achievement description: visit 1000 stops",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visiter 1 000 arrêts"
+    "Visit 500 stops": {
+      "comment": "Achievement description: visit 500 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visiter 500 arrêts"
           }
         }
       }
     },
-    "Visual" : {
-      "comment" : "Station detail: visual signs indicator",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Signalétique visuelle"
+    "Visit 1000 stops": {
+      "comment": "Achievement description: visit 1000 stops",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visiter 1 000 arrêts"
           }
         }
       }
     },
-    "Where to?" : {
-      "comment" : "Travel flow: pick destination navigation title",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Où allez-vous ?"
+    "Visual": {
+      "comment": "Station detail: visual signs indicator",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signalétique visuelle"
           }
         }
       }
     },
-    "Which direction?" : {
-      "comment" : "Travel flow: pick direction section header",
-      "extractionState" : "stale",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quelle direction ?"
+    "Where to?": {
+      "comment": "Travel flow: pick destination navigation title",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où allez-vous ?"
           }
         }
       }
     },
-    "Your journey" : {
-      "comment" : "Travel confirm: journey stops section header",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre trajet"
+    "Your journey": {
+      "comment": "Travel confirm: journey stops section header",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre trajet"
           }
         }
       }
     },
-    "Zone %@" : {
-      "comment" : "Station detail: fare zone label",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zone %@"
+    "Zone %@": {
+      "comment": "Station detail: fare zone label",
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zone %@"
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

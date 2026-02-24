@@ -21,7 +21,7 @@ struct TravelSuccessView: View {
     @State private var showTeaser = false
     @State private var showDone = false
 
-    @State private var tickerTimer: Timer?
+    @State private var tickerTask: Task<Void, Never>?
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -99,7 +99,7 @@ struct TravelSuccessView: View {
         .toolbar(.hidden, for: .navigationBar)
         .sensoryFeedback(.success, trigger: showCheckmark)
         .onAppear(perform: startSequence)
-        .onDisappear { tickerTimer?.invalidate() }
+        .onDisappear { tickerTask?.cancel() }
     }
 
     // MARK: - Phase 1: Arrival
@@ -363,7 +363,6 @@ struct TravelSuccessView: View {
         }
     }
 
-
     // MARK: - Animation Sequence
 
     private func startSequence() {
@@ -399,7 +398,7 @@ struct TravelSuccessView: View {
         if let celebration {
             for (index, _) in celebration.xpItems.enumerated() {
                 let delay = 0.8 + Double(index) * 0.1
-                withAnimation(.easeOut(duration: 0.3).delay(delay)) {
+                _ = withAnimation(.easeOut(duration: 0.3).delay(delay)) {
                     showXPItems.insert(index)
                 }
             }
@@ -449,7 +448,10 @@ struct TravelSuccessView: View {
         lightImpact: UIImpactFeedbackGenerator,
         heavyImpact: UIImpactFeedbackGenerator
     ) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + startDelay) {
+        tickerTask = Task { @MainActor in
+            try? await Task.sleep(for: .seconds(startDelay))
+            guard !Task.isCancelled else { return }
+
             withAnimation(.easeOut(duration: 0.2)) {
                 showTicker = true
                 showLevelBar = true
@@ -472,10 +474,11 @@ struct TravelSuccessView: View {
             let totalDuration: TimeInterval = 0.8
             let steps = min(target, 30)
             let interval = totalDuration / Double(steps)
-            var currentStep = 0
 
-            tickerTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-                currentStep += 1
+            for currentStep in 1 ... steps {
+                try? await Task.sleep(for: .seconds(interval))
+                guard !Task.isCancelled else { return }
+
                 let progress = Double(currentStep) / Double(steps)
                 let easedProgress = 1 - pow(1 - progress, 3) // ease-out cubic
 
@@ -509,10 +512,9 @@ struct TravelSuccessView: View {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.4)) {
                                 levelBounce = true
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                withAnimation(.spring(response: 0.2)) {
-                                    levelBounce = false
-                                }
+                            try? await Task.sleep(for: .seconds(0.3))
+                            withAnimation(.spring(response: 0.2)) {
+                                levelBounce = false
                             }
                             heavyImpact.impactOccurred()
                         }
@@ -529,13 +531,9 @@ struct TravelSuccessView: View {
                 withAnimation(.linear(duration: interval)) {
                     levelBarProgress = barTarget
                 }
-
-                if currentStep >= steps {
-                    timer.invalidate()
-                    tickerTimer = nil
-                    tickerValue = target
-                }
             }
+
+            tickerValue = target
         }
     }
 
