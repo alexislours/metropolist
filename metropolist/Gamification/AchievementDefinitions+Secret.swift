@@ -19,20 +19,6 @@ extension AchievementDefinitions {
             ctx.firstBirHakeimLine6Date
         },
         AchievementDefinition(
-            id: "secret_dernier_metro",
-            title: String(localized: "The Last Metro", comment: "Achievement title: travel after midnight on a weekday"),
-            description: String(
-                localized: "Travel after midnight and before 3 AM on a weekday",
-                comment: "Achievement description: travel after midnight on a weekday"
-            ),
-            group: .secret,
-            systemImage: "moon.zzz",
-            xpReward: 100,
-            isHidden: true
-        ) { ctx in
-            ctx.firstWeekdayLateNightTravelDate
-        },
-        AchievementDefinition(
             id: "secret_grand_paris",
             title: String(localized: "Greater Paris", comment: "Achievement title: visit all 8 IDF departments"),
             description: String(

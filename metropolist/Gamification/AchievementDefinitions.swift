@@ -83,7 +83,6 @@ struct AchievementContext {
     let networkHalfDate: Date? // when 50% of the network was reached
     // Station & time-based achievement data
     let firstBirHakeimLine6Date: Date? // first completed stop at Bir-Hakeim on line 6
-    let firstWeekdayLateNightTravelDate: Date? // first travel midnight–3 AM on a weekday
     let allDepartmentsCoveredDate: Date? // when all 8 IDF departments were visited
     let firstOperaNightTravelDate: Date? // first travel from/to Opéra between 23h–3h
     let firstLine13RushHourDate: Date? // first travel on line 13 between 8h–9h

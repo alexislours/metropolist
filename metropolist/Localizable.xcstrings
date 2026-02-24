@@ -2,7 +2,15 @@
   "sourceLanguage" : "en",
   "strings" : {
     "???" : {
-      "comment" : "Achievement: hidden achievement title placeholder"
+      "comment" : "Achievement: hidden achievement title placeholder",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "???"
+          }
+        }
+      }
     },
     "·" : {
       "shouldTranslate" : false
@@ -626,6 +634,17 @@
         }
       }
     },
+    "Bus Fanatic" : {
+      "comment" : "Achievement title: discover 50 bus lines",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fou du Bus"
+          }
+        }
+      }
+    },
     "Cable Car" : {
       "comment" : "Transit mode: cable car",
       "localizations" : {
@@ -1042,6 +1061,17 @@
         }
       }
     },
+    "Discover 50 bus lines" : {
+      "comment" : "Achievement description: discover 50 bus lines",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Découvrez 50 lignes de bus"
+          }
+        }
+      }
+    },
     "Discoverer" : {
       "comment" : "Achievement title: visit 50 stops",
       "localizations" : {
@@ -1229,6 +1259,17 @@
         }
       }
     },
+    "Greater Paris" : {
+      "comment" : "Achievement title: visit all 8 IDF departments",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Grand Paris"
+          }
+        }
+      }
+    },
     "Half Network" : {
       "comment" : "Achievement title: complete 50% of network",
       "localizations" : {
@@ -1328,6 +1369,17 @@
         }
       }
     },
+    "Inception" : {
+      "comment" : "Achievement title: travel through Bir-Hakeim on Line 6",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inception"
+          }
+        }
+      }
+    },
     "Jack of All Trades" : {
       "comment" : "Achievement title: use 3 modes in one day",
       "localizations" : {
@@ -1390,6 +1442,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "LICENCE OUVERTE v2.0 (ETALAB)"
+          }
+        }
+      }
+    },
+    "Line 13 Survivor" : {
+      "comment" : "Achievement title: travel on Line 13 during rush hour",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Survivant de la 13"
           }
         }
       }
@@ -1929,10 +1992,26 @@
       }
     },
     "Secret" : {
-      "comment" : "Achievement group: secret category"
+      "comment" : "Achievement group: secret category",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Secret"
+          }
+        }
+      }
     },
     "Secret achievement" : {
-      "comment" : "Achievement: hidden achievement description placeholder"
+      "comment" : "Achievement: hidden achievement description placeholder",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trophée secret"
+          }
+        }
+      }
     },
     "Secret Achievement Unlocked!" : {
       "comment" : "Travel success: secret achievement reveal label"
@@ -2102,11 +2181,27 @@
         }
       }
     },
-    "The 30-07 Rider" : {
-      "comment" : "Achievement title: travel on the 30-07 line"
+    "The Last Metro" : {
+      "comment" : "Achievement title: travel after midnight on a weekday",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Dernier Métro"
+          }
+        }
+      }
     },
-    "The 95-20 Rider" : {
-      "comment" : "Achievement title: travel on the 95-20 line"
+    "The Phantom of the Opera" : {
+      "comment" : "Achievement title: travel at Opéra between 11 PM and 3 AM",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Fantôme de l'Opéra"
+          }
+        }
+      }
     },
     "This action cannot be undone." : {
       "comment" : "Travel history: delete warning message",
@@ -2185,6 +2280,12 @@
         }
       }
     },
+    "Travel after midnight and before 3 AM on a weekday" : {
+      "comment" : "Achievement description: travel after midnight on a weekday"
+    },
+    "Travel at Opéra station between 11 PM and 3 AM" : {
+      "comment" : "Achievement description: travel at Opéra between 11 PM and 3 AM"
+    },
     "Travel before 6 AM" : {
       "comment" : "Achievement description: travel before 6 AM",
       "localizations" : {
@@ -2251,11 +2352,8 @@
         }
       }
     },
-    "Travel on the 30-07 line" : {
-      "comment" : "Achievement description: travel on the 30-07 line"
-    },
-    "Travel on the 95-20 line" : {
-      "comment" : "Achievement description: travel on the 95-20 line"
+    "Travel on Line 13 between 8 AM and 9 AM" : {
+      "comment" : "Achievement description: travel on Line 13 during rush hour"
     },
     "Travel recorded" : {
       "comment" : "XP item: base travel XP",
@@ -2267,6 +2365,9 @@
           }
         }
       }
+    },
+    "Travel through Bir-Hakeim station on Line 6" : {
+      "comment" : "Achievement description: travel through Bir-Hakeim on Line 6"
     },
     "Travels" : {
       "comment" : "Statistics: travels count label\nXP breakdown: travel XP",
@@ -2476,6 +2577,9 @@
           }
         }
       }
+    },
+    "Visit at least one station in each Île-de-France department" : {
+      "comment" : "Achievement description: visit all 8 IDF departments"
     },
     "Visual" : {
       "comment" : "Station detail: visual signs indicator",

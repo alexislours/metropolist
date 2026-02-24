@@ -253,7 +253,6 @@ enum GamificationEngine {
             streakMilestoneDates: streakMilestoneDates,
             networkHalfDate: networkHalfDate,
             firstBirHakeimLine6Date: stationAchievements.firstBirHakeimLine6Date,
-            firstWeekdayLateNightTravelDate: stationAchievements.firstWeekdayLateNightTravelDate,
             allDepartmentsCoveredDate: stationAchievements.allDepartmentsCoveredDate,
             firstOperaNightTravelDate: stationAchievements.firstOperaNightTravelDate,
             firstLine13RushHourDate: stationAchievements.firstLine13RushHourDate,

@@ -32,6 +32,7 @@ struct TravelSuccessView: View {
     @State private var showEpicDismissButton = false
     // Inline card after overlay dismisses
     @State private var showEpicLoot = false
+    @State private var currentEpicIndex = 0
     @State private var epicShimmerPhase: CGFloat = 0
     @State private var showTeaser = false
     @State private var showDone = false
@@ -54,6 +55,11 @@ struct TravelSuccessView: View {
 
     private var hiddenAchievements: [AchievementDefinition] {
         viewModel.celebrationEvent?.newAchievements.filter(\.isHidden) ?? []
+    }
+
+    private var currentEpicAchievement: AchievementDefinition? {
+        guard currentEpicIndex < hiddenAchievements.count else { return nil }
+        return hiddenAchievements[currentEpicIndex]
     }
 
     var body: some View {
@@ -455,7 +461,7 @@ struct TravelSuccessView: View {
                             .frame(width: 96, height: 96)
                             .shadow(color: .yellow.opacity(0.6), radius: 20)
 
-                        if let achievement = hiddenAchievements.first {
+                        if let achievement = currentEpicAchievement {
                             Image(systemName: achievement.systemImage)
                                 .font(.system(size: 40, weight: .bold))
                                 .foregroundStyle(.white)
@@ -479,7 +485,7 @@ struct TravelSuccessView: View {
                 Spacer().frame(height: 20)
 
                 // Achievement details
-                if let achievement = hiddenAchievements.first {
+                if let achievement = currentEpicAchievement {
                     VStack(spacing: 8) {
                         Text(achievement.title)
                             .font(.title.bold())
@@ -754,15 +760,22 @@ struct TravelSuccessView: View {
             }
         }
 
-        // t+0.4: Expanding rings burst outward
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.4) {
+        startEpicRevealContent(at: startTime + 0.4, heavyImpact: heavyImpact)
+    }
+
+    private func startEpicRevealContent(
+        at startTime: TimeInterval,
+        heavyImpact: UIImpactFeedbackGenerator
+    ) {
+        // t+0.0: Expanding rings burst outward
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime) {
             withAnimation(.easeOut(duration: 1.2)) {
                 epicOverlayRings = true
             }
         }
 
-        // t+0.5: Icon slams in with heavy haptic
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.5) {
+        // t+0.1: Icon slams in with heavy haptic
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.1) {
             heavyImpact.impactOccurred()
             withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
                 epicOverlayIcon = true
@@ -773,31 +786,34 @@ struct TravelSuccessView: View {
             }
         }
 
-        // t+1.0: "SECRET ACHIEVEMENT UNLOCKED!" label
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.0) {
+        // t+0.6: "SECRET ACHIEVEMENT UNLOCKED!" label
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.6) {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
                 epicOverlayLabel = true
             }
         }
 
-        // t+1.3: Achievement title + description
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.3) {
+        // t+0.9: Achievement title + description
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.9) {
             withAnimation(.easeOut(duration: 0.4)) {
                 epicOverlayTitle = true
             }
         }
 
-        // t+1.6: XP reward + confetti
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.6) {
+        // t+1.2: XP reward + confetti
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.2) {
             heavyImpact.impactOccurred()
             withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
                 epicOverlayXP = true
             }
-            showConfetti = true
+            showConfetti = false
+            DispatchQueue.main.async {
+                showConfetti = true
+            }
         }
 
-        // t+2.4: Show dismiss button
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 2.4) {
+        // t+2.0: Show dismiss button
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 2.0) {
             withAnimation(.easeOut(duration: 0.3)) {
                 showEpicDismissButton = true
             }
@@ -805,8 +821,10 @@ struct TravelSuccessView: View {
     }
 
     private func dismissEpicOverlay() {
-        withAnimation(.easeIn(duration: 0.5)) {
-            epicOverlayBackdrop = false
+        let hasMore = currentEpicIndex + 1 < hiddenAchievements.count
+
+        // Fade out current content
+        withAnimation(.easeIn(duration: 0.3)) {
             epicOverlayRings = false
             epicOverlayIcon = false
             epicOverlayLabel = false
@@ -816,27 +834,42 @@ struct TravelSuccessView: View {
             showEpicDismissButton = false
         }
 
-        // Remove overlay after fade
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            showEpicOverlay = false
-        }
+        if hasMore {
+            // Advance to next achievement and re-animate content
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                currentEpicIndex += 1
+                let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
+                heavyImpact.prepare()
+                startEpicRevealContent(at: 0, heavyImpact: heavyImpact)
+            }
+        } else {
+            // Final dismiss — collapse entire overlay
+            withAnimation(.easeIn(duration: 0.5)) {
+                epicOverlayBackdrop = false
+            }
 
-        // Inline card springs in as overlay fades
-        withAnimation(.spring(duration: 0.5).delay(0.2)) {
-            showEpicLoot = true
-        }
+            // Remove overlay after fade
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                showEpicOverlay = false
+            }
 
-        // Start shimmer on inline card
-        withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
-            epicShimmerPhase = 1
-        }
+            // Inline cards spring in as overlay fades
+            withAnimation(.spring(duration: 0.5).delay(0.2)) {
+                showEpicLoot = true
+            }
 
-        // Show teaser + done after dismiss
-        withAnimation(.easeOut(duration: 0.3).delay(0.8)) {
-            showTeaser = true
-        }
-        withAnimation(.easeOut(duration: 0.3).delay(1.0)) {
-            showDone = true
+            // Start shimmer on inline cards
+            withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
+                epicShimmerPhase = 1
+            }
+
+            // Show teaser + done after dismiss
+            withAnimation(.easeOut(duration: 0.3).delay(0.8)) {
+                showTeaser = true
+            }
+            withAnimation(.easeOut(duration: 0.3).delay(1.0)) {
+                showDone = true
+            }
         }
     }
 

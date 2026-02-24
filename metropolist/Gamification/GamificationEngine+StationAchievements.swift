@@ -3,7 +3,6 @@ import Foundation
 extension GamificationEngine {
     struct StationAchievementResults {
         var firstBirHakeimLine6Date: Date?
-        var firstWeekdayLateNightTravelDate: Date?
         var allDepartmentsCoveredDate: Date?
         var firstOperaNightTravelDate: Date?
         var firstLine13RushHourDate: Date?
@@ -50,13 +49,6 @@ extension GamificationEngine {
         let cal = Calendar.current
         for travel in sortedTravels {
             let hour = cal.component(.hour, from: travel.createdAt)
-            let weekday = cal.component(.weekday, from: travel.createdAt)
-
-            if result.firstWeekdayLateNightTravelDate == nil,
-               hour >= 0, hour < 3,
-               weekday >= 2, weekday <= 6 {
-                result.firstWeekdayLateNightTravelDate = travel.createdAt
-            }
 
             if result.firstOperaNightTravelDate == nil,
                hour >= 23 || hour < 3 {
