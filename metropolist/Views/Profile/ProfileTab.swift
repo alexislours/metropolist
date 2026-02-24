@@ -269,6 +269,7 @@ struct BadgesDetailView: View {
             .padding(.bottom, 80)
             .animation(reduceMotion ? .none : .snappy(duration: 0.25), value: selectedMode)
         }
+        .accessibilityIdentifier("view-badges-detail")
         .background(Color(UIColor.systemGroupedBackground))
         .navigationTitle(String(localized: "Badges", comment: "Badges: navigation title"))
         .navigationBarTitleDisplayMode(.inline)
@@ -305,6 +306,7 @@ struct AchievementsDetailView: View {
             .padding(.bottom, 80)
             .animation(reduceMotion ? .none : .snappy(duration: 0.25), value: selectedGroup)
         }
+        .accessibilityIdentifier("view-achievements-detail")
         .background(Color(UIColor.systemGroupedBackground))
         .navigationTitle(String(localized: "Achievements", comment: "Achievements: navigation title"))
         .navigationBarTitleDisplayMode(.inline)

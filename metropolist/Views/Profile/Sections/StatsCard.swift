@@ -26,6 +26,7 @@ struct StatsDetailView: View {
             .padding(.top, 8)
             .padding(.bottom, 80)
         }
+        .accessibilityIdentifier("view-stats-detail")
         .background(Color(UIColor.systemGroupedBackground))
         .navigationTitle(String(localized: "Statistics", comment: "Statistics: navigation title"))
         .navigationBarTitleDisplayMode(.inline)
