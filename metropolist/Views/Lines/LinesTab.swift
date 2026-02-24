@@ -142,7 +142,6 @@ struct LinesTab: View {
             }
             .task {
                 loadData()
-                expandedModes = []
             }
             .onChange(of: dataStore.userDataVersion) {
                 loadData()
