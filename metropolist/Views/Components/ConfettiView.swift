@@ -24,16 +24,16 @@ struct ConfettiView: View {
                     let progress = age / Self.lifetime
                     let gravity = 400.0 * age * age * 0.5
 
-                    let x = particle.startX * size.width + particle.velocityX * age
-                    let y = particle.startY * size.height + particle.velocityY * age + gravity
+                    let posX = particle.startX * size.width + particle.velocityX * age
+                    let posY = particle.startY * size.height + particle.velocityY * age + gravity
 
-                    guard y < size.height + 20 else { continue }
+                    guard posY < size.height + 20 else { continue }
 
                     let opacity = 1.0 - max(0, (progress - 0.6) / 0.4)
                     let rotation = Angle.degrees(particle.rotationSpeed * age)
                     let wobble = sin(age * particle.wobbleFrequency) * particle.wobbleAmplitude
 
-                    let point = CGPoint(x: x + wobble, y: y)
+                    let point = CGPoint(x: posX + wobble, y: posY)
 
                     context.opacity = opacity * particle.opacity
                     context.translateBy(x: point.x, y: point.y)
@@ -79,9 +79,9 @@ struct ConfettiView: View {
         startTime = Date()
         // Mix base color with festive accents for variety
         let accentColors: [Color] = [.yellow, .white, .orange]
-        particles = (0 ..< Self.particleCount).map { i in
-            let particleColor: Color = if i % 5 == 0 {
-                accentColors[i % accentColors.count]
+        particles = (0 ..< Self.particleCount).map { index in
+            let particleColor: Color = if index % 5 == 0 {
+                accentColors[index % accentColors.count]
             } else {
                 color
             }
@@ -125,7 +125,7 @@ private struct Particle: Identifiable {
         wobbleFrequency = Double.random(in: 3 ... 8)
         wobbleAmplitude = Double.random(in: 5 ... 15)
         size = Double.random(in: 6 ... 12)
-        shape = Shape.allCases.randomElement()!
+        shape = Shape.allCases.randomElement() ?? .rect
         opacity = Double.random(in: 0.7 ... 1.0)
         delay = Double.random(in: 0 ... 0.3)
     }

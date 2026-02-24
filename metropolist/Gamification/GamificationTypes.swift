@@ -118,7 +118,7 @@ struct AchievementState: Identifiable, Equatable {
 struct CelebrationXPItem: Identifiable, Equatable {
     let id = UUID()
     let kind: Kind
-    let xp: Int
+    let xpValue: Int
     let label: String
     let systemImage: String
 
@@ -133,7 +133,7 @@ struct CelebrationXPItem: Identifiable, Equatable {
     }
 
     static func == (lhs: CelebrationXPItem, rhs: CelebrationXPItem) -> Bool {
-        lhs.kind == rhs.kind && lhs.xp == rhs.xp && lhs.label == rhs.label
+        lhs.kind == rhs.kind && lhs.xpValue == rhs.xpValue && lhs.label == rhs.label
     }
 }
 

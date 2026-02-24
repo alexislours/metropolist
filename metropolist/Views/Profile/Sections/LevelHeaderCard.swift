@@ -92,68 +92,68 @@ struct LevelHeaderCard: View {
 
             if showXPBreakdown {
                 let breakdown = snapshot.xpBreakdown
-                let rows: [(String, String, Int)] = {
-                    var r: [(String, String, Int)] = []
+                let rows: [XPBreakdownRow] = {
+                    var items: [XPBreakdownRow] = []
                     if breakdown.travelXP > 0 {
-                        r.append((
-                            "tram.fill",
-                            String(localized: "Travels", comment: "XP breakdown: travel XP"),
-                            breakdown.travelXP
+                        items.append(XPBreakdownRow(
+                            icon: "tram.fill",
+                            label: String(localized: "Travels", comment: "XP breakdown: travel XP"),
+                            xpAmount: breakdown.travelXP
                         ))
                     }
                     if breakdown.stopXP > 0 {
-                        r.append((
-                            "mappin.and.ellipse",
-                            String(localized: "Stations", comment: "XP breakdown: station XP"),
-                            breakdown.stopXP
+                        items.append(XPBreakdownRow(
+                            icon: "mappin.and.ellipse",
+                            label: String(localized: "Stations", comment: "XP breakdown: station XP"),
+                            xpAmount: breakdown.stopXP
                         ))
                     }
                     if breakdown.firstLineXP > 0 {
-                        r.append((
-                            "sparkles",
-                            String(localized: "Line discovery", comment: "XP breakdown: first line XP"),
-                            breakdown.firstLineXP
+                        items.append(XPBreakdownRow(
+                            icon: "sparkles",
+                            label: String(localized: "Line discovery", comment: "XP breakdown: first line XP"),
+                            xpAmount: breakdown.firstLineXP
                         ))
                     }
                     if breakdown.lineCompletionXP > 0 {
-                        r.append((
-                            "checkmark.seal.fill",
-                            String(localized: "Line completions", comment: "XP breakdown: line completion XP"),
-                            breakdown.lineCompletionXP
+                        items.append(XPBreakdownRow(
+                            icon: "checkmark.seal.fill",
+                            label: String(localized: "Line completions", comment: "XP breakdown: line completion XP"),
+                            xpAmount: breakdown.lineCompletionXP
                         ))
                     }
                     if breakdown.achievementXP > 0 {
-                        r.append((
-                            "trophy.fill",
-                            String(localized: "Achievements", comment: "XP breakdown: achievement XP"),
-                            breakdown.achievementXP
+                        items.append(XPBreakdownRow(
+                            icon: "trophy.fill",
+                            label: String(localized: "Achievements", comment: "XP breakdown: achievement XP"),
+                            xpAmount: breakdown.achievementXP
                         ))
                     }
                     if breakdown.streakXP > 0 {
-                        r.append((
-                            "flame.fill",
-                            String(localized: "Streaks", comment: "XP breakdown: streak XP"),
-                            breakdown.streakXP
+                        items.append(XPBreakdownRow(
+                            icon: "flame.fill",
+                            label: String(localized: "Streaks", comment: "XP breakdown: streak XP"),
+                            xpAmount: breakdown.streakXP
                         ))
                     }
-                    return r
+                    return items
                 }()
 
                 VStack(spacing: 8) {
-                    ForEach(rows, id: \.1) { icon, label, xp in
+                    ForEach(rows) { row in
                         HStack(spacing: 10) {
-                            Image(systemName: icon)
+                            Image(systemName: row.icon)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                                 .frame(width: 20)
 
-                            Text(label)
+                            Text(row.label)
                                 .font(.caption)
                                 .foregroundStyle(.primary)
 
                             Spacer()
 
-                            Text(String(localized: "\(xp) XP", comment: "XP breakdown: amount"))
+                            Text(String(localized: "\(row.xpAmount) XP", comment: "XP breakdown: amount"))
                                 .font(.caption.monospacedDigit().bold())
                                 .foregroundStyle(.secondary)
                         }
@@ -175,4 +175,11 @@ struct LevelHeaderCard: View {
     private var nextLevel: PlayerLevel {
         LevelDefinitions.nextLevel(after: snapshot.level)
     }
+}
+
+private struct XPBreakdownRow: Identifiable {
+    let id = UUID()
+    let icon: String
+    let label: String
+    let xpAmount: Int
 }

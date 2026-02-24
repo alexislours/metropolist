@@ -105,7 +105,7 @@ enum GamificationDiffEngine {
         // Base travel XP (always awarded)
         items.append(CelebrationXPItem(
             kind: .baseTravel,
-            xp: xpPerTravel,
+            xpValue: xpPerTravel,
             label: String(localized: "Travel recorded", comment: "XP item: base travel XP"),
             systemImage: "tram.fill"
         ))
@@ -113,10 +113,10 @@ enum GamificationDiffEngine {
         if let ctx = context {
             // Discovery bonus (first travel on this line)
             if ctx.isFirstTravelOnLine {
-                let xp = ctx.lineMode == .bus ? xpPerFirstLineBus : xpPerFirstLineOther
+                let discoveryXP = ctx.lineMode == .bus ? xpPerFirstLineBus : xpPerFirstLineOther
                 items.append(CelebrationXPItem(
                     kind: .discoveryBonus,
-                    xp: xp,
+                    xpValue: discoveryXP,
                     label: String(localized: "New line discovered!", comment: "XP item: first travel on line bonus"),
                     systemImage: "sparkles"
                 ))
@@ -124,10 +124,10 @@ enum GamificationDiffEngine {
 
             // New stations
             if ctx.newStopsCount > 0 {
-                let xp = ctx.newStopsCount * xpPerUniqueStop
+                let stopsXP = ctx.newStopsCount * xpPerUniqueStop
                 items.append(CelebrationXPItem(
                     kind: .newStations,
-                    xp: xp,
+                    xpValue: stopsXP,
                     label: String(
                         localized: "\(ctx.newStopsCount) new stations",
                         comment: "XP item: new unique stations visited"
@@ -143,7 +143,7 @@ enum GamificationDiffEngine {
             // This is approximate — the exact XP is baked into the total diff
             items.append(CelebrationXPItem(
                 kind: .badgeMilestone,
-                xp: 0, // XP already counted in other categories
+                xpValue: 0, // XP already counted in other categories
                 label: String(localized: "\(badge.tier.label) badge earned", comment: "XP item: badge tier milestone"),
                 systemImage: badge.tier.systemImage
             ))
@@ -155,10 +155,10 @@ enum GamificationDiffEngine {
             let beforeProgress = before.lineProgress[ctx.lineSourceID]
             if afterProgress?.fraction == 1.0, (beforeProgress?.fraction ?? 0) < 1.0 {
                 let totalStops = afterProgress?.totalStops ?? 0
-                let xp = xpBaseLineCompletion + (totalStops * xpPerLineCompletionStop)
+                let completionXP = xpBaseLineCompletion + (totalStops * xpPerLineCompletionStop)
                 items.append(CelebrationXPItem(
                     kind: .lineCompletion,
-                    xp: xp,
+                    xpValue: completionXP,
                     label: String(localized: "Line completed!", comment: "XP item: full line completion bonus"),
                     systemImage: "checkmark.seal.fill"
                 ))
@@ -170,7 +170,7 @@ enum GamificationDiffEngine {
         if streakXPDiff > 0 {
             items.append(CelebrationXPItem(
                 kind: .streak,
-                xp: streakXPDiff,
+                xpValue: streakXPDiff,
                 label: String(
                     localized: "\(after.stats.currentStreak)-day streak",
                     comment: "XP item: streak bonus"
@@ -183,7 +183,7 @@ enum GamificationDiffEngine {
         for achievement in newAchievements {
             items.append(CelebrationXPItem(
                 kind: .achievement,
-                xp: achievement.xpReward,
+                xpValue: achievement.xpReward,
                 label: achievement.title,
                 systemImage: achievement.systemImage
             ))

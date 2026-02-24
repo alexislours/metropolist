@@ -1,6 +1,8 @@
+// swiftlint:disable file_length
 import SwiftUI
 import TransitModels
 
+// swiftlint:disable:next type_body_length
 struct TravelSuccessView: View {
     let viewModel: TravelFlowViewModel
     let onDone: () -> Void
@@ -182,8 +184,8 @@ struct TravelSuccessView: View {
 
             Spacer()
 
-            if item.xp > 0 {
-                Text("+\(item.xp) XP")
+            if item.xpValue > 0 {
+                Text("+\(item.xpValue) XP")
                     .font(.subheadline.bold().monospacedDigit())
                     .foregroundStyle(xpItemColor(for: item.kind))
             }
@@ -396,7 +398,7 @@ struct TravelSuccessView: View {
 
         // Phase 3: XP Breakdown (0.8s+)
         if let celebration {
-            for (index, _) in celebration.xpItems.enumerated() {
+            for index in celebration.xpItems.indices {
                 let delay = 0.8 + Double(index) * 0.1
                 _ = withAnimation(.easeOut(duration: 0.3).delay(delay)) {
                     showXPItems.insert(index)
@@ -492,40 +494,23 @@ struct TravelSuccessView: View {
                 }
 
                 // Animate level bar in sync
-                let barTarget: CGFloat
-                if levelProgress.leveledUp {
-                    if progress < 0.5 {
-                        // Fill to 100% of old level
-                        barTarget = beforeFraction + (1.0 - beforeFraction) * CGFloat(progress / 0.5)
-                    } else {
-                        // Reset and fill new level
-                        let newProgress = (progress - 0.5) / 0.5
-                        let afterFraction: CGFloat = if levelProgress.afterXPToNext > 0 {
-                            CGFloat(levelProgress.afterXPInLevel) / CGFloat(levelProgress.afterXPToNext)
-                        } else {
-                            0
-                        }
-                        barTarget = afterFraction * CGFloat(newProgress)
+                let barTarget = levelBarTarget(
+                    progress: progress,
+                    easedProgress: easedProgress,
+                    beforeFraction: beforeFraction,
+                    levelProgress: levelProgress
+                )
 
-                        // Trigger level bounce at midpoint
-                        if currentStep == steps / 2 + 1 {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.4)) {
-                                levelBounce = true
-                            }
-                            try? await Task.sleep(for: .seconds(0.3))
-                            withAnimation(.spring(response: 0.2)) {
-                                levelBounce = false
-                            }
-                            heavyImpact.impactOccurred()
-                        }
+                // Trigger level bounce at midpoint
+                if levelProgress.leveledUp, progress >= 0.5, currentStep == steps / 2 + 1 {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.4)) {
+                        levelBounce = true
                     }
-                } else {
-                    let afterFraction: CGFloat = if levelProgress.afterXPToNext > 0 {
-                        CGFloat(levelProgress.afterXPInLevel) / CGFloat(levelProgress.afterXPToNext)
-                    } else {
-                        0
+                    try? await Task.sleep(for: .seconds(0.3))
+                    withAnimation(.spring(response: 0.2)) {
+                        levelBounce = false
                     }
-                    barTarget = beforeFraction + (afterFraction - beforeFraction) * CGFloat(easedProgress)
+                    heavyImpact.impactOccurred()
                 }
 
                 withAnimation(.linear(duration: interval)) {
@@ -534,6 +519,36 @@ struct TravelSuccessView: View {
             }
 
             tickerValue = target
+        }
+    }
+
+    private func levelBarTarget(
+        progress: Double,
+        easedProgress: Double,
+        beforeFraction: CGFloat,
+        levelProgress: CelebrationLevelProgress
+    ) -> CGFloat {
+        if levelProgress.leveledUp {
+            if progress < 0.5 {
+                // Fill to 100% of old level
+                return beforeFraction + (1.0 - beforeFraction) * CGFloat(progress / 0.5)
+            } else {
+                // Reset and fill new level
+                let newProgress = (progress - 0.5) / 0.5
+                let afterFraction: CGFloat = if levelProgress.afterXPToNext > 0 {
+                    CGFloat(levelProgress.afterXPInLevel) / CGFloat(levelProgress.afterXPToNext)
+                } else {
+                    0
+                }
+                return afterFraction * CGFloat(newProgress)
+            }
+        } else {
+            let afterFraction: CGFloat = if levelProgress.afterXPToNext > 0 {
+                CGFloat(levelProgress.afterXPInLevel) / CGFloat(levelProgress.afterXPToNext)
+            } else {
+                0
+            }
+            return beforeFraction + (afterFraction - beforeFraction) * CGFloat(easedProgress)
         }
     }
 
