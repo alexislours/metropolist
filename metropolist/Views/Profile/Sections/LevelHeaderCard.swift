@@ -3,6 +3,8 @@ import SwiftUI
 struct LevelHeaderCard: View {
     let snapshot: GamificationSnapshot
 
+    @State private var showXPBreakdown = false
+
     var body: some View {
         CardSection {
             VStack(spacing: 16) {
@@ -66,6 +68,99 @@ struct LevelHeaderCard: View {
                             .foregroundStyle(.secondary)
                     }
                 }
+
+                // XP Breakdown
+                xpBreakdownSection
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation(.snappy(duration: 0.25)) {
+                    showXPBreakdown.toggle()
+                }
+            }
+        }
+    }
+
+    private var xpBreakdownSection: some View {
+        VStack(spacing: 0) {
+            Image(systemName: "chevron.down")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.tertiary)
+                .rotationEffect(.degrees(showXPBreakdown ? 180 : 0))
+                .frame(maxWidth: .infinity)
+                .padding(.top, 4)
+
+            if showXPBreakdown {
+                let breakdown = snapshot.xpBreakdown
+                let rows: [(String, String, Int)] = {
+                    var r: [(String, String, Int)] = []
+                    if breakdown.travelXP > 0 {
+                        r.append((
+                            "tram.fill",
+                            String(localized: "Travels", comment: "XP breakdown: travel XP"),
+                            breakdown.travelXP
+                        ))
+                    }
+                    if breakdown.stopXP > 0 {
+                        r.append((
+                            "mappin.and.ellipse",
+                            String(localized: "Stations", comment: "XP breakdown: station XP"),
+                            breakdown.stopXP
+                        ))
+                    }
+                    if breakdown.firstLineXP > 0 {
+                        r.append((
+                            "sparkles",
+                            String(localized: "Line discovery", comment: "XP breakdown: first line XP"),
+                            breakdown.firstLineXP
+                        ))
+                    }
+                    if breakdown.lineCompletionXP > 0 {
+                        r.append((
+                            "checkmark.seal.fill",
+                            String(localized: "Line completions", comment: "XP breakdown: line completion XP"),
+                            breakdown.lineCompletionXP
+                        ))
+                    }
+                    if breakdown.achievementXP > 0 {
+                        r.append((
+                            "trophy.fill",
+                            String(localized: "Achievements", comment: "XP breakdown: achievement XP"),
+                            breakdown.achievementXP
+                        ))
+                    }
+                    if breakdown.streakXP > 0 {
+                        r.append((
+                            "flame.fill",
+                            String(localized: "Streaks", comment: "XP breakdown: streak XP"),
+                            breakdown.streakXP
+                        ))
+                    }
+                    return r
+                }()
+
+                VStack(spacing: 8) {
+                    ForEach(rows, id: \.1) { icon, label, xp in
+                        HStack(spacing: 10) {
+                            Image(systemName: icon)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .frame(width: 20)
+
+                            Text(label)
+                                .font(.caption)
+                                .foregroundStyle(.primary)
+
+                            Spacer()
+
+                            Text(String(localized: "\(xp) XP", comment: "XP breakdown: amount"))
+                                .font(.caption.monospacedDigit().bold())
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .padding(.top, 10)
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
     }

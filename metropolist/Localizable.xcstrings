@@ -8,7 +8,7 @@
       "shouldTranslate" : false
     },
     "%@ → %@" : {
-      "comment" : "Travel success: origin to destination route summary",
+      "comment" : "Travel success: route summary",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -25,7 +25,7 @@
       }
     },
     "%@ Badge" : {
-      "comment" : "Travel success: badge tier earned",
+      "comment" : "Travel success: badge card title",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -34,6 +34,9 @@
           }
         }
       }
+    },
+    "%@ badge earned" : {
+      "comment" : "XP item: badge tier milestone"
     },
     "%@ km" : {
       "comment" : "Travel flow: distance in kilometers",
@@ -185,8 +188,12 @@
         }
       }
     },
+    "%lld new stations" : {
+      "comment" : "XP item: new unique stations visited"
+    },
     "%lld new stops completed!" : {
       "comment" : "Travel success: new unique stops count",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -243,6 +250,7 @@
     },
     "%lld stops traveled" : {
       "comment" : "Travel success: total stops traveled count",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -289,7 +297,7 @@
       }
     },
     "%lld XP" : {
-      "comment" : "Profile: total XP count",
+      "comment" : "Profile: total XP count\nXP breakdown: amount",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -298,6 +306,20 @@
           }
         }
       }
+    },
+    "%lld XP to Level %lld" : {
+      "comment" : "Travel success: teaser for next level",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld XP to Level %2$lld"
+          }
+        }
+      }
+    },
+    "%lld-day streak" : {
+      "comment" : "XP item: streak bonus"
     },
     "%lld/%lld" : {
       "localizations" : {
@@ -340,6 +362,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld/%2$lld arrêts"
+          }
+        }
+      }
+    },
+    "%lld/%lld XP" : {
+      "comment" : "Travel success: XP progress within level",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld XP"
           }
         }
       }
@@ -425,7 +458,7 @@
       }
     },
     "Achievements" : {
-      "comment" : "Achievements: navigation title\nProfile: achievements tile title",
+      "comment" : "Achievements: navigation title\nProfile: achievements tile title\nXP breakdown: achievement XP",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1276,6 +1309,7 @@
     },
     "Journey recorded!" : {
       "comment" : "Travel success: main title",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1285,8 +1319,11 @@
         }
       }
     },
+    "Journey Recorded!" : {
+      "comment" : "Travel success: main headline"
+    },
     "Level %lld" : {
-      "comment" : "Profile: current level number\nProfile: next level number\nTravel success: new level reached",
+      "comment" : "Profile: current level number\nProfile: next level number\nTravel success: current level label",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1295,6 +1332,9 @@
           }
         }
       }
+    },
+    "Level %lld reached!" : {
+      "comment" : "Travel success: level up announcement"
     },
     "Level %lld!" : {
       "comment" : "Celebration: level up notification",
@@ -1318,6 +1358,18 @@
           }
         }
       }
+    },
+    "Line badge upgraded" : {
+      "comment" : "Travel success: badge card description"
+    },
+    "Line completed!" : {
+      "comment" : "XP item: full line completion bonus"
+    },
+    "Line completions" : {
+      "comment" : "XP breakdown: line completion XP"
+    },
+    "Line discovery" : {
+      "comment" : "XP breakdown: first line XP"
     },
     "Line no longer exists" : {
       "comment" : "Travel detail: line deleted fallback text",
@@ -1479,6 +1531,9 @@
         }
       }
     },
+    "New line discovered!" : {
+      "comment" : "XP item: first travel on line bonus"
+    },
     "Night Owl" : {
       "comment" : "Achievement title: travel on Noctilien line",
       "localizations" : {
@@ -1552,6 +1607,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omniscient"
+          }
+        }
+      }
+    },
+    "Only %lld more stops to %@ on Line %@!" : {
+      "comment" : "Travel success: teaser for next badge tier",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Only %1$lld more stops to %2$@ on Line %3$@!"
           }
         }
       }
@@ -1855,6 +1921,9 @@
         }
       }
     },
+    "Stations" : {
+      "comment" : "XP breakdown: station XP"
+    },
     "Statistics" : {
       "comment" : "Profile: statistics link\nStatistics: navigation title",
       "localizations" : {
@@ -1909,6 +1978,9 @@
           }
         }
       }
+    },
+    "Streaks" : {
+      "comment" : "XP breakdown: streak XP"
     },
     "Tap + to get started" : {
       "comment" : "Travel history: empty state hint",
@@ -2079,8 +2151,11 @@
         }
       }
     },
+    "Travel recorded" : {
+      "comment" : "XP item: base travel XP"
+    },
     "Travels" : {
-      "comment" : "Statistics: travels count label",
+      "comment" : "Statistics: travels count label\nXP breakdown: travel XP",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

@@ -109,7 +109,8 @@ enum GamificationEngine {
             modeBadges: modeBadges,
             achievements: achievements,
             stats: stats,
-            lineProgress: lineProgress
+            lineProgress: lineProgress,
+            xpBreakdown: xpBreakdown
         )
     }
 

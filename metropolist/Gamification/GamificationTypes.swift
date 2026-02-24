@@ -44,6 +44,7 @@ struct GamificationSnapshot: Equatable {
     let achievements: [AchievementState]
     let stats: PlayerStats
     let lineProgress: [String: LineProgress]
+    let xpBreakdown: XPBreakdown
 
     static let empty = GamificationSnapshot(
         totalXP: 0,
@@ -54,7 +55,8 @@ struct GamificationSnapshot: Equatable {
         modeBadges: [:],
         achievements: [],
         stats: .empty,
-        lineProgress: [:]
+        lineProgress: [:],
+        xpBreakdown: XPBreakdown(travelXP: 0, stopXP: 0, lineCompletionXP: 0, firstLineXP: 0, achievementXP: 0, streakXP: 0)
     )
 }
 
@@ -111,6 +113,45 @@ struct AchievementState: Identifiable, Equatable {
     let unlockedAt: Date?
 }
 
+// MARK: - Celebration XP Breakdown
+
+struct CelebrationXPItem: Identifiable, Equatable {
+    let id = UUID()
+    let kind: Kind
+    let xp: Int
+    let label: String
+    let systemImage: String
+
+    enum Kind: Equatable {
+        case baseTravel
+        case discoveryBonus
+        case newStations
+        case badgeMilestone
+        case lineCompletion
+        case achievement
+        case streak
+    }
+
+    static func == (lhs: CelebrationXPItem, rhs: CelebrationXPItem) -> Bool {
+        lhs.kind == rhs.kind && lhs.xp == rhs.xp && lhs.label == rhs.label
+    }
+}
+
+struct CelebrationLevelProgress: Equatable {
+    let beforeLevel: PlayerLevel
+    let afterLevel: PlayerLevel
+    let beforeXPInLevel: Int
+    let beforeXPToNext: Int
+    let afterXPInLevel: Int
+    let afterXPToNext: Int
+    let leveledUp: Bool
+}
+
+enum CelebrationTeaser: Equatable {
+    case stopsToNextBadge(lineShortName: String, stopsRemaining: Int, nextTier: BadgeTier)
+    case xpToNextLevel(xpRemaining: Int, nextLevel: PlayerLevel)
+}
+
 // MARK: - Celebration
 
 struct CelebrationEvent: Equatable {
@@ -120,6 +161,9 @@ struct CelebrationEvent: Equatable {
     let newAchievements: [AchievementDefinition]
     let leveledUp: Bool
     let newLevel: PlayerLevel?
+    let xpItems: [CelebrationXPItem]
+    let levelProgress: CelebrationLevelProgress
+    let teaser: CelebrationTeaser?
 
     var hasContent: Bool {
         xpGained > 0 || !newBadges.isEmpty || !newModeBadges.isEmpty || !newAchievements.isEmpty || leveledUp
@@ -130,6 +174,9 @@ struct CelebrationEvent: Equatable {
             lhs.leveledUp == rhs.leveledUp &&
             lhs.newLevel == rhs.newLevel &&
             lhs.newAchievements.map(\.id) == rhs.newAchievements.map(\.id) &&
-            lhs.newBadges.map(\.lineSourceID) == rhs.newBadges.map(\.lineSourceID)
+            lhs.newBadges.map(\.lineSourceID) == rhs.newBadges.map(\.lineSourceID) &&
+            lhs.xpItems == rhs.xpItems &&
+            lhs.levelProgress == rhs.levelProgress &&
+            lhs.teaser == rhs.teaser
     }
 }

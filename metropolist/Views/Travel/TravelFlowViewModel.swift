@@ -351,6 +351,10 @@ final class TravelFlowViewModel {
             let existingCompletions = try dataStore.userService.completedStopIDs(forLineSourceID: line.sourceID)
             let newCompletions = stationIDs.filter { !existingCompletions.contains($0) }.count
 
+            // Detect first travel on this line
+            let lineTravelCount = (try? dataStore.userService.travelCount(forLineSourceID: line.sourceID)) ?? 0
+            let isFirstTravelOnLine = lineTravelCount == 0
+
             // Capture before snapshot for celebration diff
             let beforeSnapshot = captureGamificationSnapshot(from: dataStore)
 
@@ -369,7 +373,19 @@ final class TravelFlowViewModel {
             if let before = beforeSnapshot {
                 let after = captureGamificationSnapshot(from: dataStore)
                 if let after {
-                    celebrationEvent = GamificationDiffEngine.diff(before: before, after: after)
+                    let diffContext = DiffContext(
+                        lineSourceID: line.sourceID,
+                        lineShortName: line.shortName,
+                        lineMode: TransitMode(rawValue: line.mode) ?? .bus,
+                        newStopsCount: newCompletions,
+                        isFirstTravelOnLine: isFirstTravelOnLine,
+                        afterLineProgress: after.lineProgress[line.sourceID]
+                    )
+                    celebrationEvent = GamificationDiffEngine.diff(
+                        before: before,
+                        after: after,
+                        context: diffContext
+                    )
                 }
             }
 
