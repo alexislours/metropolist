@@ -130,6 +130,12 @@ final class TravelFlowViewModel {
         }
     }
 
+    func refreshNearbyStations() {
+        dataStore.locationService.invalidateCache()
+        nearbyStations = []
+        loadNearbyStations()
+    }
+
     func searchStations(query: String) -> [TransitStation] {
         guard !query.isEmpty else { return [] }
         return (try? dataStore.transitService.searchStations(query: query)) ?? []

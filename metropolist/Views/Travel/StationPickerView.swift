@@ -99,6 +99,16 @@ struct StationPickerView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            if !hasLinePrefill {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.refreshNearbyStations()
+                    } label: {
+                        Image(systemName: "location.magnifyingglass")
+                    }
+                    .disabled(viewModel.isLoadingNearby)
+                }
+            }
         }
         .onChange(of: searchText) {
             performSearch()
