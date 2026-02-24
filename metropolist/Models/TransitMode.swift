@@ -39,6 +39,40 @@ enum TransitMode: String, CaseIterable {
         }
     }
 
+    /// Label for a route variant: "Terminus" for bus/TER, "Mission" for RER/Transilien, "Direction" otherwise.
+    var branchLabel: String {
+        switch self {
+        case .bus, .regionalRail:
+            String(localized: "Terminus", comment: "Branch label for bus/TER")
+        case .rer, .train:
+            String(localized: "Mission", comment: "Branch label for RER/Transilien")
+        case .metro, .tram, .cableway, .funicular, .railShuttle:
+            String(localized: "Direction", comment: "Branch label for metro/tram")
+        }
+    }
+
+    var chooseBranchTitle: String {
+        switch self {
+        case .bus, .regionalRail:
+            String(localized: "Choose a terminus", comment: "Nav title: choose terminus for bus/TER")
+        case .rer, .train:
+            String(localized: "Choose a mission", comment: "Nav title: choose mission for RER/Transilien")
+        case .metro, .tram, .cableway, .funicular, .railShuttle:
+            String(localized: "Choose a direction", comment: "Nav title: choose direction for metro/tram")
+        }
+    }
+
+    func branchCountLabel(_ count: Int) -> String {
+        switch self {
+        case .bus, .regionalRail:
+            String(localized: "\(count) terminus", comment: "Stats: terminus count for bus/TER")
+        case .rer, .train:
+            String(localized: "\(count) missions", comment: "Stats: mission count for RER/Transilien")
+        case .metro, .tram, .cableway, .funicular, .railShuttle:
+            String(localized: "\(count) directions", comment: "Stats: direction count for metro/tram")
+        }
+    }
+
     var sortOrder: Int {
         switch self {
         case .metro: 0

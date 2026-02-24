@@ -132,56 +132,225 @@ struct TravelCreationFlow: View {
         .navigationTitle(String(localized: "Where to?", comment: "Travel flow: pick destination navigation title"))
     }
 
+    @ViewBuilder
     private func variantPickerList(_ viewModel: TravelFlowViewModel) -> some View {
-        List {
-            Section(String(localized: "Which direction?", comment: "Travel flow: pick direction section header")) {
-                ForEach(viewModel.variantPreviews, id: \.variant.sourceID) { preview in
-                    Button {
-                        viewModel.selectVariant(preview.variant)
-                    } label: {
-                        VStack(alignment: .leading, spacing: 6) {
+        let lineColor = viewModel.selectedLine.map { Color(hex: $0.color) } ?? .secondary
+
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                // Line context header
+                if let line = viewModel.selectedLine {
+                    HStack(spacing: 10) {
+                        LineBadge(line: line)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(viewModel.originStation?.name ?? "")
+                                .font(.subheadline.weight(.semibold))
                             Text(String(
-                                localized: "→ \(preview.variant.headsign)",
-                                comment: "Travel flow: direction headsign with arrow prefix"
+                                localized: "→ \(viewModel.destinationStation?.name ?? "")",
+                                comment: "Travel flow: direction indicator with destination"
                             ))
-                            .font(.body.weight(.medium))
-                            .foregroundStyle(.primary)
-
-                            if !preview.viaStationNames.isEmpty {
-                                let viaText = formatViaStations(preview.viaStationNames)
-                                Text(String(localized: "via \(viaText)", comment: "Travel flow: intermediate stops via label"))
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                    .lineLimit(2)
-                            }
-
-                            if preview.totalStops > 0 {
-                                Text(String(
-                                    localized: "\(preview.totalStops) stops",
-                                    comment: "Travel flow: total stops count for direction"
-                                ))
-                                .font(.caption2)
-                                .foregroundStyle(.tertiary)
-                            }
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         }
-                        .padding(.vertical, 2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
+                        Spacer()
                     }
+                    .padding(.horizontal, 4)
+                }
+
+                ForEach(viewModel.variantPreviews) { group in
+                    variantGroupCard(group, viewModel: viewModel, lineColor: lineColor)
                 }
             }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 80)
         }
-        .buttonStyle(.plain)
-        .navigationTitle(String(localized: "Pick direction", comment: "Travel flow: pick direction navigation title"))
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle(viewModel.selectedLine.flatMap({ TransitMode(rawValue: $0.mode) })?.chooseBranchTitle
+                         ?? String(localized: "Choose a direction", comment: "Travel flow: fallback choose branch title"))
     }
 
-    private func formatViaStations(_ names: [String]) -> String {
-        switch names.count {
-        case 0: return ""
-        case 1 ... 3: return names.joined(separator: ", ")
-        default:
-            let first = names.prefix(2).joined(separator: ", ")
-            return "\(first) ... \(names.last ?? "")"
+    private func variantGroupCard(
+        _ group: TravelFlowViewModel.VariantPreview,
+        viewModel: TravelFlowViewModel,
+        lineColor: Color
+    ) -> some View {
+        VStack(spacing: 0) {
+            // Expandable stop preview at the top
+            if !group.viaStationNames.isEmpty {
+                variantStopsPreview(group, viewModel: viewModel, lineColor: lineColor)
+            }
+
+            // Direction buttons
+            ForEach(Array(group.variants.enumerated()), id: \.element.sourceID) { index, variant in
+                if index > 0 || !group.viaStationNames.isEmpty {
+                    Divider().padding(.horizontal, 16)
+                }
+
+                Button {
+                    viewModel.selectVariant(variant)
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .font(.title3)
+                            .foregroundStyle(lineColor)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(viewModel.selectedLine.flatMap { TransitMode(rawValue: $0.mode) }?.branchLabel
+                                 ?? String(localized: "Direction", comment: "Travel flow: fallback branch label"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            Text(variant.headsign)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(.primary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .padding(16)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .background(Color(UIColor.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+        .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
+    }
+
+    private func variantStopsPreview(
+        _ group: TravelFlowViewModel.VariantPreview,
+        viewModel: TravelFlowViewModel,
+        lineColor: Color
+    ) -> some View {
+        var stopNames: [String] = []
+        if let originName = viewModel.originStation?.name {
+            stopNames.append(originName)
+        }
+        stopNames.append(contentsOf: group.viaStationNames)
+        if let destName = viewModel.destinationStation?.name {
+            stopNames.append(destName)
+        }
+
+        return ExpandableStopsSection(
+            lineColor: lineColor,
+            stopNames: stopNames
+        )
+    }
+
+}
+
+// MARK: - Expandable stops section (needs own @State)
+
+private struct ExpandableStopsSection: View {
+    let lineColor: Color
+    let stopNames: [String]
+
+    @State private var isExpanded = false
+    @State private var visibleCount = 0
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Button {
+                if isExpanded {
+                    // Collapse: reset immediately
+                    withAnimation(.snappy(duration: 0.2)) {
+                        visibleCount = 0
+                        isExpanded = false
+                    }
+                } else {
+                    // Expand: show container, then stagger rows in
+                    withAnimation(.snappy(duration: 0.2)) {
+                        isExpanded = true
+                    }
+                    staggerIn()
+                }
+            } label: {
+                HStack(spacing: 10) {
+                    Image(systemName: "mappin.and.ellipse")
+                        .font(.caption)
+                        .foregroundStyle(lineColor)
+
+                    Text(String(
+                        localized: "\(stopNames.count) stops",
+                        comment: "Travel flow: total stops count for direction"
+                    ))
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.primary)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.down")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                        .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                }
+                .padding(16)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+
+            if isExpanded {
+                VStack(spacing: 0) {
+                    ForEach(Array(stopNames.enumerated()), id: \.offset) { index, name in
+                        let isEndpoint = index == 0 || index == stopNames.count - 1
+                        let isFirst = index == 0
+                        let isLast = index == stopNames.count - 1
+                        let isVisible = index < visibleCount
+
+                        HStack(spacing: 12) {
+                            ZStack {
+                                VStack(spacing: 0) {
+                                    Rectangle()
+                                        .fill(isFirst ? .clear : lineColor)
+                                        .frame(width: 3)
+                                    Rectangle()
+                                        .fill(isLast ? .clear : lineColor)
+                                        .frame(width: 3)
+                                }
+
+                                Circle()
+                                    .fill(isEndpoint ? lineColor : lineColor.opacity(0.3))
+                                    .frame(width: isEndpoint ? 12 : 6, height: isEndpoint ? 12 : 6)
+                                    .overlay {
+                                        if isEndpoint {
+                                            Circle()
+                                                .strokeBorder(.white, lineWidth: 2)
+                                        }
+                                    }
+                            }
+                            .frame(width: 20)
+
+                            Text(name)
+                                .font(isEndpoint ? .subheadline.weight(.semibold) : .subheadline)
+                                .foregroundStyle(isEndpoint ? .primary : .secondary)
+
+                            Spacer()
+                        }
+                        .frame(height: isEndpoint ? 36 : 28)
+                        .opacity(isVisible ? 1 : 0)
+                        .offset(y: isVisible ? 0 : -6)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 12)
+            }
+
+            Divider().padding(.horizontal, 16)
+        }
+    }
+
+    private func staggerIn() {
+        let count = stopNames.count
+        for i in 0..<count {
+            let delay = Double(i) * 0.03
+            withAnimation(.snappy(duration: 0.25).delay(delay)) {
+                visibleCount = i + 1
+            }
         }
     }
 }

@@ -36,9 +36,16 @@ final class TravelFlowViewModel {
         let minStopOrder: Int
     }
 
-    struct VariantPreview {
-        let variant: TransitRouteVariant
-        /// Station names between origin and destination for this variant
+    struct VariantPreview: Identifiable {
+        var id: String {
+            variants.map(\.sourceID).sorted().joined(separator: "-")
+        }
+
+        /// All route variants that share the same intermediate stations path
+        let variants: [TransitRouteVariant]
+        /// Station source IDs between origin and destination (used for grouping)
+        let viaStationIDs: [String]
+        /// Station names between origin and destination (used for display)
         let viaStationNames: [String]
         let totalStops: Int
     }
@@ -288,25 +295,58 @@ final class TravelFlowViewModel {
         selectionHaptic()
         destinationStation = option.station
 
-        let allPreviews = option.variants.compactMap { pair in
-            buildVariantPreview(pair.variant)
+        // Dedup by variant sourceID (a variant can appear multiple times if the station repeats)
+        var seenVariantIDs = Set<String>()
+        let allPreviews = option.variants.compactMap { pair -> VariantPreview? in
+            guard seenVariantIDs.insert(pair.variant.sourceID).inserted else { return nil }
+            return buildVariantPreview(pair.variant)
         }
 
-        // Deduplicate variants that look identical to the user (same intermediate stations)
-        var seen = Set<String>()
-        let uniquePreviews = allPreviews.filter { preview in
-            let key = preview.viaStationNames.joined(separator: "|")
-            return seen.insert(key).inserted
+        // Group variants that share identical intermediate stations (by ID, not name),
+        // but keep variants with different headsigns selectable within the group
+        var groupOrder: [String] = []
+        var groupMap: [String: (
+            variants: [TransitRouteVariant], viaStationIDs: [String],
+            viaStationNames: [String], totalStops: Int
+        )] = [:]
+
+        for preview in allPreviews {
+            let key = preview.viaStationIDs.joined(separator: "|")
+            if groupMap[key] != nil {
+                for variant in preview.variants
+                    where !groupMap[key]!.variants.contains(where: { $0.sourceID == variant.sourceID }) {
+                    groupMap[key]!.variants.append(variant)
+                }
+            } else {
+                groupOrder.append(key)
+                groupMap[key] = (
+                    variants: Array(preview.variants),
+                    viaStationIDs: preview.viaStationIDs,
+                    viaStationNames: preview.viaStationNames,
+                    totalStops: preview.totalStops
+                )
+            }
         }
 
-        if uniquePreviews.count <= 1 {
+        let grouped = groupOrder.compactMap { key -> VariantPreview? in
+            guard let group = groupMap[key] else { return nil }
+            return VariantPreview(
+                variants: group.variants,
+                viaStationIDs: group.viaStationIDs,
+                viaStationNames: group.viaStationNames,
+                totalStops: group.totalStops
+            )
+        }
+
+        let totalVariants = grouped.reduce(0) { $0 + $1.variants.count }
+
+        if totalVariants <= 1 {
             // Unambiguous — go straight to confirm
-            selectedVariant = (uniquePreviews.first ?? allPreviews.first)?.variant
-                ?? option.variants[0].variant
+            selectedVariant = grouped.first?.variants.first ?? option.variants[0].variant
             loadIntermediateStops()
             path.append(Step.confirm)
         } else {
-            variantPreviews = uniquePreviews
+            variantPreviews = grouped
             path.append(Step.pickVariant)
         }
     }

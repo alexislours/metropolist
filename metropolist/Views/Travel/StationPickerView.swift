@@ -104,7 +104,7 @@ struct StationPickerView: View {
                     Button {
                         viewModel.refreshNearbyStations()
                     } label: {
-                        Image(systemName: "location.magnifyingglass")
+                        Image(systemName: "location.fill")
                     }
                     .disabled(viewModel.isLoadingNearby)
                 }

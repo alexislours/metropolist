@@ -85,6 +85,7 @@
     },
     "%lld branches" : {
       "comment" : "Line detail: branch count",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -127,6 +128,9 @@
         }
       }
     },
+    "%lld directions" : {
+      "comment" : "Line detail: fallback branch count\nStats: direction count for metro/tram"
+    },
     "%lld intermediate stops" : {
       "comment" : "Travel detail: intermediate stops count",
       "localizations" : {
@@ -159,6 +163,9 @@
           }
         }
       }
+    },
+    "%lld missions" : {
+      "comment" : "Stats: mission count for RER/Transilien"
     },
     "%lld new badge%@" : {
       "comment" : "Celebration: new badges earned count",
@@ -243,6 +250,9 @@
           }
         }
       }
+    },
+    "%lld terminus" : {
+      "comment" : "Stats: terminus count for bus/TER"
     },
     "%lld transit modes" : {
       "comment" : "Badges: transit mode count",
@@ -337,7 +347,7 @@
       "shouldTranslate" : false
     },
     "→ %@" : {
-      "comment" : "Travel flow: direction headsign with arrow prefix",
+      "comment" : "Travel flow: direction indicator with destination",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -536,6 +546,7 @@
     },
     "Branch" : {
       "comment" : "Line detail: branch picker label",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -635,6 +646,15 @@
           }
         }
       }
+    },
+    "Choose a direction" : {
+      "comment" : "Nav title: choose direction for metro/tram\nTravel flow: fallback choose branch title"
+    },
+    "Choose a mission" : {
+      "comment" : "Nav title: choose mission for RER/Transilien"
+    },
+    "Choose a terminus" : {
+      "comment" : "Nav title: choose terminus for bus/TER"
     },
     "Collector" : {
       "comment" : "Achievement title: complete 5 lines",
@@ -941,6 +961,9 @@
           }
         }
       }
+    },
+    "Direction" : {
+      "comment" : "Branch label for metro/tram\nLine detail: fallback branch label\nTravel flow: fallback branch label"
     },
     "Discoverer" : {
       "comment" : "Achievement title: visit 50 stops",
@@ -1349,6 +1372,9 @@
         }
       }
     },
+    "Location access is not authorized." : {
+      "comment" : "Location service: permission denied error"
+    },
     "Locked" : {
       "comment" : "Badge tier: not yet earned",
       "localizations" : {
@@ -1403,6 +1429,9 @@
           }
         }
       }
+    },
+    "Mission" : {
+      "comment" : "Branch label for RER/Transilien"
     },
     "MODE BREAKDOWN" : {
       "comment" : "Statistics: mode breakdown section header",
@@ -1560,6 +1589,7 @@
     },
     "Pick direction" : {
       "comment" : "Travel flow: pick direction navigation title",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1877,6 +1907,9 @@
         }
       }
     },
+    "Terminus" : {
+      "comment" : "Branch label for bus/TER"
+    },
     "This action cannot be undone." : {
       "comment" : "Travel history: delete warning message",
       "localizations" : {
@@ -2165,6 +2198,7 @@
     },
     "via %@" : {
       "comment" : "Travel flow: intermediate stops via label",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2275,6 +2309,7 @@
     },
     "Which direction?" : {
       "comment" : "Travel flow: pick direction section header",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

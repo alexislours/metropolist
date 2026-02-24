@@ -132,7 +132,8 @@ struct LineDetailView: View {
                         systemImage: "mappin.circle"
                     )
                     Label(
-                        String(localized: "\(viewModel.variants.count) branches", comment: "Line detail: branch count"),
+                        TransitMode(rawValue: line.mode)?.branchCountLabel(viewModel.variants.count)
+                            ?? String(localized: "\(viewModel.variants.count) directions", comment: "Line detail: fallback branch count"),
                         systemImage: "arrow.triangle.branch"
                     )
 
@@ -275,7 +276,8 @@ struct LineDetailView: View {
                     .frame(width: 8, height: 8)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(String(localized: "Branch", comment: "Line detail: branch picker label"))
+                    Text(viewModel.line.flatMap({ TransitMode(rawValue: $0.mode) })?.branchLabel
+                         ?? String(localized: "Direction", comment: "Line detail: fallback branch label"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
 

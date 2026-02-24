@@ -45,7 +45,7 @@ extension TravelFlowViewModel {
             let allStops = try dataStore.transitService.lineStops(forRouteVariantSourceID: variant.sourceID)
             guard let fromOrder = allStops.order(of: origin.sourceID),
                   let toOrder = allStops.order(of: destination.sourceID, after: fromOrder) else {
-                return VariantPreview(variant: variant, viaStationNames: [], totalStops: 0)
+                return VariantPreview(variants: [variant], viaStationIDs: [], viaStationNames: [], totalStops: 0)
             }
             let between = allStops
                 .filter { $0.order > fromOrder && $0.order < toOrder }
@@ -54,9 +54,12 @@ extension TravelFlowViewModel {
             let stations = try dataStore.transitService.stations(bySourceIDs: stationIDs)
             let nameMap = Dictionary(uniqueKeysWithValues: stations.map { ($0.sourceID, $0.name) })
             let names = stationIDs.compactMap { nameMap[$0] }
-            return VariantPreview(variant: variant, viaStationNames: names, totalStops: between.count + 2)
+            return VariantPreview(
+                variants: [variant], viaStationIDs: stationIDs,
+                viaStationNames: names, totalStops: between.count + 2
+            )
         } catch {
-            return VariantPreview(variant: variant, viaStationNames: [], totalStops: 0)
+            return VariantPreview(variants: [variant], viaStationIDs: [], viaStationNames: [], totalStops: 0)
         }
     }
 
