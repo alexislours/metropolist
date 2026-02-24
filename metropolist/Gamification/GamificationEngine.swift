@@ -295,8 +295,7 @@ enum GamificationEngine {
                 }
             }
             if firstNoctilienDate == nil {
-                let lineID = travel.lineSourceID
-                if lineID.lowercased().contains("noctilien") || lineID.hasPrefix("N") {
+                if lineMetadata[travel.lineSourceID]?.submode == "nightBus" {
                     firstNoctilienDate = travel.createdAt
                 }
             }

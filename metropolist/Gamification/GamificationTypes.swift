@@ -18,6 +18,7 @@ struct LineMetadata {
     let shortName: String
     let longName: String
     let mode: TransitMode
+    let submode: String?
     let color: String
     let textColor: String
     let totalStations: Int

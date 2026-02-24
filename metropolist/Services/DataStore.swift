@@ -48,6 +48,7 @@ final class DataStore {
                 shortName: line.shortName,
                 longName: line.longName,
                 mode: mode,
+                submode: line.submode,
                 color: line.color,
                 textColor: line.textColor,
                 totalStations: stationCounts[line.sourceID] ?? 0
