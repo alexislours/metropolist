@@ -91,13 +91,14 @@ struct StationDetailView: View {
 
                 // Modes served
                 if !groupedLines.isEmpty {
-                    HStack(spacing: 8) {
+                    FlowLayout(spacing: 8) {
                         ForEach(groupedLines, id: \.mode) { group in
                             Label(group.mode.label, systemImage: group.mode.systemImage)
                                 .foregroundStyle(group.mode.tintColor)
                         }
                     }
                     .font(.caption.weight(.medium))
+                    .lineLimit(1)
                 }
 
                 // Stats row

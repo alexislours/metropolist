@@ -95,7 +95,7 @@ struct LineDetailView: View {
                             .font(.subheadline.weight(.medium))
                     }
 
-                    HStack(spacing: 4) {
+                    FlowLayout(spacing: 4) {
                         Text(line.operatorName)
                         if let network = line.networkName {
                             Text("·")
@@ -104,6 +104,7 @@ struct LineDetailView: View {
                     }
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
                 }
 
                 Divider()
