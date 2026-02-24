@@ -342,7 +342,6 @@ enum GamificationEngine {
             totalStationsVisited: uniqueStations.count,
             totalLinesStarted: linesStarted.count,
             totalLinesCompleted: completedLineIDs.count,
-            totalCompletedStops: input.completedStops.count,
             currentStreak: current,
             firstTravelDate: input.travels.last?.createdAt
         )

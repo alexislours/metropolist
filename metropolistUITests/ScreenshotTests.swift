@@ -51,7 +51,17 @@ final class ScreenshotTests: XCTestCase, @unchecked Sendable {
         captureTravelFlow()
 
         // ── 05  Profile ──
-        app.tabBars.buttons.element(boundBy: 1).tap()
+        // iPhone uses a tab bar; iPad may use a sidebar/toolbar instead
+        let tabBarButton = app.tabBars.buttons.element(boundBy: 1)
+        if tabBarButton.exists {
+            tabBarButton.tap()
+        } else {
+            // iPad fallback — find the Profile button by label ("Profile" / "Profil")
+            let predicate = NSPredicate(format: "label CONTAINS[c] 'profil'")
+            let profileButton = app.buttons.matching(predicate).firstMatch
+            XCTAssertTrue(profileButton.waitForExistence(timeout: 5))
+            profileButton.tap()
+        }
         sleep(2)
         snapshot("05-Profile")
 

@@ -86,7 +86,6 @@ struct PlayerStats: Equatable {
     let totalStationsVisited: Int
     let totalLinesStarted: Int
     let totalLinesCompleted: Int
-    let totalCompletedStops: Int
     let currentStreak: Int
     let firstTravelDate: Date?
 
@@ -95,7 +94,6 @@ struct PlayerStats: Equatable {
         totalStationsVisited: 0,
         totalLinesStarted: 0,
         totalLinesCompleted: 0,
-        totalCompletedStops: 0,
         currentStreak: 0,
         firstTravelDate: nil
     )
