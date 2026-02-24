@@ -545,6 +545,9 @@
         }
       }
     },
+    "Branches" : {
+      "comment" : "Settings: transit data branches label"
+    },
     "Bronze" : {
       "comment" : "Badge tier: bronze level",
       "localizations" : {
@@ -830,6 +833,9 @@
           }
         }
       }
+    },
+    "Database Size" : {
+      "comment" : "Settings: transit database size label"
     },
     "Dedication" : {
       "comment" : "Achievement group: dedication category",

@@ -20,6 +20,7 @@ extension SettingsTab {
         do {
             let lines = try store.transitService.allLines()
             let totalStations = try store.transitService.totalStationCount()
+            let totalBranches = try store.transitService.totalRouteVariantCount()
 
             var countsByMode: [TransitMode: Int] = [:]
             for line in lines {
@@ -39,15 +40,35 @@ extension SettingsTab {
                 }
             }
 
+            let databaseSize = Self.formattedTransitStoreSize()
+
             return TransitStats(
                 totalLines: lines.count,
                 totalStations: totalStations,
+                totalBranches: totalBranches,
                 linesByMode: linesByMode,
-                generatedAt: generatedAt
+                generatedAt: generatedAt,
+                databaseSize: databaseSize
             )
         } catch {
             return nil
         }
+    }
+
+    private static func formattedTransitStoreSize() -> String? {
+        guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let storeURL = appSupport.appendingPathComponent("transit.store")
+        guard let attrs = try? FileManager.default.attributesOfItem(atPath: storeURL.path),
+              let size = attrs[.size] as? Int64
+        else {
+            return nil
+        }
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useMB, .useGB]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: size)
     }
 
     func prepareExport() {

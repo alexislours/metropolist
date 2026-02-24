@@ -12,7 +12,7 @@ struct StatsDetailView: View {
             VStack(spacing: 16) {
                 OverviewCard(
                     stats: stats,
-                    badgeCount: viewModel.snapshot.lineBadges.values.filter { $0 != .locked }.count
+                    badgeCount: viewModel.snapshot.lineBadges.values.reduce(0) { $0 + $1.rawValue }
                 )
 
                 ModeBreakdownCard(modeBreakdown: viewModel.modeBreakdown)

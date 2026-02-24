@@ -15,7 +15,7 @@ struct ProfileTab: View {
 
                             GamificationTiles(
                                 snapshot: viewModel.snapshot,
-                                totalBadgeSlots: viewModel.lineMetadataMap.count
+                                totalBadgeSlots: viewModel.lineMetadataMap.count * 3
                             )
 
                             NavigationLink(value: GamificationDestination.stats) {
@@ -128,7 +128,7 @@ private struct GamificationTiles: View {
     let totalBadgeSlots: Int
 
     private var earnedBadgeCount: Int {
-        snapshot.lineBadges.values.filter { $0 != .locked }.count
+        snapshot.lineBadges.values.reduce(0) { $0 + $1.rawValue }
     }
 
     private var unlockedAchievementCount: Int {

@@ -9,11 +9,11 @@ struct BadgesSummaryHeader: View {
     @ScaledMetric(relativeTo: .body) private var ringSize: CGFloat = 72
 
     private var earnedCount: Int {
-        snapshot.lineBadges.values.filter { $0 != .locked }.count
+        snapshot.lineBadges.values.reduce(0) { $0 + $1.rawValue }
     }
 
     private var totalCount: Int {
-        linesByMode.reduce(0) { $0 + $1.lines.count }
+        linesByMode.reduce(0) { $0 + $1.lines.count } * 3
     }
 
     var body: some View {
@@ -54,11 +54,11 @@ struct BadgesModeFilter: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var totalEarned: Int {
-        snapshot.lineBadges.values.filter { $0 != .locked }.count
+        snapshot.lineBadges.values.reduce(0) { $0 + $1.rawValue }
     }
 
-    private var totalLines: Int {
-        linesByMode.reduce(0) { $0 + $1.lines.count }
+    private var totalBadges: Int {
+        linesByMode.reduce(0) { $0 + $1.lines.count } * 3
     }
 
     var body: some View {
@@ -68,7 +68,7 @@ struct BadgesModeFilter: View {
                     icon: "medal.fill",
                     name: String(localized: "All", comment: "Badges: filter chip showing all modes"),
                     count: totalEarned,
-                    total: totalLines,
+                    total: totalBadges,
                     tint: .primary,
                     isSelected: selectedMode == nil
                 ) {
@@ -78,15 +78,15 @@ struct BadgesModeFilter: View {
                 }
 
                 ForEach(linesByMode, id: \.mode) { group in
-                    let count = group.lines.filter {
-                        snapshot.lineBadges[$0.sourceID] != nil && snapshot.lineBadges[$0.sourceID] != .locked
-                    }.count
+                    let count = group.lines.reduce(0) {
+                        $0 + (snapshot.lineBadges[$1.sourceID]?.rawValue ?? 0)
+                    }
 
                     FilterChip(
                         icon: group.mode.systemImage,
                         name: group.mode.label,
                         count: count,
-                        total: group.lines.count,
+                        total: group.lines.count * 3,
                         tint: group.mode.tintColor,
                         isSelected: selectedMode == group.mode
                     ) {
@@ -122,7 +122,7 @@ struct BadgesLineList: View {
     }
 
     private func earnedCount(for lines: [LineMetadata]) -> Int {
-        lines.filter { snapshot.lineBadges[$0.sourceID] != nil && snapshot.lineBadges[$0.sourceID] != .locked }.count
+        lines.reduce(0) { $0 + (snapshot.lineBadges[$1.sourceID]?.rawValue ?? 0) }
     }
 
     var body: some View {
@@ -152,7 +152,7 @@ struct BadgesLineList: View {
                     ModeSectionHeader(
                         mode: group.mode,
                         earnedCount: earnedCount(for: group.lines),
-                        totalCount: group.lines.count
+                        totalCount: group.lines.count * 3
                     )
                     .padding(.bottom, 4)
                 }

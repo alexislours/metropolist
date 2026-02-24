@@ -83,6 +83,15 @@ struct SettingsTab: View {
                     }
 
                     HStack {
+                        Text(String(localized: "Branches", comment: "Settings: transit data branches label"))
+                            .font(.subheadline)
+                        Spacer()
+                        Text("\(stats.totalBranches)")
+                            .font(.subheadline.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                    }
+
+                    HStack {
                         Text(String(localized: "Stops", comment: "Settings: transit data stops label"))
                             .font(.subheadline)
                         Spacer()
@@ -109,6 +118,19 @@ struct SettingsTab: View {
                     }
 
                     Divider()
+
+                    if let dbSize = stats.databaseSize {
+                        HStack {
+                            Text(String(localized: "Database Size", comment: "Settings: transit database size label"))
+                                .font(.subheadline)
+                            Spacer()
+                            Text(dbSize)
+                                .font(.subheadline.monospacedDigit())
+                                .foregroundStyle(.secondary)
+                        }
+
+                        Divider()
+                    }
 
                     HStack {
                         Label(
@@ -331,8 +353,10 @@ struct SettingsTab: View {
 struct TransitStats {
     let totalLines: Int
     let totalStations: Int
+    let totalBranches: Int
     let linesByMode: [(mode: TransitMode, count: Int)]
     let generatedAt: String?
+    let databaseSize: String?
 }
 
 struct ImportAlert: Identifiable {

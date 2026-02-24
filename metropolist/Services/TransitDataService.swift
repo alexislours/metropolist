@@ -37,6 +37,11 @@ struct TransitDataService {
         return try context.fetch(descriptor)
     }
 
+    func totalRouteVariantCount() throws -> Int {
+        let descriptor = FetchDescriptor<TransitRouteVariant>()
+        return try context.fetchCount(descriptor)
+    }
+
     // MARK: - Line Stops
 
     func lineStops(forRouteVariantSourceID routeVariantSourceID: String) throws -> [TransitLineStop] {
