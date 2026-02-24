@@ -312,7 +312,7 @@ enum AchievementDefinitions {
             description: String(localized: "1 year since first travel", comment: "Achievement description: 1 year since first travel"),
             group: .dedication,
             systemImage: "star.circle",
-            xpReward: 500
+            xpReward: 1000
         ) { ctx in
             guard let first = ctx.firstTravelDate else { return nil }
             guard let oneYear = Calendar.current.date(byAdding: .year, value: 1, to: first) else { return nil }

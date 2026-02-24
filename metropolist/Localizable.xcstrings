@@ -464,7 +464,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Succès"
+            "value" : "Trophées"
           }
         }
       }
@@ -475,7 +475,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "succès déverrouillés"
+            "value" : "trophées déverrouillés"
           }
         }
       }
@@ -1625,7 +1625,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Couche-tard"
+            "value" : "Noctambule"
           }
         }
       }
