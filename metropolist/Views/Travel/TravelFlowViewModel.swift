@@ -370,7 +370,6 @@ final class TravelFlowViewModel {
                 let after = captureGamificationSnapshot(from: dataStore)
                 if let after {
                     celebrationEvent = GamificationDiffEngine.diff(before: before, after: after)
-                    dataStore.pendingCelebration = celebrationEvent
                 }
             }
 

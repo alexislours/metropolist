@@ -28,6 +28,26 @@ extension GamificationEngine {
         return results
     }
 
+    static func computeStreakXP(uniqueDays: [Date]) -> Int {
+        guard !uniqueDays.isEmpty else { return 0 }
+        let cal = Calendar.current
+        var totalXP = 0
+        var streakLen = 1
+        totalXP += min(5 * streakLen, 50) // Day 1: +5
+
+        for index in 1 ..< uniqueDays.count {
+            let diff = cal.dateComponents([.day], from: uniqueDays[index - 1], to: uniqueDays[index]).day ?? 0
+            if diff == 1 {
+                streakLen += 1
+            } else {
+                streakLen = 1
+            }
+            totalXP += min(5 * streakLen, 50)
+        }
+
+        return totalXP
+    }
+
     static func computeStreaks(uniqueDays: [Date]) -> (longest: Int, current: Int) {
         guard !uniqueDays.isEmpty else { return (0, 0) }
         let cal = Calendar.current

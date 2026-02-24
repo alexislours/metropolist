@@ -3,10 +3,12 @@ import Foundation
 enum GamificationEngine {
     // MARK: - XP Constants
 
-    private static let xpPerTravel = 10
-    private static let xpPerUniqueStop = 5
-    private static let xpPerLineCompletion = 100
-    private static let xpPerModeCompletion = 500
+    private static let xpPerTravel = 5
+    private static let xpPerUniqueStop = 20
+    private static let xpPerFirstLineBus = 25
+    private static let xpPerFirstLineOther = 50
+    private static let xpBaseLineCompletion = 50
+    private static let xpPerLineCompletionStop = 5
 
     private static let dayFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,25 +29,10 @@ enum GamificationEngine {
 
         let lineBadges = lineProgress.mapValues(\.badge)
 
-        let (modeBadges, completedModes) = computeModeAnalysis(
+        let modeBadges = computeModeBadges(
             linesByMode: linesByMode,
-            completedByLine: completedByLine,
-            completedLineIDs: completedLineIDs
+            completedByLine: completedByLine
         )
-
-        let totalCompletedStops = input.completedStops.count
-
-        let xpBreakdown = XPBreakdown(
-            travelXP: input.travels.count * xpPerTravel,
-            stopXP: totalCompletedStops * xpPerUniqueStop,
-            lineCompletionXP: completedLineIDs.count * xpPerLineCompletion,
-            modeCompletionXP: completedModes.count * xpPerModeCompletion
-        )
-
-        let totalXP = xpBreakdown.total
-        let level = LevelDefinitions.level(forXP: totalXP)
-        let xpInCurrent = LevelDefinitions.xpInCurrentLevel(totalXP: totalXP)
-        let xpToNext = LevelDefinitions.xpToNextLevel(totalXP: totalXP)
 
         let uniqueTravelDays: [Date] = {
             let cal = Calendar.current
@@ -58,6 +45,20 @@ enum GamificationEngine {
             result.sort()
             return result
         }()
+
+        let uniqueStations = Set(input.completedStops.map(\.stationSourceID))
+
+        let firstLineXP = computeFirstLineXP(
+            travels: input.travels,
+            lineMetadata: input.lineMetadata
+        )
+
+        let lineCompletionXP = computeLineCompletionXP(
+            completedLineIDs: completedLineIDs,
+            lineMetadata: input.lineMetadata
+        )
+
+        let streakXP = computeStreakXP(uniqueDays: uniqueTravelDays)
 
         let stats = computeStats(
             input: input,
@@ -82,6 +83,22 @@ enum GamificationEngine {
                 unlockedAt: date
             )
         }
+
+        let achievementXP = computeAchievementXP(achievements: achievements)
+
+        let xpBreakdown = XPBreakdown(
+            travelXP: input.travels.count * xpPerTravel,
+            stopXP: uniqueStations.count * xpPerUniqueStop,
+            lineCompletionXP: lineCompletionXP,
+            firstLineXP: firstLineXP,
+            achievementXP: achievementXP,
+            streakXP: streakXP
+        )
+
+        let totalXP = xpBreakdown.total
+        let level = LevelDefinitions.level(forXP: totalXP)
+        let xpInCurrent = LevelDefinitions.xpInCurrentLevel(totalXP: totalXP)
+        let xpToNext = LevelDefinitions.xpToNextLevel(totalXP: totalXP)
 
         return GamificationSnapshot(
             totalXP: totalXP,
@@ -121,39 +138,57 @@ enum GamificationEngine {
         return (lineProgress, completedLineIDs)
     }
 
-    // MARK: - Mode Analysis
+    // MARK: - Mode Badges
 
-    private static func computeModeAnalysis(
+    private static func computeModeBadges(
         linesByMode: [TransitMode: [LineMetadata]],
-        completedByLine: [String: [CompletedStopRecord]],
-        completedLineIDs: Set<String>
-    ) -> (modeBadges: [TransitMode: BadgeTier], completedModes: Set<TransitMode>) {
+        completedByLine: [String: [CompletedStopRecord]]
+    ) -> [TransitMode: BadgeTier] {
         var modeBadges: [TransitMode: BadgeTier] = [:]
-        var completedLinesByMode: [TransitMode: Set<String>] = [:]
         for (mode, lines) in linesByMode {
             var totalStops = 0
             var completedStops = 0
-            var completedInMode: Set<String> = []
             for line in lines {
                 totalStops += line.totalStations
                 completedStops += completedByLine[line.sourceID]?.count ?? 0
-                if completedLineIDs.contains(line.sourceID) {
-                    completedInMode.insert(line.sourceID)
-                }
             }
-            completedLinesByMode[mode] = completedInMode
             modeBadges[mode] = BadgeComputation.completionTier(completed: completedStops, total: totalStops)
         }
+        return modeBadges
+    }
 
-        let completedModes: Set<TransitMode> = Set(
-            linesByMode.compactMap { mode, lines in
-                let allIDs = Set(lines.map(\.sourceID))
-                guard let completed = completedLinesByMode[mode], completed.isSuperset(of: allIDs) else { return nil }
-                return mode
-            }
-        )
+    // MARK: - XP Computation
 
-        return (modeBadges, completedModes)
+    private static func computeFirstLineXP(
+        travels: [TravelRecord],
+        lineMetadata: [String: LineMetadata]
+    ) -> Int {
+        var seenLines: Set<String> = []
+        var total = 0
+        for travel in travels {
+            guard seenLines.insert(travel.lineSourceID).inserted else { continue }
+            let isBus = lineMetadata[travel.lineSourceID]?.mode == .bus
+            total += isBus ? xpPerFirstLineBus : xpPerFirstLineOther
+        }
+        return total
+    }
+
+    private static func computeLineCompletionXP(
+        completedLineIDs: Set<String>,
+        lineMetadata: [String: LineMetadata]
+    ) -> Int {
+        var total = 0
+        for lineID in completedLineIDs {
+            let totalStations = lineMetadata[lineID]?.totalStations ?? 0
+            total += xpBaseLineCompletion + (totalStations * xpPerLineCompletionStop)
+        }
+        return total
+    }
+
+    private static func computeAchievementXP(achievements: [AchievementState]) -> Int {
+        achievements
+            .filter(\.isUnlocked)
+            .reduce(0) { $0 + $1.definition.xpReward }
     }
 
     // MARK: - Achievement Context

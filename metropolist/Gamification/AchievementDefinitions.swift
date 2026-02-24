@@ -6,6 +6,7 @@ struct AchievementDefinition: Equatable, Identifiable {
     let description: String
     let group: AchievementGroup
     let systemImage: String
+    let xpReward: Int
     let evaluate: (AchievementContext) -> Date?
 
     static func == (lhs: AchievementDefinition, rhs: AchievementDefinition) -> Bool {
@@ -69,7 +70,8 @@ enum AchievementDefinitions {
             title: String(localized: "First Steps", comment: "Achievement title: record first travel"),
             description: String(localized: "Record your first travel", comment: "Achievement description: record first travel"),
             group: .explorer,
-            systemImage: "figure.walk"
+            systemImage: "figure.walk",
+            xpReward: 25
         ) { ctx in
             ctx.totalTravels >= 1 ? ctx.firstTravelDate : nil
         },
@@ -78,7 +80,8 @@ enum AchievementDefinitions {
             title: String(localized: "Curious", comment: "Achievement title: visit 10 stops"),
             description: String(localized: "Visit 10 stops", comment: "Achievement description: visit 10 stops"),
             group: .explorer,
-            systemImage: "eye"
+            systemImage: "eye",
+            xpReward: 50
         ) { ctx in
             ctx.nthUniqueStationDates.count >= 10 ? ctx.nthUniqueStationDates[9] : nil
         },
@@ -87,7 +90,8 @@ enum AchievementDefinitions {
             title: String(localized: "Discoverer", comment: "Achievement title: visit 50 stops"),
             description: String(localized: "Visit 50 stops", comment: "Achievement description: visit 50 stops"),
             group: .explorer,
-            systemImage: "binoculars"
+            systemImage: "binoculars",
+            xpReward: 100
         ) { ctx in
             ctx.nthUniqueStationDates.count >= 50 ? ctx.nthUniqueStationDates[49] : nil
         },
@@ -96,7 +100,8 @@ enum AchievementDefinitions {
             title: String(localized: "Great Discoverer", comment: "Achievement title: visit 100 stops"),
             description: String(localized: "Visit 100 stops", comment: "Achievement description: visit 100 stops"),
             group: .explorer,
-            systemImage: "scope"
+            systemImage: "scope",
+            xpReward: 200
         ) { ctx in
             ctx.nthUniqueStationDates.count >= 100 ? ctx.nthUniqueStationDates[99] : nil
         },
@@ -105,7 +110,8 @@ enum AchievementDefinitions {
             title: String(localized: "Cartographer", comment: "Achievement title: visit 500 stops"),
             description: String(localized: "Visit 500 stops", comment: "Achievement description: visit 500 stops"),
             group: .explorer,
-            systemImage: "map.fill"
+            systemImage: "map.fill",
+            xpReward: 500
         ) { ctx in
             ctx.nthUniqueStationDates.count >= 500 ? ctx.nthUniqueStationDates[499] : nil
         },
@@ -114,7 +120,8 @@ enum AchievementDefinitions {
             title: String(localized: "Omniscient", comment: "Achievement title: visit 1000 stops"),
             description: String(localized: "Visit 1000 stops", comment: "Achievement description: visit 1000 stops"),
             group: .explorer,
-            systemImage: "globe"
+            systemImage: "globe",
+            xpReward: 1000
         ) { ctx in
             ctx.nthUniqueStationDates.count >= 1000 ? ctx.nthUniqueStationDates[999] : nil
         },
@@ -128,7 +135,8 @@ enum AchievementDefinitions {
             title: String(localized: "First Line", comment: "Achievement title: complete first line"),
             description: String(localized: "Complete a line at 100%", comment: "Achievement description: complete first line"),
             group: .completionist,
-            systemImage: "checkmark.circle"
+            systemImage: "checkmark.circle",
+            xpReward: 100
         ) { ctx in
             ctx.sortedLineCompletionDates.first
         },
@@ -137,7 +145,8 @@ enum AchievementDefinitions {
             title: String(localized: "Collector", comment: "Achievement title: complete 5 lines"),
             description: String(localized: "Complete 5 lines", comment: "Achievement description: complete 5 lines"),
             group: .completionist,
-            systemImage: "tray.full"
+            systemImage: "tray.full",
+            xpReward: 250
         ) { ctx in
             ctx.sortedLineCompletionDates.count >= 5 ? ctx.sortedLineCompletionDates[4] : nil
         },
@@ -146,7 +155,8 @@ enum AchievementDefinitions {
             title: String(localized: "Metro King", comment: "Achievement title: complete all metro lines"),
             description: String(localized: "Complete all metro lines", comment: "Achievement description: complete all metro lines"),
             group: .completionist,
-            systemImage: "crown"
+            systemImage: "crown",
+            xpReward: 1000
         ) { ctx in
             ctx.modeCompletionDates[.metro]
         },
@@ -155,7 +165,8 @@ enum AchievementDefinitions {
             title: String(localized: "RER Master", comment: "Achievement title: complete all RER lines"),
             description: String(localized: "Complete all RER lines", comment: "Achievement description: complete all RER lines"),
             group: .completionist,
-            systemImage: "train.side.front.car"
+            systemImage: "train.side.front.car",
+            xpReward: 1000
         ) { ctx in
             ctx.modeCompletionDates[.rer]
         },
@@ -164,7 +175,8 @@ enum AchievementDefinitions {
             title: String(localized: "Tram Baron", comment: "Achievement title: complete all tram lines"),
             description: String(localized: "Complete all tram lines", comment: "Achievement description: complete all tram lines"),
             group: .completionist,
-            systemImage: "tram"
+            systemImage: "tram",
+            xpReward: 750
         ) { ctx in
             ctx.modeCompletionDates[.tram]
         },
@@ -173,7 +185,8 @@ enum AchievementDefinitions {
             title: String(localized: "Half Network", comment: "Achievement title: complete 50% of network"),
             description: String(localized: "Complete 50% of the network", comment: "Achievement description: complete 50% of network"),
             group: .completionist,
-            systemImage: "chart.pie"
+            systemImage: "chart.pie",
+            xpReward: 2000
         ) { ctx in
             ctx.networkHalfDate
         },
@@ -187,7 +200,8 @@ enum AchievementDefinitions {
             title: String(localized: "Jack of All Trades", comment: "Achievement title: use 3 modes in one day"),
             description: String(localized: "Use 3 transport modes in one day", comment: "Achievement description: use 3 modes in one day"),
             group: .variety,
-            systemImage: "shuffle"
+            systemImage: "shuffle",
+            xpReward: 100
         ) { ctx in
             ctx.firstMultiModeDayDate
         },
@@ -196,7 +210,8 @@ enum AchievementDefinitions {
             title: String(localized: "Versatile", comment: "Achievement title: use every transport mode"),
             description: String(localized: "Use every transport mode", comment: "Achievement description: use every transport mode"),
             group: .variety,
-            systemImage: "rectangle.grid.2x2"
+            systemImage: "rectangle.grid.2x2",
+            xpReward: 500
         ) { ctx in
             guard !ctx.linesByMode.isEmpty else { return nil }
             let availableModes = Set(ctx.linesByMode.keys)
@@ -208,7 +223,8 @@ enum AchievementDefinitions {
             title: String(localized: "Night Owl", comment: "Achievement title: travel on Noctilien line"),
             description: String(localized: "Travel on a Noctilien line", comment: "Achievement description: travel on Noctilien line"),
             group: .variety,
-            systemImage: "moon.stars"
+            systemImage: "moon.stars",
+            xpReward: 75
         ) { ctx in
             ctx.firstNoctilienDate
         },
@@ -217,7 +233,8 @@ enum AchievementDefinitions {
             title: String(localized: "Funambulist", comment: "Achievement title: travel by funicular"),
             description: String(localized: "Travel by funicular", comment: "Achievement description: travel by funicular"),
             group: .variety,
-            systemImage: "cablecar"
+            systemImage: "cablecar",
+            xpReward: 75
         ) { ctx in
             ctx.modeFirstUsedDates[.funicular]
         },
@@ -226,7 +243,8 @@ enum AchievementDefinitions {
             title: String(localized: "Airborne", comment: "Achievement title: travel by cable car"),
             description: String(localized: "Travel by cable car", comment: "Achievement description: travel by cable car"),
             group: .variety,
-            systemImage: "cablecar.fill"
+            systemImage: "cablecar.fill",
+            xpReward: 75
         ) { ctx in
             ctx.modeFirstUsedDates[.cableway]
         },
@@ -238,7 +256,8 @@ enum AchievementDefinitions {
                 comment: "Achievement description: travel on 10 different lines"
             ),
             group: .variety,
-            systemImage: "arrow.triangle.branch"
+            systemImage: "arrow.triangle.branch",
+            xpReward: 150
         ) { ctx in
             ctx.nthUniqueLineDates.count >= 10 ? ctx.nthUniqueLineDates[9] : nil
         },
@@ -252,7 +271,8 @@ enum AchievementDefinitions {
             title: String(localized: "Regular", comment: "Achievement title: 7-day streak"),
             description: String(localized: "7-day streak", comment: "Achievement description: 7-day streak"),
             group: .dedication,
-            systemImage: "calendar"
+            systemImage: "calendar",
+            xpReward: 100
         ) { ctx in
             ctx.streakMilestoneDates[7]
         },
@@ -261,7 +281,8 @@ enum AchievementDefinitions {
             title: String(localized: "Tireless", comment: "Achievement title: 30-day streak"),
             description: String(localized: "30-day streak", comment: "Achievement description: 30-day streak"),
             group: .dedication,
-            systemImage: "calendar.badge.clock"
+            systemImage: "calendar.badge.clock",
+            xpReward: 500
         ) { ctx in
             ctx.streakMilestoneDates[30]
         },
@@ -270,7 +291,8 @@ enum AchievementDefinitions {
             title: String(localized: "Centurion", comment: "Achievement title: record 100 travels"),
             description: String(localized: "Record 100 travels", comment: "Achievement description: record 100 travels"),
             group: .dedication,
-            systemImage: "repeat.circle"
+            systemImage: "repeat.circle",
+            xpReward: 250
         ) { ctx in
             ctx.sortedTravelDates.count >= 100 ? ctx.sortedTravelDates[99] : nil
         },
@@ -279,7 +301,8 @@ enum AchievementDefinitions {
             title: String(localized: "Marathoner", comment: "Achievement title: record 500 travels"),
             description: String(localized: "Record 500 travels", comment: "Achievement description: record 500 travels"),
             group: .dedication,
-            systemImage: "figure.run"
+            systemImage: "figure.run",
+            xpReward: 750
         ) { ctx in
             ctx.sortedTravelDates.count >= 500 ? ctx.sortedTravelDates[499] : nil
         },
@@ -288,7 +311,8 @@ enum AchievementDefinitions {
             title: String(localized: "Veteran", comment: "Achievement title: 1 year since first travel"),
             description: String(localized: "1 year since first travel", comment: "Achievement description: 1 year since first travel"),
             group: .dedication,
-            systemImage: "star.circle"
+            systemImage: "star.circle",
+            xpReward: 500
         ) { ctx in
             guard let first = ctx.firstTravelDate else { return nil }
             guard let oneYear = Calendar.current.date(byAdding: .year, value: 1, to: first) else { return nil }
@@ -299,7 +323,8 @@ enum AchievementDefinitions {
             title: String(localized: "Early Bird", comment: "Achievement title: travel before 6 AM"),
             description: String(localized: "Travel before 6 AM", comment: "Achievement description: travel before 6 AM"),
             group: .dedication,
-            systemImage: "sunrise"
+            systemImage: "sunrise",
+            xpReward: 50
         ) { ctx in
             let cal = Calendar.current
             for date in ctx.travelDates {

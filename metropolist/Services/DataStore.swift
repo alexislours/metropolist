@@ -17,9 +17,6 @@ final class DataStore {
     /// Set to trigger a pre-filled travel flow from line detail.
     var travelFlowPrefill: TravelFlowPrefill?
 
-    /// Set after travel recording to show celebration toast.
-    var pendingCelebration: CelebrationEvent?
-
     /// Cached since transit data is read-only (pre-built store).
     private(set) var cachedStationCounts: [String: Int]?
 

@@ -169,6 +169,7 @@
     },
     "%lld new badge%@" : {
       "comment" : "Celebration: new badges earned count",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -358,7 +359,7 @@
       }
     },
     "+%lld XP" : {
-      "comment" : "Celebration: XP gained amount\nTravel success: XP gained amount",
+      "comment" : "Travel success: XP gained amount",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1297,6 +1298,7 @@
     },
     "Level %lld!" : {
       "comment" : "Celebration: level up notification",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

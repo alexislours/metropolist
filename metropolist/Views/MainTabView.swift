@@ -36,7 +36,7 @@ struct MainTabView: View {
             onDismiss: { activePrefill = nil },
             content: { TravelCreationFlow(prefill: activePrefill) }
         )
-        .celebrationOverlay()
+
         .onChange(of: dataStore.travelFlowPrefill) { _, newValue in
             if newValue != nil {
                 activePrefill = dataStore.travelFlowPrefill

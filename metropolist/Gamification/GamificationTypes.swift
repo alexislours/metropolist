@@ -64,10 +64,12 @@ struct XPBreakdown: Equatable {
     let travelXP: Int
     let stopXP: Int
     let lineCompletionXP: Int
-    let modeCompletionXP: Int
+    let firstLineXP: Int
+    let achievementXP: Int
+    let streakXP: Int
 
     var total: Int {
-        travelXP + stopXP + lineCompletionXP + modeCompletionXP
+        travelXP + stopXP + lineCompletionXP + firstLineXP + achievementXP + streakXP
     }
 }
 
