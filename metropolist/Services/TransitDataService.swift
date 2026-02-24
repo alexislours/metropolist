@@ -52,6 +52,21 @@ struct TransitDataService {
         return try context.fetch(descriptor)
     }
 
+    func lineStops(forStationSourceID stationSourceID: String) throws -> [TransitLineStop] {
+        let descriptor = FetchDescriptor<TransitLineStop>(
+            predicate: #Predicate { $0.stationSourceID == stationSourceID }
+        )
+        return try context.fetch(descriptor)
+    }
+
+    func lineStops(forRouteVariantSourceIDs variantIDs: [String]) throws -> [TransitLineStop] {
+        let descriptor = FetchDescriptor<TransitLineStop>(
+            predicate: #Predicate { variantIDs.contains($0.routeVariantSourceID) },
+            sortBy: [SortDescriptor(\.order)]
+        )
+        return try context.fetch(descriptor)
+    }
+
     func stationSourceIDs(forLineSourceID lineSourceID: String) throws -> Set<String> {
         let descriptor = FetchDescriptor<TransitLineStop>(
             predicate: #Predicate { $0.lineSourceID == lineSourceID }

@@ -21,14 +21,6 @@ struct LineDetailView: View {
         }
         .navigationTitle(viewModel?.line?.shortName ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: StationDestination.self) { dest in
-            StationDetailView(stationSourceID: dest.stationSourceID)
-        }
-        .navigationDestination(for: GamificationDestination.self) { dest in
-            if case let .travelDetail(id) = dest {
-                TravelDetailView(travelID: id)
-            }
-        }
         .task {
             if viewModel == nil {
                 let model = LineDetailViewModel(lineSourceID: lineSourceID, dataStore: dataStore)
@@ -59,7 +51,12 @@ struct LineDetailView: View {
                 variantPickerAndStops(viewModel)
 
                 if !viewModel.recentTravels.isEmpty {
-                    travelHistoryCard(viewModel)
+                    TravelHistoryCard(
+                        travels: viewModel.recentTravels,
+                        travelLines: viewModel.travelLineMap,
+                        stationNames: viewModel.travelStationNames,
+                        historySource: .line(lineSourceID)
+                    )
                 }
             }
             .padding(.horizontal, 16)
@@ -276,8 +273,8 @@ struct LineDetailView: View {
                     .frame(width: 8, height: 8)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(viewModel.line.flatMap({ TransitMode(rawValue: $0.mode) })?.branchLabel
-                         ?? String(localized: "Direction", comment: "Line detail: fallback branch label"))
+                    Text(viewModel.line.flatMap { TransitMode(rawValue: $0.mode) }?.branchLabel
+                        ?? String(localized: "Direction", comment: "Line detail: fallback branch label"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
 
@@ -299,25 +296,5 @@ struct LineDetailView: View {
             .shadow(color: .black.opacity(0.06), radius: 4, y: 2)
         }
         .buttonStyle(.plain)
-    }
-
-    // MARK: - Travel History
-
-    private func travelHistoryCard(_ viewModel: LineDetailViewModel) -> some View {
-        CardSection(title: String(localized: "Recent Travels", comment: "Line detail: recent travels section header")) {
-            VStack(spacing: 8) {
-                ForEach(viewModel.recentTravels, id: \.id) { travel in
-                    NavigationLink(value: GamificationDestination.travelDetail(travel.id)) {
-                        TravelHistoryRow(
-                            travel: travel,
-                            line: viewModel.travelLineMap[travel.lineSourceID],
-                            fromName: viewModel.travelStationNames[travel.fromStationSourceID] ?? travel.fromStationSourceID,
-                            toName: viewModel.travelStationNames[travel.toStationSourceID] ?? travel.toStationSourceID
-                        )
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
     }
 }

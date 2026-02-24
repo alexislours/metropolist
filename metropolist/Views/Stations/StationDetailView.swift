@@ -37,7 +37,12 @@ struct StationDetailView: View {
                 }
 
                 if !recentTravels.isEmpty {
-                    travelHistoryCard
+                    TravelHistoryCard(
+                        travels: recentTravels,
+                        travelLines: travelLineMap,
+                        stationNames: travelStationNames,
+                        historySource: .station(stationSourceID)
+                    )
                 }
             }
             .padding(.horizontal, 16)
@@ -47,14 +52,6 @@ struct StationDetailView: View {
         .background(Color(.systemGroupedBackground))
         .navigationTitle(station?.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: StationDestination.self) { dest in
-            StationDetailView(stationSourceID: dest.stationSourceID)
-        }
-        .navigationDestination(for: GamificationDestination.self) { dest in
-            if case let .travelDetail(id) = dest {
-                TravelDetailView(travelID: id)
-            }
-        }
         .task {
             await loadData()
         }
@@ -190,26 +187,6 @@ struct StationDetailView: View {
         }
     }
 
-    // MARK: - Travel History
-
-    private var travelHistoryCard: some View {
-        CardSection(title: String(localized: "Recent Travels", comment: "Station detail: recent travels section header")) {
-            VStack(spacing: 8) {
-                ForEach(recentTravels.prefix(5), id: \.id) { travel in
-                    NavigationLink(value: GamificationDestination.travelDetail(travel.id)) {
-                        TravelHistoryRow(
-                            travel: travel,
-                            line: travelLineMap[travel.lineSourceID],
-                            fromName: travelStationNames[travel.fromStationSourceID] ?? travel.fromStationSourceID,
-                            toName: travelStationNames[travel.toStationSourceID] ?? travel.toStationSourceID
-                        )
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
-    }
-
     // MARK: - Data Loading
 
     private func loadData() async {
@@ -223,12 +200,12 @@ struct StationDetailView: View {
             .sorted { $0.key.sortOrder < $1.key.sortOrder }
             .map { (mode: $0.key, lines: $0.value) }
             // Load travel history
-            recentTravels = try dataStore.userService.travels(forStationSourceID: stationSourceID)
+            recentTravels = try dataStore.travelsPassingThrough(stationSourceID: stationSourceID)
 
             // Load travel metadata
             var lineIDs: Set<String> = []
             var stationIDs: Set<String> = []
-            for travel in recentTravels.prefix(5) {
+            for travel in recentTravels {
                 lineIDs.insert(travel.lineSourceID)
                 stationIDs.insert(travel.fromStationSourceID)
                 stationIDs.insert(travel.toStationSourceID)
@@ -248,7 +225,7 @@ struct StationDetailView: View {
                     names[station.sourceID] = station.name
                 }
                 // Fill missing station names with fallback
-                for travel in recentTravels.prefix(5) {
+                for travel in recentTravels {
                     for id in [travel.fromStationSourceID, travel.toStationSourceID] where names[id] == nil {
                         names[id] = String(localized: "Unknown stop", comment: "Fallback name when stop cannot be resolved")
                     }

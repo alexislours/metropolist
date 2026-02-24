@@ -127,6 +127,19 @@ struct LinesTab: View {
             .navigationDestination(for: String.self) { lineSourceID in
                 LineDetailView(lineSourceID: lineSourceID)
             }
+            .navigationDestination(for: StationDestination.self) { dest in
+                StationDetailView(stationSourceID: dest.stationSourceID)
+            }
+            .navigationDestination(for: GamificationDestination.self) { dest in
+                switch dest {
+                case let .travelDetail(travelID):
+                    TravelDetailView(travelID: travelID)
+                case let .travelHistory(source):
+                    TravelHistoryDetailView(source: source)
+                default:
+                    EmptyView()
+                }
+            }
             .task {
                 loadData()
                 expandedModes = []

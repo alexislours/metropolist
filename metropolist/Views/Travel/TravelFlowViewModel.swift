@@ -56,33 +56,26 @@ final class TravelFlowViewModel {
     var isLoadingNearby = false
     var nearbyStations: [NearbyStation] = []
     var originStation: TransitStation?
-
     // Step 2: Line picker
     var stationLines: [TransitLine] = []
     var selectedLine: TransitLine?
-
     // Step 3: Destination picker
     var destinationOptions: [DestinationOption] = []
     var destinationStation: TransitStation?
     var selectedVariant: TransitRouteVariant?
-
     /// Step 3b: Variant disambiguation
     var variantPreviews: [VariantPreview] = []
-
     // Step 4: Confirm
     var intermediateStops: [TransitLineStop] = []
     var intermediateStationNames: [String: String] = [:]
-
     // Step 5: Success
     var recordedTravel: Travel?
     var newStopsCompleted: Int = 0
     var isProcessing = false
     var celebrationEvent: CelebrationEvent?
-
     // Errors
     var errorMessage: String?
     var showError = false
-
     // Prefill
     var prefillLine: TransitLine?
     var prefillLineStations: [TransitStation] = []
@@ -302,40 +295,26 @@ final class TravelFlowViewModel {
             return buildVariantPreview(pair.variant)
         }
 
-        // Group variants that share identical intermediate stations (by ID, not name),
-        // but keep variants with different headsigns selectable within the group
-        var groupOrder: [String] = []
-        var groupMap: [String: (
-            variants: [TransitRouteVariant], viaStationIDs: [String],
-            viaStationNames: [String], totalStops: Int
-        )] = [:]
-
+        // Group variants sharing identical intermediate stations
+        var grouped: [VariantPreview] = []
+        var keyIndex: [String: Int] = [:]
         for preview in allPreviews {
             let key = preview.viaStationIDs.joined(separator: "|")
-            if groupMap[key] != nil {
-                for variant in preview.variants
-                    where !groupMap[key]!.variants.contains(where: { $0.sourceID == variant.sourceID }) {
-                    groupMap[key]!.variants.append(variant)
+            if let idx = keyIndex[key] {
+                let newVariants = preview.variants.filter { variant in
+                    !grouped[idx].variants.contains { $0.sourceID == variant.sourceID }
                 }
-            } else {
-                groupOrder.append(key)
-                groupMap[key] = (
-                    variants: Array(preview.variants),
-                    viaStationIDs: preview.viaStationIDs,
-                    viaStationNames: preview.viaStationNames,
-                    totalStops: preview.totalStops
+                guard !newVariants.isEmpty else { continue }
+                grouped[idx] = VariantPreview(
+                    variants: grouped[idx].variants + newVariants,
+                    viaStationIDs: grouped[idx].viaStationIDs,
+                    viaStationNames: grouped[idx].viaStationNames,
+                    totalStops: grouped[idx].totalStops
                 )
+            } else {
+                keyIndex[key] = grouped.count
+                grouped.append(preview)
             }
-        }
-
-        let grouped = groupOrder.compactMap { key -> VariantPreview? in
-            guard let group = groupMap[key] else { return nil }
-            return VariantPreview(
-                variants: group.variants,
-                viaStationIDs: group.viaStationIDs,
-                viaStationNames: group.viaStationNames,
-                totalStops: group.totalStops
-            )
         }
 
         let totalVariants = grouped.reduce(0) { $0 + $1.variants.count }

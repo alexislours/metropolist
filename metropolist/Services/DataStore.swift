@@ -108,6 +108,52 @@ final class DataStore {
         try userContext.save()
     }
 
+    // MARK: - Cross-Store Queries
+
+    /// Returns all travels that passed through a station — as origin, destination, or intermediate stop.
+    func travelsPassingThrough(stationSourceID: String) throws -> [Travel] {
+        // 1. Find all route variant appearances of this station and their orders
+        let lineStops = try transitService.lineStops(forStationSourceID: stationSourceID)
+        guard !lineStops.isEmpty else { return [] }
+
+        // Map: routeVariantSourceID → station's order on that variant
+        var stationOrderByVariant: [String: Int] = [:]
+        for stop in lineStops {
+            stationOrderByVariant[stop.routeVariantSourceID] = stop.order
+        }
+
+        // 2. Fetch all travels on those route variants
+        let variantIDs = Array(stationOrderByVariant.keys)
+        let candidateTravels = try userService.travels(forRouteVariantSourceIDs: variantIDs)
+        guard !candidateTravels.isEmpty else { return [] }
+
+        // 3. Build order lookup for from/to stations on each variant
+        // Collect all station IDs we need orders for
+        var neededLookups: Set<String> = [] // "variantID:stationID"
+        for travel in candidateTravels {
+            neededLookups.insert("\(travel.routeVariantSourceID):\(travel.fromStationSourceID)")
+            neededLookups.insert("\(travel.routeVariantSourceID):\(travel.toStationSourceID)")
+        }
+
+        // Batch-fetch all stops for the relevant variants (already have some from step 1)
+        let allVariantStops = try transitService.lineStops(forRouteVariantSourceIDs: variantIDs)
+        var orderLookup: [String: Int] = [:] // "variantID:stationID" → order
+        for stop in allVariantStops {
+            orderLookup["\(stop.routeVariantSourceID):\(stop.stationSourceID)"] = stop.order
+        }
+
+        // 4. Filter: keep travels where stationOrder is between fromOrder and toOrder
+        return candidateTravels.filter { travel in
+            guard let stationOrder = stationOrderByVariant[travel.routeVariantSourceID],
+                  let fromOrder = orderLookup["\(travel.routeVariantSourceID):\(travel.fromStationSourceID)"],
+                  let toOrder = orderLookup["\(travel.routeVariantSourceID):\(travel.toStationSourceID)"]
+            else { return false }
+            let lowerBound = min(fromOrder, toOrder)
+            let upperBound = max(fromOrder, toOrder)
+            return stationOrder >= lowerBound && stationOrder <= upperBound
+        }
+    }
+
     init() {
         let transitContainer = Self.makeTransitContainer()
         let tCtx = ModelContext(transitContainer)

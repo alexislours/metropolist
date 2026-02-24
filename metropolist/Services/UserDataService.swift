@@ -74,11 +74,9 @@ struct UserDataService {
 
     // MARK: - Station travel queries
 
-    func travels(forStationSourceID stationSourceID: String) throws -> [Travel] {
+    func travels(forRouteVariantSourceIDs variantIDs: [String]) throws -> [Travel] {
         let descriptor = FetchDescriptor<Travel>(
-            predicate: #Predicate {
-                $0.fromStationSourceID == stationSourceID || $0.toStationSourceID == stationSourceID
-            },
+            predicate: #Predicate { variantIDs.contains($0.routeVariantSourceID) },
             sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
         )
         return try context.fetch(descriptor)

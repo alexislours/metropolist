@@ -61,12 +61,6 @@ struct TravelDetailView: View {
         .background(Color(.systemGroupedBackground))
         .navigationTitle(String(localized: "Travel Details", comment: "Travel detail: navigation title"))
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: String.self) { lineSourceID in
-            LineDetailView(lineSourceID: lineSourceID)
-        }
-        .navigationDestination(for: StationDestination.self) { dest in
-            StationDetailView(stationSourceID: dest.stationSourceID)
-        }
         .task {
             loadData()
         }

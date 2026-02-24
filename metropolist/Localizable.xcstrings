@@ -1163,6 +1163,17 @@
         }
       }
     },
+    "History" : {
+      "comment" : "Travel history: navigation title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historique"
+          }
+        }
+      }
+    },
     "iCloud Sync" : {
       "comment" : "Settings: iCloud sync feature title",
       "localizations" : {
@@ -1611,7 +1622,7 @@
       }
     },
     "Recent Travels" : {
-      "comment" : "Line detail: recent travels section header\nStation detail: recent travels section header",
+      "comment" : "Recent travels section header",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1623,6 +1634,7 @@
     },
     "RECENT TRAVELS" : {
       "comment" : "Profile: recent travels section header",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2033,6 +2045,7 @@
     },
     "Travel History" : {
       "comment" : "Travel history: navigation title",
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

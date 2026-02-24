@@ -48,7 +48,8 @@ struct ProfileTab: View {
                             TravelHistoryCard(
                                 travels: viewModel.recentTravels,
                                 travelLines: viewModel.travelLines,
-                                stationNames: viewModel.stationNames
+                                stationNames: viewModel.stationNames,
+                                historySource: .all
                             )
                         }
                         .padding(.horizontal, 16)
@@ -88,13 +89,17 @@ struct ProfileTab: View {
                             lines: lines
                         )
                     }
-                case .travelHistory:
-                    if let viewModel {
-                        TravelHistoryDetailView(viewModel: viewModel)
-                    }
+                case let .travelHistory(source):
+                    TravelHistoryDetailView(source: source)
                 case let .travelDetail(travelID):
                     TravelDetailView(travelID: travelID)
                 }
+            }
+            .navigationDestination(for: String.self) { lineSourceID in
+                LineDetailView(lineSourceID: lineSourceID)
+            }
+            .navigationDestination(for: StationDestination.self) { dest in
+                StationDetailView(stationSourceID: dest.stationSourceID)
             }
             .task {
                 if viewModel == nil {
@@ -112,11 +117,17 @@ struct ProfileTab: View {
 
 // MARK: - Navigation
 
+enum TravelHistorySource: Hashable {
+    case all
+    case line(String) // lineSourceID
+    case station(String) // stationSourceID
+}
+
 enum GamificationDestination: Hashable {
     case badges
     case achievements
     case stats
-    case travelHistory
+    case travelHistory(TravelHistorySource)
     case progress(TransitMode)
     case travelDetail(String) // Travel ID
 }

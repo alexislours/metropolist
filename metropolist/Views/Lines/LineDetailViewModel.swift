@@ -90,9 +90,8 @@ final class LineDetailViewModel {
             travelCount = try dataStore.userService.travelCount(forLineSourceID: lineSourceID)
             lastTravelDate = try dataStore.userService.lastTravelDate(forLineSourceID: lineSourceID)
 
-            // Recent travels (up to 5)
-            let travels = try dataStore.userService.travels(forLineSourceID: lineSourceID)
-            recentTravels = Array(travels.prefix(5))
+            // Recent travels (keep full list for "View All", card shows first 5)
+            recentTravels = try dataStore.userService.travels(forLineSourceID: lineSourceID)
             loadTravelMetadata()
 
             // Map for selected variant
@@ -110,7 +109,7 @@ final class LineDetailViewModel {
             travelCount = try dataStore.userService.travelCount(forLineSourceID: lineSourceID)
             lastTravelDate = try dataStore.userService.lastTravelDate(forLineSourceID: lineSourceID)
             let travels = try dataStore.userService.travels(forLineSourceID: lineSourceID)
-            recentTravels = Array(travels.prefix(5))
+            recentTravels = travels
             loadTravelMetadata()
         } catch {
             #if DEBUG

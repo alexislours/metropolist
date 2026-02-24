@@ -166,8 +166,8 @@ struct TravelCreationFlow: View {
             .padding(.bottom, 80)
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle(viewModel.selectedLine.flatMap({ TransitMode(rawValue: $0.mode) })?.chooseBranchTitle
-                         ?? String(localized: "Choose a direction", comment: "Travel flow: fallback choose branch title"))
+        .navigationTitle(viewModel.selectedLine.flatMap { TransitMode(rawValue: $0.mode) }?.chooseBranchTitle
+            ?? String(localized: "Choose a direction", comment: "Travel flow: fallback choose branch title"))
     }
 
     private func variantGroupCard(
@@ -197,7 +197,7 @@ struct TravelCreationFlow: View {
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(viewModel.selectedLine.flatMap { TransitMode(rawValue: $0.mode) }?.branchLabel
-                                 ?? String(localized: "Direction", comment: "Travel flow: fallback branch label"))
+                                ?? String(localized: "Direction", comment: "Travel flow: fallback branch label"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
 
@@ -241,7 +241,6 @@ struct TravelCreationFlow: View {
             stopNames: stopNames
         )
     }
-
 }
 
 // MARK: - Expandable stops section (needs own @State)
@@ -346,10 +345,10 @@ private struct ExpandableStopsSection: View {
 
     private func staggerIn() {
         let count = stopNames.count
-        for i in 0..<count {
-            let delay = Double(i) * 0.03
+        for index in 0 ..< count {
+            let delay = Double(index) * 0.03
             withAnimation(.snappy(duration: 0.25).delay(delay)) {
-                visibleCount = i + 1
+                visibleCount = index + 1
             }
         }
     }
