@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "???" : {
+      "comment" : "Achievement: hidden achievement title placeholder"
+    },
     "·" : {
       "shouldTranslate" : false
     },
@@ -853,6 +856,9 @@
           }
         }
       }
+    },
+    "Continue" : {
+      "comment" : "Travel success: dismiss secret achievement overlay"
     },
     "Could not access the selected file." : {
       "comment" : "Settings: file access error message",
@@ -1922,6 +1928,15 @@
         }
       }
     },
+    "Secret" : {
+      "comment" : "Achievement group: secret category"
+    },
+    "Secret achievement" : {
+      "comment" : "Achievement: hidden achievement description placeholder"
+    },
+    "Secret Achievement Unlocked!" : {
+      "comment" : "Travel success: secret achievement reveal label"
+    },
     "Select" : {
       "comment" : "Travel history: enter selection mode",
       "localizations" : {
@@ -2087,6 +2102,12 @@
         }
       }
     },
+    "The 30-07 Rider" : {
+      "comment" : "Achievement title: travel on the 30-07 line"
+    },
+    "The 95-20 Rider" : {
+      "comment" : "Achievement title: travel on the 95-20 line"
+    },
     "This action cannot be undone." : {
       "comment" : "Travel history: delete warning message",
       "localizations" : {
@@ -2229,6 +2250,12 @@
           }
         }
       }
+    },
+    "Travel on the 30-07 line" : {
+      "comment" : "Achievement description: travel on the 30-07 line"
+    },
+    "Travel on the 95-20 line" : {
+      "comment" : "Achievement description: travel on the 95-20 line"
     },
     "Travel recorded" : {
       "comment" : "XP item: base travel XP",

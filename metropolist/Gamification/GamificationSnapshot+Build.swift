@@ -1,3 +1,5 @@
+import TransitModels
+
 extension GamificationSnapshot {
     /// Intermediate result that also exposes the `LineMetadata` map for callers that need it.
     struct BuildResult {
@@ -12,6 +14,20 @@ extension GamificationSnapshot {
         let travels = try dataStore.userService.allTravels()
         let metaMap = try dataStore.allLineMetadata()
 
+        // Collect all station IDs referenced in stops and travels
+        let allStationSourceIDs = Set(
+            completedStops.map(\.stationSourceID) +
+                travels.flatMap { [$0.fromStationSourceID, $0.toStationSourceID] }
+        )
+        let stations = try dataStore.transitService.stations(bySourceIDs: Array(allStationSourceIDs))
+        var stationMeta: [String: StationMetadata] = [:]
+        for station in stations {
+            stationMeta[station.sourceID] = StationMetadata(
+                name: station.name,
+                postalCode: station.postalCode
+            )
+        }
+
         let stopRecords = completedStops.map {
             CompletedStopRecord(
                 lineSourceID: $0.lineSourceID,
@@ -20,13 +36,19 @@ extension GamificationSnapshot {
             )
         }
         let travelRecords = travels.map {
-            TravelRecord(lineSourceID: $0.lineSourceID, createdAt: $0.createdAt)
+            TravelRecord(
+                lineSourceID: $0.lineSourceID,
+                createdAt: $0.createdAt,
+                fromStationSourceID: $0.fromStationSourceID,
+                toStationSourceID: $0.toStationSourceID
+            )
         }
 
         let input = GamificationInput(
             completedStops: stopRecords,
             travels: travelRecords,
-            lineMetadata: metaMap
+            lineMetadata: metaMap,
+            stationMetadata: stationMeta
         )
 
         let snapshot = GamificationEngine.computeSnapshot(from: input)

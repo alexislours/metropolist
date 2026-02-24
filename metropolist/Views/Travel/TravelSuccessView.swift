@@ -20,6 +20,19 @@ struct TravelSuccessView: View {
     @State private var levelBounce = false
     @State private var showConfetti = false
     @State private var showLoot = false
+    // Epic overlay states
+    @State private var showEpicOverlay = false
+    @State private var epicOverlayBackdrop = false
+    @State private var epicOverlayRings = false
+    @State private var epicOverlayIcon = false
+    @State private var epicOverlayLabel = false
+    @State private var epicOverlayTitle = false
+    @State private var epicOverlayXP = false
+    @State private var epicGlowPulse = false
+    @State private var showEpicDismissButton = false
+    // Inline card after overlay dismisses
+    @State private var showEpicLoot = false
+    @State private var epicShimmerPhase: CGFloat = 0
     @State private var showTeaser = false
     @State private var showDone = false
 
@@ -33,6 +46,14 @@ struct TravelSuccessView: View {
         } else {
             .accentColor
         }
+    }
+
+    private var regularAchievements: [AchievementDefinition] {
+        viewModel.celebrationEvent?.newAchievements.filter { !$0.isHidden } ?? []
+    }
+
+    private var hiddenAchievements: [AchievementDefinition] {
+        viewModel.celebrationEvent?.newAchievements.filter(\.isHidden) ?? []
     }
 
     var body: some View {
@@ -59,6 +80,11 @@ struct TravelSuccessView: View {
                 // MARK: Phase 5 — Loot & Teaser
 
                 lootSection
+
+                // MARK: Phase 6 — Epic Hidden Achievement Reveal
+
+                epicLootSection
+
                 teaserSection
 
                 Spacer().frame(height: 32)
@@ -95,6 +121,12 @@ struct TravelSuccessView: View {
             if !reduceMotion {
                 ConfettiView(isActive: showConfetti, color: lineColor)
                     .ignoresSafeArea()
+            }
+        }
+        .overlay {
+            if showEpicOverlay {
+                epicFullScreenOverlay
+                    .transition(.opacity)
             }
         }
         .navigationBarBackButtonHidden()
@@ -300,8 +332,8 @@ struct TravelSuccessView: View {
                         )
                     }
 
-                    // Achievement cards
-                    ForEach(celebration.newAchievements) { achievement in
+                    // Regular achievement cards (non-hidden only)
+                    ForEach(regularAchievements) { achievement in
                         lootCard(
                             icon: achievement.systemImage,
                             iconColor: .yellow,
@@ -311,6 +343,185 @@ struct TravelSuccessView: View {
                     }
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+    }
+
+    // MARK: - Phase 6: Epic Hidden Achievement Reveal
+
+    private var epicLootSection: some View {
+        Group {
+            if showEpicLoot, !hiddenAchievements.isEmpty {
+                VStack(spacing: 10) {
+                    ForEach(hiddenAchievements) { achievement in
+                        epicInlineCard(achievement: achievement)
+                    }
+                }
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+    }
+
+    private func epicInlineCard(achievement: AchievementDefinition) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: achievement.systemImage)
+                .font(.title2)
+                .foregroundStyle(.yellow)
+                .frame(width: 36)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(achievement.title)
+                    .font(.subheadline.bold())
+                Text(achievement.description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Text("+\(achievement.xpReward) XP")
+                .font(.caption.bold().monospacedDigit())
+                .foregroundStyle(.orange)
+        }
+        .padding(12)
+        .background {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.ultraThinMaterial)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 12)
+                        .strokeBorder(
+                            AngularGradient(
+                                colors: [.yellow, .orange, .yellow.opacity(0.3), .orange, .yellow],
+                                center: .center,
+                                angle: .degrees(epicShimmerPhase * 360)
+                            ),
+                            lineWidth: 1.5
+                        )
+                }
+                .shadow(color: .yellow.opacity(0.2), radius: 8, y: 2)
+        }
+    }
+
+    // MARK: - Epic Full-Screen Overlay
+
+    private var epicFullScreenOverlay: some View {
+        ZStack {
+            // Backdrop
+            Color.black
+                .opacity(epicOverlayBackdrop ? 0.9 : 0)
+                .ignoresSafeArea()
+
+            // Expanding rings
+            ForEach(0 ..< 3, id: \.self) { ring in
+                Circle()
+                    .strokeBorder(
+                        Color.yellow.opacity(epicOverlayRings ? 0 : 0.4),
+                        lineWidth: 2
+                    )
+                    .frame(width: 100, height: 100)
+                    .scaleEffect(epicOverlayRings ? 4.0 + CGFloat(ring) * 1.5 : 0.3)
+            }
+
+            // Center content
+            VStack(spacing: 0) {
+                Spacer()
+
+                // Glow + icon
+                ZStack {
+                    // Pulsing glow
+                    Circle()
+                        .fill(
+                            RadialGradient(
+                                colors: [.yellow.opacity(0.3), .orange.opacity(0.1), .clear],
+                                center: .center,
+                                startRadius: 20,
+                                endRadius: 100
+                            )
+                        )
+                        .frame(width: 200, height: 200)
+                        .scaleEffect(epicGlowPulse ? 1.15 : 0.85)
+                        .opacity(epicOverlayIcon ? 1 : 0)
+
+                    // Icon circle
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [.yellow, .orange],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 96, height: 96)
+                            .shadow(color: .yellow.opacity(0.6), radius: 20)
+
+                        if let achievement = hiddenAchievements.first {
+                            Image(systemName: achievement.systemImage)
+                                .font(.system(size: 40, weight: .bold))
+                                .foregroundStyle(.white)
+                                .symbolEffect(.bounce, value: epicOverlayIcon)
+                        }
+                    }
+                    .scaleEffect(epicOverlayIcon ? 1 : 0)
+                }
+
+                Spacer().frame(height: 32)
+
+                // Label
+                Text(String(localized: "Secret Achievement Unlocked!", comment: "Travel success: secret achievement reveal label"))
+                    .font(.caption.weight(.black))
+                    .foregroundStyle(.yellow)
+                    .textCase(.uppercase)
+                    .tracking(2)
+                    .opacity(epicOverlayLabel ? 1 : 0)
+                    .scaleEffect(epicOverlayLabel ? 1 : 0.7)
+
+                Spacer().frame(height: 20)
+
+                // Achievement details
+                if let achievement = hiddenAchievements.first {
+                    VStack(spacing: 8) {
+                        Text(achievement.title)
+                            .font(.title.bold())
+                            .foregroundStyle(.white)
+
+                        Text(achievement.description)
+                            .font(.body)
+                            .foregroundStyle(.white.opacity(0.7))
+                    }
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .opacity(epicOverlayTitle ? 1 : 0)
+                    .offset(y: epicOverlayTitle ? 0 : 20)
+
+                    Spacer().frame(height: 24)
+
+                    // XP reward
+                    Text("+\(achievement.xpReward) XP")
+                        .font(.title2.bold().monospacedDigit())
+                        .foregroundStyle(.orange)
+                        .opacity(epicOverlayXP ? 1 : 0)
+                        .scaleEffect(epicOverlayXP ? 1 : 0.5)
+                }
+
+                Spacer().frame(height: 40)
+
+                // Dismiss button
+                if showEpicDismissButton {
+                    Button {
+                        dismissEpicOverlay()
+                    } label: {
+                        Text(String(localized: "Continue", comment: "Travel success: dismiss secret achievement overlay"))
+                            .font(.headline)
+                            .foregroundStyle(.black)
+                            .padding(.horizontal, 32)
+                            .padding(.vertical, 12)
+                            .background(.yellow, in: Capsule())
+                    }
+                    .transition(.opacity.combined(with: .move(edge: .bottom)))
+                }
+
+                Spacer()
             }
         }
     }
@@ -429,11 +640,20 @@ struct TravelSuccessView: View {
                 }
             }
 
-            withAnimation(.easeOut(duration: 0.3).delay(phase5Start + 0.3)) {
-                showTeaser = true
-            }
-            withAnimation(.easeOut(duration: 0.3).delay(phase5Start + 0.5)) {
-                showDone = true
+            // Phase 6: Epic hidden achievement reveal
+            let hasHiddenAchievements = celebration.newAchievements.contains(where: \.isHidden)
+            let phase6Start = phase5Start + (hasHiddenAchievements ? 0.6 : 0)
+
+            if hasHiddenAchievements {
+                startEpicReveal(at: phase6Start, heavyImpact: heavyImpact)
+                // Teaser + done are triggered by dismissEpicOverlay()
+            } else {
+                withAnimation(.easeOut(duration: 0.3).delay(phase6Start + 0.3)) {
+                    showTeaser = true
+                }
+                withAnimation(.easeOut(duration: 0.3).delay(phase6Start + 0.5)) {
+                    showDone = true
+                }
             }
         } else {
             // No celebration event — just show done
@@ -522,6 +742,104 @@ struct TravelSuccessView: View {
         }
     }
 
+    private func startEpicReveal(
+        at startTime: TimeInterval,
+        heavyImpact: UIImpactFeedbackGenerator
+    ) {
+        // t+0.0: Show overlay + backdrop fade
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime) {
+            showEpicOverlay = true
+            withAnimation(.easeIn(duration: 0.4)) {
+                epicOverlayBackdrop = true
+            }
+        }
+
+        // t+0.4: Expanding rings burst outward
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.4) {
+            withAnimation(.easeOut(duration: 1.2)) {
+                epicOverlayRings = true
+            }
+        }
+
+        // t+0.5: Icon slams in with heavy haptic
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.5) {
+            heavyImpact.impactOccurred()
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
+                epicOverlayIcon = true
+            }
+            // Start glow pulse
+            withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                epicGlowPulse = true
+            }
+        }
+
+        // t+1.0: "SECRET ACHIEVEMENT UNLOCKED!" label
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.0) {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                epicOverlayLabel = true
+            }
+        }
+
+        // t+1.3: Achievement title + description
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.3) {
+            withAnimation(.easeOut(duration: 0.4)) {
+                epicOverlayTitle = true
+            }
+        }
+
+        // t+1.6: XP reward + confetti
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.6) {
+            heavyImpact.impactOccurred()
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                epicOverlayXP = true
+            }
+            showConfetti = true
+        }
+
+        // t+2.4: Show dismiss button
+        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 2.4) {
+            withAnimation(.easeOut(duration: 0.3)) {
+                showEpicDismissButton = true
+            }
+        }
+    }
+
+    private func dismissEpicOverlay() {
+        withAnimation(.easeIn(duration: 0.5)) {
+            epicOverlayBackdrop = false
+            epicOverlayRings = false
+            epicOverlayIcon = false
+            epicOverlayLabel = false
+            epicOverlayTitle = false
+            epicOverlayXP = false
+            epicGlowPulse = false
+            showEpicDismissButton = false
+        }
+
+        // Remove overlay after fade
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            showEpicOverlay = false
+        }
+
+        // Inline card springs in as overlay fades
+        withAnimation(.spring(duration: 0.5).delay(0.2)) {
+            showEpicLoot = true
+        }
+
+        // Start shimmer on inline card
+        withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
+            epicShimmerPhase = 1
+        }
+
+        // Show teaser + done after dismiss
+        withAnimation(.easeOut(duration: 0.3).delay(0.8)) {
+            showTeaser = true
+        }
+        withAnimation(.easeOut(duration: 0.3).delay(1.0)) {
+            showDone = true
+        }
+    }
+
     private func levelBarTarget(
         progress: Double,
         easedProgress: Double,
@@ -560,6 +878,7 @@ struct TravelSuccessView: View {
         showTicker = true
         showLevelBar = true
         showLoot = true
+        showEpicLoot = true
         showTeaser = true
         showDone = true
 

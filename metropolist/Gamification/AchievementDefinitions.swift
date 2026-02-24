@@ -7,7 +7,28 @@ struct AchievementDefinition: Equatable, Identifiable {
     let group: AchievementGroup
     let systemImage: String
     let xpReward: Int
+    let isHidden: Bool
     let evaluate: (AchievementContext) -> Date?
+
+    init(
+        id: String,
+        title: String,
+        description: String,
+        group: AchievementGroup,
+        systemImage: String,
+        xpReward: Int,
+        isHidden: Bool = false,
+        evaluate: @escaping (AchievementContext) -> Date?
+    ) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.group = group
+        self.systemImage = systemImage
+        self.xpReward = xpReward
+        self.isHidden = isHidden
+        self.evaluate = evaluate
+    }
 
     static func == (lhs: AchievementDefinition, rhs: AchievementDefinition) -> Bool {
         lhs.id == rhs.id
@@ -19,6 +40,7 @@ enum AchievementGroup: String, CaseIterable {
     case completionist = "Completionist"
     case variety = "Variety"
     case dedication = "Dedication"
+    case secret = "Secret"
 
     var label: String {
         switch self {
@@ -26,6 +48,7 @@ enum AchievementGroup: String, CaseIterable {
         case .completionist: String(localized: "Completionist", comment: "Achievement group: completionist category")
         case .variety: String(localized: "Variety", comment: "Achievement group: variety category")
         case .dedication: String(localized: "Dedication", comment: "Achievement group: dedication category")
+        case .secret: String(localized: "Secret", comment: "Achievement group: secret category")
         }
     }
 
@@ -35,6 +58,7 @@ enum AchievementGroup: String, CaseIterable {
         case .completionist: "checkmark.seal"
         case .variety: "sparkles"
         case .dedication: "flame"
+        case .secret: "questionmark.diamond"
         }
     }
 }
@@ -57,10 +81,17 @@ struct AchievementContext {
     let firstNoctilienDate: Date? // first travel on a Noctilien line
     let streakMilestoneDates: [Int: Date] // streak length → end date when first achieved
     let networkHalfDate: Date? // when 50% of the network was reached
+    // Station & time-based achievement data
+    let firstBirHakeimLine6Date: Date? // first completed stop at Bir-Hakeim on line 6
+    let firstWeekdayLateNightTravelDate: Date? // first travel midnight–3 AM on a weekday
+    let allDepartmentsCoveredDate: Date? // when all 8 IDF departments were visited
+    let firstOperaNightTravelDate: Date? // first travel from/to Opéra between 23h–3h
+    let firstLine13RushHourDate: Date? // first travel on line 13 between 8h–9h
+    let nthUniqueBusLineDates: [Date] // date each NEW unique bus line was first used
 }
 
 enum AchievementDefinitions {
-    static let all: [AchievementDefinition] = explorer + completionist + variety + dedication
+    static let all: [AchievementDefinition] = explorer + completionist + variety + dedication + secret
 
     // MARK: - Explorer (6)
 

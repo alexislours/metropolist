@@ -6,28 +6,12 @@ struct UserDataService {
 
     // MARK: - Completion queries
 
-    func isStopCompleted(lineSourceID: String, stationSourceID: String) throws -> Bool {
-        let compositeID = "\(lineSourceID):\(stationSourceID)"
-        var descriptor = FetchDescriptor<CompletedStop>(
-            predicate: #Predicate { $0.id == compositeID }
-        )
-        descriptor.fetchLimit = 1
-        return try !context.fetch(descriptor).isEmpty
-    }
-
     func completedStopIDs(forLineSourceID lineSourceID: String) throws -> Set<String> {
         let descriptor = FetchDescriptor<CompletedStop>(
             predicate: #Predicate { $0.lineSourceID == lineSourceID }
         )
         let stops = try context.fetch(descriptor)
         return Set(stops.map(\.stationSourceID))
-    }
-
-    func completedStopCount(forLineSourceID lineSourceID: String) throws -> Int {
-        let descriptor = FetchDescriptor<CompletedStop>(
-            predicate: #Predicate { $0.lineSourceID == lineSourceID }
-        )
-        return try context.fetchCount(descriptor)
     }
 
     /// Bulk: completed stop counts grouped by line. Single fetch instead of N queries.
@@ -39,11 +23,6 @@ struct UserDataService {
             counts[stop.lineSourceID, default: 0] += 1
         }
         return counts
-    }
-
-    func totalCompletedStops() throws -> Int {
-        let descriptor = FetchDescriptor<CompletedStop>()
-        return try context.fetchCount(descriptor)
     }
 
     // MARK: - Line travel queries

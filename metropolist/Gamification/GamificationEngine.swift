@@ -231,6 +231,11 @@ enum GamificationEngine {
             Set(lines.map(\.sourceID))
         }
 
+        let stationAchievements = computeStationAchievements(
+            input: input,
+            sortedTravels: sortedTravels
+        )
+
         return AchievementContext(
             totalTravels: input.travels.count,
             modesUsed: modesUsed,
@@ -246,7 +251,13 @@ enum GamificationEngine {
             firstMultiModeDayDate: travelMilestones.firstMultiModeDayDate,
             firstNoctilienDate: travelMilestones.firstNoctilienDate,
             streakMilestoneDates: streakMilestoneDates,
-            networkHalfDate: networkHalfDate
+            networkHalfDate: networkHalfDate,
+            firstBirHakeimLine6Date: stationAchievements.firstBirHakeimLine6Date,
+            firstWeekdayLateNightTravelDate: stationAchievements.firstWeekdayLateNightTravelDate,
+            allDepartmentsCoveredDate: stationAchievements.allDepartmentsCoveredDate,
+            firstOperaNightTravelDate: stationAchievements.firstOperaNightTravelDate,
+            firstLine13RushHourDate: stationAchievements.firstLine13RushHourDate,
+            nthUniqueBusLineDates: stationAchievements.nthUniqueBusLineDates
         )
     }
 
@@ -341,44 +352,6 @@ enum GamificationEngine {
             modeFirstUsedDates: modeFirstUsedDates,
             firstMultiModeDayDate: firstMultiModeDayDate,
             firstNoctilienDate: firstNoctilienDate
-        )
-    }
-
-    private static func computeNetworkHalfDate(
-        stops: [CompletedStopRecord],
-        totalNetworkStops: Int
-    ) -> Date? {
-        guard totalNetworkStops > 0 else { return nil }
-        let sortedStops = stops.sorted { $0.completedAt < $1.completedAt }
-        var count = 0
-        for stop in sortedStops {
-            count += 1
-            if Double(count) / Double(totalNetworkStops) >= 0.5 {
-                return stop.completedAt
-            }
-        }
-        return nil
-    }
-
-    // MARK: - Stats Computation
-
-    private static func computeStats(
-        input: GamificationInput,
-        completedByLine _: [String: [CompletedStopRecord]],
-        completedLineIDs: Set<String>,
-        uniqueTravelDays: [Date]
-    ) -> PlayerStats {
-        let uniqueStations = Set(input.completedStops.map(\.stationSourceID))
-        let linesStarted = Set(input.travels.map(\.lineSourceID))
-        let (_, current) = computeStreaks(uniqueDays: uniqueTravelDays)
-
-        return PlayerStats(
-            totalTravels: input.travels.count,
-            totalStationsVisited: uniqueStations.count,
-            totalLinesStarted: linesStarted.count,
-            totalLinesCompleted: completedLineIDs.count,
-            currentStreak: current,
-            firstTravelDate: input.travels.last?.createdAt
         )
     }
 }

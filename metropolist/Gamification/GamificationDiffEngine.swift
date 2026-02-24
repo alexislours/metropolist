@@ -64,7 +64,6 @@ enum GamificationDiffEngine {
 
         // Build level progress
         let levelProgress = CelebrationLevelProgress(
-            beforeLevel: before.level,
             afterLevel: after.level,
             beforeXPInLevel: before.xpInCurrentLevel,
             beforeXPToNext: before.xpToNextLevel,

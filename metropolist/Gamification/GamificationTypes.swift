@@ -11,6 +11,13 @@ struct CompletedStopRecord {
 struct TravelRecord {
     let lineSourceID: String
     let createdAt: Date
+    let fromStationSourceID: String
+    let toStationSourceID: String
+}
+
+struct StationMetadata {
+    let name: String
+    let postalCode: String?
 }
 
 struct LineMetadata {
@@ -30,6 +37,7 @@ struct GamificationInput {
     let completedStops: [CompletedStopRecord]
     let travels: [TravelRecord]
     let lineMetadata: [String: LineMetadata]
+    let stationMetadata: [String: StationMetadata]
 }
 
 // MARK: - Engine Output
@@ -138,7 +146,6 @@ struct CelebrationXPItem: Identifiable, Equatable {
 }
 
 struct CelebrationLevelProgress: Equatable {
-    let beforeLevel: PlayerLevel
     let afterLevel: PlayerLevel
     let beforeXPInLevel: Int
     let beforeXPToNext: Int

@@ -196,27 +196,6 @@ struct TransitDataService {
         return try context.fetch(lineDescriptor)
     }
 
-    // MARK: - Route variant matching
-
-    func matchingRouteVariants(
-        lineSourceID: String,
-        from fromStationSourceID: String,
-        to toStationSourceID: String
-    ) throws -> [TransitRouteVariant] {
-        let variants = try routeVariants(forLineSourceID: lineSourceID)
-
-        var matching: [TransitRouteVariant] = []
-        for variant in variants {
-            let stops = try lineStops(forRouteVariantSourceID: variant.sourceID)
-            let fromOrder = stops.first { $0.stationSourceID == fromStationSourceID }?.order
-            let toOrder = stops.first { $0.stationSourceID == toStationSourceID }?.order
-            if let fromOrder, let toOrder, fromOrder < toOrder {
-                matching.append(variant)
-            }
-        }
-        return matching
-    }
-
     func intermediateStops(routeVariantSourceID: String, fromOrder: Int, toOrder: Int) throws -> [TransitLineStop] {
         let descriptor = FetchDescriptor<TransitLineStop>(
             predicate: #Predicate {

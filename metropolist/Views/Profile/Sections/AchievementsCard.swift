@@ -9,6 +9,7 @@ private extension AchievementGroup {
         case .completionist: .green
         case .variety: .purple
         case .dedication: .orange
+        case .secret: .indigo
         }
     }
 }
@@ -213,11 +214,31 @@ struct RichAchievementCard: View {
         state.definition.group
     }
 
+    private var isHiddenAndLocked: Bool {
+        state.definition.isHidden && !state.isUnlocked
+    }
+
+    private var displayIcon: String {
+        isHiddenAndLocked ? "questionmark" : state.definition.systemImage
+    }
+
+    private var displayTitle: String {
+        isHiddenAndLocked
+            ? String(localized: "???", comment: "Achievement: hidden achievement title placeholder")
+            : state.definition.title
+    }
+
+    private var displayDescription: String {
+        isHiddenAndLocked
+            ? String(localized: "Secret achievement", comment: "Achievement: hidden achievement description placeholder")
+            : state.definition.description
+    }
+
     var body: some View {
         HStack(spacing: 12) {
             // Icon circle
             if state.isUnlocked {
-                Image(systemName: state.definition.systemImage)
+                Image(systemName: displayIcon)
                     .font(.title3)
                     .foregroundStyle(.white)
                     .frame(width: 44, height: 44)
@@ -229,8 +250,19 @@ struct RichAchievementCard: View {
                         ),
                         in: Circle()
                     )
+            } else if isHiddenAndLocked {
+                Image(systemName: "questionmark")
+                    .font(.title3)
+                    .foregroundStyle(.quaternary)
+                    .frame(width: 44, height: 44)
+                    .background(Color(UIColor.quaternarySystemFill), in: Circle())
+                    .overlay(
+                        Circle()
+                            .strokeBorder(style: StrokeStyle(lineWidth: 1.5, dash: [2, 2]))
+                            .foregroundStyle(.quaternary)
+                    )
             } else {
-                Image(systemName: state.definition.systemImage)
+                Image(systemName: displayIcon)
                     .font(.title3)
                     .foregroundStyle(.quaternary)
                     .frame(width: 44, height: 44)
@@ -244,13 +276,14 @@ struct RichAchievementCard: View {
 
             // Text content
             VStack(alignment: .leading, spacing: 2) {
-                Text(state.definition.title)
+                Text(displayTitle)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(state.isUnlocked ? .primary : .secondary)
 
-                Text(state.definition.description)
+                Text(displayDescription)
                     .font(.caption)
                     .foregroundStyle(state.isUnlocked ? .secondary : .tertiary)
+                    .italic(isHiddenAndLocked)
             }
 
             Spacer()
