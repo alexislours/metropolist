@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @Environment(DataStore.self) private var dataStore
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var showingTravelFlow = false
     @State private var activePrefill: TravelFlowPrefill?
 
@@ -43,6 +44,12 @@ struct MainTabView: View {
                 dataStore.travelFlowPrefill = nil
                 showingTravelFlow = true
             }
+        }
+        .fullScreenCover(isPresented: Binding(
+            get: { !hasSeenOnboarding },
+            set: { if !$0 { hasSeenOnboarding = true } }
+        )) {
+            OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
         }
     }
 }

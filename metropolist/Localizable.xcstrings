@@ -458,6 +458,9 @@
         }
       }
     },
+    "14" : {
+
+    },
     "30-day streak" : {
       "comment" : "Achievement description: 30-day streak",
       "localizations" : {
@@ -766,6 +769,9 @@
         }
       }
     },
+    "Collect every station in the Île-de-France transit network" : {
+      "comment" : "Onboarding: welcome subtitle"
+    },
     "Collector" : {
       "comment" : "Achievement title: complete 5 lines",
       "localizations" : {
@@ -842,6 +848,9 @@
           }
         }
       }
+    },
+    "Complete lines to unlock badges and level up as you explore" : {
+      "comment" : "Onboarding: rewards subtitle"
     },
     "Completed" : {
       "comment" : "Lines: completed lines section",
@@ -1189,6 +1198,9 @@
           }
         }
       }
+    },
+    "Earn Rewards" : {
+      "comment" : "Onboarding: rewards title"
     },
     "Error" : {
       "comment" : "Travel flow: error alert title",
@@ -2098,6 +2110,9 @@
         }
       }
     },
+    "Ready to Explore?" : {
+      "comment" : "Onboarding: get started title"
+    },
     "Recent Travels" : {
       "comment" : "Recent travels section header",
       "localizations" : {
@@ -2152,6 +2167,9 @@
           }
         }
       }
+    },
+    "Record Your Travels" : {
+      "comment" : "Onboarding: travel title"
     },
     "Regional Rail" : {
       "comment" : "Transit mode: regional rail",
@@ -2373,6 +2391,9 @@
         }
       }
     },
+    "Start Exploring" : {
+      "comment" : "Onboarding: get started button"
+    },
     "Start travel" : {
       "comment" : "Line detail: start travel button\nStation detail: start travel button",
       "localizations" : {
@@ -2504,6 +2525,9 @@
           }
         }
       }
+    },
+    "Tap + to log a journey and discover new stations along the way" : {
+      "comment" : "Onboarding: travel subtitle"
     },
     "Terminus" : {
       "comment" : "Branch label for bus/TER",
@@ -3011,6 +3035,9 @@
         }
       }
     },
+    "Welcome to Métropolist" : {
+      "comment" : "Onboarding: welcome title"
+    },
     "What are badges and how do I earn them?" : {
       "comment" : "FAQ: badges question",
       "localizations" : {
@@ -3131,6 +3158,9 @@
           }
         }
       }
+    },
+    "Your progress syncs across devices with iCloud" : {
+      "comment" : "Onboarding: get started subtitle"
     },
     "Your travels and completed stops are synced via iCloud. Make sure you are signed into iCloud on all your devices for automatic sync." : {
       "comment" : "FAQ: sync answer",
