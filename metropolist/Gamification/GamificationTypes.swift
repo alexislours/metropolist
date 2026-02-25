@@ -19,7 +19,6 @@ struct StationMetadata {
     let name: String
     let postalCode: String?
     let fareZone: String?
-    let town: String?
 }
 
 struct LineMetadata {
@@ -142,18 +141,19 @@ struct ExtendedStats: Equatable {
 
 struct WeeklyTravelCount: Identifiable, Equatable {
     let id: Date
-    let weekLabel: String
     let count: Int
 }
 
 struct DayOfWeekStat: Equatable {
     let dayIndex: Int
     let dayName: String
-    let count: Int
     let allDays: [DayCount]
 
     struct DayCount: Identifiable, Equatable {
-        var id: Int { dayIndex }
+        var id: Int {
+            dayIndex
+        }
+
         let dayIndex: Int
         let dayName: String
         let count: Int
@@ -162,25 +162,33 @@ struct DayOfWeekStat: Equatable {
 
 struct HourOfDayStat: Equatable {
     let hour: Int
-    let count: Int
     let allHours: [HourCount]
 
     struct HourCount: Identifiable, Equatable {
-        var id: Int { hour }
+        var id: Int {
+            hour
+        }
+
         let hour: Int
         let count: Int
     }
 }
 
 struct RankedStation: Identifiable, Equatable {
-    var id: String { stationSourceID }
+    var id: String {
+        stationSourceID
+    }
+
     let stationSourceID: String
     let name: String
     let visitCount: Int
 }
 
 struct RankedLine: Identifiable, Equatable {
-    var id: String { lineSourceID }
+    var id: String {
+        lineSourceID
+    }
+
     let lineSourceID: String
     let shortName: String
     let mode: TransitMode
@@ -190,7 +198,10 @@ struct RankedLine: Identifiable, Equatable {
 }
 
 struct DepartmentCoverage: Identifiable, Equatable {
-    var id: String { department }
+    var id: String {
+        department
+    }
+
     let department: String
     let label: String
     let visited: Int
@@ -201,7 +212,10 @@ struct DepartmentCoverage: Identifiable, Equatable {
 }
 
 struct FareZoneCoverage: Identifiable, Equatable {
-    var id: String { zone }
+    var id: String {
+        zone
+    }
+
     let zone: String
     let visited: Int
     let total: Int

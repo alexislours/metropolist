@@ -21,8 +21,7 @@ extension GamificationSnapshot {
             stationMeta[station.sourceID] = StationMetadata(
                 name: station.name,
                 postalCode: station.postalCode,
-                fareZone: station.fareZone,
-                town: station.town
+                fareZone: station.fareZone
             )
         }
 

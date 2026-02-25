@@ -51,13 +51,10 @@ extension GamificationEngine {
 
         var results: [WeeklyTravelCount] = []
         var current = cutoff
-        let weekFormatter = DateFormatter()
-        weekFormatter.dateFormat = "'W'w"
 
         while current <= last {
             let count = weekCounts[current] ?? 0
-            let label = weekFormatter.string(from: current)
-            results.append(WeeklyTravelCount(id: current, weekLabel: label, count: count))
+            results.append(WeeklyTravelCount(id: current, count: count))
             guard let next = cal.date(byAdding: .weekOfYear, value: 1, to: current) else { break }
             current = next
         }
@@ -86,7 +83,6 @@ extension GamificationEngine {
         return DayOfWeekStat(
             dayIndex: best.dayIndex,
             dayName: best.dayName,
-            count: best.count,
             allDays: allDays
         )
     }
@@ -108,7 +104,7 @@ extension GamificationEngine {
         }
 
         guard let best = allHours.max(by: { $0.count < $1.count }) else { return nil }
-        return HourOfDayStat(hour: best.hour, count: best.count, allHours: allHours)
+        return HourOfDayStat(hour: best.hour, allHours: allHours)
     }
 
     // MARK: - Top Stations
