@@ -15,6 +15,7 @@ struct TravelDetailView: View {
     @State private var mapSegment: [CLLocationCoordinate2D] = []
     @State private var mapAnnotations: [LineRouteMapView.StationAnnotation] = []
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
+    @AppStorage("devMode") private var devMode: Bool = false
 
     private var mode: TransitMode? {
         line.flatMap { TransitMode(rawValue: $0.mode) }
@@ -53,6 +54,21 @@ struct TravelDetailView: View {
                             .background(lineColor, in: RoundedRectangle(cornerRadius: 10))
                             .foregroundStyle(Color(hex: line.textColor))
                         }
+                    }
+
+                    if devMode {
+                        DebugInfoSection(items: [
+                            ("travel.id", travel.id),
+                            ("lineSourceID", travel.lineSourceID),
+                            ("routeVariantSourceID", travel.routeVariantSourceID),
+                            ("fromStationSourceID", travel.fromStationSourceID),
+                            ("toStationSourceID", travel.toStationSourceID),
+                            ("stopsCompleted", String(travel.stopsCompleted)),
+                            ("createdAt", travel.createdAt.formatted(.iso8601)),
+                            ("line.sourceID", line?.sourceID ?? "nil"),
+                            ("routeVariant.sourceID", routeVariant?.sourceID ?? "nil"),
+                            ("journeyStops.count", String(journeyStops.count)),
+                        ])
                     }
                 }
             }

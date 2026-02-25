@@ -13,6 +13,7 @@ struct StationDetailView: View {
     @State private var groupedLines: [(mode: TransitMode, lines: [TransitLine])] = []
     @State private var travelStationNames: [String: String] = [:]
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
+    @AppStorage("devMode") private var devMode: Bool = false
 
     var body: some View {
         ScrollView {
@@ -44,6 +45,23 @@ struct StationDetailView: View {
                         stationNames: travelStationNames,
                         historySource: .station(stationSourceID)
                     )
+                }
+
+                if devMode, let station {
+                    DebugInfoSection(items: [
+                        ("sourceID", station.sourceID),
+                        ("name", station.name),
+                        ("latitude", String(station.latitude)),
+                        ("longitude", String(station.longitude)),
+                        ("fareZone", station.fareZone ?? "nil"),
+                        ("town", station.town ?? "nil"),
+                        ("postalCode", station.postalCode ?? "nil"),
+                        ("isAccessible", String(station.isAccessible)),
+                        ("hasAudibleSignals", String(station.hasAudibleSignals)),
+                        ("hasVisualSigns", String(station.hasVisualSigns)),
+                        ("connectingLines", String(connectingLines.count)),
+                        ("recentTravels", String(recentTravels.count)),
+                    ])
                 }
             }
             .padding(.horizontal, 16)

@@ -1122,6 +1122,16 @@
         }
       }
     },
+    "Debug" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        }
+      }
+    },
     "Dedication" : {
       "comment" : "Achievement group: dedication category",
       "localizations" : {

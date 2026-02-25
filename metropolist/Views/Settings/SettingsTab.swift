@@ -9,6 +9,7 @@ struct SettingsTab: View {
     @AppStorage("destinationSort") private var destinationSort: String = "route"
     @AppStorage("nearbyRadius") private var nearbyRadius: Int = 500
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
+    @AppStorage("devMode") private var devMode: Bool = false
 
     @State var exportedFileURL: URL?
     @State private var showImporter = false
@@ -16,6 +17,8 @@ struct SettingsTab: View {
     @State private var showDeleteConfirmation = false
     @State private var transitStats: TransitStats?
     @State private var cloudKitStatus: CKAccountStatus?
+    @State private var devModeTapCount = 0
+    @State private var devModeFeedback: String?
 
     private var appVersion: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
@@ -342,9 +345,28 @@ struct SettingsTab: View {
                     Text(String(localized: "Build", comment: "Settings: build number label"))
                         .font(.subheadline)
                     Spacer()
-                    Text(buildNumber)
+                    Text(devModeFeedback ?? buildNumber)
                         .font(.subheadline.monospacedDigit())
                         .foregroundStyle(.secondary)
+                        .contentTransition(.numericText())
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    devModeTapCount += 1
+                    if devModeTapCount >= 5 {
+                        devModeTapCount = 0
+                        devMode.toggle()
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        withAnimation {
+                            devModeFeedback = devMode ? "Developer Mode ON" : "Developer Mode OFF"
+                        }
+                        Task {
+                            try? await Task.sleep(for: .seconds(2))
+                            withAnimation {
+                                devModeFeedback = nil
+                            }
+                        }
+                    }
                 }
 
                 Divider()

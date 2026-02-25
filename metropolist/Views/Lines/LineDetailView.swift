@@ -10,6 +10,7 @@ struct LineDetailView: View {
     @ScaledMetric(relativeTo: .body) private var ringSize: CGFloat = 80
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
+    @AppStorage("devMode") private var devMode: Bool = false
 
     var body: some View {
         Group {
@@ -58,6 +59,28 @@ struct LineDetailView: View {
                         stationNames: viewModel.travelStationNames,
                         historySource: .line(lineSourceID)
                     )
+                }
+
+                if devMode, let line = viewModel.line {
+                    DebugInfoSection(items: [
+                        ("sourceID", line.sourceID),
+                        ("shortName", line.shortName),
+                        ("longName", line.longName),
+                        ("mode", line.mode),
+                        ("submode", line.submode ?? "nil"),
+                        ("color / textColor", "#\(line.color) / #\(line.textColor)"),
+                        ("operatorName", line.operatorName),
+                        ("networkName", line.networkName ?? "nil"),
+                        ("status", line.status),
+                        ("isAccessible", String(line.isAccessible)),
+                        ("groupID", line.groupID ?? "nil"),
+                        ("groupName", line.groupName ?? "nil"),
+                        ("totalStations", String(viewModel.totalStations)),
+                        ("completedStops", String(viewModel.completedStopIDs.count)),
+                        ("variants", String(viewModel.variants.count)),
+                        ("selectedVariant", viewModel.selectedVariant?.sourceID ?? "nil"),
+                        ("travelCount", String(viewModel.travelCount)),
+                    ])
                 }
             }
             .padding(.horizontal, 16)
