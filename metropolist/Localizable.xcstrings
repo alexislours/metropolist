@@ -582,6 +582,12 @@
         }
       }
     },
+    "App Icon" : {
+      "comment" : "App icon picker: navigation title\nSettings: app icon link title"
+    },
+    "APPEARANCE" : {
+      "comment" : "Settings: appearance section header"
+    },
     "Audio" : {
       "comment" : "Station detail: audible signals indicator",
       "localizations" : {
@@ -1016,6 +1022,12 @@
           }
         }
       }
+    },
+    "Default" : {
+      "comment" : "App icon picker: default label\nApp icon: default icon label"
+    },
+    "DEFAULT" : {
+      "comment" : "App icon picker: default section header"
     },
     "Delete" : {
       "comment" : "Travel history: confirm delete button",
@@ -1841,7 +1853,7 @@
       }
     },
     "Metro" : {
-      "comment" : "Transit mode: metro/subway",
+      "comment" : "App icon: metro section\nTransit mode: metro/subway",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1861,6 +1873,9 @@
           }
         }
       }
+    },
+    "Métropolist" : {
+      "comment" : "App icon picker: default icon name"
     },
     "Métropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM." : {
       "comment" : "FAQ: coverage answer",
@@ -2205,7 +2220,7 @@
       }
     },
     "RER" : {
-      "comment" : "Transit mode: RER regional express",
+      "comment" : "App icon: RER section\nTransit mode: RER regional express",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2607,7 +2622,7 @@
       }
     },
     "Tram" : {
-      "comment" : "Transit mode: tram/streetcar",
+      "comment" : "App icon: tram section\nTransit mode: tram/streetcar",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2627,6 +2642,9 @@
           }
         }
       }
+    },
+    "Transilien" : {
+      "comment" : "App icon: Transilien section"
     },
     "Transit Data" : {
       "comment" : "Transit data: navigation title",

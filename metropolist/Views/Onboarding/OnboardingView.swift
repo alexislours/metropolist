@@ -31,7 +31,7 @@ struct OnboardingView: View {
     private var bottomBar: some View {
         HStack {
             HStack(spacing: 8) {
-                ForEach(0..<pageCount, id: \.self) { index in
+                ForEach(0 ..< pageCount, id: \.self) { index in
                     Circle()
                         .fill(index == currentPage ? Color.primary : Color.secondary.opacity(0.3))
                         .frame(width: 8, height: 8)
@@ -189,7 +189,7 @@ struct OnboardingView: View {
     private static let badgeWidth: CGFloat = 48
     private static let badgeSpacing: CGFloat = 10
 
-    // Real Paris transit line colors: (name, background hex, text hex)
+    /// Real Paris transit line colors: (name, background hex, text hex)
     private static let lineRows: [[(String, String, String)]] = [
         [("1", "#FFCD00", "#000000"), ("A", "#E3051C", "#FFFFFF"), ("T3a", "#6EC4E8", "#000000"), ("6", "#6ECA97", "#000000"), ("B", "#5291CE", "#FFFFFF"), ("11", "#704B1C", "#FFFFFF"), ("C", "#FFBE00", "#000000"), ("T1", "#006DB8", "#FFFFFF")],
         [("14", "#62259D", "#FFFFFF"), ("3", "#837902", "#FFFFFF"), ("T2", "#C04191", "#FFFFFF"), ("9", "#B6BD00", "#000000"), ("D", "#009B3A", "#FFFFFF"), ("7", "#FA9ABA", "#000000"), ("E", "#BD559C", "#FFFFFF"), ("4", "#CF009E", "#FFFFFF")],
@@ -276,8 +276,7 @@ struct OnboardingView: View {
         }
         .offset(x: slidingAnimating
             ? (movesRight ? 0 : -copyWidth)
-            : (movesRight ? -copyWidth : 0)
-        )
+            : (movesRight ? -copyWidth : 0))
         .animation(
             reduceMotion ? nil : .linear(duration: duration).repeatForever(autoreverses: false),
             value: slidingAnimating
