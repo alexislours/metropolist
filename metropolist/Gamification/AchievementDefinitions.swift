@@ -87,6 +87,8 @@ struct AchievementContext {
     let firstOperaNightTravelDate: Date? // first travel from/to Opéra between 23h–3h
     let firstLine13RushHourDate: Date? // first travel on line 13 between 8h–9h
     let nthUniqueBusLineDates: [Date] // date each NEW unique bus line was first used
+    let rerCCompletionDate: Date? // when all RER C stations were completed
+    let firstChateauRougeDate: Date? // first visit to Château Rouge station
 }
 
 enum AchievementDefinitions {
@@ -350,8 +352,11 @@ enum AchievementDefinitions {
         },
         AchievementDefinition(
             id: "leve_tot",
-            title: String(localized: "Early Bird", comment: "Achievement title: travel before 6 AM"),
-            description: String(localized: "Travel before 6 AM", comment: "Achievement description: travel before 6 AM"),
+            title: String(localized: "Early Bird", comment: "Achievement title: travel between 4 AM and 6 AM"),
+            description: String(
+                localized: "Travel between 4 AM and 6 AM",
+                comment: "Achievement description: travel between 4 AM and 6 AM"
+            ),
             group: .dedication,
             systemImage: "sunrise",
             xpReward: 50
@@ -359,7 +364,7 @@ enum AchievementDefinitions {
             let cal = Calendar.current
             for date in ctx.travelDates {
                 let hour = cal.component(.hour, from: date)
-                if hour < 6 { return date }
+                if hour >= 4, hour < 6 { return date }
             }
             return nil
         },

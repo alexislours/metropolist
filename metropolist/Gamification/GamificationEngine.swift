@@ -236,6 +236,13 @@ enum GamificationEngine {
             sortedTravels: sortedTravels
         )
 
+        let rerCCompletionDate: Date? = {
+            guard let rerCID = input.lineMetadata.first(where: { $0.value.mode == .rer && $0.value.shortName == "C" })?.key else {
+                return nil
+            }
+            return lineCompletionDates[rerCID]
+        }()
+
         return AchievementContext(
             totalTravels: input.travels.count,
             modesUsed: modesUsed,
@@ -256,7 +263,9 @@ enum GamificationEngine {
             allDepartmentsCoveredDate: stationAchievements.allDepartmentsCoveredDate,
             firstOperaNightTravelDate: stationAchievements.firstOperaNightTravelDate,
             firstLine13RushHourDate: stationAchievements.firstLine13RushHourDate,
-            nthUniqueBusLineDates: stationAchievements.nthUniqueBusLineDates
+            nthUniqueBusLineDates: stationAchievements.nthUniqueBusLineDates,
+            rerCCompletionDate: rerCCompletionDate,
+            firstChateauRougeDate: stationAchievements.firstChateauRougeDate
         )
     }
 

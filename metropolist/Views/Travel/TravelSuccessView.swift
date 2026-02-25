@@ -100,6 +100,7 @@ struct TravelSuccessView: View {
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom) {
             Button {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 onDone()
             } label: {
                 Text(String(localized: "Done", comment: "Travel success: dismiss button"))

@@ -12,6 +12,17 @@
         }
       }
     },
+    "...complete the RER C" : {
+      "comment" : "Achievement description: complete the RER C line",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "…terminer le RER C."
+          }
+        }
+      }
+    },
     "·" : {
       "shouldTranslate" : false
     },
@@ -877,7 +888,15 @@
       }
     },
     "Continue" : {
-      "comment" : "Travel success: dismiss secret achievement overlay"
+      "comment" : "Travel success: dismiss secret achievement overlay",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
     },
     "Could not access the selected file." : {
       "comment" : "Settings: file access error message",
@@ -1095,7 +1114,7 @@
       }
     },
     "Early Bird" : {
-      "comment" : "Achievement title: travel before 6 AM",
+      "comment" : "Achievement title: travel between 4 AM and 6 AM",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1376,6 +1395,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inception"
+          }
+        }
+      }
+    },
+    "It's over 9000!" : {
+      "comment" : "Achievement title: visit over 9000 stops (Dragon Ball Z reference)",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It’s over 9000!"
           }
         }
       }
@@ -1765,6 +1795,17 @@
         }
       }
     },
+    "One does not simply..." : {
+      "comment" : "Achievement title: complete the RER C line (Lord of the Rings reference)",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One does not simply…"
+          }
+        }
+      }
+    },
     "Only %lld more stops to %@ on Line %@!" : {
       "comment" : "Travel success: teaser for next badge tier",
       "localizations" : {
@@ -1866,6 +1907,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enregistrez 500 trajets"
+          }
+        }
+      }
+    },
+    "Record a travel in December or January" : {
+      "comment" : "Achievement description: record a travel in December or January",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer un trajet en décembre ou janvier"
           }
         }
       }
@@ -2014,7 +2066,15 @@
       }
     },
     "Secret Achievement Unlocked!" : {
-      "comment" : "Travel success: secret achievement reveal label"
+      "comment" : "Travel success: secret achievement reveal label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trophée secret déverrouillé !"
+          }
+        }
+      }
     },
     "Select" : {
       "comment" : "Travel history: enter selection mode",
@@ -2181,17 +2241,6 @@
         }
       }
     },
-    "The Last Metro" : {
-      "comment" : "Achievement title: travel after midnight on a weekday",
-      "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le Dernier Métro"
-          }
-        }
-      }
-    },
     "The Phantom of the Opera" : {
       "comment" : "Achievement title: travel at Opéra between 11 PM and 3 AM",
       "localizations" : {
@@ -2199,6 +2248,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le Fantôme de l'Opéra"
+          }
+        }
+      }
+    },
+    "The Red Keep" : {
+      "comment" : "Achievement title: visit Château Rouge station (Game of Thrones reference)",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donjon Rouge"
           }
         }
       }
@@ -2280,19 +2340,24 @@
         }
       }
     },
-    "Travel after midnight and before 3 AM on a weekday" : {
-      "comment" : "Achievement description: travel after midnight on a weekday"
-    },
     "Travel at Opéra station between 11 PM and 3 AM" : {
-      "comment" : "Achievement description: travel at Opéra between 11 PM and 3 AM"
-    },
-    "Travel before 6 AM" : {
-      "comment" : "Achievement description: travel before 6 AM",
+      "comment" : "Achievement description: travel at Opéra between 11 PM and 3 AM",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voyager avant 6h"
+            "value" : "Voyagez à la station Opéra entre 23h et 3h"
+          }
+        }
+      }
+    },
+    "Travel between 4 AM and 6 AM" : {
+      "comment" : "Achievement description: travel between 4 AM and 6 AM",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voyager entre 4h et 6h"
           }
         }
       }
@@ -2353,7 +2418,15 @@
       }
     },
     "Travel on Line 13 between 8 AM and 9 AM" : {
-      "comment" : "Achievement description: travel on Line 13 during rush hour"
+      "comment" : "Achievement description: travel on Line 13 during rush hour",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voyagez sur la ligne 13 entre 8h et 9h"
+          }
+        }
+      }
     },
     "Travel recorded" : {
       "comment" : "XP item: base travel XP",
@@ -2367,7 +2440,15 @@
       }
     },
     "Travel through Bir-Hakeim station on Line 6" : {
-      "comment" : "Achievement description: travel through Bir-Hakeim on Line 6"
+      "comment" : "Achievement description: travel through Bir-Hakeim on Line 6",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passez par la station Bir-Hakeim sur la ligne 6"
+          }
+        }
+      }
     },
     "Travels" : {
       "comment" : "Statistics: travels count label\nXP breakdown: travel XP",
@@ -2579,7 +2660,37 @@
       }
     },
     "Visit at least one station in each Île-de-France department" : {
-      "comment" : "Achievement description: visit all 8 IDF departments"
+      "comment" : "Achievement description: visit all 8 IDF departments",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visitez au moins une station dans chaque département d'Île-de-France"
+          }
+        }
+      }
+    },
+    "Visit Château Rouge station" : {
+      "comment" : "Achievement description: visit Château Rouge station",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visiter l’arrêt Château Rouge"
+          }
+        }
+      }
+    },
+    "Visit over 9,000 stops" : {
+      "comment" : "Achievement description: visit over 9000 stops",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visiter plus de 9 000 stops"
+          }
+        }
+      }
     },
     "Visual" : {
       "comment" : "Station detail: visual signs indicator",
@@ -2599,6 +2710,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Où allez-vous ?"
+          }
+        }
+      }
+    },
+    "Winter is Coming" : {
+      "comment" : "Achievement title: record a travel in December or January (Game of Thrones reference)",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Winter is Coming"
           }
         }
       }

@@ -7,6 +7,7 @@ extension GamificationEngine {
         var firstOperaNightTravelDate: Date?
         var firstLine13RushHourDate: Date?
         var nthUniqueBusLineDates: [Date]
+        var firstChateauRougeDate: Date?
     }
 
     static func computeStationAchievements(
@@ -20,6 +21,7 @@ extension GamificationEngine {
         computeTravelTimeAchievements(sortedTravels: sortedTravels, input: input, result: &result)
         result.allDepartmentsCoveredDate = computeDepartmentCoverage(sortedStops: sortedStops, input: input)
         result.nthUniqueBusLineDates = computeBusLineDiscoveryDates(sortedTravels: sortedTravels, input: input)
+        result.firstChateauRougeDate = findChateauRougeDate(sortedStops: sortedStops, input: input)
         return result
     }
 
@@ -106,6 +108,21 @@ extension GamificationEngine {
             }
         }
         return dates
+    }
+
+    // MARK: - Château Rouge
+
+    private static func findChateauRougeDate(
+        sortedStops: [CompletedStopRecord],
+        input: GamificationInput
+    ) -> Date? {
+        for stop in sortedStops {
+            let stationName = input.stationMetadata[stop.stationSourceID]?.name ?? ""
+            if stationName.localizedCaseInsensitiveContains("Château Rouge") {
+                return stop.completedAt
+            }
+        }
+        return nil
     }
 
     // MARK: - Network Half Date

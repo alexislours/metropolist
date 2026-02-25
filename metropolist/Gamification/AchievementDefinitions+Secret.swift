@@ -74,5 +74,72 @@ extension AchievementDefinitions {
         ) { ctx in
             ctx.nthUniqueBusLineDates.count >= 50 ? ctx.nthUniqueBusLineDates[49] : nil
         },
+        AchievementDefinition(
+            id: "secret_mordor_rerc",
+            title: String(
+                localized: "One does not simply...",
+                comment: "Achievement title: complete the RER C line (Lord of the Rings reference)"
+            ),
+            description: String(
+                localized: "...complete the RER C",
+                comment: "Achievement description: complete the RER C line"
+            ),
+            group: .secret,
+            systemImage: "mountain.2",
+            xpReward: 500,
+            isHidden: true
+        ) { ctx in
+            ctx.rerCCompletionDate
+        },
+        AchievementDefinition(
+            id: "secret_over_9000",
+            title: String(localized: "It's over 9000!", comment: "Achievement title: visit over 9000 stops (Dragon Ball Z reference)"),
+            description: String(
+                localized: "Visit over 9,000 stops",
+                comment: "Achievement description: visit over 9000 stops"
+            ),
+            group: .secret,
+            systemImage: "bolt.fill",
+            xpReward: 1500,
+            isHidden: true
+        ) { ctx in
+            ctx.nthUniqueStationDates.count > 9000 ? ctx.nthUniqueStationDates[9000] : nil
+        },
+        AchievementDefinition(
+            id: "secret_winter_is_coming",
+            title: String(
+                localized: "Winter is Coming",
+                comment: "Achievement title: record a travel in December or January (Game of Thrones reference)"
+            ),
+            description: String(
+                localized: "Record a travel in December or January",
+                comment: "Achievement description: record a travel in December or January"
+            ),
+            group: .secret,
+            systemImage: "snowflake",
+            xpReward: 50,
+            isHidden: true
+        ) { ctx in
+            let cal = Calendar.current
+            for date in ctx.sortedTravelDates {
+                let month = cal.component(.month, from: date)
+                if month == 12 || month == 1 { return date }
+            }
+            return nil
+        },
+        AchievementDefinition(
+            id: "secret_red_keep",
+            title: String(localized: "The Red Keep", comment: "Achievement title: visit Château Rouge station (Game of Thrones reference)"),
+            description: String(
+                localized: "Visit Château Rouge station",
+                comment: "Achievement description: visit Château Rouge station"
+            ),
+            group: .secret,
+            systemImage: "building.columns.fill",
+            xpReward: 50,
+            isHidden: true
+        ) { ctx in
+            ctx.firstChateauRougeDate
+        },
     ]
 }

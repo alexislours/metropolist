@@ -52,6 +52,7 @@ struct SettingsTab: View {
             ) {
                 Button(String(localized: "Cancel", comment: "Settings: cancel delete action"), role: .cancel) {}
                 Button(String(localized: "Delete All", comment: "Settings: confirm delete all button"), role: .destructive) {
+                    UINotificationFeedbackGenerator().notificationOccurred(.warning)
                     deleteAllUserData()
                 }
             } message: {

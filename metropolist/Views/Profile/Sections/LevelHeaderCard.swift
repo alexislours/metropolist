@@ -70,10 +70,13 @@ struct LevelHeaderCard: View {
                 }
 
                 // XP Breakdown
-                xpBreakdownSection
+                if snapshot.totalXP > 0 {
+                    xpBreakdownSection
+                }
             }
             .contentShape(Rectangle())
             .onTapGesture {
+                guard snapshot.totalXP > 0 else { return }
                 withAnimation(.snappy(duration: 0.25)) {
                     showXPBreakdown.toggle()
                 }
