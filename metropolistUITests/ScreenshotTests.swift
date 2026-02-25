@@ -131,6 +131,7 @@ final class ScreenshotTests: XCTestCase, @unchecked Sendable {
         confirmButton.tap()
         let doneButton = app.buttons["button-done"].firstMatch
         waitForHittable(doneButton, timeout: 5)
+        sleep(6)
         snap("04-TravelSuccess")
 
         // Dismiss travel flow — wait for sheet to fully dismiss before navigating

@@ -29,9 +29,10 @@ struct SettingsTab: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
-                    transitDataSection
                     cloudKitSection
+                    transitDataSection
                     dataManagementSection
+                    faqSection
                     aboutSection
                 }
                 .padding(.horizontal, 16)
@@ -72,76 +73,26 @@ struct SettingsTab: View {
 
     private var transitDataSection: some View {
         CardSection(title: String(localized: "TRANSIT DATA", comment: "Settings: transit data section header")) {
-            VStack(spacing: 12) {
-                if let stats = transitStats {
+            if let stats = transitStats {
+                NavigationLink(destination: TransitDataView(stats: stats)) {
                     HStack {
-                        Text(String(localized: "Lines", comment: "Settings: transit data lines label"))
-                            .font(.subheadline)
-                        Spacer()
-                        Text("\(stats.totalLines)")
-                            .font(.subheadline.monospacedDigit())
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(String(localized: "Transit Database", comment: "Settings: transit database link title"))
+                                .font(.subheadline.weight(.medium))
+                            Text(
+                                "\(stats.totalLines) " + String(localized: "lines", comment: "Settings: lines count suffix") + " · "
+                                    + "\(stats.totalStations) " + String(localized: "stops", comment: "Settings: stops count suffix")
+                            )
+                            .font(.caption)
                             .foregroundStyle(.secondary)
-                    }
-
-                    HStack {
-                        Text(String(localized: "Branches", comment: "Settings: transit data branches label"))
-                            .font(.subheadline)
-                        Spacer()
-                        Text("\(stats.totalBranches)")
-                            .font(.subheadline.monospacedDigit())
-                            .foregroundStyle(.secondary)
-                    }
-
-                    HStack {
-                        Text(String(localized: "Stops", comment: "Settings: transit data stops label"))
-                            .font(.subheadline)
-                        Spacer()
-                        Text("\(stats.totalStations)")
-                            .font(.subheadline.monospacedDigit())
-                            .foregroundStyle(.secondary)
-                    }
-
-                    if !stats.linesByMode.isEmpty {
-                        Divider()
-
-                        ForEach(stats.linesByMode, id: \.mode) { item in
-                            HStack {
-                                Image(systemName: item.mode.systemImage)
-                                    .frame(width: 20)
-                                Text(item.mode.label)
-                                Spacer()
-                                Text("\(item.count)")
-                                    .font(.subheadline.monospacedDigit())
-                                    .foregroundStyle(.secondary)
-                            }
-                            .font(.subheadline)
                         }
-                    }
-
-                    Divider()
-
-                    if let dbSize = stats.databaseSize {
-                        HStack {
-                            Text(String(localized: "Database Size", comment: "Settings: transit database size label"))
-                                .font(.subheadline)
-                            Spacer()
-                            Text(dbSize)
-                                .font(.subheadline.monospacedDigit())
-                                .foregroundStyle(.secondary)
-                        }
-
-                        Divider()
-                    }
-
-                    HStack {
-                        Label(
-                            String(localized: "Ile-de-France Mobilites (IDFM)", comment: "Settings: transit data provider attribution"),
-                            systemImage: "building.columns.fill"
-                        )
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.tertiary)
                     }
                 }
+                .foregroundStyle(.primary)
             }
         }
     }
@@ -285,6 +236,27 @@ struct SettingsTab: View {
                 }
                 .foregroundStyle(.red)
             }
+        }
+    }
+
+    // MARK: - FAQ Section
+
+    private var faqSection: some View {
+        CardSection(title: String(localized: "HELP", comment: "Settings: help section header")) {
+            NavigationLink(destination: FAQView()) {
+                HStack {
+                    Label(
+                        String(localized: "FAQ", comment: "Settings: FAQ link"),
+                        systemImage: "questionmark.circle"
+                    )
+                    .font(.subheadline)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+            .foregroundStyle(.primary)
         }
     }
 

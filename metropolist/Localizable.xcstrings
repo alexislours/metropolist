@@ -403,6 +403,17 @@
     "%lld%%" : {
       "shouldTranslate" : false
     },
+    "• 5 XP per travel\n• 20 XP per new station\n• Line completion: 50 + 5 per station\n• First line bonus: 25 (bus) or 50 (other modes)\n• Daily streak: up to 50 XP/day\n• Achievement rewards" : {
+      "comment" : "FAQ: XP answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• 5 XP par trajet\\n• 20 XP par nouvel arrêt\\n• Ligne complétée : 50 + 5 par arrêt\\n• Bonus de première ligne : 25 (bus) ou 50 (autres modes)\\n• Série quotidienne : jusqu'à 50 XP/jour\\n• Récompenses de succès"
+          }
+        }
+      }
+    },
     "→ %@" : {
       "comment" : "Travel flow: direction indicator with destination",
       "localizations" : {
@@ -663,6 +674,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Téléphérique"
+          }
+        }
+      }
+    },
+    "Can I delete a travel I recorded?" : {
+      "comment" : "FAQ: delete travel question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puis-je supprimer un trajet enregistré ?"
           }
         }
       }
@@ -931,6 +953,17 @@
         }
       }
     },
+    "Data Management" : {
+      "comment" : "FAQ: data management section title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestion des données"
+          }
+        }
+      }
+    },
     "DATA MANAGEMENT" : {
       "comment" : "Settings: data management section header",
       "localizations" : {
@@ -1047,6 +1080,17 @@
         }
       }
     },
+    "Deleting all data permanently removes all your travels and completed stops. Your progress, XP, badges, and achievements will all be lost and this cannot be undone. Export a backup first via Settings > Data Management." : {
+      "comment" : "FAQ: delete data answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La suppression de toutes les données retire définitivement tous vos trajets et arrêts complétés. Votre progression, XP, vos badges et vos succès seront tous perdus et cette action est irréversible. Exportez d'abord une sauvegarde via Paramètres > Gestion des données."
+          }
+        }
+      }
+    },
     "Departure" : {
       "comment" : "Station picker: navigation title",
       "localizations" : {
@@ -1102,6 +1146,17 @@
         }
       }
     },
+    "Does the app work offline?" : {
+      "comment" : "FAQ: offline question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'application fonctionne-t-elle hors ligne ?"
+          }
+        }
+      }
+    },
     "Done" : {
       "comment" : "Travel history: exit selection mode\nTravel success: dismiss button",
       "localizations" : {
@@ -1109,6 +1164,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terminé"
+          }
+        }
+      }
+    },
+    "Each line has three badge tiers: Bronze at 10% completion, Silver at 40%, and Gold at 100%." : {
+      "comment" : "FAQ: badges answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque ligne possède trois niveaux de badges : Bronze à 10 % de complétion, Argent à 40 %, et Or à 100 %."
           }
         }
       }
@@ -1142,6 +1208,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Explorateur"
+          }
+        }
+      }
+    },
+    "Export as SQLite" : {
+      "comment" : "Transit data: export database button",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporter en SQLite"
           }
         }
       }
@@ -1201,6 +1278,17 @@
         }
       }
     },
+    "FAQ" : {
+      "comment" : "FAQ: navigation title\nSettings: FAQ link",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        }
+      }
+    },
     "Finding nearby stops..." : {
       "comment" : "Stop picker: nearby stops loading",
       "localizations" : {
@@ -1256,6 +1344,28 @@
         }
       }
     },
+    "General" : {
+      "comment" : "FAQ: general section title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Général"
+          }
+        }
+      }
+    },
+    "Go to Settings > Data Management. Use Export Data to save a JSON backup, and Import Data to restore from a previous export." : {
+      "comment" : "FAQ: export import answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allez dans Paramètres > Gestion des données. Utilisez « Exporter les données » pour enregistrer une sauvegarde JSON, et « Importer les données » pour restaurer une exportation précédente."
+          }
+        }
+      }
+    },
     "Gold" : {
       "comment" : "Badge tier: gold level",
       "localizations" : {
@@ -1300,6 +1410,17 @@
         }
       }
     },
+    "HELP" : {
+      "comment" : "Settings: help section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AIDE"
+          }
+        }
+      }
+    },
     "History" : {
       "comment" : "Travel history: navigation title",
       "localizations" : {
@@ -1307,6 +1428,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Historique"
+          }
+        }
+      }
+    },
+    "How do I earn XP?" : {
+      "comment" : "FAQ: XP question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment gagner de l'XP ?"
+          }
+        }
+      }
+    },
+    "How do I export or import my data?" : {
+      "comment" : "FAQ: export import question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment exporter ou importer mes données ?"
+          }
+        }
+      }
+    },
+    "How do streaks work?" : {
+      "comment" : "FAQ: streaks question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment fonctionnent les séries ?"
+          }
+        }
+      }
+    },
+    "How is my data synced across devices?" : {
+      "comment" : "FAQ: sync question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment mes données sont-elles synchronisées entre mes appareils ?"
           }
         }
       }
@@ -1542,6 +1707,17 @@
         }
       }
     },
+    "lines" : {
+      "comment" : "Settings: lines count suffix",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lignes"
+          }
+        }
+      }
+    },
     "Lines" : {
       "comment" : "Lines: navigation title\nSettings: transit data lines label\nStation detail: connecting lines section header\nTab: lines list",
       "localizations" : {
@@ -1549,6 +1725,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lignes"
+          }
+        }
+      }
+    },
+    "LINES BY MODE" : {
+      "comment" : "Transit data: lines by mode section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LIGNES PAR MODE"
           }
         }
       }
@@ -1659,6 +1846,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Roi du Métro"
+          }
+        }
+      }
+    },
+    "Metropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM." : {
+      "comment" : "FAQ: coverage answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métropolist couvre l'ensemble du réseau de transports en commun d'Île-de-France (région parisienne), incluant le Métro, le RER, le Tramway, le Bus, ainsi que les autres modes opérés par IDFM."
           }
         }
       }
@@ -1846,7 +2044,7 @@
       }
     },
     "OVERVIEW" : {
-      "comment" : "Statistics: overview section header",
+      "comment" : "Statistics: overview section header\nTransit data: overview section header",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1874,6 +2072,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profil"
+          }
+        }
+      }
+    },
+    "Progression & Rewards" : {
+      "comment" : "FAQ: gamification section title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Progression & Récompenses"
           }
         }
       }
@@ -2076,6 +2285,17 @@
         }
       }
     },
+    "Secret achievements are hidden challenges that only reveal themselves once unlocked." : {
+      "comment" : "FAQ: secret achievements answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les trophées secrets sont des défis cachés qui ne se révèlent qu'une fois déverrouillés."
+          }
+        }
+      }
+    },
     "Select" : {
       "comment" : "Travel history: enter selection mode",
       "localizations" : {
@@ -2186,6 +2406,17 @@
         }
       }
     },
+    "stops" : {
+      "comment" : "Settings: stops count suffix",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "arrêts"
+          }
+        }
+      }
+    },
     "Stops" : {
       "comment" : "Line detail: stops section header\nSettings: transit data stops label\nStation picker: line stops section header\nStatistics: stops count label",
       "localizations" : {
@@ -2215,6 +2446,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Séries"
+          }
+        }
+      }
+    },
+    "Streaks track consecutive days you log a travel. Each day of your streak earns a bonus of 5 × streak day in XP (capped at 50 XP/day). If you miss a day, the streak resets. Keep it going to unlock the 7-day and 30-day achievements!" : {
+      "comment" : "FAQ: streaks answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les séries comptabilisent les jours consécutifs où vous enregistrez un trajet. Chaque jour de série vous rapporte un bonus de 5 × jour de série en XP (plafonné à 50 XP/jour). Si vous manquez un jour, la série est réinitialisée. Continuez sur votre lancée pour débloquer les succès de 7 et 30 jours !"
           }
         }
       }
@@ -2329,6 +2571,17 @@
         }
       }
     },
+    "Transit Data" : {
+      "comment" : "Transit data: navigation title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Données de transport"
+          }
+        }
+      }
+    },
     "TRANSIT DATA" : {
       "comment" : "Settings: transit data section header",
       "localizations" : {
@@ -2336,6 +2589,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DONNÉES DE TRANSPORT"
+          }
+        }
+      }
+    },
+    "Transit Database" : {
+      "comment" : "Settings: transit database link title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base de données des transports"
           }
         }
       }
@@ -2451,7 +2715,7 @@
       }
     },
     "Travels" : {
-      "comment" : "Statistics: travels count label\nXP breakdown: travel XP",
+      "comment" : "FAQ: travels section title\nStatistics: travels count label\nXP breakdown: travel XP",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2703,6 +2967,72 @@
         }
       }
     },
+    "What are badges and how do I earn them?" : {
+      "comment" : "FAQ: badges question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que sont les badges et comment les gagner ?"
+          }
+        }
+      }
+    },
+    "What are secret achievements?" : {
+      "comment" : "FAQ: secret achievements question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que sont les trophées secrets ?"
+          }
+        }
+      }
+    },
+    "What area does Metropolist cover?" : {
+      "comment" : "FAQ: coverage question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelle zone couvre Métropolist ?"
+          }
+        }
+      }
+    },
+    "What counts as a completed stop?" : {
+      "comment" : "FAQ: completed stop question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qu'est-ce qui est considéré comme un arrêt complété ?"
+          }
+        }
+      }
+    },
+    "What happens if I delete all my data?" : {
+      "comment" : "FAQ: delete data question",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que se passe-t-il si je supprime toutes mes données ?"
+          }
+        }
+      }
+    },
+    "When you log a travel, all intermediate stations between your departure and destination are marked as completed. Visiting a stop on different lines counts separately for each line." : {
+      "comment" : "FAQ: completed stop answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorsque vous enregistrez un trajet, tous les arrêts intermédiaires entre votre départ et votre destination sont marqués comme complétés. Visiter un arrêt sur des lignes différentes compte séparément pour chaque ligne."
+          }
+        }
+      }
+    },
     "Where to?" : {
       "comment" : "Travel flow: pick destination navigation title",
       "localizations" : {
@@ -2725,6 +3055,28 @@
         }
       }
     },
+    "Yes! All transit data is bundled with the app so you can browse lines, stations, and routes without an internet connection." : {
+      "comment" : "FAQ: offline answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui ! Toutes les données de transport sont intégrées à l'application afin que vous puissiez consulter les lignes, les arrêts et les itinéraires sans connexion Internet."
+          }
+        }
+      }
+    },
+    "Yes. Go to Profile > History, tap Select, choose the travels you want to remove, then delete them. If a stop is no longer covered by another travel on that line, it will also be removed from your completion." : {
+      "comment" : "FAQ: delete travel answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui. Allez dans Profil > Historique, appuyez sur Sélectionner, choisissez les trajets que vous souhaitez retirer, puis supprimez-les. Si un arrêt n'est plus couvert par un autre trajet sur cette ligne, il sera également retiré de votre progression."
+          }
+        }
+      }
+    },
     "Your journey" : {
       "comment" : "Travel confirm: journey stops section header",
       "localizations" : {
@@ -2732,6 +3084,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre trajet"
+          }
+        }
+      }
+    },
+    "Your travels and completed stops are synced via iCloud. Make sure you are signed into iCloud on all your devices for automatic sync." : {
+      "comment" : "FAQ: sync answer",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos trajets et arrêts complétés sont synchronisés via iCloud. Assurez-vous d'être connecté à iCloud sur tous vos appareils pour une synchronisation automatique."
           }
         }
       }

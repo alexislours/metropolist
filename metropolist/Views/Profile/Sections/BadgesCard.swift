@@ -241,9 +241,11 @@ private struct RichLineBadgeCard: View {
                     .font(.body)
                     .foregroundStyle(tier.color)
 
-                Text(tier.label)
-                    .font(.caption2)
-                    .foregroundStyle(isLocked ? .tertiary : .secondary)
+                if !isLocked {
+                    Text(tier.label)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
             .frame(width: 48)
         }
