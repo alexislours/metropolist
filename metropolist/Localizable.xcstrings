@@ -1850,7 +1850,7 @@
         }
       }
     },
-    "Metropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM." : {
+    "Métropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM." : {
       "comment" : "FAQ: coverage answer",
       "localizations" : {
         "fr" : {
@@ -2989,7 +2989,7 @@
         }
       }
     },
-    "What area does Metropolist cover?" : {
+    "What area does Métropolist cover?" : {
       "comment" : "FAQ: coverage question",
       "localizations" : {
         "fr" : {

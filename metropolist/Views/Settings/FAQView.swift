@@ -83,10 +83,10 @@ private let faqSections: [FAQSection] = [
         title: String(localized: "General", comment: "FAQ: general section title"),
         items: [
             FAQItem(
-                question: String(localized: "What area does Metropolist cover?", comment: "FAQ: coverage question"),
+                question: String(localized: "What area does Métropolist cover?", comment: "FAQ: coverage question"),
                 answer: String(
                     // swiftlint:disable:next line_length
-                    localized: "Metropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM.",
+                    localized: "Métropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM.",
                     comment: "FAQ: coverage answer"
                 )
             ),
