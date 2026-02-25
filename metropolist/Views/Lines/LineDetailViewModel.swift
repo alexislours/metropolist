@@ -51,7 +51,7 @@ final class LineDetailViewModel {
     }
 
     func loadData() async {
-        await Task.yield()
+        try? await Task.sleep(for: .milliseconds(50))
         do {
             line = try dataStore.transitService.line(bySourceID: lineSourceID)
             variants = try dataStore.transitService.routeVariants(forLineSourceID: lineSourceID)

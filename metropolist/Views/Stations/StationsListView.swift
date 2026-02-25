@@ -17,7 +17,7 @@ struct StationsListView: View {
     var body: some View {
         Group {
             if isLoading {
-                ProgressView()
+                TransitLoadingIndicator()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if searchText.isEmpty {
                 visitedStationsContent
@@ -25,7 +25,10 @@ struct StationsListView: View {
                 searchResultsContent
             }
         }
-        .task { loadVisitedStations() }
+        .task {
+            try? await Task.sleep(for: .milliseconds(50))
+            loadVisitedStations()
+        }
         .onChange(of: dataStore.userDataVersion) {
             loadVisitedStations()
         }
@@ -69,7 +72,7 @@ struct StationsListView: View {
                     if searchText == lastSearchedQuery {
                         ContentUnavailableView.search(text: searchText)
                     } else {
-                        ProgressView()
+                        TransitLoadingIndicator()
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 20)
                     }

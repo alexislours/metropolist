@@ -14,7 +14,7 @@ struct TravelCreationFlow: View {
             if let viewModel {
                 flowContent(viewModel)
             } else {
-                ProgressView()
+                TransitLoadingIndicator()
             }
         }
         .task {
@@ -100,7 +100,7 @@ struct TravelCreationFlow: View {
         List {
             if viewModel.isLoadingDestinations {
                 HStack(spacing: 12) {
-                    ProgressView()
+                    TransitLoadingIndicator()
                     Text(String(localized: "Loading destinations...", comment: "Travel flow: loading destinations indicator"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)

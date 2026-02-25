@@ -130,6 +130,7 @@ struct LinesTab: View {
                 }
             }
             .task {
+                try? await Task.sleep(for: .milliseconds(50))
                 loadData()
             }
             .onChange(of: dataStore.userDataVersion) {
@@ -151,7 +152,7 @@ struct LinesTab: View {
     @ViewBuilder
     private var linesContent: some View {
         if isLoading {
-            ProgressView()
+            TransitLoadingIndicator()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             List {

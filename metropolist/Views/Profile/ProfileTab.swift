@@ -58,7 +58,7 @@ struct ProfileTab: View {
                     }
                     .background(Color(UIColor.systemGroupedBackground))
                 } else {
-                    ProgressView()
+                    TransitLoadingIndicator()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }

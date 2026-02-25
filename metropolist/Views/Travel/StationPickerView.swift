@@ -23,7 +23,7 @@ struct StationPickerView: View {
                 } else if viewModel.isLoadingNearby {
                     Section {
                         HStack(spacing: 12) {
-                            ProgressView()
+                            TransitLoadingIndicator()
                             Text(String(localized: "Finding nearby stops...", comment: "Stop picker: nearby stops loading"))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
@@ -57,7 +57,7 @@ struct StationPickerView: View {
                         if searchText == lastSearchedQuery {
                             ContentUnavailableView.search(text: searchText)
                         } else {
-                            ProgressView()
+                            TransitLoadingIndicator()
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 20)
                         }
@@ -131,7 +131,7 @@ struct StationPickerView: View {
         if viewModel.isLoadingLineStations {
             Section {
                 HStack(spacing: 12) {
-                    ProgressView()
+                    TransitLoadingIndicator()
                     Text(String(localized: "Loading stops...", comment: "Station picker: loading line stops indicator"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)

@@ -33,7 +33,7 @@ final class ProfileViewModel {
     }
 
     func load() async {
-        await Task.yield()
+        try? await Task.sleep(for: .milliseconds(50))
         do {
             let result = try GamificationSnapshot.build(from: dataStore)
             let metaMap = result.lineMetadata

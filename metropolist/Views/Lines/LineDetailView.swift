@@ -15,7 +15,7 @@ struct LineDetailView: View {
             if let viewModel {
                 content(viewModel)
             } else {
-                ProgressView()
+                TransitLoadingIndicator()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
