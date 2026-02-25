@@ -19,6 +19,7 @@ struct SettingsTab: View {
     @State var cloudKitStatus: CKAccountStatus?
     @State private var devModeTapCount = 0
     @State private var devModeFeedback: String?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var appVersion: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
@@ -294,12 +295,12 @@ struct SettingsTab: View {
                         devModeTapCount = 0
                         devMode.toggle()
                         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                        withAnimation {
+                        withAnimation(reduceMotion ? .none : .default) {
                             devModeFeedback = devMode ? "Developer Mode ON" : "Developer Mode OFF"
                         }
                         Task {
                             try? await Task.sleep(for: .seconds(2))
-                            withAnimation {
+                            withAnimation(reduceMotion ? .none : .default) {
                                 devModeFeedback = nil
                             }
                         }

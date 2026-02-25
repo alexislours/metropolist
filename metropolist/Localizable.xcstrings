@@ -658,6 +658,17 @@
         }
       }
     },
+    "Add new travel" : {
+      "comment" : "Accessibility: FAB button label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un nouveau trajet"
+          }
+        }
+      }
+    },
     "Add to favorites" : {
       "comment" : "Line detail: favorite button\nStation detail: favorite button",
       "localizations" : {
@@ -2265,6 +2276,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nouvelle ligne découverte !"
+          }
+        }
+      }
+    },
+    "Next page" : {
+      "comment" : "Accessibility: onboarding next button",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page suivante"
           }
         }
       }

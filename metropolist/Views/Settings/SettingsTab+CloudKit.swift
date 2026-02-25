@@ -12,6 +12,7 @@ extension SettingsTab {
                     .foregroundStyle(cloudKitStatusColor)
                     .frame(width: 50, height: 50)
                     .background(cloudKitStatusColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+                    .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(String(localized: "iCloud Sync", comment: "Settings: iCloud sync feature title"))

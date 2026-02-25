@@ -39,12 +39,13 @@ struct OnboardingView: View {
             HStack(spacing: 8) {
                 ForEach(0 ..< pageCount, id: \.self) { index in
                     Circle()
-                        .fill(index == currentPage ? Color.primary : Color.secondary.opacity(0.3))
+                        .fill(index == currentPage ? Color.primary : Color.secondary.opacity(0.5))
                         .frame(width: 8, height: 8)
                         .scaleEffect(index == currentPage ? 1.2 : 1.0)
                         .animation(reduceMotion ? .none : .spring(duration: 0.3), value: currentPage)
                 }
             }
+            .accessibilityHidden(true)
 
             Spacer()
 
@@ -60,6 +61,7 @@ struct OnboardingView: View {
                         .frame(width: 48, height: 48)
                         .background(.blue, in: Circle())
                 }
+                .accessibilityLabel(String(localized: "Next page", comment: "Accessibility: onboarding next button"))
             } else {
                 Button {
                     hasSeenOnboarding = true
@@ -150,6 +152,7 @@ struct OnboardingView: View {
                         }
                 }
             }
+            .accessibilityHidden(true)
             .padding(.horizontal, 20)
 
             // Mini FAB
@@ -159,6 +162,7 @@ struct OnboardingView: View {
                 .frame(width: 48, height: 48)
                 .background(.blue, in: Circle())
                 .shadow(color: .blue.opacity(0.3), radius: 8, y: 4)
+                .accessibilityHidden(true)
         }
     }
 
@@ -285,6 +289,7 @@ struct OnboardingView: View {
         )
         .opacity(0.45)
         .allowsHitTesting(false)
+        .accessibilityHidden(true)
     }
 
     private var getStartedPage: some View {

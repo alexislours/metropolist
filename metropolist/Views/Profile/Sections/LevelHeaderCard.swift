@@ -4,6 +4,7 @@ struct LevelHeaderCard: View {
     let snapshot: GamificationSnapshot
 
     @State private var showXPBreakdown = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         CardSection {
@@ -11,7 +12,7 @@ struct LevelHeaderCard: View {
                 // Level circle + title
                 HStack(spacing: 16) {
                     Text("\(snapshot.level.number)")
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .foregroundStyle(.white)
                         .frame(width: 64, height: 64)
                         .background(levelGradient, in: Circle())
@@ -77,7 +78,7 @@ struct LevelHeaderCard: View {
             .contentShape(Rectangle())
             .onTapGesture {
                 guard snapshot.totalXP > 0 else { return }
-                withAnimation(.snappy(duration: 0.25)) {
+                withAnimation(reduceMotion ? .none : .snappy(duration: 0.25)) {
                     showXPBreakdown.toggle()
                 }
             }
@@ -92,6 +93,7 @@ struct LevelHeaderCard: View {
                 .rotationEffect(.degrees(showXPBreakdown ? 180 : 0))
                 .frame(maxWidth: .infinity)
                 .padding(.top, 4)
+                .accessibilityHidden(true)
 
             if showXPBreakdown {
                 let breakdown = snapshot.xpBreakdown

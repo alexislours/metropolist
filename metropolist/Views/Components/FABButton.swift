@@ -34,6 +34,7 @@ struct FABButton: View {
                 .background(.blue, in: Circle())
                 .shadow(color: .blue.opacity(0.3), radius: 8, y: 4)
         }
+        .accessibilityLabel(String(localized: "Add new travel", comment: "Accessibility: FAB button label"))
         .buttonStyle(FABButtonStyle())
         .sensoryFeedback(.impact(flexibility: .rigid), trigger: tapTrigger)
     }
