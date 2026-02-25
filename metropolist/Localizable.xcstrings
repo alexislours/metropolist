@@ -1719,7 +1719,7 @@
       }
     },
     "Lines" : {
-      "comment" : "Lines: navigation title\nSettings: transit data lines label\nStation detail: connecting lines section header\nTab: lines list",
+      "comment" : "Lines: navigation title\nSegment control: lines tab\nSettings: transit data lines label\nStation detail: connecting lines section header\nTab: lines list",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1971,6 +1971,17 @@
         }
       }
     },
+    "No visited stops yet" : {
+      "comment" : "Stations list: empty state title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun arrêt visité pour le moment"
+          }
+        }
+      }
+    },
     "OK" : {
       "comment" : "Travel flow: dismiss error button",
       "localizations" : {
@@ -2209,7 +2220,7 @@
       }
     },
     "Results (%lld)" : {
-      "comment" : "Station picker: search results count header",
+      "comment" : "Station picker: search results count header\nStations list: search results count header",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2237,6 +2248,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher des lignes"
+          }
+        }
+      }
+    },
+    "Search stops" : {
+      "comment" : "Stations: search field prompt",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher des arrêts"
           }
         }
       }
@@ -2418,7 +2440,7 @@
       }
     },
     "Stops" : {
-      "comment" : "Line detail: stops section header\nSettings: transit data stops label\nStation picker: line stops section header\nStatistics: stops count label",
+      "comment" : "Line detail: stops section header\nSegment control: stations tab\nSettings: transit data stops label\nStation picker: line stops section header\nStations: navigation title\nStatistics: stops count label",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2435,6 +2457,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arrêts visités"
+          }
+        }
+      }
+    },
+    "Stops you visit will appear here. Use search to find any stop." : {
+      "comment" : "Stations list: empty state description",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les arrêts que vous visitez apparaîtront ici. Utilisez la recherche pour trouver n'importe quel arrêt."
           }
         }
       }
@@ -2842,6 +2875,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vétéran"
+          }
+        }
+      }
+    },
+    "View" : {
+      "comment" : "Segment control: accessibility label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vue"
           }
         }
       }

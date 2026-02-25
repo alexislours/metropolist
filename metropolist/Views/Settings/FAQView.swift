@@ -122,7 +122,6 @@ private let faqSections: [FAQSection] = [
             FAQItem(
                 question: String(localized: "What are badges and how do I earn them?", comment: "FAQ: badges question"),
                 answer: String(
-                    // swiftlint:disable:next line_length
                     localized: "Each line has three badge tiers: Bronze at 10% completion, Silver at 40%, and Gold at 100%.",
                     comment: "FAQ: badges answer"
                 )
@@ -138,7 +137,6 @@ private let faqSections: [FAQSection] = [
             FAQItem(
                 question: String(localized: "What are secret achievements?", comment: "FAQ: secret achievements question"),
                 answer: String(
-                    // swiftlint:disable:next line_length
                     localized: "Secret achievements are hidden challenges that only reveal themselves once unlocked.",
                     comment: "FAQ: secret achievements answer"
                 )

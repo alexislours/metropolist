@@ -1,0 +1,176 @@
+import SwiftUI
+import TransitModels
+
+struct StationsListView: View {
+    @Environment(DataStore.self) private var dataStore
+    let searchText: String
+
+    @State private var isLoading = true
+    @State private var visitedStations: [TransitStation] = []
+    @State private var loadedLines: [String: [TransitLine]] = [:]
+
+    // Search state
+    @State private var searchResults: [TransitStation] = []
+    @State private var searchTask: Task<Void, Never>?
+    @State private var lastSearchedQuery = ""
+
+    var body: some View {
+        Group {
+            if isLoading {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if searchText.isEmpty {
+                visitedStationsContent
+            } else {
+                searchResultsContent
+            }
+        }
+        .task { loadVisitedStations() }
+        .onChange(of: dataStore.userDataVersion) {
+            loadVisitedStations()
+        }
+        .onChange(of: searchText) {
+            performSearch()
+        }
+    }
+
+    // MARK: - Visited Stations
+
+    @ViewBuilder
+    private var visitedStationsContent: some View {
+        if visitedStations.isEmpty {
+            ContentUnavailableView(
+                String(localized: "No visited stops yet", comment: "Stations list: empty state title"),
+                systemImage: "mappin.slash",
+                description: Text(String(
+                    localized: "Stops you visit will appear here. Use search to find any stop.",
+                    comment: "Stations list: empty state description"
+                ))
+            )
+        } else {
+            List {
+                ForEach(visitedStations) { station in
+                    NavigationLink(value: StationDestination(stationSourceID: station.sourceID)) {
+                        stationRow(station)
+                    }
+                }
+            }
+            .contentMargins(.bottom, 80)
+            .listSectionSpacing(.compact)
+        }
+    }
+
+    // MARK: - Search Results
+
+    private var searchResultsContent: some View {
+        List {
+            Section {
+                if searchResults.isEmpty {
+                    if searchText == lastSearchedQuery {
+                        ContentUnavailableView.search(text: searchText)
+                    } else {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 20)
+                    }
+                } else {
+                    ForEach(searchResults) { station in
+                        NavigationLink(value: StationDestination(stationSourceID: station.sourceID)) {
+                            stationRow(station)
+                        }
+                        .task(id: station.sourceID) {
+                            guard loadedLines[station.sourceID] == nil else { return }
+                            await Task.yield()
+                            guard !Task.isCancelled else { return }
+                            do {
+                                loadedLines[station.sourceID] = try dataStore.transitService.lines(forStationSourceID: station.sourceID)
+                            } catch {}
+                        }
+                    }
+                }
+            } header: {
+                HStack(spacing: 6) {
+                    Text(String(localized: "Results (\(searchResults.count))", comment: "Stations list: search results count header"))
+                    if searchText != lastSearchedQuery {
+                        ProgressView()
+                            .controlSize(.small)
+                    }
+                }
+            }
+        }
+        .contentMargins(.bottom, 80)
+        .listSectionSpacing(.compact)
+    }
+
+    // MARK: - Station Row
+
+    private func stationRow(_ station: TransitStation) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(station.name)
+                .font(.subheadline)
+                .foregroundStyle(.primary)
+
+            if let town = station.town {
+                Text(town)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            if let lines = loadedLines[station.sourceID], !lines.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 4) {
+                        ForEach(lines) { line in
+                            LineBadge(line: line)
+                        }
+                    }
+                }
+            } else if loadedLines[station.sourceID] == nil {
+                ProgressView()
+                    .controlSize(.small)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    // MARK: - Data Loading
+
+    private func loadVisitedStations() {
+        do {
+            let completedStops = try dataStore.userService.allCompletedStops()
+            let uniqueIDs = Array(Set(completedStops.map(\.stationSourceID)))
+            let stations = try dataStore.transitService.stations(bySourceIDs: uniqueIDs)
+                .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+            visitedStations = stations
+
+            if !stations.isEmpty {
+                let stationIDSet = Set(stations.map(\.sourceID))
+                loadedLines = try dataStore.transitService.connectingLinesByStation(forStationSourceIDs: stationIDSet)
+            }
+        } catch {
+            #if DEBUG
+                print("Failed to load visited stations: \(error)")
+            #endif
+        }
+        isLoading = false
+    }
+
+    private func performSearch() {
+        searchTask?.cancel()
+        let query = searchText
+        guard !query.isEmpty else {
+            searchResults = []
+            lastSearchedQuery = ""
+            return
+        }
+        searchTask = Task {
+            try? await Task.sleep(for: .milliseconds(300))
+            guard !Task.isCancelled else { return }
+            do {
+                let results = try dataStore.transitService.searchStations(query: query)
+                guard !Task.isCancelled else { return }
+                searchResults = results
+                lastSearchedQuery = query
+            } catch {}
+        }
+    }
+}

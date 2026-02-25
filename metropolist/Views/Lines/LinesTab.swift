@@ -4,6 +4,7 @@ import TransitModels
 struct LinesTab: View {
     @Environment(DataStore.self) private var dataStore
     @State private var searchText = ""
+    @State private var selectedSegment: TabSegment = .lines
     @State private var isLoading = true
     @State private var lines: [TransitLine] = []
     @State private var stationCounts: [String: Int] = [:]
@@ -12,6 +13,17 @@ struct LinesTab: View {
     @State private var inProgressExpanded = true
     @State private var completedExpanded = false
     @State private var filtered = FilteredResult()
+
+    private enum TabSegment: String, CaseIterable {
+        case lines, stations
+
+        var label: String {
+            switch self {
+            case .lines: String(localized: "Lines", comment: "Segment control: lines tab")
+            case .stations: String(localized: "Stops", comment: "Segment control: stations tab")
+            }
+        }
+    }
 
     private struct FilteredResult {
         var inProgress: [TransitLine] = []
@@ -75,55 +87,32 @@ struct LinesTab: View {
     var body: some View {
         NavigationStack {
             Group {
-                if isLoading {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                if selectedSegment == .lines {
+                    linesContent
                 } else {
-                    List {
-                        if !filtered.inProgress.isEmpty {
-                            modeSection(
-                                title: String(localized: "In Progress", comment: "Lines: in-progress lines section"),
-                                icon: "play.circle.fill",
-                                tint: .blue,
-                                lines: filtered.inProgress,
-                                isExpanded: $inProgressExpanded
-                            )
-                        }
-
-                        if !filtered.completed.isEmpty {
-                            modeSection(
-                                title: String(localized: "Completed", comment: "Lines: completed lines section"),
-                                icon: "checkmark.circle.fill",
-                                tint: .green,
-                                lines: filtered.completed,
-                                isExpanded: $completedExpanded
-                            )
-                        }
-
-                        if !filtered.inProgress.isEmpty || !filtered.completed.isEmpty {
-                            Section {
-                                Text(String(localized: "All Lines", comment: "Lines: all lines divider label"))
-                                    .font(.footnote.weight(.medium))
-                                    .foregroundStyle(.secondary)
-                                    .textCase(.uppercase)
-                                    .listRowBackground(Color.clear)
-                                    .listRowSeparator(.hidden)
-                            }
-                        }
-
-                        ForEach(filtered.grouped, id: \.mode) { group in
-                            modeSection(for: group.mode, lines: group.lines)
-                        }
-                    }
-                    .contentMargins(.bottom, 80)
-                    .listSectionSpacing(.compact)
-                    .searchable(text: $searchText, prompt: String(localized: "Search lines", comment: "Lines: search field prompt"))
-                    .refreshable {
-                        loadData()
-                    }
+                    StationsListView(searchText: searchText)
                 }
             }
-            .navigationTitle(String(localized: "Lines", comment: "Lines: navigation title"))
+            .searchable(
+                text: $searchText,
+                prompt: selectedSegment == .lines
+                    ? String(localized: "Search lines", comment: "Lines: search field prompt")
+                    : String(localized: "Search stops", comment: "Stations: search field prompt")
+            )
+            .navigationTitle(selectedSegment == .lines
+                ? String(localized: "Lines", comment: "Lines: navigation title")
+                : String(localized: "Stops", comment: "Stations: navigation title"))
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Picker(String(localized: "View", comment: "Segment control: accessibility label"), selection: $selectedSegment) {
+                        ForEach(TabSegment.allCases, id: \.self) { segment in
+                            Text(segment.label).tag(segment)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 200)
+                }
+            }
             .navigationDestination(for: String.self) { lineSourceID in
                 LineDetailView(lineSourceID: lineSourceID)
             }
@@ -147,7 +136,64 @@ struct LinesTab: View {
                 loadData()
             }
             .onChange(of: searchText) {
-                refilter()
+                if selectedSegment == .lines {
+                    refilter()
+                }
+            }
+            .onChange(of: selectedSegment) {
+                searchText = ""
+            }
+        }
+    }
+
+    // MARK: - Lines Content
+
+    @ViewBuilder
+    private var linesContent: some View {
+        if isLoading {
+            ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            List {
+                if !filtered.inProgress.isEmpty {
+                    modeSection(
+                        title: String(localized: "In Progress", comment: "Lines: in-progress lines section"),
+                        icon: "play.circle.fill",
+                        tint: .blue,
+                        lines: filtered.inProgress,
+                        isExpanded: $inProgressExpanded
+                    )
+                }
+
+                if !filtered.completed.isEmpty {
+                    modeSection(
+                        title: String(localized: "Completed", comment: "Lines: completed lines section"),
+                        icon: "checkmark.circle.fill",
+                        tint: .green,
+                        lines: filtered.completed,
+                        isExpanded: $completedExpanded
+                    )
+                }
+
+                if !filtered.inProgress.isEmpty || !filtered.completed.isEmpty {
+                    Section {
+                        Text(String(localized: "All Lines", comment: "Lines: all lines divider label"))
+                            .font(.footnote.weight(.medium))
+                            .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                    }
+                }
+
+                ForEach(filtered.grouped, id: \.mode) { group in
+                    modeSection(for: group.mode, lines: group.lines)
+                }
+            }
+            .contentMargins(.bottom, 80)
+            .listSectionSpacing(.compact)
+            .refreshable {
+                loadData()
             }
         }
     }
