@@ -409,7 +409,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "• 5 XP par trajet\\n• 20 XP par nouvel arrêt\\n• Ligne complétée : 50 + 5 par arrêt\\n• Bonus de première ligne : 25 (bus) ou 50 (autres modes)\\n• Série quotidienne : jusqu'à 50 XP/jour\\n• Récompenses de succès"
+            "value" : "• 5 XP par trajet\n• 20 XP par nouvel arrêt\n• Ligne complétée : 50 + 5 par arrêt\n• Bonus de première ligne : 25 (bus) ou 50 (autres modes)\n• Série quotidienne : jusqu'à 50 XP/jour\n• Récompenses de succès"
           }
         }
       }
