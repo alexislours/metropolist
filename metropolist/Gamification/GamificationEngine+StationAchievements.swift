@@ -153,7 +153,7 @@ extension GamificationEngine {
     ) -> PlayerStats {
         let uniqueStations = Set(input.completedStops.map(\.stationSourceID))
         let linesStarted = Set(input.travels.map(\.lineSourceID))
-        let (_, current) = computeStreaks(uniqueDays: uniqueTravelDays)
+        let (longest, current) = computeStreaks(uniqueDays: uniqueTravelDays)
 
         return PlayerStats(
             totalTravels: input.travels.count,
@@ -161,6 +161,7 @@ extension GamificationEngine {
             totalLinesStarted: linesStarted.count,
             totalLinesCompleted: completedLineIDs.count,
             currentStreak: current,
+            longestStreak: longest,
             firstTravelDate: input.travels.last?.createdAt
         )
     }

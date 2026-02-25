@@ -95,6 +95,8 @@ enum GamificationEngine {
             streakXP: streakXP
         )
 
+        let extendedStats = computeExtendedStats(from: input)
+
         let totalXP = xpBreakdown.total
         let level = LevelDefinitions.level(forXP: totalXP)
         let xpInCurrent = LevelDefinitions.xpInCurrentLevel(totalXP: totalXP)
@@ -110,7 +112,8 @@ enum GamificationEngine {
             achievements: achievements,
             stats: stats,
             lineProgress: lineProgress,
-            xpBreakdown: xpBreakdown
+            xpBreakdown: xpBreakdown,
+            extendedStats: extendedStats
         )
     }
 

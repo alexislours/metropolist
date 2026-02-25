@@ -18,6 +18,8 @@ struct TravelRecord {
 struct StationMetadata {
     let name: String
     let postalCode: String?
+    let fareZone: String?
+    let town: String?
 }
 
 struct LineMetadata {
@@ -53,6 +55,7 @@ struct GamificationSnapshot: Equatable {
     let stats: PlayerStats
     let lineProgress: [String: LineProgress]
     let xpBreakdown: XPBreakdown
+    let extendedStats: ExtendedStats
 
     static let empty = GamificationSnapshot(
         totalXP: 0,
@@ -64,7 +67,8 @@ struct GamificationSnapshot: Equatable {
         achievements: [],
         stats: .empty,
         lineProgress: [:],
-        xpBreakdown: XPBreakdown(travelXP: 0, stopXP: 0, lineCompletionXP: 0, firstLineXP: 0, achievementXP: 0, streakXP: 0)
+        xpBreakdown: XPBreakdown(travelXP: 0, stopXP: 0, lineCompletionXP: 0, firstLineXP: 0, achievementXP: 0, streakXP: 0),
+        extendedStats: .empty
     )
 }
 
@@ -100,6 +104,7 @@ struct PlayerStats: Equatable {
     let totalLinesStarted: Int
     let totalLinesCompleted: Int
     let currentStreak: Int
+    let longestStreak: Int
     let firstTravelDate: Date?
 
     static let empty = PlayerStats(
@@ -108,8 +113,101 @@ struct PlayerStats: Equatable {
         totalLinesStarted: 0,
         totalLinesCompleted: 0,
         currentStreak: 0,
+        longestStreak: 0,
         firstTravelDate: nil
     )
+}
+
+// MARK: - Extended Stats
+
+struct ExtendedStats: Equatable {
+    let travelsPerWeek: [WeeklyTravelCount]
+    let busiestDayOfWeek: DayOfWeekStat?
+    let busiestHourOfDay: HourOfDayStat?
+    let topStations: [RankedStation]
+    let topLines: [RankedLine]
+    let departmentCoverage: [DepartmentCoverage]
+    let fareZoneCoverage: [FareZoneCoverage]
+
+    static let empty = ExtendedStats(
+        travelsPerWeek: [],
+        busiestDayOfWeek: nil,
+        busiestHourOfDay: nil,
+        topStations: [],
+        topLines: [],
+        departmentCoverage: [],
+        fareZoneCoverage: []
+    )
+}
+
+struct WeeklyTravelCount: Identifiable, Equatable {
+    let id: Date
+    let weekLabel: String
+    let count: Int
+}
+
+struct DayOfWeekStat: Equatable {
+    let dayIndex: Int
+    let dayName: String
+    let count: Int
+    let allDays: [DayCount]
+
+    struct DayCount: Identifiable, Equatable {
+        var id: Int { dayIndex }
+        let dayIndex: Int
+        let dayName: String
+        let count: Int
+    }
+}
+
+struct HourOfDayStat: Equatable {
+    let hour: Int
+    let count: Int
+    let allHours: [HourCount]
+
+    struct HourCount: Identifiable, Equatable {
+        var id: Int { hour }
+        let hour: Int
+        let count: Int
+    }
+}
+
+struct RankedStation: Identifiable, Equatable {
+    var id: String { stationSourceID }
+    let stationSourceID: String
+    let name: String
+    let visitCount: Int
+}
+
+struct RankedLine: Identifiable, Equatable {
+    var id: String { lineSourceID }
+    let lineSourceID: String
+    let shortName: String
+    let mode: TransitMode
+    let color: String
+    let textColor: String
+    let travelCount: Int
+}
+
+struct DepartmentCoverage: Identifiable, Equatable {
+    var id: String { department }
+    let department: String
+    let label: String
+    let visited: Int
+    let total: Int
+    var percentage: Double {
+        total > 0 ? Double(visited) / Double(total) : 0
+    }
+}
+
+struct FareZoneCoverage: Identifiable, Equatable {
+    var id: String { zone }
+    let zone: String
+    let visited: Int
+    let total: Int
+    var percentage: Double {
+        total > 0 ? Double(visited) / Double(total) : 0
+    }
 }
 
 // MARK: - Achievements

@@ -14,17 +14,15 @@ extension GamificationSnapshot {
         let travels = try dataStore.userService.allTravels()
         let metaMap = try dataStore.allLineMetadata()
 
-        // Collect all station IDs referenced in stops and travels
-        let allStationSourceIDs = Set(
-            completedStops.map(\.stationSourceID) +
-                travels.flatMap { [$0.fromStationSourceID, $0.toStationSourceID] }
-        )
-        let stations = try dataStore.transitService.stations(bySourceIDs: Array(allStationSourceIDs))
+        // Fetch ALL stations so geographic totals (department/fare zone) are accurate
+        let allStations = try dataStore.transitService.allStations()
         var stationMeta: [String: StationMetadata] = [:]
-        for station in stations {
+        for station in allStations {
             stationMeta[station.sourceID] = StationMetadata(
                 name: station.name,
-                postalCode: station.postalCode
+                postalCode: station.postalCode,
+                fareZone: station.fareZone,
+                town: station.town
             )
         }
 

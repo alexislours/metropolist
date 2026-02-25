@@ -304,7 +304,7 @@
       }
     },
     "%lld travels" : {
-      "comment" : "Travel history: total travels count",
+      "comment" : "Statistics: line travel count\nTravel history: total travels count",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -321,6 +321,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld trajets"
+          }
+        }
+      }
+    },
+    "%lld visits" : {
+      "comment" : "Statistics: station visit count",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld visites"
           }
         }
       }
@@ -360,6 +371,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Série de %lld jours"
+          }
+        }
+      }
+    },
+    "%lld." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
           }
         }
       }
@@ -437,6 +458,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld%%"
+          }
+        }
+      }
+    },
+    "%lldh" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldh"
           }
         }
       }
@@ -616,6 +647,17 @@
         }
       }
     },
+    "ACTIVITY" : {
+      "comment" : "Statistics: activity chart section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ACTIVITÉ"
+          }
+        }
+      }
+    },
     "Add to favorites" : {
       "comment" : "Line detail: favorite button\nStation detail: favorite button",
       "localizations" : {
@@ -726,6 +768,17 @@
         }
       }
     },
+    "Best: %lld" : {
+      "comment" : "Statistics: longest streak",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record : %lld"
+          }
+        }
+      }
+    },
     "Branches" : {
       "comment" : "Settings: transit data branches label",
       "localizations" : {
@@ -777,6 +830,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fou du Bus"
+          }
+        }
+      }
+    },
+    "Busiest day: %@" : {
+      "comment" : "Statistics: busiest day of week",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jour le plus actif : %@"
           }
         }
       }
@@ -1133,6 +1197,17 @@
         }
       }
     },
+    "Day" : {
+      "comment" : "Statistics: chart axis label day",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jour"
+          }
+        }
+      }
+    },
     "Debug" : {
       "localizations" : {
         "fr" : {
@@ -1233,6 +1308,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La suppression de toutes les données retire définitivement tous vos trajets et arrêts complétés. Votre progression, XP, vos badges et vos succès seront tous perdus et cette action est irréversible. Exportez d'abord une sauvegarde via Paramètres > Gestion des données."
+          }
+        }
+      }
+    },
+    "Departments" : {
+      "comment" : "Statistics: department coverage subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Départements"
           }
         }
       }
@@ -1457,6 +1543,17 @@
         }
       }
     },
+    "Fare zones" : {
+      "comment" : "Statistics: fare zone coverage subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zones tarifaires"
+          }
+        }
+      }
+    },
     "Favorites" : {
       "comment" : "Lines: favorites section\nStations: favorites section",
       "localizations" : {
@@ -1534,6 +1631,17 @@
         }
       }
     },
+    "GEOGRAPHIC COVERAGE" : {
+      "comment" : "Statistics: geographic section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "COUVERTURE GÉOGRAPHIQUE"
+          }
+        }
+      }
+    },
     "Go to Settings > Data Management. Use Export Data to save a JSON backup, and Import Data to restore from a previous export." : {
       "comment" : "FAQ: export import answer",
       "localizations" : {
@@ -1607,6 +1715,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Historique"
+          }
+        }
+      }
+    },
+    "Hour" : {
+      "comment" : "Statistics: chart axis label hour",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heure"
           }
         }
       }
@@ -2084,6 +2203,28 @@
         }
       }
     },
+    "Most used lines" : {
+      "comment" : "Statistics: top lines subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lignes les plus utilisées"
+          }
+        }
+      }
+    },
+    "Most visited stops" : {
+      "comment" : "Statistics: top stations subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêts les plus visités"
+          }
+        }
+      }
+    },
     "Nearby" : {
       "comment" : "Stop picker: nearby stops section header",
       "localizations" : {
@@ -2150,6 +2291,17 @@
         }
       }
     },
+    "No data yet" : {
+      "comment" : "Statistics: empty geographic\nStatistics: empty rankings",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune donnée pour le moment"
+          }
+        }
+      }
+    },
     "No destinations found from this stop on this line." : {
       "comment" : "Travel flow: error when no downstream stops exist",
       "localizations" : {
@@ -2173,7 +2325,7 @@
       }
     },
     "No travels recorded" : {
-      "comment" : "Statistics: empty mode breakdown\nTravel history: empty state title",
+      "comment" : "Statistics: empty activity chart\nStatistics: empty mode breakdown\nStatistics: empty time patterns\nTravel history: empty state title",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2277,6 +2429,17 @@
         }
       }
     },
+    "Peak hour: %lld:00" : {
+      "comment" : "Statistics: busiest hour of day",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heure de pointe : %lldh00"
+          }
+        }
+      }
+    },
     "Pick a line" : {
       "comment" : "Travel flow: pick line navigation title",
       "localizations" : {
@@ -2317,6 +2480,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Progression & Récompenses"
+          }
+        }
+      }
+    },
+    "RANKINGS" : {
+      "comment" : "Statistics: rankings section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CLASSEMENTS"
           }
         }
       }
@@ -2871,6 +3045,17 @@
         }
       }
     },
+    "TIME PATTERNS" : {
+      "comment" : "Statistics: time patterns section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HABITUDES TEMPORELLES"
+          }
+        }
+      }
+    },
     "Tireless" : {
       "comment" : "Achievement title: 30-day streak",
       "localizations" : {
@@ -3059,7 +3244,7 @@
       }
     },
     "Travels" : {
-      "comment" : "FAQ: travels section title\nStatistics: travels count label\nXP breakdown: travel XP",
+      "comment" : "FAQ: travels section title\nStatistics: chart axis label travels\nStatistics: travels count label\nXP breakdown: travel XP",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -3076,6 +3261,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les trajets et les arrêts sont synchronisés sur vos appareils"
+          }
+        }
+      }
+    },
+    "Travels per week" : {
+      "comment" : "Statistics: activity chart subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trajets par semaine"
           }
         }
       }
@@ -3322,6 +3518,17 @@
         }
       }
     },
+    "Week" : {
+      "comment" : "Statistics: chart axis label week",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Semaine"
+          }
+        }
+      }
+    },
     "Welcome to Métropolist" : {
       "comment" : "Onboarding: welcome title",
       "localizations" : {
@@ -3477,7 +3684,7 @@
       }
     },
     "Zone %@" : {
-      "comment" : "Station detail: fare zone label",
+      "comment" : "Station detail: fare zone label\nStatistics: fare zone number",
       "localizations" : {
         "fr" : {
           "stringUnit" : {

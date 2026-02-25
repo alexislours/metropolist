@@ -21,6 +21,25 @@ struct StatsDetailView: View {
                     stats: stats,
                     linesByMode: viewModel.linesByMode
                 )
+
+                ActivityChartCard(
+                    travelsPerWeek: viewModel.snapshot.extendedStats.travelsPerWeek
+                )
+
+                TimePatternCard(
+                    busiestDay: viewModel.snapshot.extendedStats.busiestDayOfWeek,
+                    busiestHour: viewModel.snapshot.extendedStats.busiestHourOfDay
+                )
+
+                RankingsCard(
+                    topStations: viewModel.snapshot.extendedStats.topStations,
+                    topLines: viewModel.snapshot.extendedStats.topLines
+                )
+
+                GeographicCoverageCard(
+                    departmentCoverage: viewModel.snapshot.extendedStats.departmentCoverage,
+                    fareZoneCoverage: viewModel.snapshot.extendedStats.fareZoneCoverage
+                )
             }
             .padding(.horizontal, 16)
             .padding(.top, 8)
@@ -73,14 +92,25 @@ private struct OverviewCard: View {
 
                     Spacer()
 
-                    if let first = stats.firstTravelDate {
-                        Text(String(
-                            localized: "Since \(first.formatted(.dateTime.month(.wide).day().year()))",
-                            comment: "Statistics: first travel date"
-                        ))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    Label {
+                        Text(String(localized: "Best: \(stats.longestStreak)", comment: "Statistics: longest streak"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } icon: {
+                        Image(systemName: "trophy.fill")
+                            .font(.caption)
+                            .foregroundStyle(.yellow)
                     }
+                }
+
+                if let first = stats.firstTravelDate {
+                    Text(String(
+                        localized: "Since \(first.formatted(.dateTime.month(.wide).day().year()))",
+                        comment: "Statistics: first travel date"
+                    ))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
         }

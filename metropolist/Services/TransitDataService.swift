@@ -89,6 +89,11 @@ struct TransitDataService {
 
     // MARK: - Stations
 
+    func allStations() throws -> [TransitStation] {
+        let descriptor = FetchDescriptor<TransitStation>()
+        return try context.fetch(descriptor)
+    }
+
     func station(bySourceID sourceID: String) throws -> TransitStation? {
         var descriptor = FetchDescriptor<TransitStation>(
             predicate: #Predicate { $0.sourceID == sourceID }
