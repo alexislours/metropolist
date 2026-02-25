@@ -1,3 +1,4 @@
+import Foundation
 import TransitModels
 
 // MARK: - Route Loading & Gamification
@@ -35,7 +36,11 @@ extension TravelFlowViewModel {
             options.append(DestinationOption(station: station, variants: variantPairs, minStopOrder: minOrder))
         }
 
-        options.sort { $0.minStopOrder < $1.minStopOrder }
+        if UserDefaults.standard.string(forKey: "destinationSort") == "alphabetical" {
+            options.sort { $0.station.name.localizedStandardCompare($1.station.name) == .orderedAscending }
+        } else {
+            options.sort { $0.minStopOrder < $1.minStopOrder }
+        }
         return options
     }
 

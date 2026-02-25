@@ -9,6 +9,7 @@ struct LineDetailView: View {
     @State private var showPercentage = false
     @ScaledMetric(relativeTo: .body) private var ringSize: CGFloat = 80
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @AppStorage("mapStyle") private var mapStyle: String = "standard"
 
     var body: some View {
         Group {
@@ -171,7 +172,8 @@ struct LineDetailView: View {
         LineRouteMapView(
             segments: viewModel.segments,
             stationAnnotations: viewModel.stationAnnotations,
-            lineColor: Color(hex: viewModel.line?.color ?? "000000")
+            lineColor: Color(hex: viewModel.line?.color ?? "000000"),
+            preferredMapStyle: mapStyle
         )
     }
 

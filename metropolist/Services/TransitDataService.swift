@@ -117,11 +117,11 @@ struct TransitDataService {
         return try context.fetch(descriptor)
     }
 
-    func nearbyStations(latitude: Double, longitude: Double, radiusDegrees: Double = 0.005) throws -> [TransitStation] {
-        let minLat = latitude - radiusDegrees
-        let maxLat = latitude + radiusDegrees
-        let minLon = longitude - radiusDegrees
-        let maxLon = longitude + radiusDegrees
+    func nearbyStations(latitude: Double, longitude: Double, latRadius: Double, lonRadius: Double) throws -> [TransitStation] {
+        let minLat = latitude - latRadius
+        let maxLat = latitude + latRadius
+        let minLon = longitude - lonRadius
+        let maxLon = longitude + lonRadius
         let descriptor = FetchDescriptor<TransitStation>(
             predicate: #Predicate {
                 $0.latitude >= minLat && $0.latitude <= maxLat &&

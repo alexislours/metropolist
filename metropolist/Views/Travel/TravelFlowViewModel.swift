@@ -100,20 +100,27 @@ final class TravelFlowViewModel {
             do {
                 let userLocation = try await dataStore.locationService.requestLocationAsync()
 
+                let radiusMeters = UserDefaults.standard.integer(forKey: "nearbyRadius")
+                let radius = Double(radiusMeters > 0 ? radiusMeters : 500)
+                let latDegrees = radius / 111_000.0
+                let lonDegrees = latDegrees / cos(userLocation.coordinate.latitude * .pi / 180)
+
                 let stations = try dataStore.transitService.nearbyStations(
                     latitude: userLocation.coordinate.latitude,
                     longitude: userLocation.coordinate.longitude,
-                    radiusDegrees: 0.01
+                    latRadius: latDegrees,
+                    lonRadius: lonDegrees
                 )
 
-                // Sort by distance, take closest 15
+                // Filter by actual distance, sort, take closest 20
                 let sorted = stations
                     .map { station -> (TransitStation, CLLocationDistance) in
                         let stationLoc = CLLocation(latitude: station.latitude, longitude: station.longitude)
                         return (station, userLocation.distance(from: stationLoc))
                     }
+                    .filter { $0.1 <= radius }
                     .sorted { $0.1 < $1.1 }
-                    .prefix(15)
+                    .prefix(20)
 
                 // Fetch lines for top stations
                 var nearby: [NearbyStation] = []

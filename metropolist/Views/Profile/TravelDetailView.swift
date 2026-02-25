@@ -14,6 +14,7 @@ struct TravelDetailView: View {
     @State private var completedStopIDs: Set<String> = []
     @State private var mapSegment: [CLLocationCoordinate2D] = []
     @State private var mapAnnotations: [LineRouteMapView.StationAnnotation] = []
+    @AppStorage("mapStyle") private var mapStyle: String = "standard"
 
     private var mode: TransitMode? {
         line.flatMap { TransitMode(rawValue: $0.mode) }
@@ -33,7 +34,8 @@ struct TravelDetailView: View {
                         LineRouteMapView(
                             segments: mapSegment.count >= 2 ? [mapSegment] : [],
                             stationAnnotations: mapAnnotations,
-                            lineColor: lineColor
+                            lineColor: lineColor,
+                            preferredMapStyle: mapStyle
                         )
                     }
 

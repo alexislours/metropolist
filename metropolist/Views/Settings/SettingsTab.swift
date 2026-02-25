@@ -6,6 +6,10 @@ import UniformTypeIdentifiers
 struct SettingsTab: View {
     @Environment(DataStore.self) var store
 
+    @AppStorage("destinationSort") private var destinationSort: String = "route"
+    @AppStorage("nearbyRadius") private var nearbyRadius: Int = 500
+    @AppStorage("mapStyle") private var mapStyle: String = "standard"
+
     @State var exportedFileURL: URL?
     @State private var showImporter = false
     @State var importAlert: ImportAlert?
@@ -30,6 +34,7 @@ struct SettingsTab: View {
             ScrollView {
                 VStack(spacing: 16) {
                     cloudKitSection
+                    preferencesSection
                     transitDataSection
                     dataManagementSection
                     faqSection
@@ -65,6 +70,63 @@ struct SettingsTab: View {
             .task {
                 transitStats = loadTransitStats()
                 cloudKitStatus = try? await CKContainer(identifier: "iCloud.com.alexislours.metropolist").accountStatus()
+            }
+        }
+    }
+
+    // MARK: - Preferences Section
+
+    private var preferencesSection: some View {
+        CardSection(title: String(localized: "PREFERENCES", comment: "Settings: preferences section header")) {
+            VStack(spacing: 0) {
+                HStack {
+                    Text(String(localized: "Destination Sort", comment: "Settings: destination sort label"))
+                        .font(.subheadline)
+                    Spacer()
+                    let sortLabel = String(localized: "Destination Sort", comment: "Settings: destination sort label")
+                    Picker(sortLabel, selection: $destinationSort) {
+                        Text(String(localized: "Route Order", comment: "Settings: sort by route order")).tag("route")
+                        Text(String(localized: "Alphabetical", comment: "Settings: sort alphabetically")).tag("alphabetical")
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .tint(.secondary)
+                }
+
+                Divider()
+                    .padding(.vertical, 12)
+
+                HStack {
+                    Text(String(localized: "Nearby Radius", comment: "Settings: nearby radius label"))
+                        .font(.subheadline)
+                    Spacer()
+                    Picker(String(localized: "Nearby Radius", comment: "Settings: nearby radius label"), selection: $nearbyRadius) {
+                        Text(String(localized: "200 m", comment: "Settings: nearby radius 200 meters")).tag(200)
+                        Text(String(localized: "500 m", comment: "Settings: nearby radius 500 meters")).tag(500)
+                        Text(String(localized: "1 km", comment: "Settings: nearby radius 1 kilometer")).tag(1000)
+                        Text(String(localized: "2 km", comment: "Settings: nearby radius 2 kilometers")).tag(2000)
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .tint(.secondary)
+                }
+
+                Divider()
+                    .padding(.vertical, 12)
+
+                HStack {
+                    Text(String(localized: "Map Style", comment: "Settings: map style label"))
+                        .font(.subheadline)
+                    Spacer()
+                    Picker(String(localized: "Map Style", comment: "Settings: map style label"), selection: $mapStyle) {
+                        Text(String(localized: "Standard", comment: "Settings: standard map style")).tag("standard")
+                        Text(String(localized: "Satellite", comment: "Settings: satellite map style")).tag("satellite")
+                        Text(String(localized: "Hybrid", comment: "Settings: hybrid map style")).tag("hybrid")
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .tint(.secondary)
+                }
             }
         }
     }

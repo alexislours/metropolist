@@ -56,7 +56,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     var pendingQuickActionType: String?
 
     func application(
-        _ application: UIApplication,
+        _: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,
         options: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
@@ -71,7 +71,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     func windowScene(
-        _ windowScene: UIWindowScene,
+        _: UIWindowScene,
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping @Sendable (Bool) -> Void
     ) {

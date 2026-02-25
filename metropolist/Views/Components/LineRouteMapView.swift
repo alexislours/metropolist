@@ -5,6 +5,7 @@ struct LineRouteMapView: View {
     let segments: [[CLLocationCoordinate2D]]
     let stationAnnotations: [StationAnnotation]
     let lineColor: Color
+    var preferredMapStyle: String = "standard"
 
     struct StationAnnotation: Identifiable, Equatable {
         let id: String
@@ -37,6 +38,7 @@ struct LineRouteMapView: View {
                 }
             }
         }
+        .mapStyle(preferredMapStyle == "satellite" ? .imagery : preferredMapStyle == "hybrid" ? .hybrid : .standard)
         .allowsHitTesting(false)
         .frame(height: 220)
         .clipShape(RoundedRectangle(cornerRadius: 12))

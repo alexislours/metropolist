@@ -12,6 +12,7 @@ struct StationDetailView: View {
     @State private var travelLineMap: [String: TransitLine] = [:]
     @State private var groupedLines: [(mode: TransitMode, lines: [TransitLine])] = []
     @State private var travelStationNames: [String: String] = [:]
+    @AppStorage("mapStyle") private var mapStyle: String = "standard"
 
     var body: some View {
         ScrollView {
@@ -159,6 +160,7 @@ struct StationDetailView: View {
                 longitude: station.longitude
             ))
         }
+        .mapStyle(mapStyle == "satellite" ? .imagery : mapStyle == "hybrid" ? .hybrid : .standard)
         .frame(height: 160)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
