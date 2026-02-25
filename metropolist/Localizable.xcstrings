@@ -459,7 +459,14 @@
       }
     },
     "14" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14"
+          }
+        }
+      }
     },
     "30-day streak" : {
       "comment" : "Achievement description: 30-day streak",
@@ -583,10 +590,26 @@
       }
     },
     "App Icon" : {
-      "comment" : "App icon picker: navigation title\nSettings: app icon link title"
+      "comment" : "App icon picker: navigation title\nSettings: app icon link title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icône de l'app"
+          }
+        }
+      }
     },
     "APPEARANCE" : {
-      "comment" : "Settings: appearance section header"
+      "comment" : "Settings: appearance section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "APPARENCE"
+          }
+        }
+      }
     },
     "Audio" : {
       "comment" : "Station detail: audible signals indicator",
@@ -776,7 +799,15 @@
       }
     },
     "Collect every station in the Île-de-France transit network" : {
-      "comment" : "Onboarding: welcome subtitle"
+      "comment" : "Onboarding: welcome subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collectionnez chaque arrêt du réseau de transport d'Île-de-France"
+          }
+        }
+      }
     },
     "Collector" : {
       "comment" : "Achievement title: complete 5 lines",
@@ -856,7 +887,15 @@
       }
     },
     "Complete lines to unlock badges and level up as you explore" : {
-      "comment" : "Onboarding: rewards subtitle"
+      "comment" : "Onboarding: rewards subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complétez des lignes pour débloquer des badges et monter de niveau au fil de vos explorations"
+          }
+        }
+      }
     },
     "Completed" : {
       "comment" : "Lines: completed lines section",
@@ -1024,10 +1063,26 @@
       }
     },
     "Default" : {
-      "comment" : "App icon picker: default label\nApp icon: default icon label"
+      "comment" : "App icon picker: default label\nApp icon: default icon label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par défaut"
+          }
+        }
+      }
     },
     "DEFAULT" : {
-      "comment" : "App icon picker: default section header"
+      "comment" : "App icon picker: default section header",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PAR DÉFAUT"
+          }
+        }
+      }
     },
     "Delete" : {
       "comment" : "Travel history: confirm delete button",
@@ -1212,7 +1267,15 @@
       }
     },
     "Earn Rewards" : {
-      "comment" : "Onboarding: rewards title"
+      "comment" : "Onboarding: rewards title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Récoltez des trophées"
+          }
+        }
+      }
     },
     "Error" : {
       "comment" : "Travel flow: error alert title",
@@ -1875,7 +1938,15 @@
       }
     },
     "Métropolist" : {
-      "comment" : "App icon picker: default icon name"
+      "comment" : "App icon picker: default icon name",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métropolist"
+          }
+        }
+      }
     },
     "Métropolist covers the entire Ile-de-France (Paris region) public transit network, including Metro, RER, Tramway, Bus, and other modes operated by IDFM." : {
       "comment" : "FAQ: coverage answer",
@@ -2126,7 +2197,15 @@
       }
     },
     "Ready to Explore?" : {
-      "comment" : "Onboarding: get started title"
+      "comment" : "Onboarding: get started title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prêt à explorer ?"
+          }
+        }
+      }
     },
     "Recent Travels" : {
       "comment" : "Recent travels section header",
@@ -2184,7 +2263,15 @@
       }
     },
     "Record Your Travels" : {
-      "comment" : "Onboarding: travel title"
+      "comment" : "Onboarding: travel title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrez vos trajets"
+          }
+        }
+      }
     },
     "Regional Rail" : {
       "comment" : "Transit mode: regional rail",
@@ -2407,7 +2494,15 @@
       }
     },
     "Start Exploring" : {
-      "comment" : "Onboarding: get started button"
+      "comment" : "Onboarding: get started button",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En route !"
+          }
+        }
+      }
     },
     "Start travel" : {
       "comment" : "Line detail: start travel button\nStation detail: start travel button",
@@ -2542,7 +2637,15 @@
       }
     },
     "Tap + to log a journey and discover new stations along the way" : {
-      "comment" : "Onboarding: travel subtitle"
+      "comment" : "Onboarding: travel subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyez sur + pour créer un trajet et découvrir de nouveaux arrêts en chemin"
+          }
+        }
+      }
     },
     "Terminus" : {
       "comment" : "Branch label for bus/TER",
@@ -2644,7 +2747,15 @@
       }
     },
     "Transilien" : {
-      "comment" : "App icon: Transilien section"
+      "comment" : "App icon: Transilien section",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transilien"
+          }
+        }
+      }
     },
     "Transit Data" : {
       "comment" : "Transit data: navigation title",
@@ -3054,7 +3165,15 @@
       }
     },
     "Welcome to Métropolist" : {
-      "comment" : "Onboarding: welcome title"
+      "comment" : "Onboarding: welcome title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue sur Métropolist"
+          }
+        }
+      }
     },
     "What are badges and how do I earn them?" : {
       "comment" : "FAQ: badges question",
@@ -3178,7 +3297,15 @@
       }
     },
     "Your progress syncs across devices with iCloud" : {
-      "comment" : "Onboarding: get started subtitle"
+      "comment" : "Onboarding: get started subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre progression se synchronise sur tous vos appareils avec iCloud"
+          }
+        }
+      }
     },
     "Your travels and completed stops are synced via iCloud. Make sure you are signed into iCloud on all your devices for automatic sync." : {
       "comment" : "FAQ: sync answer",

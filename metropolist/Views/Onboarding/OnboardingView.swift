@@ -1,5 +1,11 @@
 import SwiftUI
 
+private struct OnboardingBadge {
+    let name: String
+    let background: String
+    let foreground: String
+}
+
 struct OnboardingView: View {
     @Binding var hasSeenOnboarding: Bool
     @State private var currentPage = 0
@@ -75,6 +81,7 @@ struct OnboardingView: View {
     private var welcomePage: some View {
         OnboardingPageView(
             title: String(localized: "Welcome to Métropolist", comment: "Onboarding: welcome title"),
+            // swiftlint:disable:next line_length
             subtitle: String(localized: "Collect every station in the Île-de-France transit network", comment: "Onboarding: welcome subtitle")
         ) {
             welcomePreview
@@ -105,6 +112,7 @@ struct OnboardingView: View {
     private var travelPage: some View {
         OnboardingPageView(
             title: String(localized: "Record Your Travels", comment: "Onboarding: travel title"),
+            // swiftlint:disable:next line_length
             subtitle: String(localized: "Tap + to log a journey and discover new stations along the way", comment: "Onboarding: travel subtitle")
         ) {
             travelPreview
@@ -124,17 +132,17 @@ struct OnboardingView: View {
 
             // Station dots connected by a line
             HStack(spacing: 0) {
-                ForEach(0 ..< 6, id: \.self) { i in
-                    if i > 0 {
+                ForEach(0 ..< 6, id: \.self) { index in
+                    if index > 0 {
                         Rectangle()
                             .fill(Color.purple.opacity(0.3))
                             .frame(height: 3)
                     }
                     Circle()
-                        .fill(i < 3 ? Color.purple : Color.purple.opacity(0.3))
+                        .fill(index < 3 ? Color.purple : Color.purple.opacity(0.3))
                         .frame(width: 14, height: 14)
                         .overlay {
-                            if i < 3 {
+                            if index < 3 {
                                 Image(systemName: "checkmark")
                                     .font(.system(size: 8, weight: .bold))
                                     .foregroundStyle(.white)
@@ -159,6 +167,7 @@ struct OnboardingView: View {
     private var rewardsPage: some View {
         OnboardingPageView(
             title: String(localized: "Earn Rewards", comment: "Onboarding: rewards title"),
+            // swiftlint:disable:next line_length
             subtitle: String(localized: "Complete lines to unlock badges and level up as you explore", comment: "Onboarding: rewards subtitle")
         ) {
             rewardsPreview
@@ -189,47 +198,101 @@ struct OnboardingView: View {
     private static let badgeWidth: CGFloat = 48
     private static let badgeSpacing: CGFloat = 10
 
-    /// Real Paris transit line colors: (name, background hex, text hex)
-    private static let lineRows: [[(String, String, String)]] = [
-        [("1", "#FFCD00", "#000000"), ("A", "#E3051C", "#FFFFFF"), ("T3a", "#6EC4E8", "#000000"), ("6", "#6ECA97", "#000000"), ("B", "#5291CE", "#FFFFFF"), ("11", "#704B1C", "#FFFFFF"), ("C", "#FFBE00", "#000000"), ("T1", "#006DB8", "#FFFFFF")],
-        [("14", "#62259D", "#FFFFFF"), ("3", "#837902", "#FFFFFF"), ("T2", "#C04191", "#FFFFFF"), ("9", "#B6BD00", "#000000"), ("D", "#009B3A", "#FFFFFF"), ("7", "#FA9ABA", "#000000"), ("E", "#BD559C", "#FFFFFF"), ("4", "#CF009E", "#FFFFFF")],
-        [("12", "#007852", "#FFFFFF"), ("5", "#FF7E2E", "#000000"), ("T4", "#000000", "#FFFFFF"), ("8", "#E19BDF", "#000000"), ("13", "#6EC4E8", "#000000"), ("2", "#003CA6", "#FFFFFF"), ("N", "#009B3A", "#FFFFFF"), ("10", "#C9910D", "#000000")],
-        [("7b", "#6ECA97", "#000000"), ("P", "#FFBE00", "#000000"), ("T6", "#E3051C", "#FFFFFF"), ("L", "#5291CE", "#FFFFFF"), ("R", "#6EC4E8", "#000000"), ("3b", "#6EC4E8", "#000000"), ("J", "#CDCD00", "#000000"), ("H", "#704B1C", "#FFFFFF")],
-        [("T7", "#6ECA97", "#000000"), ("U", "#B90845", "#FFFFFF"), ("T5", "#837902", "#FFFFFF"), ("K", "#6EC4E8", "#000000"), ("T8", "#6EC4E8", "#000000"), ("V", "#A0006E", "#FFFFFF"), ("T9", "#FF7E2E", "#000000"), ("15", "#A0006E", "#FFFFFF")],
-        [("M", "#6EC4E8", "#000000"), ("T10", "#9B5FC0", "#FFFFFF"), ("T13", "#837902", "#FFFFFF"), ("O", "#E3051C", "#FFFFFF"), ("T3b", "#6EC4E8", "#000000"), ("S", "#C04191", "#FFFFFF"), ("T11", "#F29DC3", "#000000"), ("R", "#6EC4E8", "#000000")],
+    private static let lineRows: [[OnboardingBadge]] = [
+        [
+            .init(name: "1", background: "#FFCD00", foreground: "#000000"),
+            .init(name: "A", background: "#E3051C", foreground: "#FFFFFF"),
+            .init(name: "T3a", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "6", background: "#6ECA97", foreground: "#000000"),
+            .init(name: "B", background: "#5291CE", foreground: "#FFFFFF"),
+            .init(name: "11", background: "#704B1C", foreground: "#FFFFFF"),
+            .init(name: "C", background: "#FFBE00", foreground: "#000000"),
+            .init(name: "T1", background: "#006DB8", foreground: "#FFFFFF"),
+        ],
+        [
+            .init(name: "14", background: "#62259D", foreground: "#FFFFFF"),
+            .init(name: "3", background: "#837902", foreground: "#FFFFFF"),
+            .init(name: "T2", background: "#C04191", foreground: "#FFFFFF"),
+            .init(name: "9", background: "#B6BD00", foreground: "#000000"),
+            .init(name: "D", background: "#009B3A", foreground: "#FFFFFF"),
+            .init(name: "7", background: "#FA9ABA", foreground: "#000000"),
+            .init(name: "E", background: "#BD559C", foreground: "#FFFFFF"),
+            .init(name: "4", background: "#CF009E", foreground: "#FFFFFF"),
+        ],
+        [
+            .init(name: "12", background: "#007852", foreground: "#FFFFFF"),
+            .init(name: "5", background: "#FF7E2E", foreground: "#000000"),
+            .init(name: "T4", background: "#000000", foreground: "#FFFFFF"),
+            .init(name: "8", background: "#E19BDF", foreground: "#000000"),
+            .init(name: "13", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "2", background: "#003CA6", foreground: "#FFFFFF"),
+            .init(name: "N", background: "#009B3A", foreground: "#FFFFFF"),
+            .init(name: "10", background: "#C9910D", foreground: "#000000"),
+        ],
+        [
+            .init(name: "7b", background: "#6ECA97", foreground: "#000000"),
+            .init(name: "P", background: "#FFBE00", foreground: "#000000"),
+            .init(name: "T6", background: "#E3051C", foreground: "#FFFFFF"),
+            .init(name: "L", background: "#5291CE", foreground: "#FFFFFF"),
+            .init(name: "R", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "3b", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "J", background: "#CDCD00", foreground: "#000000"),
+            .init(name: "H", background: "#704B1C", foreground: "#FFFFFF"),
+        ],
+        [
+            .init(name: "T7", background: "#6ECA97", foreground: "#000000"),
+            .init(name: "U", background: "#B90845", foreground: "#FFFFFF"),
+            .init(name: "T5", background: "#837902", foreground: "#FFFFFF"),
+            .init(name: "K", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "T8", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "V", background: "#A0006E", foreground: "#FFFFFF"),
+            .init(name: "T9", background: "#FF7E2E", foreground: "#000000"),
+            .init(name: "15", background: "#A0006E", foreground: "#FFFFFF"),
+        ],
+        [
+            .init(name: "M", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "T10", background: "#9B5FC0", foreground: "#FFFFFF"),
+            .init(name: "T13", background: "#837902", foreground: "#FFFFFF"),
+            .init(name: "O", background: "#E3051C", foreground: "#FFFFFF"),
+            .init(name: "T3b", background: "#6EC4E8", foreground: "#000000"),
+            .init(name: "S", background: "#C04191", foreground: "#FFFFFF"),
+            .init(name: "T11", background: "#F29DC3", foreground: "#000000"),
+            .init(name: "R", background: "#6EC4E8", foreground: "#000000"),
+        ],
     ]
+
+    private var scrollingLinesOverlay: some View {
+        VStack(spacing: 14) {
+            ForEach(Array(Self.lineRows.enumerated()), id: \.offset) { index, row in
+                slidingRow(
+                    badges: row,
+                    movesRight: index.isMultiple(of: 2),
+                    duration: Double(28 + index * 6)
+                )
+            }
+        }
+        .mask(
+            LinearGradient(
+                stops: [
+                    .init(color: .clear, location: 0),
+                    .init(color: .black, location: 0.15),
+                    .init(color: .black, location: 0.85),
+                    .init(color: .clear, location: 1),
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
+        .opacity(0.45)
+        .allowsHitTesting(false)
+    }
 
     private var getStartedPage: some View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Preview area — Color.clear holds the layout, overlay renders the lines
             Color.clear
-                .overlay {
-                    VStack(spacing: 14) {
-                        ForEach(Array(Self.lineRows.enumerated()), id: \.offset) { index, row in
-                            slidingRow(
-                                badges: row,
-                                movesRight: index.isMultiple(of: 2),
-                                duration: Double(28 + index * 6)
-                            )
-                        }
-                    }
-                    .mask(
-                        LinearGradient(
-                            stops: [
-                                .init(color: .clear, location: 0),
-                                .init(color: .black, location: 0.15),
-                                .init(color: .black, location: 0.85),
-                                .init(color: .clear, location: 1),
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                    .opacity(0.45)
-                    .allowsHitTesting(false)
-                }
+                .overlay { scrollingLinesOverlay }
                 .frame(maxWidth: .infinity)
 
             Spacer()
@@ -255,7 +318,7 @@ struct OnboardingView: View {
     }
 
     private func slidingRow(
-        badges: [(String, String, String)],
+        badges: [OnboardingBadge],
         movesRight: Bool,
         duration: Double
     ) -> some View {
@@ -263,20 +326,20 @@ struct OnboardingView: View {
         let copyWidth = CGFloat(badges.count) * (Self.badgeWidth + Self.badgeSpacing)
 
         return HStack(spacing: Self.badgeSpacing) {
-            ForEach(tripled.indices, id: \.self) { i in
-                let b = badges[i % badges.count]
-                Text(b.0)
+            ForEach(tripled.indices, id: \.self) { index in
+                let badge = badges[index % badges.count]
+                Text(badge.name)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
                     .font(.caption.bold())
-                    .foregroundStyle(Color(hex: b.2))
+                    .foregroundStyle(Color(hex: badge.foreground))
                     .frame(width: Self.badgeWidth, height: 28)
-                    .background(Color(hex: b.1), in: RoundedRectangle(cornerRadius: 6))
+                    .background(Color(hex: badge.background), in: RoundedRectangle(cornerRadius: 6))
             }
         }
         .offset(x: slidingAnimating
-            ? (movesRight ? 0 : -copyWidth)
-            : (movesRight ? -copyWidth : 0))
+            ? (movesRight ? CGFloat(0) : -copyWidth)
+            : (movesRight ? -copyWidth : CGFloat(0)))
         .animation(
             reduceMotion ? nil : .linear(duration: duration).repeatForever(autoreverses: false),
             value: slidingAnimating

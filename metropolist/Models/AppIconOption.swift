@@ -1,5 +1,11 @@
 import SwiftUI
 
+struct AppIconGroup {
+    let mode: TransitMode
+    let label: String
+    let icons: [AppIconOption]
+}
+
 struct AppIconOption: Identifiable, Hashable {
     let id: String
     let lineName: String
@@ -30,8 +36,8 @@ struct AppIconOption: Identifiable, Hashable {
 
     static let modeOrder: [TransitMode] = [.metro, .rer, .train, .tram]
 
-    static let allOptions: [(mode: TransitMode, label: String, icons: [AppIconOption])] = [
-        (.metro, String(localized: "Metro", comment: "App icon: metro section"), [
+    static let allOptions: [AppIconGroup] = [
+        AppIconGroup(mode: .metro, label: String(localized: "Metro", comment: "App icon: metro section"), icons: [
             AppIconOption(id: "Metro1", lineName: "1", mode: .metro, bgHex: "#ffbe00", fgHex: "#000000"),
             AppIconOption(id: "Metro2", lineName: "2", mode: .metro, bgHex: "#0055c8", fgHex: "#ffffff"),
             AppIconOption(id: "Metro3", lineName: "3", mode: .metro, bgHex: "#6e6e00", fgHex: "#ffffff"),
@@ -49,14 +55,14 @@ struct AppIconOption: Identifiable, Hashable {
             AppIconOption(id: "Metro13", lineName: "13", mode: .metro, bgHex: "#6ec4e8", fgHex: "#000000"),
             AppIconOption(id: "Metro14", lineName: "14", mode: .metro, bgHex: "#62259d", fgHex: "#ffffff"),
         ]),
-        (.rer, String(localized: "RER", comment: "App icon: RER section"), [
+        AppIconGroup(mode: .rer, label: String(localized: "RER", comment: "App icon: RER section"), icons: [
             AppIconOption(id: "RERA", lineName: "A", mode: .rer, bgHex: "#eb2132", fgHex: "#ffffff"),
             AppIconOption(id: "RERB", lineName: "B", mode: .rer, bgHex: "#5091cb", fgHex: "#ffffff"),
             AppIconOption(id: "RERC", lineName: "C", mode: .rer, bgHex: "#ffcc30", fgHex: "#000000"),
             AppIconOption(id: "RERD", lineName: "D", mode: .rer, bgHex: "#008b5b", fgHex: "#ffffff"),
             AppIconOption(id: "RERE", lineName: "E", mode: .rer, bgHex: "#b94e9a", fgHex: "#ffffff"),
         ]),
-        (.train, String(localized: "Transilien", comment: "App icon: Transilien section"), [
+        AppIconGroup(mode: .train, label: String(localized: "Transilien", comment: "App icon: Transilien section"), icons: [
             AppIconOption(id: "TransilienH", lineName: "H", mode: .train, bgHex: "#84653d", fgHex: "#ffffff"),
             AppIconOption(id: "TransilienJ", lineName: "J", mode: .train, bgHex: "#cec73d", fgHex: "#000000"),
             AppIconOption(id: "TransilienK", lineName: "K", mode: .train, bgHex: "#9b9842", fgHex: "#ffffff"),
@@ -67,7 +73,7 @@ struct AppIconOption: Identifiable, Hashable {
             AppIconOption(id: "TransilienU", lineName: "U", mode: .train, bgHex: "#b6134c", fgHex: "#ffffff"),
             AppIconOption(id: "TransilienV", lineName: "V", mode: .train, bgHex: "#9f9825", fgHex: "#ffffff"),
         ]),
-        (.tram, String(localized: "Tram", comment: "App icon: tram section"), [
+        AppIconGroup(mode: .tram, label: String(localized: "Tram", comment: "App icon: tram section"), icons: [
             AppIconOption(id: "TramT1", lineName: "T1", mode: .tram, bgHex: "#003ca6", fgHex: "#ffffff"),
             AppIconOption(id: "TramT2", lineName: "T2", mode: .tram, bgHex: "#cf009e", fgHex: "#ffffff"),
             AppIconOption(id: "TramT3a", lineName: "T3a", mode: .tram, bgHex: "#ff7e2e", fgHex: "#000000"),
