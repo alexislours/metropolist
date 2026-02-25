@@ -8,6 +8,8 @@ struct StationsListView: View {
     @State private var isLoading = true
     @State private var visitedStations: [TransitStation] = []
     @State private var loadedLines: [String: [TransitLine]] = [:]
+    @State private var favoriteStations: [TransitStation] = []
+    @State private var favoriteSectionExpanded = true
 
     // Search state
     @State private var searchResults: [TransitStation] = []
@@ -41,7 +43,7 @@ struct StationsListView: View {
 
     @ViewBuilder
     private var visitedStationsContent: some View {
-        if visitedStations.isEmpty {
+        if visitedStations.isEmpty, favoriteStations.isEmpty {
             ContentUnavailableView(
                 String(localized: "No visited stops yet", comment: "Stations list: empty state title"),
                 systemImage: "mappin.slash",
@@ -52,6 +54,33 @@ struct StationsListView: View {
             )
         } else {
             List {
+                if !favoriteStations.isEmpty {
+                    Section {
+                        DisclosureGroup(isExpanded: $favoriteSectionExpanded) {
+                            ForEach(favoriteStations) { station in
+                                NavigationLink(value: StationDestination(stationSourceID: station.sourceID)) {
+                                    stationRow(station)
+                                }
+                            }
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "star.fill")
+                                    .font(.body)
+                                    .foregroundStyle(.yellow)
+                                    .frame(width: 24)
+                                Text(String(localized: "Favorites", comment: "Stations: favorites section"))
+                                    .font(.headline)
+                                Text("\(favoriteStations.count)")
+                                    .font(.caption.weight(.medium).monospacedDigit())
+                                    .foregroundStyle(.yellow)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(Color.yellow.opacity(0.12), in: Capsule())
+                            }
+                        }
+                    }
+                }
+
                 ForEach(visitedStations) { station in
                     NavigationLink(value: StationDestination(stationSourceID: station.sourceID)) {
                         stationRow(station)
@@ -139,6 +168,21 @@ struct StationsListView: View {
 
     private func loadVisitedStations() {
         do {
+            // Load favorites
+            let favIDs = try dataStore.userService.favoriteSourceIDs(kind: FavoriteKind.station.rawValue)
+            if !favIDs.isEmpty {
+                favoriteStations = try dataStore.transitService.stations(bySourceIDs: Array(favIDs))
+                    .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+                let favStationIDSet = Set(favoriteStations.map(\.sourceID))
+                let favLines = try dataStore.transitService.connectingLinesByStation(forStationSourceIDs: favStationIDSet)
+                for (id, lines) in favLines {
+                    loadedLines[id] = lines
+                }
+            } else {
+                favoriteStations = []
+            }
+
+            // Load visited stations
             let completedStops = try dataStore.userService.allCompletedStops()
             let uniqueIDs = Array(Set(completedStops.map(\.stationSourceID)))
             let stations = try dataStore.transitService.stations(bySourceIDs: uniqueIDs)
@@ -147,7 +191,10 @@ struct StationsListView: View {
 
             if !stations.isEmpty {
                 let stationIDSet = Set(stations.map(\.sourceID))
-                loadedLines = try dataStore.transitService.connectingLinesByStation(forStationSourceIDs: stationIDSet)
+                let visitedLines = try dataStore.transitService.connectingLinesByStation(forStationSourceIDs: stationIDSet)
+                for (id, lines) in visitedLines {
+                    loadedLines[id] = lines
+                }
             }
         } catch {
             #if DEBUG

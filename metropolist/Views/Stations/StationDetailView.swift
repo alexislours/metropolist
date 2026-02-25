@@ -7,6 +7,7 @@ struct StationDetailView: View {
     let stationSourceID: String
 
     @State private var station: TransitStation?
+    @State private var isFavorited = false
     @State private var connectingLines: [TransitLine] = []
     @State private var recentTravels: [Travel] = []
     @State private var travelLineMap: [String: TransitLine] = [:]
@@ -71,8 +72,33 @@ struct StationDetailView: View {
         .background(Color(.systemGroupedBackground))
         .navigationTitle(station?.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    isFavorited = (try? dataStore.userService.toggleFavorite(
+                        kind: FavoriteKind.station.rawValue,
+                        sourceID: stationSourceID
+                    )) ?? isFavorited
+                    UIImpactFeedbackGenerator(style: isFavorited ? .medium : .light).impactOccurred()
+                } label: {
+                    Image(systemName: isFavorited ? "star.fill" : "star")
+                        .foregroundStyle(isFavorited ? .yellow : .secondary)
+                }
+                .accessibilityLabel(
+                    isFavorited
+                        ? String(localized: "Remove from favorites", comment: "Station detail: unfavorite button")
+                        : String(localized: "Add to favorites", comment: "Station detail: favorite button")
+                )
+            }
+        }
         .task {
             await loadData()
+        }
+        .onChange(of: dataStore.userDataVersion) {
+            isFavorited = (try? dataStore.userService.isFavorite(
+                kind: FavoriteKind.station.rawValue,
+                sourceID: stationSourceID
+            )) ?? false
         }
     }
 
@@ -253,6 +279,10 @@ struct StationDetailView: View {
                 }
                 travelStationNames = names
             }
+            isFavorited = (try? dataStore.userService.isFavorite(
+                kind: FavoriteKind.station.rawValue,
+                sourceID: stationSourceID
+            )) ?? false
         } catch {
             #if DEBUG
                 print("Failed to load station detail: \(error)")

@@ -1,6 +1,12 @@
 import Foundation
 import SwiftData
 
+struct ImportResult {
+    let stopsImported: Int
+    let travelsImported: Int
+    let favoritesImported: Int
+}
+
 // MARK: - Codable DTOs
 
 struct CompletedStopDTO: Codable {
@@ -21,11 +27,19 @@ struct TravelDTO: Codable {
     let createdAt: Date
 }
 
+struct FavoriteDTO: Codable {
+    let id: String
+    let kind: String
+    let sourceID: String
+    let createdAt: Date
+}
+
 struct UserDataExport: Codable {
     let version: Int
     let exportedAt: Date
     let completedStops: [CompletedStopDTO]
     let travels: [TravelDTO]
+    let favorites: [FavoriteDTO]?
 }
 
 // MARK: - Transfer Service
@@ -34,9 +48,10 @@ enum UserDataTransferService {
     static func exportJSON(context: ModelContext) throws -> Data {
         let stops = try context.fetch(FetchDescriptor<CompletedStop>())
         let travels = try context.fetch(FetchDescriptor<Travel>())
+        let favorites = try context.fetch(FetchDescriptor<Favorite>())
 
         let export = UserDataExport(
-            version: 1,
+            version: 2,
             exportedAt: Date(),
             completedStops: stops.map {
                 CompletedStopDTO(
@@ -57,6 +72,14 @@ enum UserDataTransferService {
                     stopsCompleted: $0.stopsCompleted,
                     createdAt: $0.createdAt
                 )
+            },
+            favorites: favorites.map {
+                FavoriteDTO(
+                    id: $0.id,
+                    kind: $0.kind,
+                    sourceID: $0.sourceID,
+                    createdAt: $0.createdAt
+                )
             }
         )
 
@@ -66,7 +89,7 @@ enum UserDataTransferService {
         return try encoder.encode(export)
     }
 
-    static func importJSON(data: Data, context: ModelContext) throws -> (stopsImported: Int, travelsImported: Int) {
+    static func importJSON(data: Data, context: ModelContext) throws -> ImportResult {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         let export = try decoder.decode(UserDataExport.self, from: data)
@@ -101,7 +124,6 @@ enum UserDataTransferService {
                     toStationSourceID: dto.toStationSourceID,
                     stopsCompleted: dto.stopsCompleted
                 )
-                // Restore original ID and timestamp
                 travel.id = dto.id
                 travel.createdAt = dto.createdAt
                 context.insert(travel)
@@ -109,7 +131,26 @@ enum UserDataTransferService {
             }
         }
 
+        var favoritesImported = 0
+        for dto in export.favorites ?? [] {
+            let dtoID = dto.id
+            var descriptor = FetchDescriptor<Favorite>(
+                predicate: #Predicate { $0.id == dtoID }
+            )
+            descriptor.fetchLimit = 1
+            if try context.fetch(descriptor).isEmpty {
+                let favorite = Favorite(kind: dto.kind, sourceID: dto.sourceID)
+                favorite.createdAt = dto.createdAt
+                context.insert(favorite)
+                favoritesImported += 1
+            }
+        }
+
         try context.save()
-        return (stopsImported, travelsImported)
+        return ImportResult(
+            stopsImported: stopsImported,
+            travelsImported: travelsImported,
+            favoritesImported: favoritesImported
+        )
     }
 }

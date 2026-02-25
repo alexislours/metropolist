@@ -89,6 +89,7 @@ extension SettingsTab {
         do {
             try store.userContext.delete(model: CompletedStop.self)
             try store.userContext.delete(model: Travel.self)
+            try store.userContext.delete(model: Favorite.self)
             try store.userContext.save()
             store.userDataVersion += 1
             importAlert = ImportAlert(
@@ -121,10 +122,7 @@ extension SettingsTab {
                 store.userDataVersion += 1
                 importAlert = ImportAlert(
                     title: String(localized: "Import Successful", comment: "Settings: import success alert title"),
-                    message: String(
-                        localized: "\(counts.stopsImported) stops and \(counts.travelsImported) travels imported.",
-                        comment: "Settings: import success message with counts"
-                    )
+                    message: Self.importSummary(counts)
                 )
             } catch {
                 importAlert = ImportAlert(
@@ -138,5 +136,15 @@ extension SettingsTab {
                 message: error.localizedDescription
             )
         }
+    }
+
+    private static func importSummary(_ counts: ImportResult) -> String {
+        let stops = counts.stopsImported
+        let travels = counts.travelsImported
+        let favs = counts.favoritesImported
+        return String(
+            localized: "\(stops) stops, \(travels) travels, and \(favs) favorites imported.",
+            comment: "Settings: import success message with counts"
+        )
     }
 }

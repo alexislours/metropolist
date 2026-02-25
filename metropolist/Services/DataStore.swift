@@ -253,6 +253,7 @@ final class DataStore {
         let schema = Schema([
             CompletedStop.self,
             Travel.self,
+            Favorite.self,
         ])
 
         #if DEBUG

@@ -264,19 +264,19 @@
         }
       }
     },
-    "%lld stops and %lld travels imported." : {
+    "%lld stops, %lld travels, and %lld favorites imported." : {
       "comment" : "Settings: import success message with counts",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$lld stops and %2$lld travels imported."
+            "value" : "%1$lld stops, %2$lld travels, and %3$lld favorites imported."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$lld arrêts et %2$lld trajets importés."
+            "value" : "%1$lld arrêts et %2$lld trajets, et %3$lld favoris importés."
           }
         }
       }
@@ -612,6 +612,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actif"
+          }
+        }
+      }
+    },
+    "Add to favorites" : {
+      "comment" : "Line detail: favorite button\nStation detail: favorite button",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter aux favoris"
           }
         }
       }
@@ -1442,6 +1453,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "FAQ"
+          }
+        }
+      }
+    },
+    "Favorites" : {
+      "comment" : "Lines: favorites section\nStations: favorites section",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoris"
           }
         }
       }
@@ -2394,6 +2416,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habitué"
+          }
+        }
+      }
+    },
+    "Remove from favorites" : {
+      "comment" : "Line detail: unfavorite button\nStation detail: unfavorite button",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer des favoris"
           }
         }
       }

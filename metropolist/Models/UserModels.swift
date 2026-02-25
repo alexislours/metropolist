@@ -1,6 +1,26 @@
 import Foundation
 import SwiftData
 
+enum FavoriteKind: String {
+    case line
+    case station
+}
+
+@Model
+final class Favorite {
+    var id: String = ""
+    var kind: String = ""
+    var sourceID: String = ""
+    var createdAt: Date = Date()
+
+    init(kind: String, sourceID: String) {
+        id = "\(kind):\(sourceID)"
+        self.kind = kind
+        self.sourceID = sourceID
+        createdAt = Date()
+    }
+}
+
 @Model
 final class CompletedStop {
     var id: String = "" // "{lineSourceID}:{stationSourceID}"

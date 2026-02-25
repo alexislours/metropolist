@@ -7,6 +7,7 @@ struct LineDetailView: View {
 
     @State private var viewModel: LineDetailViewModel?
     @State private var showPercentage = false
+    @State private var isFavorited = false
     @ScaledMetric(relativeTo: .body) private var ringSize: CGFloat = 80
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
@@ -23,15 +24,42 @@ struct LineDetailView: View {
         }
         .navigationTitle(viewModel?.line?.shortName ?? "")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    isFavorited = (try? dataStore.userService.toggleFavorite(
+                        kind: FavoriteKind.line.rawValue,
+                        sourceID: lineSourceID
+                    )) ?? isFavorited
+                    UIImpactFeedbackGenerator(style: isFavorited ? .medium : .light).impactOccurred()
+                } label: {
+                    Image(systemName: isFavorited ? "star.fill" : "star")
+                        .foregroundStyle(isFavorited ? .yellow : .secondary)
+                }
+                .accessibilityLabel(
+                    isFavorited
+                        ? String(localized: "Remove from favorites", comment: "Line detail: unfavorite button")
+                        : String(localized: "Add to favorites", comment: "Line detail: favorite button")
+                )
+            }
+        }
         .task {
             if viewModel == nil {
                 let model = LineDetailViewModel(lineSourceID: lineSourceID, dataStore: dataStore)
                 await model.loadData()
                 viewModel = model
             }
+            isFavorited = (try? dataStore.userService.isFavorite(
+                kind: FavoriteKind.line.rawValue,
+                sourceID: lineSourceID
+            )) ?? false
         }
         .onChange(of: dataStore.userDataVersion) {
             viewModel?.refresh()
+            isFavorited = (try? dataStore.userService.isFavorite(
+                kind: FavoriteKind.line.rawValue,
+                sourceID: lineSourceID
+            )) ?? false
         }
     }
 

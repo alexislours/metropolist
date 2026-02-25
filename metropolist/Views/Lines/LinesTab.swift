@@ -12,7 +12,10 @@ struct LinesTab: View {
     @State private var expandedModes: Set<TransitMode> = []
     @State private var inProgressExpanded = true
     @State private var completedExpanded = false
+    @State private var favoritesExpanded = true
     @State private var filtered = FilteredResult()
+    @State private var favoriteLineSourceIDs: Set<String> = []
+    @State private var filteredFavoriteLines: [TransitLine] = []
 
     private enum TabSegment: String, CaseIterable {
         case lines, stations
@@ -82,6 +85,10 @@ struct LinesTab: View {
         }
 
         filtered = FilteredResult(inProgress: inProgress, completed: completed, grouped: grouped)
+
+        filteredFavoriteLines = base
+            .filter { favoriteLineSourceIDs.contains($0.sourceID) }
+            .sorted { $0.shortName.localizedStandardCompare($1.shortName) == .orderedAscending }
     }
 
     var body: some View {
@@ -156,6 +163,17 @@ struct LinesTab: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             List {
+                if !filteredFavoriteLines.isEmpty {
+                    modeSection(
+                        title: String(localized: "Favorites", comment: "Lines: favorites section"),
+                        icon: "star.fill",
+                        tint: .yellow,
+                        lines: filteredFavoriteLines,
+                        isExpanded: $favoritesExpanded,
+                        count: filteredFavoriteLines.count
+                    )
+                }
+
                 if !filtered.inProgress.isEmpty {
                     modeSection(
                         title: String(localized: "In Progress", comment: "Lines: in-progress lines section"),
@@ -298,6 +316,7 @@ struct LinesTab: View {
             lines = try dataStore.transitService.allLines()
             stationCounts = try dataStore.stationCountsByLine()
             completedCounts = try dataStore.userService.completedCountsByLine()
+            favoriteLineSourceIDs = try dataStore.userService.favoriteSourceIDs(kind: FavoriteKind.line.rawValue)
         } catch {
             #if DEBUG
                 print("Failed to load lines: \(error)")

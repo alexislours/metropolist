@@ -123,6 +123,43 @@ struct UserDataService {
         return try context.fetch(descriptor)
     }
 
+    // MARK: - Favorites
+
+    @discardableResult
+    func toggleFavorite(kind: String, sourceID: String) throws -> Bool {
+        let compositeID = "\(kind):\(sourceID)"
+        var descriptor = FetchDescriptor<Favorite>(
+            predicate: #Predicate { $0.id == compositeID }
+        )
+        descriptor.fetchLimit = 1
+        if let existing = try context.fetch(descriptor).first {
+            context.delete(existing)
+            try context.save()
+            return false
+        } else {
+            let favorite = Favorite(kind: kind, sourceID: sourceID)
+            context.insert(favorite)
+            try context.save()
+            return true
+        }
+    }
+
+    func isFavorite(kind: String, sourceID: String) throws -> Bool {
+        let compositeID = "\(kind):\(sourceID)"
+        var descriptor = FetchDescriptor<Favorite>(
+            predicate: #Predicate { $0.id == compositeID }
+        )
+        descriptor.fetchLimit = 1
+        return try !context.fetch(descriptor).isEmpty
+    }
+
+    func favoriteSourceIDs(kind: String) throws -> Set<String> {
+        let descriptor = FetchDescriptor<Favorite>(
+            predicate: #Predicate { $0.kind == kind }
+        )
+        return try Set(context.fetch(descriptor).map(\.sourceID))
+    }
+
     // MARK: - Travel history
 
     func allTravels() throws -> [Travel] {
