@@ -31,6 +31,7 @@ final class ScreenshotTests: XCTestCase, @unchecked Sendable {
             "-AppleLocale", locale,
             "-FASTLANE_SNAPSHOT", "YES",
             "-ui_testing",
+            "-hasSeenOnboarding", "YES",
         ]
 
         XCUIDevice.shared.appearance = .light

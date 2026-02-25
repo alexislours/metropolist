@@ -30,7 +30,6 @@ struct SettingsTab: View {
             ScrollView {
                 VStack(spacing: 16) {
                     cloudKitSection
-                    appIconSection
                     transitDataSection
                     dataManagementSection
                     faqSection
@@ -158,43 +157,6 @@ struct SettingsTab: View {
         case .noAccount, .restricted, .temporarilyUnavailable: return .orange
         case .couldNotDetermine, nil: return .secondary
         @unknown default: return .secondary
-        }
-    }
-
-    // MARK: - App Icon Section
-
-    private var currentIconOption: AppIconOption {
-        let name = UIApplication.shared.alternateIconName
-        let id = name ?? "MetropolistIcon"
-        return AppIconOption.find(byID: id) ?? AppIconOption.defaultIcon
-    }
-
-    private var appIconSection: some View {
-        CardSection(title: String(localized: "APPEARANCE", comment: "Settings: appearance section header")) {
-            NavigationLink(destination: AppIconPickerView()) {
-                HStack(spacing: 14) {
-                    AppIconPreview(
-                        option: currentIconOption,
-                        isSelected: false,
-                        size: 44
-                    )
-
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(String(localized: "App Icon", comment: "Settings: app icon link title"))
-                            .font(.subheadline.weight(.medium))
-                        Text(currentIconOption.lineName)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
-            .foregroundStyle(.primary)
         }
     }
 
