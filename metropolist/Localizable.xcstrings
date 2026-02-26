@@ -3001,6 +3001,17 @@
         }
       }
     },
+    "Sort" : {
+      "comment" : "Station picker: sort order picker label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tri"
+          }
+        }
+      }
+    },
     "Standard" : {
       "comment" : "Settings: standard map style",
       "localizations" : {

@@ -8,6 +8,7 @@ struct TravelCreationFlow: View {
     var prefill: TravelFlowPrefill?
 
     @State private var viewModel: TravelFlowViewModel?
+    @AppStorage("destinationSort") private var destinationSort: String = "route"
 
     var body: some View {
         Group {
@@ -96,6 +97,16 @@ struct TravelCreationFlow: View {
         .navigationTitle(String(localized: "Pick a line", comment: "Travel flow: pick line navigation title"))
     }
 
+    private func sortedDestinationOptions(_ viewModel: TravelFlowViewModel) -> [TravelFlowViewModel.DestinationOption] {
+        if destinationSort == "alphabetical" {
+            viewModel.destinationOptions.sorted {
+                $0.station.name.localizedStandardCompare($1.station.name) == .orderedAscending
+            }
+        } else {
+            viewModel.destinationOptions.sorted { $0.minStopDistance < $1.minStopDistance }
+        }
+    }
+
     private func destinationPickerList(_ viewModel: TravelFlowViewModel) -> some View {
         List {
             if viewModel.isLoadingDestinations {
@@ -108,7 +119,7 @@ struct TravelCreationFlow: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.vertical, 8)
             } else {
-                ForEach(viewModel.destinationOptions) { option in
+                ForEach(sortedDestinationOptions(viewModel)) { option in
                     Button {
                         viewModel.selectDestination(option)
                     } label: {
@@ -130,6 +141,18 @@ struct TravelCreationFlow: View {
         }
         .buttonStyle(.plain)
         .navigationTitle(String(localized: "Where to?", comment: "Travel flow: pick destination navigation title"))
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Picker(String(localized: "Sort", comment: "Station picker: sort order picker label"), selection: $destinationSort) {
+                        Text(String(localized: "Route Order", comment: "Settings: sort by route order")).tag("route")
+                        Text(String(localized: "Alphabetical", comment: "Settings: sort alphabetically")).tag("alphabetical")
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+            }
+        }
     }
 
     @ViewBuilder

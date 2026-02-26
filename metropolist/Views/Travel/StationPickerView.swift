@@ -9,9 +9,20 @@ struct StationPickerView: View {
     @State private var searchResults: [TransitStation] = []
     @State private var loadedLines: [String: [TransitLine]] = [:]
     @State private var lastSearchedQuery = ""
+    @AppStorage("destinationSort") private var destinationSort: String = "route"
 
     private var hasLinePrefill: Bool {
         viewModel.prefill?.lineSourceID != nil
+    }
+
+    private var sortedLineStations: [TransitStation] {
+        if destinationSort == "alphabetical" {
+            viewModel.prefillLineStations.sorted {
+                $0.name.localizedStandardCompare($1.name) == .orderedAscending
+            }
+        } else {
+            viewModel.prefillLineStations
+        }
     }
 
     var body: some View {
@@ -98,7 +109,18 @@ struct StationPickerView: View {
                         .foregroundStyle(.secondary)
                 }
             }
-            if !hasLinePrefill {
+            if hasLinePrefill {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Picker(String(localized: "Sort", comment: "Station picker: sort order picker label"), selection: $destinationSort) {
+                            Text(String(localized: "Route Order", comment: "Settings: sort by route order")).tag("route")
+                            Text(String(localized: "Alphabetical", comment: "Settings: sort alphabetically")).tag("alphabetical")
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
+            } else {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.refreshNearbyStations()
@@ -149,9 +171,9 @@ struct StationPickerView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.vertical, 8)
             }
-        } else if !viewModel.prefillLineStations.isEmpty {
+        } else if !sortedLineStations.isEmpty {
             Section {
-                ForEach(viewModel.prefillLineStations) { station in
+                ForEach(sortedLineStations) { station in
                     Button {
                         viewModel.selectOrigin(station)
                     } label: {
