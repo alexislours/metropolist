@@ -81,7 +81,11 @@ struct SettingsTab: View {
             }
             .task {
                 transitStats = loadTransitStats()
-                cloudKitStatus = try? await CKContainer(identifier: "iCloud.com.alexislours.metropolist").accountStatus()
+                do {
+                    cloudKitStatus = try await CKContainer(identifier: "iCloud.com.alexislours.metropolist").accountStatus()
+                } catch {
+                    cloudKitStatus = .couldNotDetermine
+                }
             }
         }
     }
