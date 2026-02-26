@@ -310,4 +310,176 @@ struct TravelFlowViewModelTests {
         #expect(vm.path.count == 0)
         #expect(!vm.isProcessing)
     }
+
+    // MARK: - Branching line destinations
+
+    /// Seeds a Y-shaped line mimicking Line 13:
+    ///
+    ///     Branch A:  A0 ─ A1 ─ A2 ─┐
+    ///                                Junction ─ Trunk1 ─ Trunk2 ─ Terminus
+    ///     Branch B:  B0 ─ B1 ─ B2 ─┘
+    ///
+    /// Direction 0: short variant covering only branch A → Junction
+    /// Direction 1: full variant covering Terminus → Trunk2 → Trunk1 → Junction → A2 → A1 → A0
+    /// Direction 1: full variant covering Terminus → Trunk2 → Trunk1 → Junction → B2 → B1 → B0
+    private static func makeBranchingLine(
+        in context: ModelContext
+    ) -> (line: TransitLine, branchAStations: [TransitStation], branchBStations: [TransitStation],
+          trunkStations: [TransitStation])
+    {
+        let line = TestSupport.seedLine(in: context, sourceID: "METRO:13", shortName: "13")
+
+        // Shared trunk stations
+        let junction = TestSupport.seedStation(in: context, sourceID: "junction", name: "Junction")
+        let trunk1 = TestSupport.seedStation(in: context, sourceID: "trunk1", name: "Trunk1")
+        let trunk2 = TestSupport.seedStation(in: context, sourceID: "trunk2", name: "Trunk2")
+        let terminus = TestSupport.seedStation(in: context, sourceID: "terminus", name: "Terminus")
+
+        // Branch A stations
+        let a0 = TestSupport.seedStation(in: context, sourceID: "a0", name: "A0")
+        let a1 = TestSupport.seedStation(in: context, sourceID: "a1", name: "A1")
+        let a2 = TestSupport.seedStation(in: context, sourceID: "a2", name: "A2")
+
+        // Branch B stations
+        let b0 = TestSupport.seedStation(in: context, sourceID: "b0", name: "B0")
+        let b1 = TestSupport.seedStation(in: context, sourceID: "b1", name: "B1")
+        let b2 = TestSupport.seedStation(in: context, sourceID: "b2", name: "B2")
+
+        // Direction 0: short variant, branch A only → Junction
+        let shortVariant = TestSupport.seedRouteVariant(
+            in: context, sourceID: "METRO:13:0:junction", lineSourceID: "METRO:13",
+            direction: 0, headsign: "Junction", stationCount: 4
+        )
+        for (order, sid) in ["a0", "a1", "a2", "junction"].enumerated() {
+            TestSupport.seedLineStop(in: context, lineSourceID: "METRO:13", stationSourceID: sid,
+                                     routeVariantSourceID: shortVariant.sourceID, order: order)
+        }
+
+        // Direction 1: full variant, Terminus → branch A
+        let fullVariantA = TestSupport.seedRouteVariant(
+            in: context, sourceID: "METRO:13:1:a0", lineSourceID: "METRO:13",
+            direction: 1, headsign: "A0", stationCount: 7
+        )
+        for (order, sid) in ["terminus", "trunk2", "trunk1", "junction", "a2", "a1", "a0"].enumerated() {
+            TestSupport.seedLineStop(in: context, lineSourceID: "METRO:13", stationSourceID: sid,
+                                     routeVariantSourceID: fullVariantA.sourceID, order: order)
+        }
+
+        // Direction 1: full variant, Terminus → branch B
+        let fullVariantB = TestSupport.seedRouteVariant(
+            in: context, sourceID: "METRO:13:1:b0", lineSourceID: "METRO:13",
+            direction: 1, headsign: "B0", stationCount: 7
+        )
+        for (order, sid) in ["terminus", "trunk2", "trunk1", "junction", "b2", "b1", "b0"].enumerated() {
+            TestSupport.seedLineStop(in: context, lineSourceID: "METRO:13", stationSourceID: sid,
+                                     routeVariantSourceID: fullVariantB.sourceID, order: order)
+        }
+
+        try! context.save()
+
+        return (line, [a0, a1, a2], [b0, b1, b2], [junction, trunk1, trunk2, terminus])
+    }
+
+    @Test("loadDestinationOptions includes upstream trunk stations on branching line")
+    func branchingLineIncludesUpstreamStations() throws {
+        let tCtx = TestSupport.makeTransitContext()
+        let (line, branchA, _, _) = Self.makeBranchingLine(in: tCtx)
+        let store = AppDataStore(transitContext: tCtx, userContext: TestSupport.makeUserContext())
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        // Origin is on branch A (like Mairie de Clichy)
+        vm.originStation = branchA[1] // A1
+        vm.selectedLine = line
+        let options = try vm.loadDestinationOptions(for: line)
+        let destinationIDs = Set(options.map(\.station.sourceID))
+
+        // Should include branch A neighbors
+        #expect(destinationIDs.contains("a0"))
+        #expect(destinationIDs.contains("a2"))
+        // Should include the junction
+        #expect(destinationIDs.contains("junction"))
+        // Should include trunk stations (upstream on full variant)
+        #expect(destinationIDs.contains("trunk1"))
+        #expect(destinationIDs.contains("trunk2"))
+        #expect(destinationIDs.contains("terminus"))
+        // Should NOT include branch B stations (A1 is not on that variant)
+        #expect(!destinationIDs.contains("b0"))
+        #expect(!destinationIDs.contains("b1"))
+        #expect(!destinationIDs.contains("b2"))
+    }
+
+    @Test("loadDestinationOptions sorts by distance from origin")
+    func branchingLineDistanceSorting() throws {
+        let tCtx = TestSupport.makeTransitContext()
+        let (line, branchA, _, _) = Self.makeBranchingLine(in: tCtx)
+        let store = AppDataStore(transitContext: tCtx, userContext: TestSupport.makeUserContext())
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        vm.originStation = branchA[1] // A1, order 5 on full variant (a0=6, a2=4, junction=3...)
+        vm.selectedLine = line
+        let options = try vm.loadDestinationOptions(for: line)
+
+        // First destinations should be closest neighbors (distance 1)
+        let firstTwo = Set(options.prefix(2).map(\.station.sourceID))
+        #expect(firstTwo.contains("a0") || firstTwo.contains("a2"))
+    }
+
+    @Test("loadIntermediateStops works in reverse direction on branching line")
+    func branchingLineReverseIntermediateStops() throws {
+        let tCtx = TestSupport.makeTransitContext()
+        let (line, branchA, _, trunkStations) = Self.makeBranchingLine(in: tCtx)
+        let store = AppDataStore(transitContext: tCtx, userContext: TestSupport.makeUserContext())
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        // Travel from A1 (branch) to Terminus (trunk) — reverse direction on the full variant
+        vm.originStation = branchA[1]
+        vm.destinationStation = trunkStations[3] // Terminus
+        vm.selectedLine = line
+        vm.selectedVariant = TransitRouteVariant(
+            sourceID: "METRO:13:1:a0", lineSourceID: "METRO:13",
+            direction: 1, headsign: "A0", stationCount: 7
+        )
+        // We need to use the variant from the context
+        let variants = try store.transitService.routeVariants(forLineSourceID: "METRO:13")
+        vm.selectedVariant = variants.first { $0.sourceID == "METRO:13:1:a0" }
+
+        vm.loadIntermediateStops()
+
+        let stopIDs = vm.intermediateStops.map(\.stationSourceID)
+        // Should include all stops from A1 to Terminus: A1, A2, Junction, Trunk1, Trunk2, Terminus
+        #expect(stopIDs.count == 6)
+        // First stop should be origin (A1), last should be destination (Terminus)
+        #expect(stopIDs.first == "a1")
+        #expect(stopIDs.last == "terminus")
+        // Intermediate order: A1 → A2 → Junction → Trunk1 → Trunk2 → Terminus
+        #expect(stopIDs[1] == "a2")
+        #expect(stopIDs[2] == "junction")
+        #expect(stopIDs[3] == "trunk1")
+        #expect(stopIDs[4] == "trunk2")
+    }
+
+    @Test("buildVariantPreview works in reverse direction")
+    func branchingLineReverseVariantPreview() throws {
+        let tCtx = TestSupport.makeTransitContext()
+        let (line, branchA, _, trunkStations) = Self.makeBranchingLine(in: tCtx)
+        let store = AppDataStore(transitContext: tCtx, userContext: TestSupport.makeUserContext())
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        vm.originStation = branchA[1] // A1
+        vm.destinationStation = trunkStations[3] // Terminus
+        vm.selectedLine = line
+
+        let variants = try store.transitService.routeVariants(forLineSourceID: "METRO:13")
+        let fullVariant = variants.first { $0.sourceID == "METRO:13:1:a0" }!
+        let preview = vm.buildVariantPreview(fullVariant)
+
+        #expect(preview != nil)
+        #expect(preview!.totalStops == 6)
+        // Via stations should be A2, Junction, Trunk1, Trunk2 (between A1 and Terminus)
+        #expect(preview!.viaStationNames.count == 4)
+        #expect(preview!.viaStationNames[0] == "A2")
+        #expect(preview!.viaStationNames[1] == "Junction")
+        #expect(preview!.viaStationNames[2] == "Trunk1")
+        #expect(preview!.viaStationNames[3] == "Trunk2")
+    }
 }

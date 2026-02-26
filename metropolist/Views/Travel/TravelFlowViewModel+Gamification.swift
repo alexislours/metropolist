@@ -9,6 +9,7 @@ extension TravelFlowViewModel {
 
         var stationVariants: [String: [(variant: TransitRouteVariant, stop: TransitLineStop)]] = [:]
         var allStationIDs: Set<String> = []
+        var originOrders: [String: Int] = [:]
 
         for variant in variants {
             let stops = try dataStore.transitService.lineStops(forRouteVariantSourceID: variant.sourceID)
@@ -17,8 +18,9 @@ extension TravelFlowViewModel {
                 continue
             }
 
-            let downstreamStops = stops.filter { $0.order > originOrder }
-            for stop in downstreamStops {
+            originOrders[variant.sourceID] = originOrder
+            let reachableStops = stops.filter { $0.stationSourceID != origin.sourceID }
+            for stop in reachableStops {
                 stationVariants[stop.stationSourceID, default: []].append((variant: variant, stop: stop))
                 allStationIDs.insert(stop.stationSourceID)
             }
@@ -32,14 +34,17 @@ extension TravelFlowViewModel {
         var options: [DestinationOption] = []
         for (stationID, variantPairs) in stationVariants {
             guard let station = stationMap[stationID] else { continue }
-            let minOrder = variantPairs.map(\.stop.order).min() ?? 0
-            options.append(DestinationOption(station: station, variants: variantPairs, minStopOrder: minOrder))
+            let minDistance = variantPairs.compactMap { pair -> Int? in
+                guard let originOrder = originOrders[pair.variant.sourceID] else { return nil }
+                return abs(pair.stop.order - originOrder)
+            }.min() ?? 0
+            options.append(DestinationOption(station: station, variants: variantPairs, minStopDistance: minDistance))
         }
 
         if UserDefaults.standard.string(forKey: "destinationSort") == "alphabetical" {
             options.sort { $0.station.name.localizedStandardCompare($1.station.name) == .orderedAscending }
         } else {
-            options.sort { $0.minStopOrder < $1.minStopOrder }
+            options.sort { $0.minStopDistance < $1.minStopDistance }
         }
         return options
     }
@@ -48,13 +53,23 @@ extension TravelFlowViewModel {
         guard let origin = originStation, let destination = destinationStation else { return nil }
         do {
             let allStops = try dataStore.transitService.lineStops(forRouteVariantSourceID: variant.sourceID)
-            guard let fromOrder = allStops.order(of: origin.sourceID),
-                  let toOrder = allStops.order(of: destination.sourceID, after: fromOrder) else {
+            guard let fromOrder = allStops.order(of: origin.sourceID) else {
                 return VariantPreview(variants: [variant], viaStationIDs: [], viaStationNames: [], totalStops: 0)
             }
-            let between = allStops
-                .filter { $0.order > fromOrder && $0.order < toOrder }
+            let toOrder: Int? = if let forward = allStops.order(of: destination.sourceID, after: fromOrder) {
+                forward
+            } else {
+                allStops.order(of: destination.sourceID, before: fromOrder)
+            }
+            guard let toOrder else {
+                return VariantPreview(variants: [variant], viaStationIDs: [], viaStationNames: [], totalStops: 0)
+            }
+            let lower = min(fromOrder, toOrder)
+            let upper = max(fromOrder, toOrder)
+            var between = allStops
+                .filter { $0.order > lower && $0.order < upper }
                 .sorted { $0.order < $1.order }
+            if fromOrder > toOrder { between.reverse() }
             let stationIDs = between.map(\.stationSourceID)
             let stations = try dataStore.transitService.stations(bySourceIDs: stationIDs)
             let nameMap = Dictionary(uniqueKeysWithValues: stations.map { ($0.sourceID, $0.name) })
@@ -74,15 +89,21 @@ extension TravelFlowViewModel {
               let destination = destinationStation else { return }
         do {
             let allStops = try dataStore.transitService.lineStops(forRouteVariantSourceID: variant.sourceID)
-            guard let fromOrder = allStops.order(of: origin.sourceID),
-                  let toOrder = allStops.order(of: destination.sourceID, after: fromOrder) else {
-                return
+            guard let fromOrder = allStops.order(of: origin.sourceID) else { return }
+            let toOrder: Int? = if let forward = allStops.order(of: destination.sourceID, after: fromOrder) {
+                forward
+            } else {
+                allStops.order(of: destination.sourceID, before: fromOrder)
             }
+            guard let toOrder else { return }
+            let lower = min(fromOrder, toOrder)
+            let upper = max(fromOrder, toOrder)
             intermediateStops = try dataStore.transitService.intermediateStops(
                 routeVariantSourceID: variant.sourceID,
-                fromOrder: fromOrder,
-                toOrder: toOrder
+                fromOrder: lower,
+                toOrder: upper
             )
+            if fromOrder > toOrder { intermediateStops.reverse() }
             let stationIDs = intermediateStops.map(\.stationSourceID)
             let stations = try dataStore.transitService.stations(bySourceIDs: stationIDs)
             var names: [String: String] = [:]

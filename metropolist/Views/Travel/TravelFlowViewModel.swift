@@ -33,8 +33,8 @@ final class TravelFlowViewModel {
         let station: TransitStation
         /// The variants that serve this station downstream from origin
         let variants: [(variant: TransitRouteVariant, stop: TransitLineStop)]
-        /// Minimum stop order across all variants (for route-order sorting)
-        let minStopOrder: Int
+        /// Minimum stop distance from origin across all variants (for proximity sorting)
+        let minStopDistance: Int
     }
 
     struct VariantPreview: Identifiable {

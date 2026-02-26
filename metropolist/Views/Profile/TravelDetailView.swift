@@ -318,19 +318,28 @@ struct TravelDetailView: View {
                 routeVariant = variant
 
                 let allStops = try dataStore.transitService.lineStops(forRouteVariantSourceID: variant.sourceID)
-                if let fromOrder = allStops.order(of: travel.fromStationSourceID),
-                   let toOrder = allStops.order(of: travel.toStationSourceID, after: fromOrder) {
-                    journeyStops = try dataStore.transitService.intermediateStops(
-                        routeVariantSourceID: variant.sourceID,
-                        fromOrder: fromOrder,
-                        toOrder: toOrder
-                    )
+                if let fromOrder = allStops.order(of: travel.fromStationSourceID) {
+                    let resolvedToOrder: Int? = if let forward = allStops.order(of: travel.toStationSourceID, after: fromOrder) {
+                        forward
+                    } else {
+                        allStops.order(of: travel.toStationSourceID, before: fromOrder)
+                    }
+                    if let toOrder = resolvedToOrder {
+                        let lower = min(fromOrder, toOrder)
+                        let upper = max(fromOrder, toOrder)
+                        journeyStops = try dataStore.transitService.intermediateStops(
+                            routeVariantSourceID: variant.sourceID,
+                            fromOrder: lower,
+                            toOrder: upper
+                        )
+                        if fromOrder > toOrder { journeyStops.reverse() }
 
-                    // Load names for all journey stops
-                    let journeyStationIDs = journeyStops.map(\.stationSourceID)
-                    let journeyStations = try dataStore.transitService.stations(bySourceIDs: journeyStationIDs)
-                    for station in journeyStations {
-                        names[station.sourceID] = station.name
+                        // Load names for all journey stops
+                        let journeyStationIDs = journeyStops.map(\.stationSourceID)
+                        let journeyStations = try dataStore.transitService.stations(bySourceIDs: journeyStationIDs)
+                        for station in journeyStations {
+                            names[station.sourceID] = station.name
+                        }
                     }
                 }
             }
