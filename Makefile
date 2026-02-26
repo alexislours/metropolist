@@ -1,4 +1,4 @@
-.PHONY: lint lint-fix format format-check periphery
+.PHONY: lint lint-fix format format-check build periphery
 
 lint:
 	swiftlint lint metropolist/
@@ -11,6 +11,9 @@ format:
 
 format-check:
 	swiftformat --lint metropolist/
+
+build:
+	xcodebuild -scheme metropolist -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 
 periphery:
 	periphery scan
