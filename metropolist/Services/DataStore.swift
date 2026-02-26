@@ -73,6 +73,9 @@ final class DataStore {
     /// Cached line metadata map. Transit data is read-only, so this never needs invalidation.
     private(set) var cachedLineMetadata: [String: LineMetadata]?
 
+    /// Cached station metadata map. Transit data is read-only, so this never needs invalidation.
+    private(set) var cachedStationMetadata: [String: StationMetadata]?
+
     @ObservationIgnored private var remoteChangeTask: Task<Void, Never>?
     @ObservationIgnored private var debounceTask: Task<Void, Never>?
 
@@ -81,6 +84,21 @@ final class DataStore {
         let counts = try transitService.uniqueStationCountsByLine()
         cachedStationCounts = counts
         return counts
+    }
+
+    func allStationMetadata() throws -> [String: StationMetadata] {
+        if let cached = cachedStationMetadata { return cached }
+        let allStations = try transitService.allStations()
+        var meta: [String: StationMetadata] = [:]
+        for station in allStations {
+            meta[station.sourceID] = StationMetadata(
+                name: station.name,
+                postalCode: station.postalCode,
+                fareZone: station.fareZone
+            )
+        }
+        cachedStationMetadata = meta
+        return meta
     }
 
     func allLineMetadata() throws -> [String: LineMetadata] {

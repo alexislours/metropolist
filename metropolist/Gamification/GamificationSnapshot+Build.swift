@@ -1,5 +1,3 @@
-import TransitModels
-
 extension GamificationSnapshot {
     /// Intermediate result that also exposes the `LineMetadata` map for callers that need it.
     struct BuildResult {
@@ -14,16 +12,7 @@ extension GamificationSnapshot {
         let travels = try dataStore.userService.allTravels()
         let metaMap = try dataStore.allLineMetadata()
 
-        // Fetch ALL stations so geographic totals (department/fare zone) are accurate
-        let allStations = try dataStore.transitService.allStations()
-        var stationMeta: [String: StationMetadata] = [:]
-        for station in allStations {
-            stationMeta[station.sourceID] = StationMetadata(
-                name: station.name,
-                postalCode: station.postalCode,
-                fareZone: station.fareZone
-            )
-        }
+        let stationMeta = try dataStore.allStationMetadata()
 
         let stopRecords = completedStops.map {
             CompletedStopRecord(
