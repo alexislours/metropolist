@@ -3,6 +3,56 @@ import Foundation
 import SwiftData
 import TransitModels
 
+enum DataStoreError: LocalizedError {
+    case appSupportUnavailable
+    case transitStoreMissing
+    case transitContainerFailed(underlying: Error)
+    case appSupportDirCreationFailed(underlying: Error)
+    case transitStoreCopyFailed(underlying: Error)
+    case userContainerFailed(underlying: Error)
+    case inMemoryContainerFailed(underlying: Error)
+
+    var errorDescription: String? {
+        switch self {
+        case .appSupportUnavailable:
+            String(
+                localized: "Application storage directory is unavailable.",
+                comment: "DataStore error: Application Support missing"
+            )
+        case .transitStoreMissing:
+            String(
+                localized: "Transit data is missing from the app bundle.",
+                comment: "DataStore error: transit.store not in bundle"
+            )
+        case let .transitContainerFailed(error):
+            String(
+                localized: "Could not create transit database: \(error.localizedDescription)",
+                comment: "DataStore error: transit container creation failed"
+            )
+        case let .appSupportDirCreationFailed(error):
+            String(
+                localized: "Could not create storage directory: \(error.localizedDescription)",
+                comment: "DataStore error: cannot create App Support dir"
+            )
+        case let .transitStoreCopyFailed(error):
+            String(
+                localized: "Could not install transit data: \(error.localizedDescription)",
+                comment: "DataStore error: transit.store copy failed"
+            )
+        case let .userContainerFailed(error):
+            String(
+                localized: "Could not create user database: \(error.localizedDescription)",
+                comment: "DataStore error: user container creation failed"
+            )
+        case let .inMemoryContainerFailed(error):
+            String(
+                localized: "Could not create in-memory database: \(error.localizedDescription)",
+                comment: "DataStore error: in-memory container failed"
+            )
+        }
+    }
+}
+
 @MainActor
 @Observable
 final class DataStore {
@@ -151,13 +201,13 @@ final class DataStore {
         }
     }
 
-    init() {
-        let transitContainer = Self.makeTransitContainer()
+    init() throws {
+        let transitContainer = try Self.makeTransitContainer()
         let tCtx = ModelContext(transitContainer)
         tCtx.autosaveEnabled = false
         transitService = TransitDataService(context: tCtx)
 
-        let userContainer = Self.makeUserContainer()
+        let userContainer = try Self.makeUserContainer()
         let uCtx = ModelContext(userContainer)
         userContext = uCtx
         userService = UserDataService(context: uCtx)
@@ -189,7 +239,7 @@ final class DataStore {
 
     // MARK: - Transit Container
 
-    private static func makeTransitContainer() -> ModelContainer {
+    private static func makeTransitContainer() throws -> ModelContainer {
         let schema = Schema([
             TransitLine.self,
             TransitStation.self,
@@ -199,27 +249,27 @@ final class DataStore {
             TransitMetadata.self,
         ])
 
-        let storeURL = transitStoreURL()
-        copyTransitStoreIfNeeded(to: storeURL)
+        let storeURL = try transitStoreURL()
+        try copyTransitStoreIfNeeded(to: storeURL)
 
         let config = ModelConfiguration(schema: schema, url: storeURL, cloudKitDatabase: .none)
         do {
             return try ModelContainer(for: schema, configurations: [config])
         } catch {
-            fatalError("Could not create transit ModelContainer: \(error)")
+            throw DataStoreError.transitContainerFailed(underlying: error)
         }
     }
 
-    private static func transitStoreURL() -> URL {
+    private static func transitStoreURL() throws -> URL {
         guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            fatalError("Application Support directory unavailable")
+            throw DataStoreError.appSupportUnavailable
         }
         return appSupport.appendingPathComponent("transit.store")
     }
 
-    private static func copyTransitStoreIfNeeded(to destination: URL) {
+    private static func copyTransitStoreIfNeeded(to destination: URL) throws {
         guard let bundledURL = Bundle.main.url(forResource: "transit", withExtension: "store") else {
-            fatalError("Could not find transit.store in app bundle")
+            throw DataStoreError.transitStoreMissing
         }
 
         let fileManager = FileManager.default
@@ -236,7 +286,7 @@ final class DataStore {
             do {
                 try fileManager.createDirectory(at: appSupport, withIntermediateDirectories: true)
             } catch {
-                fatalError("Could not create Application Support directory: \(error)")
+                throw DataStoreError.appSupportDirCreationFailed(underlying: error)
             }
             // Remove existing store files if upgrading
             if fileManager.fileExists(atPath: destination.path) {
@@ -248,7 +298,7 @@ final class DataStore {
             do {
                 try fileManager.copyItem(at: bundledURL, to: destination)
             } catch {
-                fatalError("Could not copy transit.store to Application Support: \(error)")
+                throw DataStoreError.transitStoreCopyFailed(underlying: error)
             }
             UserDefaults.standard.set(bundledModDate, forKey: dateKey)
         }
@@ -256,7 +306,7 @@ final class DataStore {
 
     // MARK: - User Container
 
-    private static func makeUserContainer() -> ModelContainer {
+    private static func makeUserContainer() throws -> ModelContainer {
         let schema = Schema([
             CompletedStop.self,
             Travel.self,
@@ -269,13 +319,13 @@ final class DataStore {
                 do {
                     return try ModelContainer(for: schema, configurations: [config])
                 } catch {
-                    fatalError("Could not create in-memory user ModelContainer: \(error)")
+                    throw DataStoreError.inMemoryContainerFailed(underlying: error)
                 }
             }
         #endif
 
         guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            fatalError("Application Support directory unavailable")
+            throw DataStoreError.appSupportUnavailable
         }
         let storeURL = appSupport.appendingPathComponent("user.store")
 
@@ -287,7 +337,7 @@ final class DataStore {
         do {
             return try ModelContainer(for: schema, configurations: [config])
         } catch {
-            fatalError("Could not create user ModelContainer: \(error)")
+            throw DataStoreError.userContainerFailed(underlying: error)
         }
     }
 }

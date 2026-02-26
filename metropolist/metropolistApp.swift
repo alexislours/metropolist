@@ -1,9 +1,22 @@
 import SwiftUI
 
+enum AppBootstrap {
+    case ready(DataStore)
+    case failed(Error)
+
+    init() {
+        do {
+            self = try .ready(DataStore())
+        } catch {
+            self = .failed(error)
+        }
+    }
+}
+
 @main
 struct MetropolistApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-    @State private var dataStore = DataStore()
+    @State private var bootstrap = AppBootstrap()
 
     #if DEBUG
         private let isScreenshotMode = ProcessInfo.processInfo.arguments.contains("--screenshots")
@@ -11,24 +24,29 @@ struct MetropolistApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .task {
-                    registerQuickActions()
-                    handleQuickAction(appDelegate.pendingQuickActionType)
-                    appDelegate.pendingQuickActionType = nil
-                }
-                .onReceive(NotificationCenter.default.publisher(for: .quickActionTriggered)) { notification in
-                    handleQuickAction(notification.object as? String)
-                }
-            #if DEBUG
-                .task {
-                    if isScreenshotMode {
-                        MockDataSeeder.seed(dataStore: dataStore)
+            switch bootstrap {
+            case let .ready(dataStore):
+                MainTabView()
+                    .task {
+                        registerQuickActions()
+                        handleQuickAction(appDelegate.pendingQuickActionType)
+                        appDelegate.pendingQuickActionType = nil
                     }
-                }
-            #endif
+                    .onReceive(NotificationCenter.default.publisher(for: .quickActionTriggered)) { notification in
+                        handleQuickAction(notification.object as? String)
+                    }
+                #if DEBUG
+                    .task {
+                        if isScreenshotMode {
+                            MockDataSeeder.seed(dataStore: dataStore)
+                        }
+                    }
+                #endif
+                    .environment(dataStore)
+            case let .failed(error):
+                DataStoreErrorView(error: error)
+            }
         }
-        .environment(dataStore)
     }
 
     private func registerQuickActions() {
@@ -44,7 +62,9 @@ struct MetropolistApp: App {
 
     private func handleQuickAction(_ type: String?) {
         guard type == "com.alexislours.metropolist.startTravel" else { return }
-        dataStore.travelFlowPrefill = TravelFlowPrefill()
+        if case let .ready(dataStore) = bootstrap {
+            dataStore.travelFlowPrefill = TravelFlowPrefill()
+        }
     }
 }
 

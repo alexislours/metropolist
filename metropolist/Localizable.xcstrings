@@ -746,6 +746,17 @@
         }
       }
     },
+    "Application storage directory is unavailable." : {
+      "comment" : "DataStore error: Application Support missing",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le répertoire de stockage de l'application est indisponible."
+          }
+        }
+      }
+    },
     "Audio" : {
       "comment" : "Station detail: audible signals indicator",
       "localizations" : {
@@ -1138,6 +1149,61 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible d'accéder au fichier sélectionné."
+          }
+        }
+      }
+    },
+    "Could not create in-memory database: %@" : {
+      "comment" : "DataStore error: in-memory container failed",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de créer la base de données en mémoire : %@"
+          }
+        }
+      }
+    },
+    "Could not create storage directory: %@" : {
+      "comment" : "DataStore error: cannot create App Support dir",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de créer le répertoire de stockage : %@"
+          }
+        }
+      }
+    },
+    "Could not create transit database: %@" : {
+      "comment" : "DataStore error: transit container creation failed",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de créer la base de données des transports : %@"
+          }
+        }
+      }
+    },
+    "Could not create user database: %@" : {
+      "comment" : "DataStore error: user container creation failed",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de créer la base de données utilisateur : %@"
+          }
+        }
+      }
+    },
+    "Could not install transit data: %@" : {
+      "comment" : "DataStore error: transit.store copy failed",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d'installer les données de transport : %@"
           }
         }
       }
@@ -3144,6 +3210,17 @@
         }
       }
     },
+    "Transit data is missing from the app bundle." : {
+      "comment" : "DataStore error: transit.store not in bundle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les données de transport sont manquantes dans le paquet de l'application."
+          }
+        }
+      }
+    },
     "Transit Database" : {
       "comment" : "Settings: transit database link title",
       "localizations" : {
@@ -3298,6 +3375,17 @@
         }
       }
     },
+    "Try restarting the app. If the problem persists, reinstall the app." : {
+      "comment" : "DataStore error screen: recovery suggestion",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essayez de redémarrer l'application. Si le problème persiste, réinstallez-la."
+          }
+        }
+      }
+    },
     "Type a stop name to get started" : {
       "comment" : "Stop picker: empty state description",
       "localizations" : {
@@ -3305,6 +3393,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saisissez le nom d'un arrêt pour commencer"
+          }
+        }
+      }
+    },
+    "Unable to Start" : {
+      "comment" : "DataStore error screen: title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de démarrer"
           }
         }
       }
