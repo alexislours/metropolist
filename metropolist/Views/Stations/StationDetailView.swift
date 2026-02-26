@@ -75,10 +75,10 @@ struct StationDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    isFavorited = (try? dataStore.userService.toggleFavorite(
+                    isFavorited = logged { try dataStore.userService.toggleFavorite(
                         kind: FavoriteKind.station.rawValue,
                         sourceID: stationSourceID
-                    )) ?? isFavorited
+                    ) } ?? isFavorited
                     UIImpactFeedbackGenerator(style: isFavorited ? .medium : .light).impactOccurred()
                 } label: {
                     Image(systemName: isFavorited ? "star.fill" : "star")
@@ -95,10 +95,10 @@ struct StationDetailView: View {
             await loadData()
         }
         .onChange(of: dataStore.userDataVersion) {
-            isFavorited = (try? dataStore.userService.isFavorite(
+            isFavorited = logged { try dataStore.userService.isFavorite(
                 kind: FavoriteKind.station.rawValue,
                 sourceID: stationSourceID
-            )) ?? false
+            ) } ?? false
         }
     }
 
@@ -279,10 +279,10 @@ struct StationDetailView: View {
                 }
                 travelStationNames = names
             }
-            isFavorited = (try? dataStore.userService.isFavorite(
+            isFavorited = logged { try dataStore.userService.isFavorite(
                 kind: FavoriteKind.station.rawValue,
                 sourceID: stationSourceID
-            )) ?? false
+            ) } ?? false
         } catch {
             #if DEBUG
                 print("Failed to load station detail: \(error)")

@@ -143,7 +143,7 @@ final class LineDetailViewModel {
                 missingIDs.append(id)
             }
         }
-        if !missingIDs.isEmpty, let extras = try? dataStore.transitService.stations(bySourceIDs: missingIDs) {
+        if !missingIDs.isEmpty, let extras = (logged { try dataStore.transitService.stations(bySourceIDs: missingIDs) }) {
             for station in extras {
                 names[station.sourceID] = station.name
             }

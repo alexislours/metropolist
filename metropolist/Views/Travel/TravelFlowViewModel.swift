@@ -146,11 +146,11 @@ final class TravelFlowViewModel {
 
     func searchStations(query: String) -> [TransitStation] {
         guard !query.isEmpty else { return [] }
-        return (try? dataStore.transitService.searchStations(query: query)) ?? []
+        return logged { try dataStore.transitService.searchStations(query: query) } ?? []
     }
 
     func linesForStation(_ sourceID: String) -> [TransitLine] {
-        (try? dataStore.transitService.lines(forStationSourceID: sourceID)) ?? []
+        logged { try dataStore.transitService.lines(forStationSourceID: sourceID) } ?? []
     }
 
     // MARK: - Line-stop loading (for line prefill)
@@ -361,7 +361,7 @@ final class TravelFlowViewModel {
             let newCompletions = stationIDs.filter { !existingCompletions.contains($0) }.count
 
             // Detect first travel on this line
-            let lineTravelCount = (try? dataStore.userService.travelCount(forLineSourceID: line.sourceID)) ?? 0
+            let lineTravelCount = logged { try dataStore.userService.travelCount(forLineSourceID: line.sourceID) } ?? 0
             let isFirstTravelOnLine = lineTravelCount == 0
 
             // Capture before snapshot for celebration diff

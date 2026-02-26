@@ -96,6 +96,6 @@ extension TravelFlowViewModel {
     }
 
     func captureGamificationSnapshot(from dataStore: DataStore) -> GamificationSnapshot? {
-        try? GamificationSnapshot.build(from: dataStore).snapshot
+        logged { try GamificationSnapshot.build(from: dataStore).snapshot }
     }
 }

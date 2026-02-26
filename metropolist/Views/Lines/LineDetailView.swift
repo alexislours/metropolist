@@ -27,10 +27,10 @@ struct LineDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    isFavorited = (try? dataStore.userService.toggleFavorite(
+                    isFavorited = logged { try dataStore.userService.toggleFavorite(
                         kind: FavoriteKind.line.rawValue,
                         sourceID: lineSourceID
-                    )) ?? isFavorited
+                    ) } ?? isFavorited
                     UIImpactFeedbackGenerator(style: isFavorited ? .medium : .light).impactOccurred()
                 } label: {
                     Image(systemName: isFavorited ? "star.fill" : "star")
@@ -49,17 +49,17 @@ struct LineDetailView: View {
                 await model.loadData()
                 viewModel = model
             }
-            isFavorited = (try? dataStore.userService.isFavorite(
+            isFavorited = logged { try dataStore.userService.isFavorite(
                 kind: FavoriteKind.line.rawValue,
                 sourceID: lineSourceID
-            )) ?? false
+            ) } ?? false
         }
         .onChange(of: dataStore.userDataVersion) {
             viewModel?.refresh()
-            isFavorited = (try? dataStore.userService.isFavorite(
+            isFavorited = logged { try dataStore.userService.isFavorite(
                 kind: FavoriteKind.line.rawValue,
                 sourceID: lineSourceID
-            )) ?? false
+            ) } ?? false
         }
     }
 

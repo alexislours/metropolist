@@ -67,7 +67,7 @@ extension SettingsTab {
             return nil
         }
         let storeURL = appSupport.appendingPathComponent("transit.store")
-        guard let attrs = try? FileManager.default.attributesOfItem(atPath: storeURL.path),
+        guard let attrs = (logged { try FileManager.default.attributesOfItem(atPath: storeURL.path) }),
               let size = attrs[.size] as? Int64
         else {
             return nil
