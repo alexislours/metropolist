@@ -101,15 +101,14 @@ struct ProfileTab: View {
             .navigationDestination(for: StationDestination.self) { dest in
                 StationDetailView(stationSourceID: dest.stationSourceID)
             }
-            .task {
+            .task(id: dataStore.userDataVersion) {
                 if viewModel == nil {
                     let model = ProfileViewModel(dataStore: dataStore)
                     viewModel = model
                     await model.load()
+                } else {
+                    await viewModel?.load()
                 }
-            }
-            .onChange(of: dataStore.userDataVersion) {
-                Task { await viewModel?.load() }
             }
         }
     }
