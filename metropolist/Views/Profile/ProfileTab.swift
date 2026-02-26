@@ -8,7 +8,12 @@ struct ProfileTab: View {
     var body: some View {
         NavigationStack {
             Group {
-                if let viewModel, !viewModel.isLoading {
+                if let viewModel, viewModel.error != nil {
+                    ContentUnavailableView(
+                        String(localized: "Unable to Load Profile", comment: "Profile: error screen title"),
+                        systemImage: "exclamationmark.triangle.fill"
+                    )
+                } else if let viewModel, !viewModel.isLoading {
                     ScrollView {
                         VStack(spacing: 16) {
                             LevelHeaderCard(snapshot: viewModel.snapshot)

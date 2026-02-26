@@ -23,6 +23,9 @@ final class LineDetailViewModel {
     var travelLineMap: [String: TransitLine] = [:]
     var travelStationNames: [String: String] = [:]
 
+    /// Error
+    var error: Error?
+
     // Map data
     var segments: [[CLLocationCoordinate2D]] = []
     var stationAnnotations: [LineRouteMapView.StationAnnotation] = []
@@ -97,9 +100,7 @@ final class LineDetailViewModel {
             // Map for selected variant
             updateMapForSelectedVariant()
         } catch {
-            #if DEBUG
-                print("Failed to load line detail: \(error)")
-            #endif
+            self.error = error
         }
     }
 
@@ -112,9 +113,7 @@ final class LineDetailViewModel {
             recentTravels = travels
             loadTravelMetadata()
         } catch {
-            #if DEBUG
-                print("Failed to refresh line detail: \(error)")
-            #endif
+            self.error = error
         }
     }
 

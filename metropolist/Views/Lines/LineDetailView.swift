@@ -15,7 +15,12 @@ struct LineDetailView: View {
 
     var body: some View {
         Group {
-            if let viewModel {
+            if let viewModel, viewModel.error != nil {
+                ContentUnavailableView(
+                    String(localized: "Unable to Load Line", comment: "Line detail: error screen title"),
+                    systemImage: "exclamationmark.triangle.fill"
+                )
+            } else if let viewModel {
                 content(viewModel)
             } else {
                 TransitLoadingIndicator()

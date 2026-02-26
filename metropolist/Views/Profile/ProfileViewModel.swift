@@ -16,6 +16,7 @@ struct ModeBreakdownEntry: Identifiable {
 final class ProfileViewModel {
     var snapshot: GamificationSnapshot = .empty
     var isLoading = true
+    var error: Error?
 
     // Resolved data for display
     var lineMetadataMap: [String: LineMetadata] = [:]
@@ -89,9 +90,7 @@ final class ProfileViewModel {
             travelSearchIndex = searchIndex
 
         } catch {
-            #if DEBUG
-                print("Failed to load gamification data: \(error)")
-            #endif
+            self.error = error
         }
         isLoading = false
     }
