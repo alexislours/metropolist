@@ -291,8 +291,11 @@ struct AchievementsDetailView: View {
     @State private var selectedGroup: AchievementGroup?
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private var groupedAchievements: [AchievementGroup: [AchievementState]] {
-        Dictionary(grouping: achievements, by: \.definition.group)
+    private let groupedAchievements: [AchievementGroup: [AchievementState]]
+
+    init(achievements: [AchievementState]) {
+        self.achievements = achievements
+        groupedAchievements = Dictionary(grouping: achievements, by: \.definition.group)
     }
 
     var body: some View {
