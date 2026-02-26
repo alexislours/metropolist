@@ -207,14 +207,15 @@ final class TravelFlowViewModel {
 
     // MARK: - Haptics
 
+    @ObservationIgnored private lazy var selectionGenerator = UISelectionFeedbackGenerator()
+    @ObservationIgnored private lazy var notificationGenerator = UINotificationFeedbackGenerator()
+
     private func selectionHaptic() {
-        let generator = UISelectionFeedbackGenerator()
-        generator.selectionChanged()
+        selectionGenerator.selectionChanged()
     }
 
     private func successHaptic() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
+        notificationGenerator.notificationOccurred(.success)
     }
 
     // MARK: - Step 1 → 2: Select origin
