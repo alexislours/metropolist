@@ -53,8 +53,16 @@ struct SettingsTab: View {
             .fileImporter(isPresented: $showImporter, allowedContentTypes: [.json]) { result in
                 handleImport(result)
             }
-            .alert(item: $importAlert) { alert in
-                Alert(title: Text(alert.title), message: Text(alert.message))
+            .alert(
+                importAlert?.title ?? "",
+                isPresented: Binding(
+                    get: { importAlert != nil },
+                    set: { if !$0 { importAlert = nil } }
+                )
+            ) {
+                // Empty actions = default OK dismiss button
+            } message: {
+                Text(importAlert?.message ?? "")
             }
             .alert(
                 String(localized: "Delete All User Data?", comment: "Settings: delete all data confirmation title"),
