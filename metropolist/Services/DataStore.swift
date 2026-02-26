@@ -288,18 +288,21 @@ final class DataStore {
             } catch {
                 throw DataStoreError.appSupportDirCreationFailed(underlying: error)
             }
-            // Remove existing store files if upgrading
-            if fileManager.fileExists(atPath: destination.path) {
-                try? fileManager.removeItem(at: destination)
-                // Also clean up WAL/SHM sidecars
-                try? fileManager.removeItem(at: destination.appendingPathExtension("wal"))
-                try? fileManager.removeItem(at: destination.appendingPathExtension("shm"))
-            }
+            let tempURL = appSupport.appendingPathComponent(UUID().uuidString + ".store")
             do {
-                try fileManager.copyItem(at: bundledURL, to: destination)
+                try fileManager.copyItem(at: bundledURL, to: tempURL)
+                if fileManager.fileExists(atPath: destination.path) {
+                    _ = try fileManager.replaceItemAt(destination, withItemAt: tempURL)
+                } else {
+                    try fileManager.moveItem(at: tempURL, to: destination)
+                }
             } catch {
+                try? fileManager.removeItem(at: tempURL)
                 throw DataStoreError.transitStoreCopyFailed(underlying: error)
             }
+            // Clean up stale WAL/SHM sidecars from previous store
+            try? fileManager.removeItem(at: destination.appendingPathExtension("wal"))
+            try? fileManager.removeItem(at: destination.appendingPathExtension("shm"))
             UserDefaults.standard.set(bundledModDate, forKey: dateKey)
         }
     }
