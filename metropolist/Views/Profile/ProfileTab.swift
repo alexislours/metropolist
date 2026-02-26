@@ -327,8 +327,21 @@ struct ProgressDetailView: View {
     let snapshot: GamificationSnapshot
     let mode: TransitMode
     let lines: [LineMetadata]
+    private let sortedLines: [LineMetadata]
 
     @ScaledMetric(relativeTo: .body) private var ringSize: CGFloat = 80
+
+    init(snapshot: GamificationSnapshot, mode: TransitMode, lines: [LineMetadata]) {
+        self.snapshot = snapshot
+        self.mode = mode
+        self.lines = lines
+        sortedLines = lines.sorted { lhs, rhs in
+            let fracA = snapshot.lineProgress[lhs.sourceID]?.fraction ?? 0
+            let fracB = snapshot.lineProgress[rhs.sourceID]?.fraction ?? 0
+            if fracA != fracB { return fracA > fracB }
+            return lhs.shortName.localizedStandardCompare(rhs.shortName) == .orderedAscending
+        }
+    }
 
     private var totalStops: Int {
         lines.reduce(0) { $0 + $1.totalStations }
@@ -336,15 +349,6 @@ struct ProgressDetailView: View {
 
     private var completedStops: Int {
         lines.reduce(0) { $0 + (snapshot.lineProgress[$1.sourceID]?.completedStops ?? 0) }
-    }
-
-    private var sortedLines: [LineMetadata] {
-        lines.sorted { lhs, rhs in
-            let fracA = snapshot.lineProgress[lhs.sourceID]?.fraction ?? 0
-            let fracB = snapshot.lineProgress[rhs.sourceID]?.fraction ?? 0
-            if fracA != fracB { return fracA > fracB }
-            return lhs.shortName.localizedStandardCompare(rhs.shortName) == .orderedAscending
-        }
     }
 
     var body: some View {
