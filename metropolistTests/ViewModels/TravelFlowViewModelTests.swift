@@ -201,4 +201,113 @@ struct TravelFlowViewModelTests {
         #expect(!vm.showError)
         #expect(!vm.isProcessing)
     }
+
+    // MARK: - confirmTravel
+
+    /// Creates a VM with all preconditions set for `confirmTravel()`.
+    /// Line has 5 stations (A–E), origin=A, destination=E, intermediate stops populated.
+    private static func makeConfirmReadyVM() -> (
+        vm: TravelFlowViewModel, store: AppDataStore,
+        line: TransitLine, stations: [TransitStation]
+    ) {
+        let tCtx = TestSupport.makeTransitContext()
+        let uCtx = TestSupport.makeUserContext()
+        let (line, variant, stations) = TestSupport.seedCompleteLine(
+            in: tCtx, lineSourceID: "METRO:1", stationNames: ["A", "B", "C", "D", "E"]
+        )
+        let store = AppDataStore(transitContext: tCtx, userContext: uCtx)
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        vm.originStation = stations[0]
+        vm.destinationStation = stations[4]
+        vm.selectedLine = line
+        vm.selectedVariant = variant
+        vm.loadIntermediateStops()
+
+        return (vm, store, line, stations)
+    }
+
+    @Test("confirmTravel records travel and navigates to success")
+    func confirmTravelRecordsTravel() {
+        let (vm, _, line, stations) = Self.makeConfirmReadyVM()
+
+        vm.confirmTravel()
+
+        #expect(vm.recordedTravel != nil)
+        #expect(vm.recordedTravel?.lineSourceID == line.sourceID)
+        #expect(vm.recordedTravel?.fromStationSourceID == stations[0].sourceID)
+        #expect(vm.recordedTravel?.toStationSourceID == stations[4].sourceID)
+        #expect(vm.path.count == 1)
+        #expect(!vm.isProcessing)
+        #expect(!vm.showError)
+    }
+
+    @Test("confirmTravel counts new stops correctly")
+    func confirmTravelCountsNewStops() {
+        let (vm, _, _, _) = Self.makeConfirmReadyVM()
+
+        vm.confirmTravel()
+
+        // 5 stations (A–E), all inclusive — all new on first travel
+        #expect(vm.newStopsCompleted == 5)
+    }
+
+    @Test("confirmTravel with pre-existing stops counts only new ones")
+    func confirmTravelCountsOnlyNewStops() throws {
+        let (vm, store, _, stations) = Self.makeConfirmReadyVM()
+
+        // Pre-record stops A, B, C on this line
+        try store.userService.recordTravel(
+            lineSourceID: "METRO:1",
+            routeVariantSourceID: "METRO:1:v1",
+            fromStationSourceID: stations[0].sourceID,
+            toStationSourceID: stations[2].sourceID,
+            intermediateStationSourceIDs: [
+                stations[0].sourceID, stations[1].sourceID, stations[2].sourceID,
+            ]
+        )
+
+        vm.confirmTravel()
+
+        // Only D and E are new
+        #expect(vm.newStopsCompleted == 2)
+    }
+
+    @Test("confirmTravel produces celebration event with XP")
+    func confirmTravelProducesCelebration() {
+        let (vm, _, _, _) = Self.makeConfirmReadyVM()
+
+        vm.confirmTravel()
+
+        #expect(vm.celebrationEvent != nil)
+        #expect(vm.celebrationEvent!.xpGained > 0)
+        let kinds = vm.celebrationEvent!.xpItems.map(\.kind)
+        #expect(kinds.contains(.baseTravel))
+        #expect(kinds.contains(.discoveryBonus))
+    }
+
+    @Test("confirmTravel increments userDataVersion")
+    func confirmTravelIncrementsVersion() {
+        let (vm, store, _, _) = Self.makeConfirmReadyVM()
+        let before = store.userDataVersion
+
+        vm.confirmTravel()
+
+        #expect(store.userDataVersion == before + 1)
+    }
+
+    @Test("confirmTravel with missing preconditions does nothing")
+    func confirmTravelMissingPreconditions() {
+        let store = AppDataStore(
+            transitContext: TestSupport.makeTransitContext(),
+            userContext: TestSupport.makeUserContext()
+        )
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        vm.confirmTravel()
+
+        #expect(vm.recordedTravel == nil)
+        #expect(vm.path.count == 0)
+        #expect(!vm.isProcessing)
+    }
 }
