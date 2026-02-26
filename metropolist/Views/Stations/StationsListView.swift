@@ -1,3 +1,4 @@
+import os
 import SwiftUI
 import TransitModels
 
@@ -47,7 +48,10 @@ struct StationsListView: View {
                 guard !Task.isCancelled else { return }
                 searchResults = results
                 lastSearchedQuery = query
-            } catch {}
+            } catch {
+                lastSearchedQuery = query
+                fallbackLogger.error("searchStations: \(String(describing: error), privacy: .public)")
+            }
         }
     }
 
@@ -128,7 +132,10 @@ struct StationsListView: View {
                             guard !Task.isCancelled else { return }
                             do {
                                 loadedLines[station.sourceID] = try dataStore.transitService.lines(forStationSourceID: station.sourceID)
-                            } catch {}
+                            } catch {
+                                loadedLines[station.sourceID] = []
+                                fallbackLogger.error("lines(forStationSourceID:): \(String(describing: error), privacy: .public)")
+                            }
                         }
                     }
                 }
