@@ -38,6 +38,8 @@ struct TravelSuccessView: View {
     @State private var showDone = false
 
     @State private var tickerTask: Task<Void, Never>?
+    @State private var sequenceTask: Task<Void, Never>?
+    @State private var epicRevealTask: Task<Void, Never>?
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -140,7 +142,11 @@ struct TravelSuccessView: View {
         .toolbar(.hidden, for: .navigationBar)
         .sensoryFeedback(.success, trigger: showCheckmark)
         .onAppear(perform: startSequence)
-        .onDisappear { tickerTask?.cancel() }
+        .onDisappear {
+            tickerTask?.cancel()
+            sequenceTask?.cancel()
+            epicRevealTask?.cancel()
+        }
     }
 
     // MARK: - Phase 1: Arrival
@@ -641,9 +647,11 @@ struct TravelSuccessView: View {
 
             // Confetti on level-up
             if celebration.leveledUp {
-                DispatchQueue.main.asyncAfter(deadline: .now() + phase5Start) {
+                sequenceTask = Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(phase5Start))
+                    guard !Task.isCancelled else { return }
                     showConfetti = true
-                    heavyImpact.impactOccurred()
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                 }
             }
 
@@ -652,7 +660,7 @@ struct TravelSuccessView: View {
             let phase6Start = phase5Start + (hasHiddenAchievements ? 0.6 : 0)
 
             if hasHiddenAchievements {
-                startEpicReveal(at: phase6Start, heavyImpact: heavyImpact)
+                startEpicReveal(at: phase6Start)
                 // Teaser + done are triggered by dismissEpicOverlay()
             } else {
                 withAnimation(.easeOut(duration: 0.3).delay(phase6Start + 0.3)) {
@@ -749,80 +757,79 @@ struct TravelSuccessView: View {
         }
     }
 
-    private func startEpicReveal(
-        at startTime: TimeInterval,
-        heavyImpact: UIImpactFeedbackGenerator
-    ) {
-        // t+0.0: Show overlay + backdrop fade
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime) {
+    private func startEpicReveal(at startTime: TimeInterval) {
+        epicRevealTask = Task { @MainActor in
+            // t+0.0: Show overlay + backdrop fade
+            try? await Task.sleep(for: .seconds(startTime))
+            guard !Task.isCancelled else { return }
             showEpicOverlay = true
             withAnimation(.easeIn(duration: 0.4)) {
                 epicOverlayBackdrop = true
             }
-        }
 
-        startEpicRevealContent(at: startTime + 0.4, heavyImpact: heavyImpact)
+            // Wait for backdrop animation before content
+            try? await Task.sleep(for: .seconds(0.4))
+            guard !Task.isCancelled else { return }
+            await runEpicRevealContent()
+        }
     }
 
-    private func startEpicRevealContent(
-        at startTime: TimeInterval,
-        heavyImpact: UIImpactFeedbackGenerator
-    ) {
+    private func runEpicRevealContent() async {
         // t+0.0: Expanding rings burst outward
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime) {
-            withAnimation(.easeOut(duration: 1.2)) {
-                epicOverlayRings = true
-            }
+        withAnimation(.easeOut(duration: 1.2)) {
+            epicOverlayRings = true
         }
 
         // t+0.1: Icon slams in with heavy haptic
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.1) {
-            heavyImpact.impactOccurred()
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
-                epicOverlayIcon = true
-            }
-            // Start glow pulse
-            withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                epicGlowPulse = true
-            }
+        try? await Task.sleep(for: .seconds(0.1))
+        guard !Task.isCancelled else { return }
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
+            epicOverlayIcon = true
+        }
+        withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+            epicGlowPulse = true
         }
 
         // t+0.6: "SECRET ACHIEVEMENT UNLOCKED!" label
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.6) {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
-                epicOverlayLabel = true
-            }
+        try? await Task.sleep(for: .seconds(0.5))
+        guard !Task.isCancelled else { return }
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+            epicOverlayLabel = true
         }
 
         // t+0.9: Achievement title + description
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 0.9) {
-            withAnimation(.easeOut(duration: 0.4)) {
-                epicOverlayTitle = true
-            }
+        try? await Task.sleep(for: .seconds(0.3))
+        guard !Task.isCancelled else { return }
+        withAnimation(.easeOut(duration: 0.4)) {
+            epicOverlayTitle = true
         }
 
         // t+1.2: XP reward + confetti
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 1.2) {
-            heavyImpact.impactOccurred()
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
-                epicOverlayXP = true
-            }
-            showConfetti = false
-            DispatchQueue.main.async {
-                showConfetti = true
-            }
+        try? await Task.sleep(for: .seconds(0.3))
+        guard !Task.isCancelled else { return }
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+            epicOverlayXP = true
         }
+        showConfetti = false
+        try? await Task.sleep(for: .milliseconds(10))
+        guard !Task.isCancelled else { return }
+        showConfetti = true
 
         // t+2.0: Show dismiss button
-        DispatchQueue.main.asyncAfter(deadline: .now() + startTime + 2.0) {
-            withAnimation(.easeOut(duration: 0.3)) {
-                showEpicDismissButton = true
-            }
+        try? await Task.sleep(for: .seconds(0.8))
+        guard !Task.isCancelled else { return }
+        withAnimation(.easeOut(duration: 0.3)) {
+            showEpicDismissButton = true
         }
     }
 
     private func dismissEpicOverlay() {
         let hasMore = currentEpicIndex + 1 < hiddenAchievements.count
+
+        // Cancel any pending reveal sequence
+        epicRevealTask?.cancel()
 
         // Fade out current content
         withAnimation(.easeIn(duration: 0.3)) {
@@ -837,11 +844,11 @@ struct TravelSuccessView: View {
 
         if hasMore {
             // Advance to next achievement and re-animate content
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            epicRevealTask = Task { @MainActor in
+                try? await Task.sleep(for: .seconds(0.4))
+                guard !Task.isCancelled else { return }
                 currentEpicIndex += 1
-                let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
-                heavyImpact.prepare()
-                startEpicRevealContent(at: 0, heavyImpact: heavyImpact)
+                await runEpicRevealContent()
             }
         } else {
             // Final dismiss — collapse entire overlay
@@ -849,8 +856,9 @@ struct TravelSuccessView: View {
                 epicOverlayBackdrop = false
             }
 
-            // Remove overlay after fade
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            epicRevealTask = Task { @MainActor in
+                try? await Task.sleep(for: .seconds(0.5))
+                guard !Task.isCancelled else { return }
                 showEpicOverlay = false
             }
 
