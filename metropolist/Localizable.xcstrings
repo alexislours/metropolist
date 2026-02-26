@@ -93,6 +93,38 @@
         }
       }
     },
+    "%@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%@, %@, +%lld XP" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@, +%3$lld XP"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@, +%3$lld XP"
+          }
+        }
+      }
+    },
     "%lld" : {
       "localizations" : {
         "fr" : {
@@ -249,6 +281,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld sur %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld XP" : {
+      "comment" : "Travel success accessibility: level progress value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld XP"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld sur %2$lld XP"
           }
         }
       }
@@ -1994,8 +2043,19 @@
         }
       }
     },
+    "Journey recorded. %lld XP earned." : {
+      "comment" : "Travel success accessibility: summary announcement for reduce motion",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trajet enregistré. %lld XP gagnés."
+          }
+        }
+      }
+    },
     "Level %lld" : {
-      "comment" : "Profile: current level number\nProfile: next level number\nTravel success: current level label",
+      "comment" : "Profile: current level number\nProfile: next level number\nTravel success accessibility: level progress label\nTravel success: current level label",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -2023,6 +2083,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "LICENCE OUVERTE v2.0 (ETALAB)"
+          }
+        }
+      }
+    },
+    "Line %@, %@ to %@" : {
+      "comment" : "Travel success accessibility: route summary",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Line %1$@, %2$@ to %3$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ligne %1$@, de %2$@ à %3$@"
           }
         }
       }
