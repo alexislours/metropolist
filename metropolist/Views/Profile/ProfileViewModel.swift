@@ -53,16 +53,16 @@ final class ProfileViewModel {
 
             // Resolve travel display data
             recentTravels = travels
-            var lineMap: [String: TransitLine] = [:]
             var nameMap: [String: String] = [:]
+            var neededLineIDs: Set<String> = []
             var neededStationIDs: Set<String> = []
             for travel in recentTravels {
-                if lineMap[travel.lineSourceID] == nil {
-                    lineMap[travel.lineSourceID] = try dataStore.transitService.line(bySourceID: travel.lineSourceID)
-                }
+                neededLineIDs.insert(travel.lineSourceID)
                 neededStationIDs.insert(travel.fromStationSourceID)
                 neededStationIDs.insert(travel.toStationSourceID)
             }
+            let lines = try dataStore.transitService.lines(bySourceIDs: Array(neededLineIDs))
+            let lineMap = Dictionary(uniqueKeysWithValues: lines.map { ($0.sourceID, $0) })
             let stations = try dataStore.transitService.stations(bySourceIDs: Array(neededStationIDs))
             for station in stations {
                 nameMap[station.sourceID] = station.name
