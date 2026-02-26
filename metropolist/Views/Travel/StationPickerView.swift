@@ -8,7 +8,6 @@ struct StationPickerView: View {
     @State private var searchText = ""
     @State private var searchResults: [TransitStation] = []
     @State private var loadedLines: [String: [TransitLine]] = [:]
-    @State private var searchTask: Task<Void, Never>?
     @State private var lastSearchedQuery = ""
 
     private var hasLinePrefill: Bool {
@@ -110,8 +109,19 @@ struct StationPickerView: View {
                 }
             }
         }
-        .onChange(of: searchText) {
-            performSearch()
+        .task(id: searchText) {
+            let query = searchText
+            guard !query.isEmpty else {
+                searchResults = []
+                lastSearchedQuery = ""
+                return
+            }
+            try? await Task.sleep(for: .milliseconds(300))
+            guard !Task.isCancelled else { return }
+            let results = viewModel.searchStations(query: query)
+            guard !Task.isCancelled else { return }
+            searchResults = results
+            lastSearchedQuery = query
         }
         .task {
             if viewModel.prefill?.stationSourceID != nil {
@@ -236,23 +246,5 @@ struct StationPickerView: View {
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())
-    }
-
-    private func performSearch() {
-        searchTask?.cancel()
-        let query = searchText
-        guard !query.isEmpty else {
-            searchResults = []
-            lastSearchedQuery = ""
-            return
-        }
-        searchTask = Task {
-            try? await Task.sleep(for: .milliseconds(300))
-            guard !Task.isCancelled else { return }
-            let results = viewModel.searchStations(query: query)
-            guard !Task.isCancelled else { return }
-            searchResults = results
-            lastSearchedQuery = query
-        }
     }
 }

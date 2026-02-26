@@ -14,7 +14,6 @@ struct TravelHistoryDetailView: View {
 
     @State private var searchText = ""
     @State private var debouncedSearch = ""
-    @State private var searchTask: Task<Void, Never>?
     @State private var selectedIDs: Set<String> = []
     @State private var editMode: EditMode = .inactive
     @State private var showDeleteConfirmation = false
@@ -43,13 +42,10 @@ struct TravelHistoryDetailView: View {
         }
         .contentMargins(.bottom, 80)
         .searchable(text: $searchText, prompt: String(localized: "Search travels", comment: "Travel history: search field prompt"))
-        .onChange(of: searchText) { _, newValue in
-            searchTask?.cancel()
-            searchTask = Task {
-                try? await Task.sleep(for: .milliseconds(200))
-                guard !Task.isCancelled else { return }
-                debouncedSearch = newValue
-            }
+        .task(id: searchText) {
+            try? await Task.sleep(for: .milliseconds(200))
+            guard !Task.isCancelled else { return }
+            debouncedSearch = searchText
         }
         .navigationTitle(String(localized: "History", comment: "Travel history: navigation title"))
         .navigationBarTitleDisplayMode(.inline)

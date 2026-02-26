@@ -13,7 +13,6 @@ struct StationsListView: View {
 
     // Search state
     @State private var searchResults: [TransitStation] = []
-    @State private var searchTask: Task<Void, Never>?
     @State private var lastSearchedQuery = ""
 
     var body: some View {
@@ -34,8 +33,21 @@ struct StationsListView: View {
         .onChange(of: dataStore.userDataVersion) {
             loadVisitedStations()
         }
-        .onChange(of: searchText) {
-            performSearch()
+        .task(id: searchText) {
+            let query = searchText
+            guard !query.isEmpty else {
+                searchResults = []
+                lastSearchedQuery = ""
+                return
+            }
+            try? await Task.sleep(for: .milliseconds(300))
+            guard !Task.isCancelled else { return }
+            do {
+                let results = try dataStore.transitService.searchStations(query: query)
+                guard !Task.isCancelled else { return }
+                searchResults = results
+                lastSearchedQuery = query
+            } catch {}
         }
     }
 
@@ -202,25 +214,5 @@ struct StationsListView: View {
             #endif
         }
         isLoading = false
-    }
-
-    private func performSearch() {
-        searchTask?.cancel()
-        let query = searchText
-        guard !query.isEmpty else {
-            searchResults = []
-            lastSearchedQuery = ""
-            return
-        }
-        searchTask = Task {
-            try? await Task.sleep(for: .milliseconds(300))
-            guard !Task.isCancelled else { return }
-            do {
-                let results = try dataStore.transitService.searchStations(query: query)
-                guard !Task.isCancelled else { return }
-                searchResults = results
-                lastSearchedQuery = query
-            } catch {}
-        }
     }
 }
