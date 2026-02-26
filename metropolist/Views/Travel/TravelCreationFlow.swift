@@ -251,19 +251,20 @@ private struct ExpandableStopsSection: View {
 
     @State private var isExpanded = false
     @State private var visibleCount = 0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 0) {
             Button {
                 if isExpanded {
                     // Collapse: reset immediately
-                    withAnimation(.snappy(duration: 0.2)) {
+                    withAnimation(reduceMotion ? .none : .snappy(duration: 0.2)) {
                         visibleCount = 0
                         isExpanded = false
                     }
                 } else {
                     // Expand: show container, then stagger rows in
-                    withAnimation(.snappy(duration: 0.2)) {
+                    withAnimation(reduceMotion ? .none : .snappy(duration: 0.2)) {
                         isExpanded = true
                     }
                     staggerIn()
@@ -344,6 +345,10 @@ private struct ExpandableStopsSection: View {
     }
 
     private func staggerIn() {
+        if reduceMotion {
+            visibleCount = stopNames.count
+            return
+        }
         let count = stopNames.count
         for index in 0 ..< count {
             let delay = Double(index) * 0.03
