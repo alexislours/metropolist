@@ -1,5 +1,28 @@
 # What's New
 
+## 1.2.0 (2026022601) - 2026-02-26
+
+What's New in Métropolist:
+
+[NEW FEATURES]
+• Favorite Lines & Stations: Star any line or station from its detail page. Favorites appear as a dedicated section at the top of the Lines and Stations tabs.
+• Home Screen Quick Action: Long-press the app icon to start a new travel directly.
+• Extended Statistics: Your profile now shows weekly activity charts, busiest day/hour breakdowns, top 5 most visited stations and most used lines, plus department and fare zone coverage with progress bars.
+• Preferences: New settings for destination sort order (route vs alphabetical), nearby station radius (200m–2km), and map style (standard/satellite/hybrid).
+• Developer Mode: Tap the build number 5 times in Settings to reveal debug info sections on line, station, and travel detail pages.
+• New Loading Animation: A custom transit-themed loading indicator replaces the default spinner throughout the app.
+
+[IMPROVEMENTS]
+• Faster profile and search loading with reduced redundant work.
+• Smoother scrolling in achievements and station lists.
+• Better VoiceOver support and reduced-motion compliance across the app.
+
+[BUG FIXES]
+• Fixed date display issues on certain regional calendar settings.
+• Fixed iCloud status getting stuck on "Checking" when offline.
+• Fixed nearby station search not respecting the configured radius.
+• Fixed broken translations and formatting issues in French localization.
+
 ## 1.1.0 (2026022501) - 2026-02-25
 
 What’s New in Métropolist:
