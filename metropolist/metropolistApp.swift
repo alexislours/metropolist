@@ -52,6 +52,7 @@ extension Notification.Name {
     static let quickActionTriggered = Notification.Name("com.alexislours.metropolist.quickAction")
 }
 
+@MainActor
 final class AppDelegate: NSObject, UIApplicationDelegate {
     var pendingQuickActionType: String?
 
@@ -69,6 +70,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
+@MainActor
 final class SceneDelegate: NSObject, UIWindowSceneDelegate {
     func windowScene(
         _: UIWindowScene,
