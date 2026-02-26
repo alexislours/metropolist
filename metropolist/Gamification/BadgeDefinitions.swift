@@ -27,6 +27,15 @@ enum BadgeTier: Int, Comparable, Equatable, CaseIterable {
         case .gold: "medal.star.fill"
         }
     }
+
+    var threshold: Double {
+        switch self {
+        case .locked: 0
+        case .bronze: 0.1
+        case .silver: 0.4
+        case .gold: 1.0
+        }
+    }
 }
 
 enum BadgeComputation {

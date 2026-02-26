@@ -10,14 +10,6 @@ struct DiffContext {
 }
 
 enum GamificationDiffEngine {
-    // Mirror XP constants from GamificationEngine
-    private static let xpPerTravel = 5
-    private static let xpPerUniqueStop = 20
-    private static let xpPerFirstLineBus = 25
-    private static let xpPerFirstLineOther = 50
-    private static let xpBaseLineCompletion = 50
-    private static let xpPerLineCompletionStop = 5
-
     static func diff(
         before: GamificationSnapshot,
         after: GamificationSnapshot,
@@ -104,7 +96,7 @@ enum GamificationDiffEngine {
         // Base travel XP (always awarded)
         items.append(CelebrationXPItem(
             kind: .baseTravel,
-            xpValue: xpPerTravel,
+            xpValue: GamificationEngine.xpPerTravel,
             label: String(localized: "Travel recorded", comment: "XP item: base travel XP"),
             systemImage: "tram.fill"
         ))
@@ -112,7 +104,7 @@ enum GamificationDiffEngine {
         if let ctx = context {
             // Discovery bonus (first travel on this line)
             if ctx.isFirstTravelOnLine {
-                let discoveryXP = ctx.lineMode == .bus ? xpPerFirstLineBus : xpPerFirstLineOther
+                let discoveryXP = ctx.lineMode == .bus ? GamificationEngine.xpPerFirstLineBus : GamificationEngine.xpPerFirstLineOther
                 items.append(CelebrationXPItem(
                     kind: .discoveryBonus,
                     xpValue: discoveryXP,
@@ -123,7 +115,7 @@ enum GamificationDiffEngine {
 
             // New stations
             if ctx.newStopsCount > 0 {
-                let stopsXP = ctx.newStopsCount * xpPerUniqueStop
+                let stopsXP = ctx.newStopsCount * GamificationEngine.xpPerUniqueStop
                 items.append(CelebrationXPItem(
                     kind: .newStations,
                     xpValue: stopsXP,
@@ -154,7 +146,7 @@ enum GamificationDiffEngine {
             let beforeProgress = before.lineProgress[ctx.lineSourceID]
             if afterProgress?.fraction == 1.0, (beforeProgress?.fraction ?? 0) < 1.0 {
                 let totalStops = afterProgress?.totalStops ?? 0
-                let completionXP = xpBaseLineCompletion + (totalStops * xpPerLineCompletionStop)
+                let completionXP = GamificationEngine.xpBaseLineCompletion + (totalStops * GamificationEngine.xpPerLineCompletionStop)
                 items.append(CelebrationXPItem(
                     kind: .lineCompletion,
                     xpValue: completionXP,
@@ -213,7 +205,7 @@ enum GamificationDiffEngine {
         if let ctx = context, let progress = ctx.afterLineProgress {
             let nextTier = nextBadgeTier(for: progress.badge)
             if let tier = nextTier {
-                let thresholdFraction = badgeThreshold(for: tier)
+                let thresholdFraction = tier.threshold
                 let stopsNeeded = Int(ceil(thresholdFraction * Double(progress.totalStops))) - progress.completedStops
                 if stopsNeeded > 0, stopsNeeded <= 15 {
                     return .stopsToNextBadge(
@@ -241,15 +233,6 @@ enum GamificationDiffEngine {
         case .bronze: .silver
         case .silver: .gold
         case .gold: nil
-        }
-    }
-
-    private static func badgeThreshold(for tier: BadgeTier) -> Double {
-        switch tier {
-        case .locked: 0
-        case .bronze: 0.1
-        case .silver: 0.4
-        case .gold: 1.0
         }
     }
 }

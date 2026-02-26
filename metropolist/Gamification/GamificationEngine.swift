@@ -3,12 +3,12 @@ import Foundation
 enum GamificationEngine {
     // MARK: - XP Constants
 
-    private static let xpPerTravel = 5
-    private static let xpPerUniqueStop = 20
-    private static let xpPerFirstLineBus = 25
-    private static let xpPerFirstLineOther = 50
-    private static let xpBaseLineCompletion = 50
-    private static let xpPerLineCompletionStop = 5
+    static let xpPerTravel = 5
+    static let xpPerUniqueStop = 20
+    static let xpPerFirstLineBus = 25
+    static let xpPerFirstLineOther = 50
+    static let xpBaseLineCompletion = 50
+    static let xpPerLineCompletionStop = 5
 
     private static let dayFormatter: DateFormatter = {
         let formatter = DateFormatter()
