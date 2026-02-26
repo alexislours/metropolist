@@ -29,6 +29,10 @@ private struct TransitDotsView: UIViewRepresentable {
     func updateUIView(_ uiView: TransitDotsUIView, context _: Context) {
         uiView.applyTint(UIColor(tint))
     }
+
+    static func dismantleUIView(_ uiView: TransitDotsUIView, coordinator _: ()) {
+        uiView.stopAnimations()
+    }
 }
 
 // MARK: - Core Animation implementation
@@ -116,6 +120,21 @@ private final class TransitDotsUIView: UIView {
             group.beginTime = CACurrentMediaTime() + Double(index) * stagger
 
             dot.add(group, forKey: "pulse")
+        }
+    }
+
+    func stopAnimations() {
+        for dot in dotLayers {
+            dot.removeAllAnimations()
+        }
+    }
+
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow == nil {
+            stopAnimations()
+        } else if dotLayers.first?.animation(forKey: "pulse") == nil {
+            startAnimations()
         }
     }
 
