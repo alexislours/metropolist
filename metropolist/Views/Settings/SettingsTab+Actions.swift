@@ -55,6 +55,13 @@ extension SettingsTab {
         }
     }
 
+    private static let bytesFormatter: ByteCountFormatter = {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useMB, .useGB]
+        formatter.countStyle = .file
+        return formatter
+    }()
+
     private static func formattedTransitStoreSize() -> String? {
         guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
             return nil
@@ -65,10 +72,7 @@ extension SettingsTab {
         else {
             return nil
         }
-        let formatter = ByteCountFormatter()
-        formatter.allowedUnits = [.useMB, .useGB]
-        formatter.countStyle = .file
-        return formatter.string(fromByteCount: size)
+        return bytesFormatter.string(fromByteCount: size)
     }
 
     func prepareExport() {
