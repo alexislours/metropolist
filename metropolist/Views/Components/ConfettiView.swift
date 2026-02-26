@@ -6,6 +6,7 @@ struct ConfettiView: View {
 
     @State private var particles: [Particle] = []
     @State private var startTime: Date?
+    @State private var cleanupTask: Task<Void, Never>?
 
     private static let particleCount = 80
     private static let lifetime: TimeInterval = 3.0
@@ -73,6 +74,9 @@ struct ConfettiView: View {
                 emit()
             }
         }
+        .onDisappear {
+            cleanupTask?.cancel()
+        }
     }
 
     private func emit() {
@@ -89,7 +93,10 @@ struct ConfettiView: View {
         }
 
         // Clear particles after lifetime
-        DispatchQueue.main.asyncAfter(deadline: .now() + Self.lifetime + 0.5) {
+        cleanupTask?.cancel()
+        cleanupTask = Task {
+            try? await Task.sleep(for: .seconds(Self.lifetime + 0.5))
+            guard !Task.isCancelled else { return }
             particles = []
             startTime = nil
         }
