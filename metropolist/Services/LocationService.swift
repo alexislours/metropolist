@@ -81,7 +81,7 @@ extension LocationService: @preconcurrency CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
-        if isAuthorized {
+        if isAuthorized, locationContinuation != nil {
             manager.requestLocation()
         }
     }
