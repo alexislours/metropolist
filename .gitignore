@@ -25,4 +25,4 @@ fastlane/screenshots_ipad
 screenshot-plan.md
 metropolist/transit.store
 CLAUDE.md
-ideas/
+ideas/.build/

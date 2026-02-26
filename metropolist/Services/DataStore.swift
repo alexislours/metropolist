@@ -175,6 +175,13 @@ final class DataStore {
         }
     }
 
+    /// Internal init for testing with in-memory contexts.
+    init(transitContext: ModelContext, userContext: ModelContext) {
+        transitService = TransitDataService(context: transitContext)
+        self.userContext = userContext
+        userService = UserDataService(context: userContext)
+    }
+
     deinit {
         remoteChangeTask?.cancel()
         debounceTask?.cancel()
