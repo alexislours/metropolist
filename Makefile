@@ -18,7 +18,7 @@ build:
 test:
 	@rm -rf .build/tests.xcresult
 	@xcodebuild test -scheme metropolist \
-		-destination 'platform=macOS' \
+		-destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
 		-only-testing:metropolistTests \
 		-resultBundlePath .build/tests.xcresult 2>&1 | xcbeautify --quiet
 	@xcrun xcresulttool get test-results summary --path .build/tests.xcresult --compact \

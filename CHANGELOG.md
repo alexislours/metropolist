@@ -1,5 +1,13 @@
 # What's New
 
+## 1.2.1 (2026022602) - 2026-02-26
+
+What's New in Métropolist:
+
+[IMPROVEMENTS]
+• Error Screen: Fatal errors during app start now show what went wrong instead of silently crashing.
+• Error Handling: Profile and line detail screens now show an error message instead of a blank page when data loading fails.
+
 ## 1.2.0 (2026022601) - 2026-02-26
 
 What's New in Métropolist:
