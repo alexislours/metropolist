@@ -10,6 +10,7 @@ What's New in Métropolist:
 [IMPROVEMENTS]
 • Error Screen: Fatal errors during app start now show what went wrong instead of silently crashing.
 • Error Handling: Profile and line detail screens now show an error message instead of a blank page when data loading fails.
+• Celebration Accessibility: VoiceOver now reads XP breakdown, badge unlocks, achievement details, and level progress on the travel success screen. The secret achievement overlay is properly marked as modal.
 
 ## 1.2.0 (2026022601) - 2026-02-26
 

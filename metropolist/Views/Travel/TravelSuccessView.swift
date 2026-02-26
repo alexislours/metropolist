@@ -130,6 +130,7 @@ struct TravelSuccessView: View {
             if !reduceMotion {
                 ConfettiView(isActive: showConfetti, color: lineColor)
                     .ignoresSafeArea()
+                    .accessibilityHidden(true)
             }
         }
         .overlay {
@@ -165,6 +166,7 @@ struct TravelSuccessView: View {
                     .symbolEffect(.bounce, value: showCheckmark)
                     .scaleEffect(showCheckmark ? 1 : 0)
             }
+            .accessibilityHidden(true)
 
             Text(String(localized: "Journey Recorded!", comment: "Travel success: main headline"))
                 .font(.title2.bold())
@@ -191,6 +193,11 @@ struct TravelSuccessView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text(String(
+                    localized: "Line \(line.shortName), \(origin.name) to \(destination.name)",
+                    comment: "Travel success accessibility: route summary"
+                )))
                 .opacity(showJourneyHeader ? 1 : 0)
                 .offset(y: showJourneyHeader ? 0 : 10)
             }
@@ -235,6 +242,10 @@ struct TravelSuccessView: View {
                     .foregroundStyle(xpItemColor(for: item.kind))
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(item.xpValue > 0
+                ? "\(item.label), +\(item.xpValue) XP"
+                : item.label))
     }
 
     private func xpItemColor(for kind: CelebrationXPItem.Kind) -> Color {
@@ -299,7 +310,17 @@ struct TravelSuccessView: View {
                                 }
                             }
                             .frame(height: 8)
+                            .accessibilityHidden(true)
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(Text(String(
+                            localized: "Level \(celebration.levelProgress.afterLevel.number)",
+                            comment: "Travel success accessibility: level progress label"
+                        )))
+                        .accessibilityValue(Text(String(
+                            localized: "\(celebration.levelProgress.afterXPInLevel) of \(celebration.levelProgress.afterXPToNext) XP",
+                            comment: "Travel success accessibility: level progress value"
+                        )))
                         .padding(.horizontal, 8)
                         .transition(.opacity)
                     }
@@ -413,6 +434,8 @@ struct TravelSuccessView: View {
                 }
                 .shadow(color: .yellow.opacity(0.2), radius: 8, y: 2)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("\(achievement.title), \(achievement.description), +\(achievement.xpReward) XP"))
     }
 
     // MARK: - Epic Full-Screen Overlay
@@ -423,6 +446,7 @@ struct TravelSuccessView: View {
             Color.black
                 .opacity(epicOverlayBackdrop ? 0.9 : 0)
                 .ignoresSafeArea()
+                .accessibilityHidden(true)
 
             // Expanding rings
             ForEach(0 ..< 3, id: \.self) { ring in
@@ -434,6 +458,7 @@ struct TravelSuccessView: View {
                     .frame(width: 100, height: 100)
                     .scaleEffect(epicOverlayRings ? 4.0 + CGFloat(ring) * 1.5 : 0.3)
             }
+            .accessibilityHidden(true)
 
             // Center content
             VStack(spacing: 0) {
@@ -477,6 +502,7 @@ struct TravelSuccessView: View {
                     }
                     .scaleEffect(epicOverlayIcon ? 1 : 0)
                 }
+                .accessibilityHidden(true)
 
                 Spacer().frame(height: 32)
 
@@ -506,6 +532,8 @@ struct TravelSuccessView: View {
                     .padding(.horizontal, 40)
                     .opacity(epicOverlayTitle ? 1 : 0)
                     .offset(y: epicOverlayTitle ? 0 : 20)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text("\(achievement.title), \(achievement.description)"))
 
                     Spacer().frame(height: 24)
 
@@ -531,12 +559,14 @@ struct TravelSuccessView: View {
                             .padding(.vertical, 12)
                             .background(.yellow, in: Capsule())
                     }
+                    .accessibilityIdentifier("button-continue")
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }
 
                 Spacer()
             }
         }
+        .accessibilityAddTraits(.isModal)
     }
 
     private func lootCard(icon: String, iconColor: Color, title: String, description: String) -> some View {
@@ -558,6 +588,8 @@ struct TravelSuccessView: View {
         }
         .padding(12)
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("\(title), \(description)"))
     }
 
     private var teaserSection: some View {
@@ -934,6 +966,11 @@ struct TravelSuccessView: View {
                 levelBarProgress = CGFloat(celebration.levelProgress.afterXPInLevel)
                     / CGFloat(celebration.levelProgress.afterXPToNext)
             }
+
+            AccessibilityNotification.Announcement(String(
+                localized: "Journey recorded. \(celebration.xpGained) XP earned.",
+                comment: "Travel success accessibility: summary announcement for reduce motion"
+            )).post()
         }
     }
 }

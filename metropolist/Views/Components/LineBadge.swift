@@ -12,5 +12,6 @@ struct LineBadge: View {
             .padding(.vertical, 2)
             .frame(minWidth: 32, minHeight: 24)
             .background(Color(hex: line.color), in: RoundedRectangle(cornerRadius: 4))
+            .accessibilityLabel(Text(line.shortName))
     }
 }
