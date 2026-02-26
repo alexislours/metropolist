@@ -10,6 +10,7 @@ struct SettingsTab: View {
     @AppStorage("nearbyRadius") private var nearbyRadius: Int = 500
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
     @AppStorage("devMode") private var devMode: Bool = false
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     @State var exportedFileURL: URL?
     @State private var showImporter = false
@@ -258,20 +259,39 @@ struct SettingsTab: View {
 
     private var faqSection: some View {
         CardSection(title: String(localized: "HELP", comment: "Settings: help section header")) {
-            NavigationLink(destination: FAQView()) {
-                HStack {
-                    Label(
-                        String(localized: "FAQ", comment: "Settings: FAQ link"),
-                        systemImage: "questionmark.circle"
-                    )
-                    .font(.subheadline)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.tertiary)
+            VStack(spacing: 0) {
+                NavigationLink(destination: FAQView()) {
+                    HStack {
+                        Label(
+                            String(localized: "FAQ", comment: "Settings: FAQ link"),
+                            systemImage: "questionmark.circle"
+                        )
+                        .font(.subheadline)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
                 }
+                .foregroundStyle(.primary)
+
+                Divider()
+                    .padding(.vertical, 12)
+
+                Button {
+                    hasSeenOnboarding = false
+                } label: {
+                    HStack {
+                        Label(
+                            String(localized: "Replay Onboarding", comment: "Settings: replay onboarding button"),
+                            systemImage: "arrow.counterclockwise"
+                        )
+                        .font(.subheadline)
+                        Spacer()
+                    }
+                }
+                .foregroundStyle(.primary)
             }
-            .foregroundStyle(.primary)
         }
     }
 

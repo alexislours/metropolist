@@ -4,6 +4,9 @@
 
 What's New in Métropolist:
 
+[NEW FEATURES]
+• Replay Onboarding: Revisit the guided tour anytime from the Help section in Settings.
+
 [IMPROVEMENTS]
 • Error Screen: Fatal errors during app start now show what went wrong instead of silently crashing.
 • Error Handling: Profile and line detail screens now show an error message instead of a blank page when data loading fails.

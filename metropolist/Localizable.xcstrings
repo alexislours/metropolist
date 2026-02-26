@@ -2704,6 +2704,17 @@
         }
       }
     },
+    "Replay Onboarding" : {
+      "comment" : "Settings: replay onboarding button",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir l’onboarding"
+          }
+        }
+      }
+    },
     "RER" : {
       "comment" : "Transit mode: RER regional express",
       "localizations" : {
@@ -3393,6 +3404,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saisissez le nom d'un arrêt pour commencer"
+          }
+        }
+      }
+    },
+    "Unable to Load Line" : {
+      "comment" : "Line detail: error screen title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de charger la ligne"
+          }
+        }
+      }
+    },
+    "Unable to Load Profile" : {
+      "comment" : "Profile: error screen title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de charger le profil"
           }
         }
       }
