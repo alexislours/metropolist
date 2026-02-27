@@ -395,6 +395,7 @@ final class TravelFlowViewModel {
                         after: after,
                         context: diffContext
                     )
+                    WidgetDataBridge.updateWidget(from: after)
                 }
             }
 

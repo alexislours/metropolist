@@ -96,6 +96,7 @@ extension SettingsTab {
             try store.userContext.delete(model: Favorite.self)
             try store.userContext.save()
             store.userDataVersion += 1
+            WidgetDataBridge.updateWidget(from: .empty)
             importAlert = ImportAlert(
                 title: String(localized: "Data Deleted", comment: "Settings: data deleted alert title"),
                 message: String(localized: "All user data has been deleted.", comment: "Settings: data deleted confirmation message")
@@ -124,6 +125,9 @@ extension SettingsTab {
                 let data = try Data(contentsOf: url)
                 let counts = try UserDataTransferService.importJSON(data: data, context: store.userContext)
                 store.userDataVersion += 1
+                if let snapshot = (logged { try GamificationSnapshot.build(from: store).snapshot }) {
+                    WidgetDataBridge.updateWidget(from: snapshot)
+                }
                 importAlert = ImportAlert(
                     title: String(localized: "Import Successful", comment: "Settings: import success alert title"),
                     message: Self.importSummary(counts)

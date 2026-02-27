@@ -1,0 +1,287 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld" : {
+      "comment" : "Widget: achievements unlocked / total\nWidget: badge count as earned / total\nWidget: stations visited / total stations",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld to next level" : {
+      "comment" : "Widget: XP remaining to reach next level",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld to next level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld avant le prochain niveau"
+          }
+        }
+      }
+    },
+    "%lld / %lld XP" : {
+      "comment" : "Widget: XP progress as current / total XP",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld XP"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld / %2$lld XP"
+          }
+        }
+      }
+    },
+    "%lld XP" : {
+      "comment" : "Widget: total XP count",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld XP"
+          }
+        }
+      }
+    },
+    "%lld-day streak" : {
+      "comment" : "Widget: streak headline with day count",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Série de %lldj"
+          }
+        }
+      }
+    },
+    "Achievements" : {
+      "comment" : "Widget: achievements section title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trophées"
+          }
+        }
+      }
+    },
+    "Badges" : {
+      "comment" : "Widget gallery: badges widget name\nWidget: badges section title",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Badges"
+          }
+        }
+      }
+    },
+    "Bronze" : {
+      "comment" : "Widget: bronze badge tier",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bronze"
+          }
+        }
+      }
+    },
+    "Gold" : {
+      "comment" : "Widget: gold badge tier",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or"
+          }
+        }
+      }
+    },
+    "LEVEL" : {
+      "comment" : "Widget: label inside level ring",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NIVEAU"
+          }
+        }
+      }
+    },
+    "Lines" : {
+      "comment" : "Widget: lines completed label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lignes"
+          }
+        }
+      }
+    },
+    "Lines done" : {
+      "comment" : "Widget: lines completed label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lignes comp."
+          }
+        }
+      }
+    },
+    "Network" : {
+      "comment" : "Widget gallery: network widget name\nWidget: network coverage label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réseau"
+          }
+        }
+      }
+    },
+    "Silver" : {
+      "comment" : "Widget: silver badge tier",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argent"
+          }
+        }
+      }
+    },
+    "Stations" : {
+      "comment" : "Widget: network coverage title\nWidget: total stations visited label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêts"
+          }
+        }
+      }
+    },
+    "Stats" : {
+      "comment" : "Widget gallery: stats widget name",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stats"
+          }
+        }
+      }
+    },
+    "Streak" : {
+      "comment" : "Widget gallery: streak widget name\nWidget: current travel streak label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séries"
+          }
+        }
+      }
+    },
+    "Travels" : {
+      "comment" : "Widget: total travels label",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trajets"
+          }
+        }
+      }
+    },
+    "unlocked" : {
+      "comment" : "Widget: achievements unlocked subtitle",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "débloqués"
+          }
+        }
+      }
+    },
+    "Your badge collection progress." : {
+      "comment" : "Widget gallery: badges widget description",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre progression de collection de badges."
+          }
+        }
+      }
+    },
+    "Your current travel streak." : {
+      "comment" : "Widget gallery: streak widget description",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre série de trajets en cours."
+          }
+        }
+      }
+    },
+    "Your level and travel stats." : {
+      "comment" : "Widget gallery: stats widget description",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre niveau et vos statistiques de trajets."
+          }
+        }
+      }
+    },
+    "Your station coverage progress." : {
+      "comment" : "Widget gallery: network widget description",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre progression de couverture du réseau."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

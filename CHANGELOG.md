@@ -14,7 +14,7 @@ What's New in Métropolist:
 • Celebration Accessibility: VoiceOver now reads XP breakdown, badge unlocks, achievement details, and level progress on the travel success screen. The secret achievement overlay is properly marked as modal.
 
 [BUG FIXES]
-• Fixed branching lines (e.g. RER) only showing stations in one direction. All reachable destinations now appear, and you can travel in either direction.
+• Fixed branching lines (e.g. M13) only showing stations in one direction. All reachable destinations now appear, and you can travel in either direction.
 
 ## 1.2.0 (2026022601) - 2026-02-26
 

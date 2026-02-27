@@ -182,6 +182,9 @@ struct TravelHistoryDetailView: View {
         selectedIDs.removeAll()
         editMode = .inactive
         dataStore.userDataVersion += 1
+        if let snapshot = (logged { try GamificationSnapshot.build(from: dataStore).snapshot }) {
+            WidgetDataBridge.updateWidget(from: snapshot)
+        }
         shouldDismissWhenEmpty = true
     }
 }

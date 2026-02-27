@@ -158,6 +158,7 @@ extension GamificationEngine {
         return PlayerStats(
             totalTravels: input.travels.count,
             totalStationsVisited: uniqueStations.count,
+            totalStationsInNetwork: input.stationMetadata.count,
             totalLinesStarted: linesStarted.count,
             totalLinesCompleted: completedLineIDs.count,
             currentStreak: current,

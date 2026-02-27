@@ -2,6 +2,7 @@ import CoreData
 import Foundation
 import SwiftData
 import TransitModels
+import WidgetKit
 
 enum DataStoreError: LocalizedError {
     case appSupportUnavailable
@@ -237,7 +238,11 @@ final class DataStore {
                 debounceTask = Task { @MainActor [weak self] in
                     try? await Task.sleep(for: .milliseconds(500))
                     guard !Task.isCancelled else { return }
-                    self?.userDataVersion += 1
+                    guard let self else { return }
+                    userDataVersion += 1
+                    if let snapshot = (logged { try GamificationSnapshot.build(from: self).snapshot }) {
+                        WidgetDataBridge.updateWidget(from: snapshot)
+                    }
                 }
             }
         }

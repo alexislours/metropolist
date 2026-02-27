@@ -100,6 +100,7 @@ struct LineProgress: Equatable {
 struct PlayerStats: Equatable {
     let totalTravels: Int
     let totalStationsVisited: Int
+    let totalStationsInNetwork: Int
     let totalLinesStarted: Int
     let totalLinesCompleted: Int
     let currentStreak: Int
@@ -109,6 +110,7 @@ struct PlayerStats: Equatable {
     static let empty = PlayerStats(
         totalTravels: 0,
         totalStationsVisited: 0,
+        totalStationsInNetwork: 0,
         totalLinesStarted: 0,
         totalLinesCompleted: 0,
         currentStreak: 0,

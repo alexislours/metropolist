@@ -1,16 +1,16 @@
 .PHONY: lint lint-fix format format-check build test test-ci periphery
 
 lint:
-	swiftlint lint metropolist/
+	swiftlint lint metropolist/ metropolistWidgets/
 
 lint-fix:
-	swiftlint lint --fix metropolist/
+	swiftlint lint --fix metropolist/ metropolistWidgets/
 
 format:
-	swiftformat metropolist/
+	swiftformat metropolist/ metropolistWidgets/ Shared/
 
 format-check:
-	swiftformat --lint metropolist/
+	swiftformat --lint metropolist/ metropolistWidgets/ Shared/
 
 build:
 	xcodebuild -scheme metropolist -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build

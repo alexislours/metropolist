@@ -31,6 +31,9 @@ struct MetropolistApp: App {
                         registerQuickActions()
                         handleQuickAction(appDelegate.pendingQuickActionType)
                         appDelegate.pendingQuickActionType = nil
+                        if let snapshot = (logged { try GamificationSnapshot.build(from: dataStore).snapshot }) {
+                            WidgetDataBridge.updateWidget(from: snapshot)
+                        }
                     }
                     .onReceive(NotificationCenter.default.publisher(for: .quickActionTriggered)) { notification in
                         handleQuickAction(notification.object as? String)
