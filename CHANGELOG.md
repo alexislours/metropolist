@@ -1,5 +1,12 @@
 # What's New
 
+## 1.3.1 (2026022702) - 2026-02-27
+
+What's New in Métropolist:
+
+[BUG FIXES]
+• Fixed English not appearing as a supported language on the App Store.
+
 ## 1.3.0 (2026022701) - 2026-02-27
 
 What's New in Métropolist:
