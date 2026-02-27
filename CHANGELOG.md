@@ -6,6 +6,7 @@ What's New in Métropolist:
 
 [BUG FIXES]
 • Fixed English not appearing as a supported language on the App Store.
+• Fixed direction picker showing both directions when only one makes sense given the chosen departure and arrival stops.
 
 ## 1.3.0 (2026022701) - 2026-02-27
 
