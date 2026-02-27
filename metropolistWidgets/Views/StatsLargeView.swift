@@ -30,9 +30,12 @@ struct StatsLargeView: View {
                     Text("\(data.totalXP) XP", comment: "Widget: total XP count")
                         .font(.system(.title3, design: .rounded, weight: .bold))
 
-                    Text("\(data.xpInCurrentLevel) / \(data.xpToNextLevel) to next level", comment: "Widget: XP remaining to reach next level")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                    Text(
+                        "\(data.xpInCurrentLevel) / \(data.xpToNextLevel) to next level",
+                        comment: "Widget: XP remaining to reach next level"
+                    )
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
                 }
             }
 

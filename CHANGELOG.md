@@ -1,5 +1,12 @@
 # What's New
 
+## 1.3.0 (2026022701) - 2026-02-27
+
+What's New in Métropolist:
+
+[NEW FEATURES]
+• Home Screen Widgets: View your stats, current streak, badge collection, and network coverage directly from your Home Screen. Available in small, medium, large, and Lock Screen sizes.
+
 ## 1.2.1 (2026022602) - 2026-02-26
 
 What's New in Métropolist:

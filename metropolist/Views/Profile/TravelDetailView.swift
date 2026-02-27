@@ -351,31 +351,9 @@ struct TravelDetailView: View {
             stationNames = names
 
             // Build map data from journey stops
-            let allStations = try dataStore.transitService.stations(bySourceIDs: Array(names.keys))
-            var stationsById: [String: TransitStation] = [:]
-            for station in allStations {
-                stationsById[station.sourceID] = station
-            }
-
-            let stopIDs = journeyStops.isEmpty
-                ? [travel.fromStationSourceID, travel.toStationSourceID]
-                : journeyStops.map(\.stationSourceID)
-
-            var coords: [CLLocationCoordinate2D] = []
-            var annotations: [LineRouteMapView.StationAnnotation] = []
-            for id in stopIDs {
-                guard let station = stationsById[id] else { continue }
-                let coord = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
-                coords.append(coord)
-                let isEndpoint = id == travel.fromStationSourceID || id == travel.toStationSourceID
-                annotations.append(LineRouteMapView.StationAnnotation(
-                    id: id,
-                    coordinate: coord,
-                    isTerminus: isEndpoint
-                ))
-            }
-            mapSegment = coords
-            mapAnnotations = annotations
+            let mapData = try buildMapData(travel: travel, stationNames: names)
+            mapSegment = mapData.segment
+            mapAnnotations = mapData.annotations
 
             // Load completed stops for this line
             completedStopIDs = try dataStore.userService.completedStopIDs(forLineSourceID: travel.lineSourceID)
@@ -384,5 +362,35 @@ struct TravelDetailView: View {
                 print("Failed to load travel detail: \(error)")
             #endif
         }
+    }
+
+    private func buildMapData(
+        travel: Travel,
+        stationNames: [String: String]
+    ) throws -> (segment: [CLLocationCoordinate2D], annotations: [LineRouteMapView.StationAnnotation]) {
+        let allStations = try dataStore.transitService.stations(bySourceIDs: Array(stationNames.keys))
+        var stationsById: [String: TransitStation] = [:]
+        for station in allStations {
+            stationsById[station.sourceID] = station
+        }
+
+        let stopIDs = journeyStops.isEmpty
+            ? [travel.fromStationSourceID, travel.toStationSourceID]
+            : journeyStops.map(\.stationSourceID)
+
+        var coords: [CLLocationCoordinate2D] = []
+        var annotations: [LineRouteMapView.StationAnnotation] = []
+        for id in stopIDs {
+            guard let station = stationsById[id] else { continue }
+            let coord = CLLocationCoordinate2D(latitude: station.latitude, longitude: station.longitude)
+            coords.append(coord)
+            let isEndpoint = id == travel.fromStationSourceID || id == travel.toStationSourceID
+            annotations.append(LineRouteMapView.StationAnnotation(
+                id: id,
+                coordinate: coord,
+                isTerminus: isEndpoint
+            ))
+        }
+        return (coords, annotations)
     }
 }
