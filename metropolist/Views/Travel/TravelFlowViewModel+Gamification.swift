@@ -49,6 +49,31 @@ extension TravelFlowViewModel {
         return options
     }
 
+    /// Filters out variants where the destination is only reachable backward (behind the origin)
+    /// when at least one variant reaches it forward. This prevents offering wrong-direction options
+    /// when the correct direction is obvious from the chosen origin and destination.
+    func filterVariantsByDirection(
+        _ variants: [(variant: TransitRouteVariant, stop: TransitLineStop)]
+    ) -> [(variant: TransitRouteVariant, stop: TransitLineStop)] {
+        guard let origin = originStation, let destination = destinationStation else { return variants }
+
+        var forwardIDs = Set<String>()
+        var checked = Set<String>()
+
+        for pair in variants where checked.insert(pair.variant.sourceID).inserted {
+            let stops: [TransitLineStop]? = logged {
+                try dataStore.transitService.lineStops(forRouteVariantSourceID: pair.variant.sourceID)
+            }
+            guard let stops,
+                  let fromOrder = stops.order(of: origin.sourceID),
+                  stops.order(of: destination.sourceID, after: fromOrder) != nil else { continue }
+            forwardIDs.insert(pair.variant.sourceID)
+        }
+
+        guard !forwardIDs.isEmpty else { return variants }
+        return variants.filter { forwardIDs.contains($0.variant.sourceID) }
+    }
+
     func buildVariantPreview(_ variant: TransitRouteVariant) -> VariantPreview? {
         guard let origin = originStation, let destination = destinationStation else { return nil }
         do {

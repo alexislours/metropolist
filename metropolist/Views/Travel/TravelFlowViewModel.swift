@@ -297,9 +297,12 @@ final class TravelFlowViewModel {
         selectionHaptic()
         destinationStation = option.station
 
+        // Filter out wrong-direction variants when forward direction is available
+        let directionFiltered = filterVariantsByDirection(option.variants)
+
         // Dedup by variant sourceID (a variant can appear multiple times if the station repeats)
         var seenVariantIDs = Set<String>()
-        let allPreviews = option.variants.compactMap { pair -> VariantPreview? in
+        let allPreviews = directionFiltered.compactMap { pair -> VariantPreview? in
             guard seenVariantIDs.insert(pair.variant.sourceID).inserted else { return nil }
             return buildVariantPreview(pair.variant)
         }

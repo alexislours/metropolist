@@ -458,6 +458,93 @@ struct TravelFlowViewModelTests {
         #expect(stopIDs[4] == "trunk2")
     }
 
+    @Test("filterVariantsByDirection removes backward variants when forward exists")
+    func filterVariantsByDirectionRemovesBackward() throws {
+        let tCtx = TestSupport.makeTransitContext()
+        let line = TestSupport.seedLine(in: tCtx, sourceID: "BUS:30", shortName: "30-07")
+
+        let stationA = TestSupport.seedStation(in: tCtx, sourceID: "grands-bains", name: "Grands Bains")
+        let stationB = TestSupport.seedStation(in: tCtx, sourceID: "mid", name: "Middle")
+        let stationC = TestSupport.seedStation(in: tCtx, sourceID: "herblay", name: "Herblay")
+        let stationD = TestSupport.seedStation(in: tCtx, sourceID: "gare-herblay", name: "Gare d'Herblay")
+        let stationE = TestSupport.seedStation(in: tCtx, sourceID: "buttes", name: "Buttes Blanches")
+
+        // Forward variant: A → B → C → D (direction "Gare d'Herblay")
+        let forward = TestSupport.seedRouteVariant(
+            in: tCtx, sourceID: "BUS:30:0", lineSourceID: "BUS:30",
+            direction: 0, headsign: "Gare d'Herblay", stationCount: 4
+        )
+        for (order, sid) in ["grands-bains", "mid", "herblay", "gare-herblay"].enumerated() {
+            TestSupport.seedLineStop(in: tCtx, lineSourceID: "BUS:30", stationSourceID: sid,
+                                     routeVariantSourceID: forward.sourceID, order: order)
+        }
+
+        // Reverse variant: D → C → B → A → E (direction "Buttes Blanches")
+        let reverse = TestSupport.seedRouteVariant(
+            in: tCtx, sourceID: "BUS:30:1", lineSourceID: "BUS:30",
+            direction: 1, headsign: "Buttes Blanches", stationCount: 5
+        )
+        for (order, sid) in ["gare-herblay", "herblay", "mid", "grands-bains", "buttes"].enumerated() {
+            TestSupport.seedLineStop(in: tCtx, lineSourceID: "BUS:30", stationSourceID: sid,
+                                     routeVariantSourceID: reverse.sourceID, order: order)
+        }
+
+        try tCtx.save()
+
+        let store = AppDataStore(transitContext: tCtx, userContext: TestSupport.makeUserContext())
+        let vm = TravelFlowViewModel(dataStore: store)
+        vm.originStation = stationA    // Grands Bains
+        vm.destinationStation = stationC // Herblay
+        vm.selectedLine = line
+
+        let forwardStop = TransitLineStop(
+            lineSourceID: "BUS:30", stationSourceID: "herblay",
+            routeVariantSourceID: forward.sourceID, order: 2, isTerminus: false
+        )
+        let reverseStop = TransitLineStop(
+            lineSourceID: "BUS:30", stationSourceID: "herblay",
+            routeVariantSourceID: reverse.sourceID, order: 1, isTerminus: false
+        )
+        let variants: [(variant: TransitRouteVariant, stop: TransitLineStop)] = [
+            (variant: forward, stop: forwardStop),
+            (variant: reverse, stop: reverseStop),
+        ]
+
+        let filtered = vm.filterVariantsByDirection(variants)
+
+        // Only the forward variant should remain
+        #expect(filtered.count == 1)
+        #expect(filtered[0].variant.sourceID == "BUS:30:0")
+    }
+
+    @Test("filterVariantsByDirection keeps backward variant when no forward exists")
+    func filterVariantsByDirectionKeepsBackwardOnly() throws {
+        let tCtx = TestSupport.makeTransitContext()
+        let (line, branchA, _, trunkStations) = Self.makeBranchingLine(in: tCtx)
+        let store = AppDataStore(transitContext: tCtx, userContext: TestSupport.makeUserContext())
+        let vm = TravelFlowViewModel(dataStore: store)
+
+        // A1 → Terminus: only reachable backward on variant METRO:13:1:a0
+        vm.originStation = branchA[1]       // A1
+        vm.destinationStation = trunkStations[3] // Terminus
+        vm.selectedLine = line
+
+        let variants = try store.transitService.routeVariants(forLineSourceID: "METRO:13")
+        let fullVariantA = variants.first { $0.sourceID == "METRO:13:1:a0" }!
+        let stops = try store.transitService.lineStops(forRouteVariantSourceID: fullVariantA.sourceID)
+        let terminusStop = stops.first { $0.stationSourceID == "terminus" }!
+
+        let input: [(variant: TransitRouteVariant, stop: TransitLineStop)] = [
+            (variant: fullVariantA, stop: terminusStop),
+        ]
+
+        let filtered = vm.filterVariantsByDirection(input)
+
+        // Backward variant should be kept since no forward alternative exists
+        #expect(filtered.count == 1)
+        #expect(filtered[0].variant.sourceID == "METRO:13:1:a0")
+    }
+
     @Test("buildVariantPreview works in reverse direction")
     func branchingLineReverseVariantPreview() throws {
         let tCtx = TestSupport.makeTransitContext()
