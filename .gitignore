@@ -29,6 +29,7 @@ node_modules/
 data-builder/metropolist-data.json
 data-builder/data/*.json
 data-builder/data/IDFM-gtfs/
+data-builder/data/backup/**/
 store-builder/transit.store
 metropolist/metropolist/transit.store
 

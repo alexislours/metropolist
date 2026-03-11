@@ -70,18 +70,15 @@ A native iOS app to explore, track, and complete every transit station in the Pa
 
 The app bundles a pre-built SwiftData store with transit data. Since this file is not checked into the repository, you must download the source datasets and generate it before building.
 
-#### Required Datasets
+#### Fetching the Data
 
-Download the following from [IDFM Open Data](https://prim.iledefrance-mobilites.fr/) and [data.gouv.fr](https://www.data.gouv.fr/):
+A fetch script downloads all required datasets (3 JSON files + GTFS archive) from the IDFM and data.gouv.fr APIs, backing up any existing data first:
 
-| Dataset                                                                                                                              | Source       | License                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------- |
-| [Arrêts et lignes](https://prim.iledefrance-mobilites.fr/fr/jeux-de-donnees/arrets-lignes)                                           | IDFM         | [ODbL](https://opendatacommons.org/licenses/odbl/)                                  |
-| [Arrêts](https://prim.iledefrance-mobilites.fr/fr/jeux-de-donnees/arrets)                                                            | IDFM         | [Etalab Open License 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) |
-| [Référentiel des lignes](https://prim.iledefrance-mobilites.fr/fr/jeux-de-donnees/referentiel-des-lignes)                            | IDFM         | [ODbL](https://opendatacommons.org/licenses/odbl/)                                  |
-| [GTFS Horaires](https://www.data.gouv.fr/datasets/horaires-prevus-sur-les-lignes-de-transport-en-commun-dile-de-france-gtfs-datahub) | data.gouv.fr | [Licence Mobilités](https://cloud.fabmob.io/s/eYWWJBdM3fQiFNm)                      |
+```bash
+make fetch
+```
 
-Place the downloaded files in `data-builder/data/` with the following structure:
+This populates `data-builder/data/` with the following structure:
 
 ```
 data-builder/data/
@@ -100,7 +97,16 @@ data-builder/data/
     ...
 ```
 
-Then run:
+The datasets are published under the following licenses:
+
+| Dataset                                                                                                                              | Source       | License                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ----------------------------------------------------------------------------------- |
+| [Arrêts et lignes](https://prim.iledefrance-mobilites.fr/fr/jeux-de-donnees/arrets-lignes)                                           | IDFM         | [ODbL](https://opendatacommons.org/licenses/odbl/)                                  |
+| [Arrêts](https://prim.iledefrance-mobilites.fr/fr/jeux-de-donnees/arrets)                                                            | IDFM         | [Etalab Open License 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) |
+| [Référentiel des lignes](https://prim.iledefrance-mobilites.fr/fr/jeux-de-donnees/referentiel-des-lignes)                            | IDFM         | [ODbL](https://opendatacommons.org/licenses/odbl/)                                  |
+| [GTFS Horaires](https://www.data.gouv.fr/datasets/horaires-prevus-sur-les-lignes-de-transport-en-commun-dile-de-france-gtfs-datahub) | data.gouv.fr | [Licence Mobilités](https://cloud.fabmob.io/s/eYWWJBdM3fQiFNm)                      |
+
+#### Building the Store
 
 ```bash
 # 1. Process IDFM/GTFS data into JSON

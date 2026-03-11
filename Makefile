@@ -2,9 +2,13 @@ DATA_JSON = data-builder/metropolist-data.json
 TRANSIT_STORE = store-builder/transit.store
 APP_STORE = metropolist/metropolist/transit.store
 
-.PHONY: all data store import icons clean
+.PHONY: all fetch data store import icons clean
 
 all: store
+
+# Step 0 (optional): Fetch latest raw data from IDFM APIs
+fetch:
+	cd data-builder && bun run fetch
 
 # Step 1: Build JSON from raw IDFM/GTFS data (always runs — inputs are external GTFS files)
 data:
