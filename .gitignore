@@ -1,41 +1,47 @@
 # macOS
 .DS_Store
-.AppleDouble
-.LSOverride
 
 # Xcode
 xcuserdata/
 *.xcuserstate
-*.xcscmblueprint
-*.xccheckout
+DerivedData/
 
 # Swift Package Manager
 .build/
 .swiftpm/
 
-# CocoaPods
-Pods/
+# Fastlane (metropolist/fastlane/)
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots/
+**/fastlane/screenshots_ipad/
+**/fastlane/screenshots_organized/
+**/fastlane/screenshots_ipad_organized/
+**/fastlane/test_output
 
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
+# Bun / Node (data-builder/)
+node_modules/
+.env
+.env.*.local
+.env.local
 
-# IDE
-.idea/
-.vscode/
-.cursor/
-*.swp
-*~
+# Generated data - regenerate with `make`
+data-builder/metropolist-data.json
+data-builder/data/*.json
+data-builder/data/IDFM-gtfs/
+store-builder/transit.store
+metropolist/metropolist/transit.store
 
-# Build artifacts
-DerivedData/
+# Build output
 build/
 
-# Generated data (large files - regenerate with Makefile)
-data-builder/metropolist-data.json
-store-builder/transit.store
-
+# IDE
+.cursor/
 CLAUDE.md
+.vscode/
+.idea/
+
+# Project-specific
 metropolist/CHANGELOG.md
+metropolist/ideas/
+metropolist/proposals/
