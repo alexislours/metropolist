@@ -255,6 +255,9 @@ final class TravelFlowViewModel {
             let existingCompletions = try dataStore.userService.completedStopIDs(forLineSourceID: line.sourceID)
             let newCompletions = stationIDs.filter { !existingCompletions.contains($0) }.count
 
+            let allCompletedStationIDs = try Set(dataStore.userService.allCompletedStops().map(\.stationSourceID))
+            let newGlobalStations = stationIDs.filter { !allCompletedStationIDs.contains($0) }.count
+
             // Detect first travel on this line
             let lineTravelCount = logged { try dataStore.userService.travelCount(forLineSourceID: line.sourceID) } ?? 0
             let isFirstTravelOnLine = lineTravelCount == 0
@@ -282,7 +285,7 @@ final class TravelFlowViewModel {
                         lineSourceID: line.sourceID,
                         lineShortName: line.shortName,
                         lineMode: TransitMode(rawValue: line.mode) ?? .bus,
-                        newStopsCount: newCompletions,
+                        newStopsCount: newGlobalStations,
                         isFirstTravelOnLine: isFirstTravelOnLine,
                         afterLineProgress: after.lineProgress[line.sourceID]
                     )
