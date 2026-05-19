@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: App Store reviews
+    url: https://apps.apple.com/app/id6759519940
+    about: For general feedback or ratings, please leave a review on the App Store.
+  - name: Transit data correction
+    url: https://prim.iledefrance-mobilites.fr/
+    about: Métropolist uses open data from Île-de-France Mobilités. Corrections to station names, lines, or routes should be reported upstream at IDFM.
