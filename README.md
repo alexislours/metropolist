@@ -137,7 +137,7 @@ English, French
 
 ## Data Sources
 
-Transit data is sourced from [Île-de-France Mobilités (IDFM)](https://prim.iledefrance-mobilites.fr/) and [data.gouv.fr](https://www.data.gouv.fr/), published under the [Etalab Open License 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/), [ODbL](https://opendatacommons.org/licenses/odbl/), and [Licence Mobilités](https://cloud.fabmob.io/s/eYWWJBdM3fQiFNm) licenses. See [Required Datasets](#required-datasets) for details.
+Transit data is sourced from [Île-de-France Mobilités (IDFM)](https://prim.iledefrance-mobilites.fr/) and [data.gouv.fr](https://www.data.gouv.fr/), published under the [Etalab Open License 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/), [ODbL](https://opendatacommons.org/licenses/odbl/), and [Licence Mobilités](https://cloud.fabmob.io/s/eYWWJBdM3fQiFNm) licenses. See [Required Datasets](#data-pipeline) for details.
 
 ## License
 
