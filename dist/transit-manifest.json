@@ -1,0 +1,35 @@
+{
+  "manifestVersion": 1,
+  "updatedAt": "2026-08-07T23:46:14.652Z",
+  "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202608072345,
+      "generatedAt": "2026-08-07T23:45:22.257Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-07-2346/transit-v1-202608072345.store",
+      "byteSize": 8777728,
+      "sha256": "27c773bb010d53ecfd63017934f833cde2eedf314d8a1814afa20a103bc5fce7",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 97037,
+        "lines": 1897,
+        "routeVariants": 5516,
+        "stations": 15058,
+        "transfers": 12949
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "linesModified": 0,
+          "stationsAdded": 0,
+          "stationsRemoved": 0,
+          "stationsModified": 0,
+          "routeVariantsChanged": 0,
+          "transfersChanged": 0
+        },
+        "highlights": []
+      }
+    }
+  ]
+}
