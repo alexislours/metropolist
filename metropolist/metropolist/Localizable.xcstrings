@@ -388,7 +388,45 @@
       }
     },
     "%lld connections changed" : {
-      "comment" : "Transit updates: transfers changed count"
+      "comment" : "Transit updates: transfers changed count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld connection changed"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld connections changed"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld correspondance modifiée"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld correspondances modifiées"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld day streak" : {
       "comment" : "Statistics: current streak count",
@@ -510,13 +548,127 @@
       }
     },
     "%lld lines added" : {
-      "comment" : "Transit updates: lines added count"
+      "comment" : "Transit updates: lines added count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld line added"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lines added"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ligne ajoutée"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lignes ajoutées"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld lines removed" : {
-      "comment" : "Transit updates: lines removed count"
+      "comment" : "Transit updates: lines removed count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld line removed"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lines removed"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ligne supprimée"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lignes supprimées"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld lines updated" : {
-      "comment" : "Transit updates: lines updated count"
+      "comment" : "Transit updates: lines updated count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld line updated"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lines updated"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ligne modifiée"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld lignes modifiées"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld m" : {
       "comment" : "Distance: meters",
@@ -672,7 +824,45 @@
       }
     },
     "%lld routes changed" : {
-      "comment" : "Transit updates: routes changed count"
+      "comment" : "Transit updates: routes changed count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld route changed"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld routes changed"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld itinéraire modifié"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld itinéraires modifiés"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld stops" : {
       "comment" : "Line detail: stop count\nTimeline: day stops count\nTimeline: stops traveled count\nTravel detail accessibility: stops count\nTravel detail: stops traveled count\nTravel flow: total stops count for direction\nTravel history accessibility: stops count\nTravel history: stops traveled count",
@@ -692,13 +882,127 @@
       }
     },
     "%lld stops added" : {
-      "comment" : "Transit updates: stops added count"
+      "comment" : "Transit updates: stops added count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stop added"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stops added"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arrêt ajouté"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arrêts ajoutés"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld stops removed" : {
-      "comment" : "Transit updates: stops removed count"
+      "comment" : "Transit updates: stops removed count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stop removed"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stops removed"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arrêt supprimé"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arrêts supprimés"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld stops updated" : {
-      "comment" : "Transit updates: stops updated count"
+      "comment" : "Transit updates: stops updated count",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stop updated"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stops updated"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arrêt modifié"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld arrêts modifiés"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld stops, %lld travels, and %lld favorites imported." : {
       "comment" : "Settings: import success message with counts",
@@ -1599,7 +1903,21 @@
       }
     },
     "Always" : {
-      "comment" : "Transit updates: automatic updates always"
+      "comment" : "Transit updates: automatic updates always",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Always"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toujours"
+          }
+        }
+      }
     },
     "An error occurred while loading station data." : {
       "comment" : "Map tab: error description when station data fails to load",
@@ -1670,10 +1988,38 @@
       }
     },
     "Automatic Updates" : {
-      "comment" : "Transit updates: automatic updates label"
+      "comment" : "Transit updates: automatic updates label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic Updates"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mises à jour automatiques"
+          }
+        }
+      }
     },
     "Automatic updates are set to Wi-Fi only. Download this update now anyway?" : {
-      "comment" : "Transit updates: cellular confirmation message"
+      "comment" : "Transit updates: cellular confirmation message",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic updates are set to Wi-Fi only. Download this update now anyway?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les mises à jour automatiques sont limitées au Wi-Fi. Télécharger quand même cette mise à jour maintenant ?"
+          }
+        }
+      }
     },
     "Awarded for" : {
       "comment" : "Certificate: formal award label",
@@ -2050,7 +2396,21 @@
       }
     },
     "Check for Updates" : {
-      "comment" : "Transit updates: check button"
+      "comment" : "Transit updates: check button",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check for Updates"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher des mises à jour"
+          }
+        }
+      }
     },
     "Checking" : {
       "comment" : "Settings: iCloud status checking",
@@ -2070,7 +2430,21 @@
       }
     },
     "Checking for Updates…" : {
-      "comment" : "Transit updates: checking label"
+      "comment" : "Transit updates: checking label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checking for Updates…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche de mises à jour…"
+          }
+        }
+      }
     },
     "Choose a direction" : {
       "comment" : "Nav title: choose direction for metro/tram\nTravel flow: fallback choose branch title",
@@ -2430,7 +2804,21 @@
       }
     },
     "Contains information from the following dataset, made available under the Licence Mobilités." : {
-      "comment" : "Licences: Licence Mobilités attribution text"
+      "comment" : "Licences: Licence Mobilités attribution text",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contains information from the following dataset, made available under the Licence Mobilités."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contient des informations issues du jeu de données suivant, mis à disposition sous Licence Mobilités."
+          }
+        }
+      }
     },
     "Continue" : {
       "comment" : "Travel success: dismiss secret achievement overlay",
@@ -2552,7 +2940,21 @@
       }
     },
     "Could not reach the update server." : {
-      "comment" : "Transit update error: network"
+      "comment" : "Transit update error: network",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not reach the update server."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de joindre le serveur de mise à jour."
+          }
+        }
+      }
     },
     "Curious" : {
       "comment" : "Achievement title: visit 10 stops",
@@ -3098,16 +3500,72 @@
       }
     },
     "Download" : {
-      "comment" : "Transit updates: confirm cellular download"
+      "comment" : "Transit updates: confirm cellular download",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger"
+          }
+        }
+      }
     },
     "Download (%@)" : {
-      "comment" : "Transit update sheet: download button with size\nTransit updates: download button with size"
+      "comment" : "Transit update sheet: download button with size\nTransit updates: download button with size",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download (%@)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger (%@)"
+          }
+        }
+      }
     },
     "Download cancelled." : {
-      "comment" : "Transit update error: cancelled"
+      "comment" : "Transit update error: cancelled",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download cancelled."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement annulé."
+          }
+        }
+      }
     },
     "Download over cellular?" : {
-      "comment" : "Transit updates: cellular confirmation title"
+      "comment" : "Transit updates: cellular confirmation title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download over cellular?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharger via le réseau cellulaire ?"
+          }
+        }
+      }
     },
     "Each line has three badge tiers: Bronze at 10% completion, Silver at 40%, and Gold at 100%." : {
       "comment" : "FAQ: badges answer",
@@ -3671,7 +4129,21 @@
       }
     },
     "Hide changes" : {
-      "comment" : "Transit updates: hide change list"
+      "comment" : "Transit updates: hide change list",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide changes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer les changements"
+          }
+        }
+      }
     },
     "History" : {
       "comment" : "Travel history: navigation title",
@@ -4150,7 +4622,21 @@
       }
     },
     "LICENCE MOBILITÉS" : {
-      "comment" : "Licences: Licence Mobilités section header"
+      "comment" : "Licences: Licence Mobilités section header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LICENCE MOBILITÉS"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LICENCE MOBILITÉS"
+          }
+        }
+      }
     },
     "LICENCE OUVERTE v2.0 (ETALAB)" : {
       "comment" : "Licences: Etalab section header",
@@ -5071,7 +5557,21 @@
       }
     },
     "New transit data is available" : {
-      "comment" : "Transit update sheet: title"
+      "comment" : "Transit update sheet: title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New transit data is available"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De nouvelles données de transport sont disponibles"
+          }
+        }
+      }
     },
     "Next day with travels" : {
       "comment" : "Timeline: next day button",
@@ -5176,7 +5676,21 @@
       }
     },
     "No internet connection." : {
-      "comment" : "Transit update error: offline"
+      "comment" : "Transit update error: offline",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No internet connection."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune connexion Internet."
+          }
+        }
+      }
     },
     "No lines" : {
       "comment" : "Station detail: no connecting lines",
@@ -5315,10 +5829,38 @@
       }
     },
     "Not enough free space to download the update." : {
-      "comment" : "Transit update error: disk full"
+      "comment" : "Transit update error: disk full",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not enough free space to download the update."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espace libre insuffisant pour télécharger la mise à jour."
+          }
+        }
+      }
     },
     "Not Now" : {
-      "comment" : "Transit update sheet: dismiss button"
+      "comment" : "Transit update sheet: dismiss button",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Now"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus tard"
+          }
+        }
+      }
     },
     "Off" : {
       "comment" : "Map accessibility: heatmap off\nTransit updates: automatic updates off",
@@ -5661,7 +6203,21 @@
       }
     },
     "Published %@" : {
-      "comment" : "Transit update sheet: dataset publication date"
+      "comment" : "Transit update sheet: dataset publication date",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Published %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publié le %@"
+          }
+        }
+      }
     },
     "RANKINGS" : {
       "comment" : "Statistics: rankings section header",
@@ -6395,7 +6951,21 @@
       }
     },
     "Source Code" : {
-      "comment" : "Settings: GitHub source code link"
+      "comment" : "Settings: GitHub source code link",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Source Code"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code source"
+          }
+        }
+      }
     },
     "Speed" : {
       "comment" : "Accessibility: speed picker",
@@ -6772,10 +7342,38 @@
       }
     },
     "The download was incomplete or corrupted." : {
-      "comment" : "Transit update error: integrity"
+      "comment" : "Transit update error: integrity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The download was incomplete or corrupted."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le téléchargement est incomplet ou corrompu."
+          }
+        }
+      }
     },
     "The downloaded data could not be opened." : {
-      "comment" : "Transit update error: unusable store"
+      "comment" : "Transit update error: unusable store",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The downloaded data could not be opened."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les données téléchargées n'ont pas pu être ouvertes."
+          }
+        }
+      }
     },
     "The Full Circle" : {
       "comment" : "Achievement title: travel on both T3a and T3b tram lines",
@@ -6829,10 +7427,38 @@
       }
     },
     "The update could not be verified as authentic." : {
-      "comment" : "Transit update error: bad signature"
+      "comment" : "Transit update error: bad signature",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The update could not be verified as authentic."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'authenticité de la mise à jour n'a pas pu être vérifiée."
+          }
+        }
+      }
     },
     "The update information could not be read." : {
-      "comment" : "Transit update error: bad manifest"
+      "comment" : "Transit update error: bad manifest",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The update information could not be read."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les informations de mise à jour n'ont pas pu être lues."
+          }
+        }
+      }
     },
     "This action cannot be undone." : {
       "comment" : "Travel history: delete warning message",
@@ -7583,19 +8209,89 @@
       }
     },
     "Update available" : {
-      "comment" : "Settings: transit data update available badge\nTransit updates: available label"
+      "comment" : "Settings: transit data update available badge\nTransit updates: available label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update available"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mise à jour disponible"
+          }
+        }
+      }
     },
     "Update ready — restart to apply" : {
-      "comment" : "Settings: transit data update staged badge"
+      "comment" : "Settings: transit data update staged badge",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update ready — restart to apply"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mise à jour prête — redémarrez pour l'appliquer"
+          }
+        }
+      }
     },
     "Update ready. It will be applied the next time you open Metropolist." : {
-      "comment" : "Transit updates: staged label"
+      "comment" : "Transit updates: staged label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update ready. It will be applied the next time you open Metropolist."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mise à jour prête. Elle sera appliquée à la prochaine ouverture de Metropolist."
+          }
+        }
+      }
     },
     "Updated transit data." : {
-      "comment" : "Transit updates: generic change description"
+      "comment" : "Transit updates: generic change description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated transit data."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Données de transport mises à jour."
+          }
+        }
+      }
     },
     "UPDATES" : {
-      "comment" : "Transit data: updates section header"
+      "comment" : "Transit data: updates section header",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UPDATES"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MISES À JOUR"
+          }
+        }
+      }
     },
     "Use 3 transport modes in one day" : {
       "comment" : "Achievement description: use 3 modes in one day",
@@ -7649,7 +8345,21 @@
       }
     },
     "Verifying…" : {
-      "comment" : "Transit updates: verifying label"
+      "comment" : "Transit updates: verifying label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifying…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérification…"
+          }
+        }
+      }
     },
     "Versatile" : {
       "comment" : "Achievement title: use every transport mode",
@@ -8111,7 +8821,21 @@
       }
     },
     "What's new" : {
-      "comment" : "Transit updates: show change list"
+      "comment" : "Transit updates: show change list",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's new"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveautés"
+          }
+        }
+      }
     },
     "When you log a travel, all intermediate stations between your departure and destination are marked as completed. Visiting a stop on different lines counts separately for each line." : {
       "comment" : "FAQ: completed stop answer",
@@ -8148,7 +8872,21 @@
       }
     },
     "Wi-Fi Only" : {
-      "comment" : "Transit updates: automatic updates on Wi-Fi only"
+      "comment" : "Transit updates: automatic updates on Wi-Fi only",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi Only"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi uniquement"
+          }
+        }
+      }
     },
     "Winter is Coming" : {
       "comment" : "Achievement title: record a travel in December or January (Game of Thrones reference)",
@@ -8203,7 +8941,21 @@
       }
     },
     "Yes! The full transit dataset ships inside the app so you can browse lines, stations, and routes without an internet connection. When you are online, Metropolist can fetch a newer dataset — this is optional and can be turned off in Settings." : {
-      "comment" : "FAQ: offline answer"
+      "comment" : "FAQ: offline answer",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes! The full transit dataset ships inside the app so you can browse lines, stations, and routes without an internet connection. When you are online, Metropolist can fetch a newer dataset — this is optional and can be turned off in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui ! L'intégralité des données de transport est intégrée à l'application afin que vous puissiez consulter les lignes, les arrêts et les itinéraires sans connexion Internet. Lorsque vous êtes en ligne, Metropolist peut télécharger un jeu de données plus récent : c'est facultatif et désactivable dans les Réglages."
+          }
+        }
+      }
     },
     "Yes. Go to Profile > History, tap Select, choose the travels you want to remove, then delete them. If a stop is no longer covered by another travel on that line, it will also be removed from your completion." : {
       "comment" : "FAQ: delete travel answer",
