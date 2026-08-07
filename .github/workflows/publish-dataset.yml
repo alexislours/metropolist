@@ -123,11 +123,10 @@ jobs:
       - name: Render release notes
         if: ${{ steps.manifest.outputs.result == 'PUBLISH' }}
         run: |
-          bun run --eval '
-            import { renderReleaseNotes } from "./data-builder/src/changes";
-            const changes = await Bun.file("data-builder/metropolist-changes.json").json();
-            await Bun.write("dist/release-notes.md", renderReleaseNotes(changes));
-          '
+          bun run scripts/render-release-notes.ts \
+            data-builder/metropolist-changes.json \
+            dist/release-notes.md
+          test -s dist/release-notes.md
 
       - name: Sign manifest
         if: ${{ steps.manifest.outputs.result == 'PUBLISH' }}
