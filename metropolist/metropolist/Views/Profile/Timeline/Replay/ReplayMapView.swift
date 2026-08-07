@@ -8,6 +8,7 @@ struct ReplayMapView: View {
     var mapHeight: CGFloat = 1
 
     @AppStorage("mapStyle") private var mapStyle: String = "standard"
+    // periphery:ignore
     @State private var cameraPosition: MapCameraPosition = .automatic
     @State private var cameraTrigger = false
 

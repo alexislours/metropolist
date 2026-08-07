@@ -11,7 +11,9 @@ extension [TransitLineStop] {
         var best: Int?
         for stop in self where stop.stationSourceID == stationSourceID && stop.order > minOrder {
             if let current = best {
-                if stop.order < current { best = stop.order }
+                if stop.order < current {
+                    best = stop.order
+                }
             } else {
                 best = stop.order
             }
@@ -24,7 +26,9 @@ extension [TransitLineStop] {
         var best: Int?
         for stop in self where stop.stationSourceID == stationSourceID && stop.order < maxOrder {
             if let current = best {
-                if stop.order > current { best = stop.order }
+                if stop.order > current {
+                    best = stop.order
+                }
             } else {
                 best = stop.order
             }

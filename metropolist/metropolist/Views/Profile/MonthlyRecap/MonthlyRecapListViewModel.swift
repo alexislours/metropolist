@@ -34,7 +34,9 @@ struct RecapSummary: Identifiable {
     }
 
     var isYearly: Bool {
-        if case .yearly = kind { return true }
+        if case .yearly = kind {
+            return true
+        }
         return false
     }
 

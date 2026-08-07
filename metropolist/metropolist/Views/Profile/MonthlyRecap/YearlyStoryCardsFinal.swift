@@ -174,7 +174,9 @@ struct WrappedSummaryPage: View {
             }
         }
         .onChange(of: animationPhase) {
-            if animationPhase >= 2 { showConfetti = true }
+            if animationPhase >= 2 {
+                showConfetti = true
+            }
         }
         .accessibilityElement(children: .combine)
     }

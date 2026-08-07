@@ -132,7 +132,9 @@ struct TravelTimelineView: View {
                 resetMapToDay(model)
             } else {
                 await viewModel?.load()
-                if let viewModel { resetMapToDay(viewModel) }
+                if let viewModel {
+                    resetMapToDay(viewModel)
+                }
             }
         }
     }
@@ -216,7 +218,9 @@ struct TravelTimelineView: View {
                 selectedDate: viewModel?.selectedDate ?? Date(),
                 onDateSelected: { date in
                     viewModel?.selectDate(date)
-                    if let viewModel { resetMapToDay(viewModel) }
+                    if let viewModel {
+                        resetMapToDay(viewModel)
+                    }
                     showDatePicker = false
                 }
             )

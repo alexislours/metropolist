@@ -91,7 +91,9 @@ struct WrappedNumbersPage: View {
             .offset(y: -30)
         }
         .onChange(of: animationPhase) {
-            if animationPhase >= 2 { animateCounter() }
+            if animationPhase >= 2 {
+                animateCounter()
+            }
         }
         .accessibilityElement(children: .combine)
     }

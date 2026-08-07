@@ -79,8 +79,12 @@ struct TravelHistoryRow: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel({
             var parts: [String] = []
-            if let line { parts.append(line.shortName) }
-            if let mode { parts.append(mode.label) }
+            if let line {
+                parts.append(line.shortName)
+            }
+            if let mode {
+                parts.append(mode.label)
+            }
             parts.append(fromName)
             parts.append(String(localized: "to", comment: "Travel history accessibility: route separator"))
             parts.append(toName)

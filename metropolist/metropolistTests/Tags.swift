@@ -13,4 +13,5 @@ extension Tag {
     @Tag static var dataStore: Self
     @Tag static var viewModel: Self
     @Tag static var travel: Self
+    @Tag static var transitUpdate: Self
 }

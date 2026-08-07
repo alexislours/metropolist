@@ -3,6 +3,7 @@ import UIKit
 
 struct TransitDataView: View {
     let stats: TransitStats
+    let updateModel: TransitUpdateModel
 
     @State private var exportedFileURL: URL?
 
@@ -79,6 +80,8 @@ struct TransitDataView: View {
                         }
                     }
                 }
+
+                TransitUpdatesSection(model: updateModel)
 
                 Button {
                     exportDatabase()

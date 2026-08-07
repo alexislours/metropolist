@@ -60,7 +60,11 @@ struct MainTabView: View {
         }
         .fullScreenCover(isPresented: Binding(
             get: { !hasSeenOnboarding },
-            set: { if !$0 { hasSeenOnboarding = true } }
+            set: {
+                if !$0 {
+                    hasSeenOnboarding = true
+                }
+            }
         )) {
             OnboardingView(hasSeenOnboarding: $hasSeenOnboarding)
         }

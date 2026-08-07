@@ -67,7 +67,9 @@ enum MonthlyStatsEngine {
         // Collect all months that have at least one travel
         let allMonths = travelsByMonth.keys.sorted { lhs, rhs in
             guard let lhsYear = lhs.year, let rhsYear = rhs.year else { return false }
-            if lhsYear != rhsYear { return lhsYear < rhsYear }
+            if lhsYear != rhsYear {
+                return lhsYear < rhsYear
+            }
             guard let lhsMonth = lhs.month, let rhsMonth = rhs.month else { return false }
             return lhsMonth < rhsMonth
         }

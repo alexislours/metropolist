@@ -11,6 +11,7 @@ struct StationsListView: View {
     @State private var loadedLines: [String: [TransitLine]] = [:]
     @State private var favoriteStations: [TransitStation] = []
     @State private var favoriteStationIDs: Set<String> = []
+    // periphery:ignore
     @State private var favoriteSectionExpanded = true
 
     // Search state

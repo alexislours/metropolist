@@ -22,7 +22,9 @@ extension GamificationEngine {
             } else {
                 streakLen = 1
             }
-            if results.count == targets.count { break }
+            if results.count == targets.count {
+                break
+            }
         }
 
         return results

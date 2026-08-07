@@ -27,11 +27,18 @@ node_modules/
 
 # Generated data - regenerate with `make`
 data-builder/metropolist-data.json
+data-builder/metropolist-changes.json
 data-builder/data/*.json
 data-builder/data/IDFM-gtfs/
 data-builder/data/backup/**/
 store-builder/transit.store
+store-builder/transit.store-shm
+store-builder/transit.store-wal
+store-builder/transit-info.json
 metropolist/metropolist/transit.store
+metropolist/metropolist/transit.store-shm
+metropolist/metropolist/transit.store-wal
+metropolist/metropolist/transit-info.json
 
 # Build output
 build/

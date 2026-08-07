@@ -1,4 +1,5 @@
 import SwiftUI
+import TransitModels
 
 @MainActor
 @Observable
@@ -108,7 +109,8 @@ final class YearlyRecapViewModel {
         var bestDay: Date = .now
         var bestDistance: Double = 0
 
-        var distanceCache = DistanceCache.load()
+        let transitIdentity = dataStore.transitDescriptor.cacheIdentity
+        var distanceCache = DistanceCache.load(transitIdentity: transitIdentity)
 
         for (day, dayTravels) in travelsByDay {
             var dayDistance = 0.0
@@ -134,7 +136,7 @@ final class YearlyRecapViewModel {
             }
         }
 
-        distanceCache.persistIfNeeded()
+        distanceCache.persistIfNeeded(transitIdentity: transitIdentity)
 
         if bestDistance > 0 {
             mostDistanceDayMeters = bestDistance

@@ -5,6 +5,7 @@ struct ProfileTab: View {
     @Environment(DataStore.self) private var dataStore
     @State private var viewModel: ProfileViewModel?
     @State private var selectedRecap: RecapKind?
+    // periphery:ignore
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -255,10 +256,14 @@ struct BadgesDetailView: View {
             let sorted = group.lines.sorted { lhs, rhs in
                 let tierA = snapshot.lineBadges[lhs.sourceID] ?? .locked
                 let tierB = snapshot.lineBadges[rhs.sourceID] ?? .locked
-                if tierA != tierB { return tierA > tierB }
+                if tierA != tierB {
+                    return tierA > tierB
+                }
                 let fracA = snapshot.lineProgress[lhs.sourceID]?.fraction ?? 0
                 let fracB = snapshot.lineProgress[rhs.sourceID]?.fraction ?? 0
-                if fracA != fracB { return fracA > fracB }
+                if fracA != fracB {
+                    return fracA > fracB
+                }
                 return lhs.shortName.localizedStandardCompare(rhs.shortName) == .orderedAscending
             }
             return (mode: group.mode, sortedLines: sorted)

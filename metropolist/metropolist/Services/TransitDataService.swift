@@ -180,7 +180,9 @@ struct TransitDataService {
         // Group lineSourceIDs by station
         var lineIDsByStation: [String: Set<String>] = [:]
         for stop in stops {
-            if let exclude = excludingLineSourceID, stop.lineSourceID == exclude { continue }
+            if let exclude = excludingLineSourceID, stop.lineSourceID == exclude {
+                continue
+            }
             lineIDsByStation[stop.stationSourceID, default: []].insert(stop.lineSourceID)
         }
 

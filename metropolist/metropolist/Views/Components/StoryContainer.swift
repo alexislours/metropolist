@@ -28,7 +28,9 @@ struct StoryContainer<Content: View>: View {
                 containerWidth = newWidth
             }
             .onChange(of: progress) {
-                if progress >= 1, currentPage < pageCount - 1 { goForward() }
+                if progress >= 1, currentPage < pageCount - 1 {
+                    goForward()
+                }
             }
         }
         .simultaneousGesture(storyGesture)

@@ -90,7 +90,9 @@ extension GamificationEngine {
             guard requiredDepartments.contains(department) else { continue }
             if departmentFirstDates[department] == nil {
                 departmentFirstDates[department] = stop.completedAt
-                if departmentFirstDates.count == requiredDepartments.count { break }
+                if departmentFirstDates.count == requiredDepartments.count {
+                    break
+                }
             }
         }
         guard requiredDepartments.allSatisfy({ departmentFirstDates[$0] != nil }) else { return nil }

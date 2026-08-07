@@ -150,11 +150,21 @@ private extension YearlyRecapView {
 
     func superlativeCount(for snapshot: YearlySnapshot) -> Int {
         var count = 0
-        if snapshot.busiestDay.1 > 0 { count += 1 }
-        if snapshot.longestStreak.length > 1 { count += 1 }
-        if snapshot.mostLinesInADay.1 > 0 { count += 1 }
-        if snapshot.mostStationsInADay.1 > 0 { count += 1 }
-        if viewModel.mostDistanceDayMeters > 0 { count += 1 }
+        if snapshot.busiestDay.1 > 0 {
+            count += 1
+        }
+        if snapshot.longestStreak.length > 1 {
+            count += 1
+        }
+        if snapshot.mostLinesInADay.1 > 0 {
+            count += 1
+        }
+        if snapshot.mostStationsInADay.1 > 0 {
+            count += 1
+        }
+        if viewModel.mostDistanceDayMeters > 0 {
+            count += 1
+        }
         return count
     }
 }

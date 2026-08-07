@@ -1,3 +1,4 @@
+import CryptoKit
 import Foundation
 import SQLite3
 import SwiftData
@@ -43,12 +44,8 @@ struct StoreBuilder {
         print("\nBuilding store...")
         let startTime = ContinuousClock.now
 
-        do {
-            let schema = Schema([
-                TransitLine.self, TransitStation.self,
-                TransitRouteVariant.self, TransitLineStop.self,
-                TransitTransfer.self, TransitMetadata.self,
-            ])
+        try autoreleasepool {
+            let schema = Schema(TransitSchema.models)
             let config = ModelConfiguration(schema: schema, url: outputURL)
             let container = try ModelContainer(for: schema, configurations: config)
             let context = ModelContext(container)
@@ -124,7 +121,15 @@ struct StoreBuilder {
             try context.save()
 
             print("  Metadata...")
-            context.insert(TransitMetadata(key: "generatedAt", value: metro.generatedAt))
+            context.insert(TransitMetadata(
+                key: TransitSchema.MetadataKey.generatedAt, value: metro.generatedAt
+            ))
+            context.insert(TransitMetadata(
+                key: TransitSchema.MetadataKey.dataVersion, value: String(metro.dataVersion)
+            ))
+            context.insert(TransitMetadata(
+                key: TransitSchema.MetadataKey.schemaVersion, value: String(TransitSchema.version)
+            ))
             try context.save()
 
         }
@@ -135,6 +140,7 @@ struct StoreBuilder {
             sqlite3_close(dbHandle)
             throw StoreBuilderError.sqlite("Failed to open database: \(err)")
         }
+        sqlite3_busy_timeout(dbHandle, 10_000)
         for table in ["ACHANGE", "ATRANSACTION", "ATRANSACTIONSTRING"] {
             guard sqlite3_exec(dbHandle, "DELETE FROM \(table)", nil, nil, nil) == SQLITE_OK else {
                 let err = String(cString: sqlite3_errmsg(dbHandle))
@@ -170,6 +176,47 @@ struct StoreBuilder {
         let elapsed = ContinuousClock.now - startTime
         let attrs = try FileManager.default.attributesOfItem(atPath: outputPath)
         let size = (attrs[.size] as? Int64 ?? 0)
+
+        let infoURL = try writeStoreInfo(storeURL: outputURL, metro: metro, byteSize: size)
+        print("  Wrote \(infoURL.lastPathComponent)")
+
         print("\nDone! \(outputPath) (\(String(format: "%.1f", Double(size) / 1_048_576)) MB) in \(elapsed)")
+    }
+
+    private static func writeStoreInfo(
+        storeURL: URL, metro: MetropolistDataDTO, byteSize: Int64
+    ) throws -> URL {
+        let digest = SHA256.hash(data: try Data(contentsOf: storeURL))
+        let info = TransitStoreInfo(
+            schemaVersion: TransitSchema.version,
+            dataVersion: metro.dataVersion,
+            generatedAt: metro.generatedAt,
+            sha256: digest.map { String(format: "%02x", $0) }.joined(),
+            byteSize: byteSize,
+            counts: TransitStoreCounts(
+                lines: metro.lines.count,
+                stations: metro.stations.count,
+                routeVariants: metro.routeVariants.count,
+                lineStops: metro.lineStops.count,
+                transfers: metro.transfers.count
+            ),
+            modelHash: try TransitStoreValidator.modelHash(storeAt: storeURL)
+        )
+
+        try TransitStoreValidator.validate(
+            storeAt: storeURL,
+            expecting: TransitStoreValidator.Expectation(
+                schemaVersion: TransitSchema.version,
+                dataVersion: metro.dataVersion,
+                generatedAt: metro.generatedAt,
+                counts: info.counts
+            )
+        )
+
+        let infoURL = storeURL.deletingLastPathComponent().appendingPathComponent("transit-info.json")
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        try encoder.encode(info).write(to: infoURL, options: .atomic)
+        return infoURL
     }
 }

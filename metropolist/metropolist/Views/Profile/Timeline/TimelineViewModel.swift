@@ -229,7 +229,9 @@ final class TimelineViewModel {
             let lower = min(fromOrder, toOrder)
             let upper = max(fromOrder, toOrder)
             var stops = variantStops.filter { $0.order >= lower && $0.order <= upper }
-            if fromOrder > toOrder { stops.reverse() }
+            if fromOrder > toOrder {
+                stops.reverse()
+            }
             travelStops[travel.id] = stops
             for stop in stops {
                 stationIDs.insert(stop.stationSourceID)

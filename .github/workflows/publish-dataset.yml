@@ -1,0 +1,177 @@
+name: Publish transit dataset
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Build and run every safeguard, publish nothing"
+        type: boolean
+        default: false
+      force:
+        description: "Publish despite threshold guards (never overrides schema/model/validator guards)"
+        type: boolean
+        default: false
+      skip_fetch:
+        description: "Reuse the cached IDFM download"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-dataset
+  cancel-in-progress: false
+
+jobs:
+  build-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Restore IDFM sources
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: data-builder/data
+          key: idfm-sources-${{ github.run_id }}
+          restore-keys: idfm-sources-
+
+      - name: Install dependencies
+        working-directory: data-builder
+        run: bun install --frozen-lockfile
+
+      - name: Restore the published dataset to diff against
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(gh release list --limit 50 --json tagName \
+            --jq '[.[] | select(.tagName | startswith("data-"))][0].tagName // ""')
+          if [ -z "$TAG" ]; then
+            echo "No published dataset release yet — the changelog will be empty."
+            exit 0
+          fi
+          if ! gh release download "$TAG" --pattern metropolist-data.json.gz --dir /tmp; then
+            echo "Release $TAG carries no dataset JSON — the changelog will be empty."
+            exit 0
+          fi
+          gunzip -c /tmp/metropolist-data.json.gz > data-builder/metropolist-data.json
+          echo "Diffing against $TAG"
+
+      - name: Fetch IDFM data
+        if: ${{ inputs.skip_fetch != true }}
+        run: make fetch
+
+      - name: Build dataset JSON
+        run: make data
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dataset-json
+          path: |
+            data-builder/metropolist-data.json
+            data-builder/metropolist-changes.json
+          retention-days: 1
+
+  build-store:
+    needs: build-data
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dataset-json
+          path: data-builder
+
+      - name: Build store
+        run: make store
+
+      - name: Compute release identity
+        id: identity
+        run: |
+          SCHEMA=$(jq -r .schemaVersion store-builder/transit-info.json)
+          DATA=$(jq -r .dataVersion store-builder/transit-info.json)
+          ASSET="transit-v${SCHEMA}-${DATA}.store"
+          TAG="data-$(date -u +%Y-%m-%d-%H%M)"
+          echo "asset=$ASSET" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "url=https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/${ASSET}" >> "$GITHUB_OUTPUT"
+
+      - name: Build manifest and run safeguards
+        id: manifest
+        run: |
+          mkdir -p dist
+          RESULT=$(bun run scripts/build-manifest.ts \
+            store-builder/transit-info.json \
+            data-builder/metropolist-changes.json \
+            "${{ steps.identity.outputs.url }}" \
+            "${{ inputs.force }}")
+          echo "$RESULT"
+          echo "result=$RESULT" >> "$GITHUB_OUTPUT"
+
+      - name: Render release notes
+        if: ${{ steps.manifest.outputs.result == 'PUBLISH' }}
+        run: |
+          bun run --eval '
+            import { renderReleaseNotes } from "./data-builder/src/changes";
+            const changes = await Bun.file("data-builder/metropolist-changes.json").json();
+            await Bun.write("dist/release-notes.md", renderReleaseNotes(changes));
+          '
+
+      - name: Sign manifest
+        if: ${{ steps.manifest.outputs.result == 'PUBLISH' }}
+        env:
+          TRANSIT_SIGNING_KEY: ${{ secrets.TRANSIT_SIGNING_KEY }}
+        run: |
+          swift scripts/transit-sign.swift dist/transit-manifest.json > dist/transit-manifest.json.sig
+          test -s dist/transit-manifest.json.sig
+
+      - name: Upload dry-run artifacts
+        if: ${{ inputs.dry_run == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dataset-dry-run
+          path: |
+            store-builder/transit.store
+            store-builder/transit-info.json
+            dist/transit-manifest.json
+          retention-days: 7
+
+      - name: Publish release asset
+        if: ${{ inputs.dry_run != true && steps.manifest.outputs.result == 'PUBLISH' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp store-builder/transit.store "${{ steps.identity.outputs.asset }}"
+          gzip -c data-builder/metropolist-data.json > metropolist-data.json.gz
+          gh release create "${{ steps.identity.outputs.tag }}" \
+            "${{ steps.identity.outputs.asset }}" \
+            metropolist-data.json.gz \
+            --title "${{ steps.identity.outputs.tag }}" \
+            --notes-file dist/release-notes.md
+
+      - name: Commit manifest
+        if: ${{ inputs.dry_run != true && steps.manifest.outputs.result == 'PUBLISH' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/transit-manifest.json dist/transit-manifest.json.sig
+          git commit -m "data: publish ${{ steps.identity.outputs.tag }}"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || exit 1
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            echo "Push rejected, retrying ($attempt)"
+            sleep 5
+          done
+          exit 1

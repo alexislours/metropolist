@@ -43,9 +43,15 @@ enum BadgeComputation {
     static func completionTier(completed: Int, total: Int) -> BadgeTier {
         guard total > 0 else { return .locked }
         let fraction = Double(completed) / Double(total)
-        if fraction >= 1.0 { return .gold }
-        if fraction >= 0.4 { return .silver }
-        if fraction >= 0.1 { return .bronze }
+        if fraction >= 1.0 {
+            return .gold
+        }
+        if fraction >= 0.4 {
+            return .silver
+        }
+        if fraction >= 0.1 {
+            return .bronze
+        }
         return .locked
     }
 }

@@ -293,7 +293,9 @@ final class TravelReplayViewModel {
 
     func beginSeeking() {
         wasPlayingBeforeScrub = isPlaying
-        if isPlaying { pause() }
+        if isPlaying {
+            pause()
+        }
     }
 
     func endSeeking() {
@@ -307,7 +309,9 @@ final class TravelReplayViewModel {
 
     private func tick(deltaTime: TimeInterval) {
         guard isPlaying, !isFinished else {
-            if isFinished { pause() }
+            if isFinished {
+                pause()
+            }
             return
         }
 

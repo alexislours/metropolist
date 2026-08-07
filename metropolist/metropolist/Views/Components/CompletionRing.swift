@@ -62,9 +62,15 @@ struct CompletionRing: View {
     }
 
     private var resolvedColor: Color {
-        if let tint { return tint }
-        if progress >= 1.0 { return .yellow }
-        if progress >= 0.5 { return .green }
+        if let tint {
+            return tint
+        }
+        if progress >= 1.0 {
+            return .yellow
+        }
+        if progress >= 0.5 {
+            return .green
+        }
         return .metroSignature
     }
 }

@@ -99,7 +99,9 @@ extension TravelFlowViewModel {
             var between = allStops
                 .filter { $0.order > lower && $0.order < upper }
                 .sorted { $0.order < $1.order }
-            if fromOrder > toOrder { between.reverse() }
+            if fromOrder > toOrder {
+                between.reverse()
+            }
             let stationIDs = between.map(\.stationSourceID)
             let stations = try dataStore.transitService.stations(bySourceIDs: stationIDs)
             let nameMap = Dictionary(uniqueKeysWithValues: stations.map { ($0.sourceID, $0.name) })
@@ -133,7 +135,9 @@ extension TravelFlowViewModel {
                 fromOrder: lower,
                 toOrder: upper
             )
-            if fromOrder > toOrder { rawStops.reverse() }
+            if fromOrder > toOrder {
+                rawStops.reverse()
+            }
             // Deduplicate stops that share the same station (e.g. multi-platform variants)
             var seenStationIDs = Set<String>()
             intermediateStops = rawStops.filter { seenStationIDs.insert($0.stationSourceID).inserted }

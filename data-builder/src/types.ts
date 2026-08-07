@@ -71,6 +71,58 @@ export interface OutputData {
   transfers: Transfer[];
 }
 
+export interface DatasetChangeDelta {
+  linesAdded: number;
+  linesRemoved: number;
+  linesModified: number;
+  stationsAdded: number;
+  stationsRemoved: number;
+  stationsModified: number;
+  routeVariantsChanged: number;
+  transfersChanged: number;
+}
+
+export type DatasetHighlightKind =
+  | "lineAdded"
+  | "lineRemoved"
+  | "stationAdded"
+  | "stationRemoved"
+  | "stationRenamed";
+
+export interface DatasetHighlight {
+  kind: DatasetHighlightKind;
+  label: string;
+  detail?: string;
+}
+
+export interface DatasetChanges {
+  delta: DatasetChangeDelta;
+  highlights: DatasetHighlight[];
+  summary?: { en: string; fr: string };
+}
+
+export interface DiffDetail {
+  lines: {
+    added: Line[];
+    removed: Line[];
+    modified: { line: Line; changes: string[] }[];
+  };
+  stations: {
+    added: Station[];
+    removed: Station[];
+    modified: { station: Station; previous: Station; changes: string[] }[];
+  };
+  routeVariants: {
+    added: RouteVariant[];
+    removed: RouteVariant[];
+    modified: { rv: RouteVariant; changes: string[] }[];
+  };
+  lineStops: { added: number; removed: number };
+  transfers: { added: number; removed: number };
+  previousCounts: { lines: number; stations: number; routeVariants: number; lineStops: number; transfers: number };
+  nextCounts: { lines: number; stations: number; routeVariants: number; lineStops: number; transfers: number };
+}
+
 /** Raw record from referentiel-des-lignes.json (IDFM open data) */
 export interface RawRefLine {
   id_line: string;

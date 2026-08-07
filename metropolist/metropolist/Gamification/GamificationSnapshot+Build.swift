@@ -1,4 +1,5 @@
 import Foundation
+import TransitModels
 
 extension GamificationSnapshot {
     /// Intermediate result that also exposes the `LineMetadata` map for callers that need it.
@@ -26,7 +27,8 @@ extension GamificationSnapshot {
                 completedAt: $0.completedAt
             )
         }
-        var distanceCache = DistanceCache.load()
+        let transitIdentity = dataStore.transitDescriptor.cacheIdentity
+        var distanceCache = DistanceCache.load(transitIdentity: transitIdentity)
         let travelRecords = travels.map { travel in
             let dist: Double? = switch distanceCache.lookup(travelID: travel.id) {
             case let .hit(cached):
@@ -49,7 +51,7 @@ extension GamificationSnapshot {
                 distance: dist
             )
         }
-        distanceCache.persistIfNeeded()
+        distanceCache.persistIfNeeded(transitIdentity: transitIdentity)
 
         let input = GamificationInput(
             completedStops: stopRecords,

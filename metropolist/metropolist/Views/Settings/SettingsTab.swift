@@ -59,7 +59,11 @@ struct SettingsTab: View {
                 importAlert?.title ?? "",
                 isPresented: Binding(
                     get: { importAlert != nil },
-                    set: { if !$0 { importAlert = nil } }
+                    set: {
+                        if !$0 {
+                            importAlert = nil
+                        }
+                    }
                 )
             ) {
                 // Empty actions = default OK dismiss button
@@ -151,10 +155,25 @@ struct SettingsTab: View {
 
     // MARK: - Transit Data Section
 
+    var updateModel: TransitUpdateModel {
+        store.transitUpdates
+    }
+
+    private var updateBadge: String? {
+        switch updateModel.state {
+        case .available:
+            String(localized: "Update available", comment: "Settings: transit data update available badge")
+        case .staged:
+            String(localized: "Update ready — restart to apply", comment: "Settings: transit data update staged badge")
+        default:
+            nil
+        }
+    }
+
     private var transitDataSection: some View {
         CardSection(title: String(localized: "TRANSIT DATA", comment: "Settings: transit data section header")) {
             if let stats = transitStats {
-                NavigationLink(destination: TransitDataView(stats: stats)) {
+                NavigationLink(destination: TransitDataView(stats: stats, updateModel: updateModel)) {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(String(localized: "Transit Database", comment: "Settings: transit database link title"))
@@ -165,6 +184,11 @@ struct SettingsTab: View {
                             )
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                            if let badge = updateBadge {
+                                Text(badge)
+                                    .font(.caption)
+                                    .foregroundStyle(.tint)
+                            }
                         }
                         Spacer()
                         Image(systemName: "chevron.right")

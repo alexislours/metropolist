@@ -10,8 +10,11 @@ struct LinesTab: View {
     @State private var stationCounts: [String: Int] = [:]
     @State private var completedCounts: [String: Int] = [:]
     @State private var expandedModes: Set<TransitMode> = []
+    // periphery:ignore
     @State private var inProgressExpanded = true
+    // periphery:ignore
     @State private var completedExpanded = false
+    // periphery:ignore
     @State private var favoritesExpanded = true
     @State private var filtered = FilteredResult()
     @State private var favoriteLineSourceIDs: Set<String> = []
@@ -72,7 +75,9 @@ struct LinesTab: View {
             let compR = completedCounts[rhs.sourceID] ?? 0
             let fracB = totalR > 0 ? Double(compR) / Double(totalR) : 0
 
-            if fracA != fracB { return fracA > fracB }
+            if fracA != fracB {
+                return fracA > fracB
+            }
             return lhs.shortName.localizedStandardCompare(rhs.shortName) == .orderedAscending
         }
 

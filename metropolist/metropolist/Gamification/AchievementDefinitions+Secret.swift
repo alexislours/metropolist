@@ -123,7 +123,9 @@ extension AchievementDefinitions {
             let cal = Calendar.current
             for date in ctx.sortedTravelDates {
                 let month = cal.component(.month, from: date)
-                if month == 12 || month == 1 { return date }
+                if month == 12 || month == 1 {
+                    return date
+                }
             }
             return nil
         },

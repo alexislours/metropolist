@@ -367,7 +367,9 @@ enum AchievementDefinitions {
             let cal = Calendar.current
             for date in ctx.travelDates {
                 let hour = cal.component(.hour, from: date)
-                if hour >= 4, hour < 6 { return date }
+                if hour >= 4, hour < 6 {
+                    return date
+                }
             }
             return nil
         },

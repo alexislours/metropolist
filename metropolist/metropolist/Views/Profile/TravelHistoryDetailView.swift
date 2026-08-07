@@ -103,7 +103,11 @@ struct TravelHistoryDetailView: View {
             String(localized: "Delete this travel?", comment: "Travel history: single delete confirmation title"),
             isPresented: Binding(
                 get: { swipeDeleteID != nil },
-                set: { if !$0 { swipeDeleteID = nil } }
+                set: {
+                    if !$0 {
+                        swipeDeleteID = nil
+                    }
+                }
             )
         ) {
             Button(String(localized: "Delete", comment: "Travel history: confirm delete button"), role: .destructive) {

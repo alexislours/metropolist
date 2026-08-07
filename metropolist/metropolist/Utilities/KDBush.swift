@@ -175,8 +175,12 @@ struct KDBush {
                 items.swapAt(scanRight, high)
             }
 
-            if scanRight <= target { low = scanRight + 1 }
-            if target <= scanRight { high = scanRight - 1 }
+            if scanRight <= target {
+                low = scanRight + 1
+            }
+            if target <= scanRight {
+                high = scanRight - 1
+            }
         }
     }
 }

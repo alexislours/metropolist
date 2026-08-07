@@ -17,6 +17,7 @@ enum AppBootstrap {
 struct MetropolistApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @State private var bootstrap = AppBootstrap()
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     #if DEBUG
         private let isScreenshotMode = ProcessInfo.processInfo.arguments.contains("--screenshots")
@@ -33,6 +34,16 @@ struct MetropolistApp: App {
                         appDelegate.pendingQuickActionType = nil
                         if let snapshot = (logged { try GamificationSnapshot.build(from: dataStore).snapshot }) {
                             WidgetDataBridge.updateWidget(from: snapshot)
+                        }
+                        await dataStore.transitUpdates.autoCheckIfDue(isFirstLaunch: !hasSeenOnboarding)
+                    }
+                    .sheet(isPresented: Bindable(dataStore.transitUpdates).isPresentingPrompt) {
+                        if let entry = dataStore.transitUpdates.state.entry {
+                            TransitUpdateSheet(
+                                entry: entry,
+                                onDownload: { dataStore.transitUpdates.download(allowExpensive: true) },
+                                onDefer: { dataStore.transitUpdates.deferCurrentUpdate() }
+                            )
                         }
                     }
                     .onReceive(NotificationCenter.default.publisher(for: .quickActionTriggered)) { notification in

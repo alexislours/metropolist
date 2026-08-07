@@ -44,6 +44,7 @@ private struct FAQSectionView: View {
 
 private struct FAQItemView: View {
     let item: FAQItem
+    // periphery:ignore
     @State private var isExpanded = false
 
     var body: some View {
@@ -94,7 +95,7 @@ private let faqSections: [FAQSection] = [
                 question: String(localized: "Does the app work offline?", comment: "FAQ: offline question"),
                 answer: String(
                     // swiftlint:disable:next line_length
-                    localized: "Yes! All transit data is bundled with the app so you can browse lines, stations, and routes without an internet connection.",
+                    localized: "Yes! The full transit dataset ships inside the app so you can browse lines, stations, and routes without an internet connection. When you are online, Metropolist can fetch a newer dataset — this is optional and can be turned off in Settings.",
                     comment: "FAQ: offline answer"
                 )
             ),

@@ -1,6 +1,29 @@
-import type { Line, Station, RouteVariant, LineStop, Transfer, OutputData } from "./types";
+import type { Line, Station, RouteVariant, LineStop, Transfer, OutputData, DatasetChanges } from "./types";
 import { log } from "./helpers";
 import { printDiff } from "./diff";
+import { buildDiffSummary } from "./changes";
+
+export function buildDataVersion(now: Date): number {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const stamp =
+    `${now.getUTCFullYear()}` +
+    `${pad(now.getUTCMonth() + 1)}` +
+    `${pad(now.getUTCDate())}` +
+    `${pad(now.getUTCHours())}` +
+    `${pad(now.getUTCMinutes())}`;
+  return Number(stamp);
+}
+
+const CHANGES_PATH = "./metropolist-changes.json";
+
+const EMPTY_CHANGES: DatasetChanges = {
+  delta: {
+    linesAdded: 0, linesRemoved: 0, linesModified: 0,
+    stationsAdded: 0, stationsRemoved: 0, stationsModified: 0,
+    routeVariantsChanged: 0, transfersChanged: 0,
+  },
+  highlights: [],
+};
 
 export function sortData(
   lines: Line[],
@@ -36,9 +59,10 @@ export async function writeOutput(
 
   sortData(lines, stations, routeVariants, lineStops, transfers);
 
+  const now = new Date();
   const output: OutputData = {
-    dataVersion: 1,
-    generatedAt: new Date().toISOString(),
+    dataVersion: buildDataVersion(now),
+    generatedAt: now.toISOString(),
     sourceFiles: {
       gtfs: "IDFM-gtfs",
       referentiel: "referentiel-des-lignes.json",
@@ -70,9 +94,9 @@ export async function writeOutput(
   const fileSize = Bun.file(outputPath).size;
   log(`  → Written to ${outputPath} (${(fileSize / 1024 / 1024).toFixed(1)} MB)`);
 
-  if (previousData) {
-    printDiff(previousData, output);
-  }
+  const changes = previousData ? buildDiffSummary(printDiff(previousData, output)) : EMPTY_CHANGES;
+  await Bun.write(CHANGES_PATH, JSON.stringify(changes, null, 2));
+  log(`  → Change summary written to ${CHANGES_PATH}`);
 
   return output;
 }

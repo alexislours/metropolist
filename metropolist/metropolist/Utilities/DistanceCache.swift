@@ -17,13 +17,11 @@ struct DistanceCache {
 
     /// Loads the cache from disk, returning an empty cache if the file
     /// is missing, corrupt, or stale (transit data version mismatch).
-    static func load() -> DistanceCache {
+    static func load(transitIdentity: String, directory: URL? = nil) -> DistanceCache {
         var cache = DistanceCache()
-        guard let url = fileURL, let data = try? Data(contentsOf: url) else { return cache }
+        guard let url = fileURL(in: directory), let data = try? Data(contentsOf: url) else { return cache }
         guard let stored = try? JSONDecoder().decode(StoredData.self, from: data) else { return cache }
-
-        let currentVersion = UserDefaults.standard.string(forKey: "transitStoreModDate") ?? ""
-        guard stored.transitVersion == currentVersion else { return cache }
+        guard stored.transitVersion == transitIdentity else { return cache }
 
         cache.distances = stored.distances
         cache.unresolved = stored.unresolved
@@ -49,25 +47,30 @@ struct DistanceCache {
         dirty = true
     }
 
-    func persistIfNeeded() {
+    func persistIfNeeded(transitIdentity: String, directory: URL? = nil) {
         guard dirty else { return }
-        let version = UserDefaults.standard.string(forKey: "transitStoreModDate") ?? ""
         let stored = StoredData(
             distances: distances,
             unresolved: unresolved,
-            transitVersion: version
+            transitVersion: transitIdentity
         )
-        guard let url = Self.fileURL, let data = try? JSONEncoder().encode(stored) else { return }
+        guard let url = Self.fileURL(in: directory), let data = try? JSONEncoder().encode(stored) else { return }
         try? data.write(to: url, options: .atomic)
+
+        var target = url
+        var values = URLResourceValues()
+        values.isExcludedFromBackup = true
+        try? target.setResourceValues(values)
     }
 
     // MARK: - Private
 
-    private static var fileURL: URL? {
-        FileManager.default.urls(
+    private static func fileURL(in directory: URL?) -> URL? {
+        let root = directory ?? FileManager.default.urls(
             for: .applicationSupportDirectory,
             in: .userDomainMask
-        ).first?.appendingPathComponent("distance-cache.json")
+        ).first
+        return root?.appendingPathComponent("distance-cache.json")
     }
 
     private struct StoredData: Codable {

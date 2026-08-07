@@ -61,6 +61,10 @@ final class DataStore {
     let transitService: TransitDataService
     let userService: UserDataService
     let locationService = LocationService()
+    let transitDescriptor: TransitStoreDescriptor
+
+    @ObservationIgnored lazy var transitUpdates: TransitUpdateModel =
+        Self.makeTransitUpdateModel(descriptor: transitDescriptor)
 
     /// Bump to trigger view refreshes after user data changes.
     var userDataVersion = 0
@@ -87,21 +91,27 @@ final class DataStore {
     @ObservationIgnored private var debounceTask: Task<Void, Never>?
 
     func stationCountsByLine() throws -> [String: Int] {
-        if let cached = cachedStationCounts { return cached }
+        if let cached = cachedStationCounts {
+            return cached
+        }
         let counts = try transitService.uniqueStationCountsByLine()
         cachedStationCounts = counts
         return counts
     }
 
     func modesByStation() throws -> [String: Set<String>] {
-        if let cached = cachedModesByStation { return cached }
+        if let cached = cachedModesByStation {
+            return cached
+        }
         let modes = try transitService.modesByStation()
         cachedModesByStation = modes
         return modes
     }
 
     func allStationMetadata() throws -> [String: StationMetadata] {
-        if let cached = cachedStationMetadata { return cached }
+        if let cached = cachedStationMetadata {
+            return cached
+        }
         let allStations = try transitService.allStations()
         var meta: [String: StationMetadata] = [:]
         for station in allStations {
@@ -129,7 +139,9 @@ final class DataStore {
     }
 
     func allLineMetadata() throws -> [String: LineMetadata] {
-        if let cached = cachedLineMetadata { return cached }
+        if let cached = cachedLineMetadata {
+            return cached
+        }
         let lines = try transitService.allLines()
         let stationCounts = try stationCountsByLine()
         var metaMap: [String: LineMetadata] = [:]
@@ -247,7 +259,8 @@ final class DataStore {
     }
 
     init() throws {
-        let transitContainer = try Self.makeTransitContainer()
+        let (transitContainer, descriptor) = try Self.makeTransitContainer()
+        transitDescriptor = descriptor
         let tCtx = ModelContext(transitContainer)
         tCtx.autosaveEnabled = false
         transitService = TransitDataService(context: tCtx)
@@ -276,6 +289,10 @@ final class DataStore {
 
     /// Internal init for testing with in-memory contexts.
     init(transitContext: ModelContext, userContext: ModelContext) {
+        transitDescriptor = TransitStoreDescriptor(
+            source: .bundle, schemaVersion: TransitSchema.version, dataVersion: 0,
+            generatedAt: "", sha256: "", byteSize: 0, installedAt: Date()
+        )
         transitService = TransitDataService(context: transitContext)
         self.userContext = userContext
         userService = UserDataService(context: userContext)
@@ -288,71 +305,36 @@ final class DataStore {
 
     // MARK: - Transit Container
 
-    private static func makeTransitContainer() throws -> ModelContainer {
-        let schema = Schema([
-            TransitLine.self,
-            TransitStation.self,
-            TransitRouteVariant.self,
-            TransitLineStop.self,
-            TransitTransfer.self,
-            TransitMetadata.self,
-        ])
-
-        let storeURL = try transitStoreURL()
-        try copyTransitStoreIfNeeded(to: storeURL)
-
-        let config = ModelConfiguration(schema: schema, url: storeURL, cloudKitDatabase: .none)
-        do {
-            return try ModelContainer(for: schema, configurations: [config])
-        } catch {
-            throw DataStoreError.transitContainerFailed(underlying: error)
-        }
-    }
-
-    private static func transitStoreURL() throws -> URL {
+    static func transitSupportRoot() throws -> URL {
         guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
             throw DataStoreError.appSupportUnavailable
         }
-        return appSupport.appendingPathComponent("transit.store")
+        return appSupport
     }
 
-    private static func copyTransitStoreIfNeeded(to destination: URL) throws {
-        guard let bundledURL = Bundle.main.url(forResource: "transit", withExtension: "store") else {
-            throw DataStoreError.transitStoreMissing
-        }
+    private static func makeTransitContainer() throws -> (ModelContainer, TransitStoreDescriptor) {
+        let schema = Schema(TransitSchema.models)
+        let root = try transitSupportRoot()
+        let bundleStore = try TransitStoreInstaller.bundledStoreURL()
+        let bundleInfo = TransitStoreInstaller.bundledInfo(storeURL: bundleStore)
 
-        let fileManager = FileManager.default
-        let appSupport = destination.deletingLastPathComponent()
+        let descriptor = try TransitStoreInstaller.prepareStore(
+            in: root, bundleStore: bundleStore, bundleInfo: bundleInfo
+        )
+        let storeURL = TransitStoreInstaller.Layout(root: root).store
+        let config = ModelConfiguration(schema: schema, url: storeURL, cloudKitDatabase: .none)
 
-        let bundledModDate = (try? fileManager.attributesOfItem(atPath: bundledURL.path)[.modificationDate] as? Date)
-            .map { String($0.timeIntervalSince1970) } ?? ""
-        let dateKey = "transitStoreModDate"
-        let installedModDate = UserDefaults.standard.string(forKey: dateKey) ?? ""
-
-        let needsCopy = !fileManager.fileExists(atPath: destination.path) || installedModDate != bundledModDate
-
-        if needsCopy {
+        do {
+            return try (ModelContainer(for: schema, configurations: [config]), descriptor)
+        } catch {
+            let recovered = try TransitStoreInstaller.recoverFromBundle(
+                in: root, bundleStore: bundleStore, bundleInfo: bundleInfo, rejecting: descriptor
+            )
             do {
-                try fileManager.createDirectory(at: appSupport, withIntermediateDirectories: true)
+                return try (ModelContainer(for: schema, configurations: [config]), recovered)
             } catch {
-                throw DataStoreError.appSupportDirCreationFailed(underlying: error)
+                throw DataStoreError.transitContainerFailed(underlying: error)
             }
-            let tempURL = appSupport.appendingPathComponent(UUID().uuidString + ".store")
-            do {
-                try fileManager.copyItem(at: bundledURL, to: tempURL)
-                if fileManager.fileExists(atPath: destination.path) {
-                    _ = try fileManager.replaceItemAt(destination, withItemAt: tempURL)
-                } else {
-                    try fileManager.moveItem(at: tempURL, to: destination)
-                }
-            } catch {
-                try? fileManager.removeItem(at: tempURL)
-                throw DataStoreError.transitStoreCopyFailed(underlying: error)
-            }
-            // Clean up stale WAL/SHM sidecars from previous store
-            try? fileManager.removeItem(at: destination.appendingPathExtension("wal"))
-            try? fileManager.removeItem(at: destination.appendingPathExtension("shm"))
-            UserDefaults.standard.set(bundledModDate, forKey: dateKey)
         }
     }
 

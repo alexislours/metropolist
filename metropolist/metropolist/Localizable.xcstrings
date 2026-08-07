@@ -387,6 +387,9 @@
         }
       }
     },
+    "%lld connections changed" : {
+      "comment" : "Transit updates: transfers changed count"
+    },
     "%lld day streak" : {
       "comment" : "Statistics: current streak count",
       "localizations" : {
@@ -505,6 +508,15 @@
           }
         }
       }
+    },
+    "%lld lines added" : {
+      "comment" : "Transit updates: lines added count"
+    },
+    "%lld lines removed" : {
+      "comment" : "Transit updates: lines removed count"
+    },
+    "%lld lines updated" : {
+      "comment" : "Transit updates: lines updated count"
     },
     "%lld m" : {
       "comment" : "Distance: meters",
@@ -659,6 +671,9 @@
         }
       }
     },
+    "%lld routes changed" : {
+      "comment" : "Transit updates: routes changed count"
+    },
     "%lld stops" : {
       "comment" : "Line detail: stop count\nTimeline: day stops count\nTimeline: stops traveled count\nTravel detail accessibility: stops count\nTravel detail: stops traveled count\nTravel flow: total stops count for direction\nTravel history accessibility: stops count\nTravel history: stops traveled count",
       "localizations" : {
@@ -675,6 +690,15 @@
           }
         }
       }
+    },
+    "%lld stops added" : {
+      "comment" : "Transit updates: stops added count"
+    },
+    "%lld stops removed" : {
+      "comment" : "Transit updates: stops removed count"
+    },
+    "%lld stops updated" : {
+      "comment" : "Transit updates: stops updated count"
     },
     "%lld stops, %lld travels, and %lld favorites imported." : {
       "comment" : "Settings: import success message with counts",
@@ -1574,6 +1598,9 @@
         }
       }
     },
+    "Always" : {
+      "comment" : "Transit updates: automatic updates always"
+    },
     "An error occurred while loading station data." : {
       "comment" : "Map tab: error description when station data fails to load",
       "localizations" : {
@@ -1641,6 +1668,12 @@
           }
         }
       }
+    },
+    "Automatic Updates" : {
+      "comment" : "Transit updates: automatic updates label"
+    },
+    "Automatic updates are set to Wi-Fi only. Download this update now anyway?" : {
+      "comment" : "Transit updates: cellular confirmation message"
     },
     "Awarded for" : {
       "comment" : "Certificate: formal award label",
@@ -1932,7 +1965,7 @@
       }
     },
     "Cancel" : {
-      "comment" : "Settings: cancel delete action\nTravel history: cancel delete button",
+      "comment" : "Settings: cancel delete action\nTransit updates: cancel cellular download\nTransit updates: cancel download\nTravel history: cancel delete button",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2016,6 +2049,9 @@
         }
       }
     },
+    "Check for Updates" : {
+      "comment" : "Transit updates: check button"
+    },
     "Checking" : {
       "comment" : "Settings: iCloud status checking",
       "localizations" : {
@@ -2032,6 +2068,9 @@
           }
         }
       }
+    },
+    "Checking for Updates…" : {
+      "comment" : "Transit updates: checking label"
     },
     "Choose a direction" : {
       "comment" : "Nav title: choose direction for metro/tram\nTravel flow: fallback choose branch title",
@@ -2511,6 +2550,9 @@
           }
         }
       }
+    },
+    "Could not reach the update server." : {
+      "comment" : "Transit update error: network"
     },
     "Curious" : {
       "comment" : "Achievement title: visit 10 stops",
@@ -3054,6 +3096,18 @@
           }
         }
       }
+    },
+    "Download" : {
+      "comment" : "Transit updates: confirm cellular download"
+    },
+    "Download (%@)" : {
+      "comment" : "Transit update sheet: download button with size\nTransit updates: download button with size"
+    },
+    "Download cancelled." : {
+      "comment" : "Transit update error: cancelled"
+    },
+    "Download over cellular?" : {
+      "comment" : "Transit updates: cellular confirmation title"
     },
     "Each line has three badge tiers: Bronze at 10% completion, Silver at 40%, and Gold at 100%." : {
       "comment" : "FAQ: badges answer",
@@ -3615,6 +3669,9 @@
           }
         }
       }
+    },
+    "Hide changes" : {
+      "comment" : "Transit updates: hide change list"
     },
     "History" : {
       "comment" : "Travel history: navigation title",
@@ -5013,6 +5070,9 @@
         }
       }
     },
+    "New transit data is available" : {
+      "comment" : "Transit update sheet: title"
+    },
     "Next day with travels" : {
       "comment" : "Timeline: next day button",
       "localizations" : {
@@ -5114,6 +5174,9 @@
           }
         }
       }
+    },
+    "No internet connection." : {
+      "comment" : "Transit update error: offline"
     },
     "No lines" : {
       "comment" : "Station detail: no connecting lines",
@@ -5251,8 +5314,14 @@
         }
       }
     },
+    "Not enough free space to download the update." : {
+      "comment" : "Transit update error: disk full"
+    },
+    "Not Now" : {
+      "comment" : "Transit update sheet: dismiss button"
+    },
     "Off" : {
-      "comment" : "Map accessibility: heatmap off",
+      "comment" : "Map accessibility: heatmap off\nTransit updates: automatic updates off",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5590,6 +5659,9 @@
           }
         }
       }
+    },
+    "Published %@" : {
+      "comment" : "Transit update sheet: dataset publication date"
     },
     "RANKINGS" : {
       "comment" : "Statistics: rankings section header",
@@ -6699,6 +6771,12 @@
         }
       }
     },
+    "The download was incomplete or corrupted." : {
+      "comment" : "Transit update error: integrity"
+    },
+    "The downloaded data could not be opened." : {
+      "comment" : "Transit update error: unusable store"
+    },
     "The Full Circle" : {
       "comment" : "Achievement title: travel on both T3a and T3b tram lines",
       "localizations" : {
@@ -6749,6 +6827,12 @@
           }
         }
       }
+    },
+    "The update could not be verified as authentic." : {
+      "comment" : "Transit update error: bad signature"
+    },
+    "The update information could not be read." : {
+      "comment" : "Transit update error: bad manifest"
     },
     "This action cannot be undone." : {
       "comment" : "Travel history: delete warning message",
@@ -7498,6 +7582,21 @@
         }
       }
     },
+    "Update available" : {
+      "comment" : "Settings: transit data update available badge\nTransit updates: available label"
+    },
+    "Update ready — restart to apply" : {
+      "comment" : "Settings: transit data update staged badge"
+    },
+    "Update ready. It will be applied the next time you open Metropolist." : {
+      "comment" : "Transit updates: staged label"
+    },
+    "Updated transit data." : {
+      "comment" : "Transit updates: generic change description"
+    },
+    "UPDATES" : {
+      "comment" : "Transit data: updates section header"
+    },
     "Use 3 transport modes in one day" : {
       "comment" : "Achievement description: use 3 modes in one day",
       "localizations" : {
@@ -7548,6 +7647,9 @@
           }
         }
       }
+    },
+    "Verifying…" : {
+      "comment" : "Transit updates: verifying label"
     },
     "Versatile" : {
       "comment" : "Achievement title: use every transport mode",
@@ -8008,6 +8110,9 @@
         }
       }
     },
+    "What's new" : {
+      "comment" : "Transit updates: show change list"
+    },
     "When you log a travel, all intermediate stations between your departure and destination are marked as completed. Visiting a stop on different lines counts separately for each line." : {
       "comment" : "FAQ: completed stop answer",
       "localizations" : {
@@ -8041,6 +8146,9 @@
           }
         }
       }
+    },
+    "Wi-Fi Only" : {
+      "comment" : "Transit updates: automatic updates on Wi-Fi only"
     },
     "Winter is Coming" : {
       "comment" : "Achievement title: record a travel in December or January (Game of Thrones reference)",
@@ -8078,6 +8186,7 @@
     },
     "Yes! All transit data is bundled with the app so you can browse lines, stations, and routes without an internet connection." : {
       "comment" : "FAQ: offline answer",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8092,6 +8201,9 @@
           }
         }
       }
+    },
+    "Yes! The full transit dataset ships inside the app so you can browse lines, stations, and routes without an internet connection. When you are online, Metropolist can fetch a newer dataset — this is optional and can be turned off in Settings." : {
+      "comment" : "FAQ: offline answer"
     },
     "Yes. Go to Profile > History, tap Select, choose the travels you want to remove, then delete them. If a stop is no longer covered by another travel on that line, it will also be removed from your completion." : {
       "comment" : "FAQ: delete travel answer",
