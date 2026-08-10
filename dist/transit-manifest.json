@@ -1,7 +1,40 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-08-07T23:46:14.652Z",
+  "updatedAt": "2026-08-10T07:20:41.826Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202608100719,
+      "generatedAt": "2026-08-10T07:19:41.142Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-10-0720/transit-v1-202608100719.store",
+      "byteSize": 8822784,
+      "sha256": "d9a91e6a38ae330b0c02474d9af5ff44a2f276d52fb905091baec072594b570b",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 97628,
+        "lines": 1897,
+        "routeVariants": 5540,
+        "stations": 15058,
+        "transfers": 12949
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "linesModified": 10,
+          "stationsAdded": 0,
+          "stationsRemoved": 0,
+          "stationsModified": 282,
+          "routeVariantsChanged": 111,
+          "transfersChanged": 0
+        },
+        "highlights": [],
+        "summary": {
+          "en": "282 stops updated",
+          "fr": "282 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202608072345,
