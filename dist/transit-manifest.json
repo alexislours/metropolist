@@ -1,7 +1,134 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-08-10T07:20:41.826Z",
+  "updatedAt": "2026-08-17T03:43:06.808Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202608170342,
+      "generatedAt": "2026-08-17T03:42:19.733Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-17-0343/transit-v1-202608170342.store",
+      "byteSize": 9150464,
+      "sha256": "1038ff343d14c82f8e40f6f315d4924aecd5fdb887e9d1fbccab7f7ba3c6f7ec",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 101876,
+        "lines": 1962,
+        "routeVariants": 5857,
+        "stations": 15287,
+        "transfers": 13026
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 68,
+          "linesRemoved": 3,
+          "linesModified": 73,
+          "stationsAdded": 235,
+          "stationsRemoved": 6,
+          "stationsModified": 109,
+          "routeVariantsChanged": 830,
+          "transfersChanged": 101
+        },
+        "highlights": [
+          {
+            "kind": "lineAdded",
+            "label": "R117",
+            "detail": "R117 (future 1677)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R110",
+            "detail": "R110 (future 1670)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R111",
+            "detail": "R111 (future 1671)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R112",
+            "detail": "R112 (future 1672)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R113",
+            "detail": "R113 (future 1673)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R104",
+            "detail": "R104 (future 1664)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R105",
+            "detail": "R105 (future 1665)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R106",
+            "detail": "R106 (future 1666)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R107",
+            "detail": "R107 (future 1667)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R108",
+            "detail": "R108 (future 1668)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "R109",
+            "detail": "R109 (future 1669)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "24 S",
+            "detail": "24 S (future 1654)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "35",
+            "detail": "35 (future 1655)"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3779"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3775"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3774"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2412"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2413"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2414"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2490"
+          }
+        ],
+        "summary": {
+          "en": "68 lines added, 3 lines removed, 235 stops added, 6 stops removed, 109 stops updated",
+          "fr": "68 lignes ajoutées, 3 lignes supprimées, 235 arrêts ajoutés, 6 arrêts supprimés, 109 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202608100719,
