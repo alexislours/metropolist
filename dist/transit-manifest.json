@@ -1,7 +1,121 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-08-17T03:43:06.808Z",
+  "updatedAt": "2026-08-31T09:03:48.350Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202608310903,
+      "generatedAt": "2026-08-31T09:03:00.696Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-31-0903/transit-v1-202608310903.store",
+      "byteSize": 9187328,
+      "sha256": "8a406f1a2fbf7a573d6dcc7e23f7f3d6f5a0213f5e18a0afc963bba6d50f4b0e",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 102160,
+        "lines": 2000,
+        "routeVariants": 5918,
+        "stations": 15324,
+        "transfers": 13076
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 38,
+          "linesRemoved": 0,
+          "linesModified": 61,
+          "stationsAdded": 54,
+          "stationsRemoved": 17,
+          "stationsModified": 319,
+          "routeVariantsChanged": 854,
+          "transfersChanged": 92
+        },
+        "highlights": [
+          {
+            "kind": "lineAdded",
+            "label": "3665"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3656"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3654"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3651"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3652"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3653"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2335"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2310"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2340"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2346"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2350"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2352"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2353"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2354"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3655"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2351"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2375"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "3659"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2349"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2326"
+          }
+        ],
+        "summary": {
+          "en": "38 lines added, 54 stops added, 17 stops removed, 319 stops updated",
+          "fr": "38 lignes ajoutées, 54 arrêts ajoutés, 17 arrêts supprimés, 319 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202608170342,
@@ -160,35 +274,6 @@
           "en": "282 stops updated",
           "fr": "282 arrêts mis à jour"
         }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202608072345,
-      "generatedAt": "2026-08-07T23:45:22.257Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-07-2346/transit-v1-202608072345.store",
-      "byteSize": 8777728,
-      "sha256": "27c773bb010d53ecfd63017934f833cde2eedf314d8a1814afa20a103bc5fce7",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 97037,
-        "lines": 1897,
-        "routeVariants": 5516,
-        "stations": 15058,
-        "transfers": 12949
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 0,
-          "linesRemoved": 0,
-          "linesModified": 0,
-          "stationsAdded": 0,
-          "stationsRemoved": 0,
-          "stationsModified": 0,
-          "routeVariantsChanged": 0,
-          "transfersChanged": 0
-        },
-        "highlights": []
       }
     }
   ]
