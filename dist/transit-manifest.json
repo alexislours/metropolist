@@ -1,7 +1,134 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-08-31T09:03:48.350Z",
+  "updatedAt": "2026-09-07T07:41:38.597Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202609070740,
+      "generatedAt": "2026-09-07T07:40:38.402Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-07-0741/transit-v1-202609070740.store",
+      "byteSize": 9121792,
+      "sha256": "2cba40ba18c1aa17643d4869cd672581829e4ec584af17d9d4bdf99cca962f67",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 101241,
+        "lines": 2000,
+        "routeVariants": 5878,
+        "stations": 15328,
+        "transfers": 13056
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 3,
+          "linesRemoved": 3,
+          "linesModified": 37,
+          "stationsAdded": 13,
+          "stationsRemoved": 9,
+          "stationsModified": 73,
+          "routeVariantsChanged": 456,
+          "transfersChanged": 36
+        },
+        "highlights": [
+          {
+            "kind": "lineAdded",
+            "label": "Soir",
+            "detail": "Soir Rambouillet"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2384"
+          },
+          {
+            "kind": "lineAdded",
+            "label": "2477"
+          },
+          {
+            "kind": "lineRemoved",
+            "label": "TàD"
+          },
+          {
+            "kind": "lineRemoved",
+            "label": "TàD"
+          },
+          {
+            "kind": "lineRemoved",
+            "label": "6538"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Sainte-Geneviève",
+            "detail": "Sainte Geneviève"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Étienne Marcel",
+            "detail": "Etienne Marcel"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "ZI de Vaubenard",
+            "detail": "Z.I. de Vaubenard"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Le Plessis Mornay",
+            "detail": "Le Plessis Mornay / Péage de Longvilliers"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Place Marguerite Perey / Polytechnique Vauve",
+            "detail": "Place Marguerite Perey"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "M.-C. Vaillant Couturier",
+            "detail": "Fontenay-sous-Bois"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Yvette",
+            "detail": "Palaiseau"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Cent Marches",
+            "detail": "Igny"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Clos de Villaine",
+            "detail": "Massy"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Château des Rentiers (Rue Nationale)"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Les Graviers (Avenue Charles de Gaulle)"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Kerautret - Salengro",
+            "detail": "Romainville"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Gambetta",
+            "detail": "Noisy-le-Sec"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Marceau",
+            "detail": "Noisy-le-Sec"
+          }
+        ],
+        "summary": {
+          "en": "3 lines added, 3 lines removed, 13 stops added, 9 stops removed, 73 stops updated",
+          "fr": "3 lignes ajoutées, 3 lignes supprimées, 13 arrêts ajoutés, 9 arrêts supprimés, 73 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202608310903,
@@ -240,39 +367,6 @@
         "summary": {
           "en": "68 lines added, 3 lines removed, 235 stops added, 6 stops removed, 109 stops updated",
           "fr": "68 lignes ajoutées, 3 lignes supprimées, 235 arrêts ajoutés, 6 arrêts supprimés, 109 arrêts mis à jour"
-        }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202608100719,
-      "generatedAt": "2026-08-10T07:19:41.142Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-10-0720/transit-v1-202608100719.store",
-      "byteSize": 8822784,
-      "sha256": "d9a91e6a38ae330b0c02474d9af5ff44a2f276d52fb905091baec072594b570b",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 97628,
-        "lines": 1897,
-        "routeVariants": 5540,
-        "stations": 15058,
-        "transfers": 12949
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 0,
-          "linesRemoved": 0,
-          "linesModified": 10,
-          "stationsAdded": 0,
-          "stationsRemoved": 0,
-          "stationsModified": 282,
-          "routeVariantsChanged": 111,
-          "transfersChanged": 0
-        },
-        "highlights": [],
-        "summary": {
-          "en": "282 stops updated",
-          "fr": "282 arrêts mis à jour"
         }
       }
     }
