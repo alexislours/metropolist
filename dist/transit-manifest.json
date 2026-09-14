@@ -1,7 +1,132 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-09-07T07:41:38.597Z",
+  "updatedAt": "2026-09-14T08:17:08.373Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202609140816,
+      "generatedAt": "2026-09-14T08:16:17.734Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-14-0817/transit-v1-202609140816.store",
+      "byteSize": 9084928,
+      "sha256": "88b427b73fc03c2780efd482ff79a519a6c62c42128b212eb67de8a56c1d3ebb",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 100632,
+        "lines": 1999,
+        "routeVariants": 5854,
+        "stations": 15317,
+        "transfers": 13053
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 0,
+          "linesRemoved": 1,
+          "linesModified": 10,
+          "stationsAdded": 4,
+          "stationsRemoved": 15,
+          "stationsModified": 72,
+          "routeVariantsChanged": 245,
+          "transfersChanged": 5
+        },
+        "highlights": [
+          {
+            "kind": "lineRemoved",
+            "label": "TàD"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "La Borne Blanche",
+            "detail": "La Borne Blanche (Gare)"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Charles de Gaulle / Guy Môquet",
+            "detail": "Charles de Gaulle"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Pasteur - Campus",
+            "detail": "École Normale"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Sous-Préfecture",
+            "detail": "Sous Préfecture"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Place de Presles",
+            "detail": "Place"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Les Échabots",
+            "detail": "Les Echabots"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Centre Pénitentiaire / Maison de retraite",
+            "detail": "Centre Pénitentiaire"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Foch",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Coquelicots",
+            "detail": "Montfermeil"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Fondation Louis Vuitton",
+            "detail": "Paris"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Porte de Madrid",
+            "detail": "Paris"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Val"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Zone Commerciale"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Yvette"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Cent Marches"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Boulevard Pasteur"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Jean Allemane"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "Rue du Professeur Calmette"
+          },
+          {
+            "kind": "stationRemoved",
+            "label": "La Chapelle"
+          }
+        ],
+        "summary": {
+          "en": "1 line removed, 4 stops added, 15 stops removed, 72 stops updated",
+          "fr": "1 ligne supprimée, 4 arrêts ajoutés, 15 arrêts supprimés, 72 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202609070740,
@@ -240,133 +365,6 @@
         "summary": {
           "en": "38 lines added, 54 stops added, 17 stops removed, 319 stops updated",
           "fr": "38 lignes ajoutées, 54 arrêts ajoutés, 17 arrêts supprimés, 319 arrêts mis à jour"
-        }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202608170342,
-      "generatedAt": "2026-08-17T03:42:19.733Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-17-0343/transit-v1-202608170342.store",
-      "byteSize": 9150464,
-      "sha256": "1038ff343d14c82f8e40f6f315d4924aecd5fdb887e9d1fbccab7f7ba3c6f7ec",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 101876,
-        "lines": 1962,
-        "routeVariants": 5857,
-        "stations": 15287,
-        "transfers": 13026
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 68,
-          "linesRemoved": 3,
-          "linesModified": 73,
-          "stationsAdded": 235,
-          "stationsRemoved": 6,
-          "stationsModified": 109,
-          "routeVariantsChanged": 830,
-          "transfersChanged": 101
-        },
-        "highlights": [
-          {
-            "kind": "lineAdded",
-            "label": "R117",
-            "detail": "R117 (future 1677)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R110",
-            "detail": "R110 (future 1670)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R111",
-            "detail": "R111 (future 1671)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R112",
-            "detail": "R112 (future 1672)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R113",
-            "detail": "R113 (future 1673)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R104",
-            "detail": "R104 (future 1664)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R105",
-            "detail": "R105 (future 1665)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R106",
-            "detail": "R106 (future 1666)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R107",
-            "detail": "R107 (future 1667)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R108",
-            "detail": "R108 (future 1668)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "R109",
-            "detail": "R109 (future 1669)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "24 S",
-            "detail": "24 S (future 1654)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "35",
-            "detail": "35 (future 1655)"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3779"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3775"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3774"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2412"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2413"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2414"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2490"
-          }
-        ],
-        "summary": {
-          "en": "68 lines added, 3 lines removed, 235 stops added, 6 stops removed, 109 stops updated",
-          "fr": "68 lignes ajoutées, 3 lignes supprimées, 235 arrêts ajoutés, 6 arrêts supprimés, 109 arrêts mis à jour"
         }
       }
     }
