@@ -1,7 +1,141 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-09-14T08:17:08.373Z",
+  "updatedAt": "2026-09-21T08:21:47.389Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202609210821,
+      "generatedAt": "2026-09-21T08:21:09.381Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-21-0821/transit-v1-202609210821.store",
+      "byteSize": 9121792,
+      "sha256": "c6e562930ad90ea05418cb97db3f92fd07f89b1292302a3d689aaee8deea41c8",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 101268,
+        "lines": 2000,
+        "routeVariants": 5869,
+        "stations": 15319,
+        "transfers": 13057
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 1,
+          "linesRemoved": 0,
+          "linesModified": 7,
+          "stationsAdded": 10,
+          "stationsRemoved": 8,
+          "stationsModified": 184,
+          "routeVariantsChanged": 222,
+          "transfersChanged": 16
+        },
+        "highlights": [
+          {
+            "kind": "lineAdded",
+            "label": "TàD",
+            "detail": "TàD Goêle"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Cité Aéronautique",
+            "detail": "Cité Technique"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Le Plessis Picard - Centre Pénitentiaire",
+            "detail": "Le Plessis Picard"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Collège Jeanne Bonnardel-Béguin",
+            "detail": "Collège Jeanne Bonnardel Béguin"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Collège Albert Camus",
+            "detail": "CES Albert Camus"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Chemin de la Saussaie / Les Grandes Vallées",
+            "detail": "Chemin de la Saussay / Les Grandes Vallées"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Malcolm X",
+            "detail": "Malcolm X - Descartes"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "14 rue Jean Jaurès",
+            "detail": "14 rue Jean Jaurès / Moimont"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Ferme de Cottinville",
+            "detail": "Clos la Garenne / Ferme de Cottinville"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Gabrielle de Guerchy",
+            "detail": "Gabrielle De Guerchy"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Défense - Égalité",
+            "detail": "Défense - Egalité"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Émile Zola - Javel",
+            "detail": "Emile Zola - Javel"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Reims - Pitet / Curnonsky",
+            "detail": "Reims-Pitet / Curnonsky"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Pierre Sémard - Indépendance",
+            "detail": "Pierre Sémard / Pierre Sémard - Indépendance / Bobigny Pabl…"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Val",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Zone Commerciale",
+            "detail": "Saint-Mard"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Jean Allemane",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Maison de retraite",
+            "detail": "Réau"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Clos la Garenne",
+            "detail": "Fresnes"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Moimont",
+            "detail": "Marly-la-Ville"
+          }
+        ],
+        "summary": {
+          "en": "1 line added, 10 stops added, 8 stops removed, 184 stops updated",
+          "fr": "1 ligne ajoutée, 10 arrêts ajoutés, 8 arrêts supprimés, 184 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202609140816,
@@ -251,120 +385,6 @@
         "summary": {
           "en": "3 lines added, 3 lines removed, 13 stops added, 9 stops removed, 73 stops updated",
           "fr": "3 lignes ajoutées, 3 lignes supprimées, 13 arrêts ajoutés, 9 arrêts supprimés, 73 arrêts mis à jour"
-        }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202608310903,
-      "generatedAt": "2026-08-31T09:03:00.696Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-08-31-0903/transit-v1-202608310903.store",
-      "byteSize": 9187328,
-      "sha256": "8a406f1a2fbf7a573d6dcc7e23f7f3d6f5a0213f5e18a0afc963bba6d50f4b0e",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 102160,
-        "lines": 2000,
-        "routeVariants": 5918,
-        "stations": 15324,
-        "transfers": 13076
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 38,
-          "linesRemoved": 0,
-          "linesModified": 61,
-          "stationsAdded": 54,
-          "stationsRemoved": 17,
-          "stationsModified": 319,
-          "routeVariantsChanged": 854,
-          "transfersChanged": 92
-        },
-        "highlights": [
-          {
-            "kind": "lineAdded",
-            "label": "3665"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3656"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3654"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3651"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3652"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3653"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2335"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2310"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2340"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2346"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2350"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2352"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2353"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2354"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3655"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2351"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2375"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "3659"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2349"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2326"
-          }
-        ],
-        "summary": {
-          "en": "38 lines added, 54 stops added, 17 stops removed, 319 stops updated",
-          "fr": "38 lignes ajoutées, 54 arrêts ajoutés, 17 arrêts supprimés, 319 arrêts mis à jour"
         }
       }
     }
