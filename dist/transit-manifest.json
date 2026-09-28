@@ -1,7 +1,138 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-09-21T08:21:47.389Z",
+  "updatedAt": "2026-09-28T09:07:42.739Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202609280906,
+      "generatedAt": "2026-09-28T09:06:51.143Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-28-0907/transit-v1-202609280906.store",
+      "byteSize": 9162752,
+      "sha256": "bba8ba356db503f42207232cc9c3449346732dfd3cef868a0e975217ce6d2bf8",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 101937,
+        "lines": 2001,
+        "routeVariants": 5878,
+        "stations": 15325,
+        "transfers": 13072
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 1,
+          "linesRemoved": 0,
+          "linesModified": 68,
+          "stationsAdded": 15,
+          "stationsRemoved": 9,
+          "stationsModified": 394,
+          "routeVariantsChanged": 376,
+          "transfersChanged": 35
+        },
+        "highlights": [
+          {
+            "kind": "lineAdded",
+            "label": "TàD",
+            "detail": "TàD Vexin Est"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "André Lenôtre",
+            "detail": "Ecoquartier Woodi"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Lamirault",
+            "detail": "Collegien - Lamirault"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Collège de Vivonne",
+            "detail": "Collège Catherine de Vivonne"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Conflans-Sainte-Honorine",
+            "detail": "Conflans Sainte-Honorine"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Centre Commercial de l'Oseraie",
+            "detail": "Centre Commercial l'Oseraie"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "M.-C. Vaillant Couturier",
+            "detail": "Fontenay-sous-Bois"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Boulevard Pasteur",
+            "detail": "Ermont"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Rue du Professeur Calmette",
+            "detail": "Ermont"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Foch",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "La Chapelle",
+            "detail": "Ermont"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Kerautret - Salengro"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Gambetta"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Marceau"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Vauvenargues",
+            "detail": "Paris"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Place Nelson Mandela",
+            "detail": "Melun"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Racine",
+            "detail": "Orsay"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Mansart",
+            "detail": "Marly-le-Roi"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "La Butte",
+            "detail": "Perdreauville"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Vincent Bureau",
+            "detail": "Valenton"
+          }
+        ],
+        "summary": {
+          "en": "1 line added, 15 stops added, 9 stops removed, 394 stops updated",
+          "fr": "1 ligne ajoutée, 15 arrêts ajoutés, 9 arrêts supprimés, 394 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202609210821,
@@ -258,133 +389,6 @@
         "summary": {
           "en": "1 line removed, 4 stops added, 15 stops removed, 72 stops updated",
           "fr": "1 ligne supprimée, 4 arrêts ajoutés, 15 arrêts supprimés, 72 arrêts mis à jour"
-        }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202609070740,
-      "generatedAt": "2026-09-07T07:40:38.402Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-07-0741/transit-v1-202609070740.store",
-      "byteSize": 9121792,
-      "sha256": "2cba40ba18c1aa17643d4869cd672581829e4ec584af17d9d4bdf99cca962f67",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 101241,
-        "lines": 2000,
-        "routeVariants": 5878,
-        "stations": 15328,
-        "transfers": 13056
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 3,
-          "linesRemoved": 3,
-          "linesModified": 37,
-          "stationsAdded": 13,
-          "stationsRemoved": 9,
-          "stationsModified": 73,
-          "routeVariantsChanged": 456,
-          "transfersChanged": 36
-        },
-        "highlights": [
-          {
-            "kind": "lineAdded",
-            "label": "Soir",
-            "detail": "Soir Rambouillet"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2384"
-          },
-          {
-            "kind": "lineAdded",
-            "label": "2477"
-          },
-          {
-            "kind": "lineRemoved",
-            "label": "TàD"
-          },
-          {
-            "kind": "lineRemoved",
-            "label": "TàD"
-          },
-          {
-            "kind": "lineRemoved",
-            "label": "6538"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Sainte-Geneviève",
-            "detail": "Sainte Geneviève"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Étienne Marcel",
-            "detail": "Etienne Marcel"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "ZI de Vaubenard",
-            "detail": "Z.I. de Vaubenard"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Le Plessis Mornay",
-            "detail": "Le Plessis Mornay / Péage de Longvilliers"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Place Marguerite Perey / Polytechnique Vauve",
-            "detail": "Place Marguerite Perey"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "M.-C. Vaillant Couturier",
-            "detail": "Fontenay-sous-Bois"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Yvette",
-            "detail": "Palaiseau"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Cent Marches",
-            "detail": "Igny"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Clos de Villaine",
-            "detail": "Massy"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Château des Rentiers (Rue Nationale)"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Les Graviers (Avenue Charles de Gaulle)"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Kerautret - Salengro",
-            "detail": "Romainville"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Gambetta",
-            "detail": "Noisy-le-Sec"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Marceau",
-            "detail": "Noisy-le-Sec"
-          }
-        ],
-        "summary": {
-          "en": "3 lines added, 3 lines removed, 13 stops added, 9 stops removed, 73 stops updated",
-          "fr": "3 lignes ajoutées, 3 lignes supprimées, 13 arrêts ajoutés, 9 arrêts supprimés, 73 arrêts mis à jour"
         }
       }
     }
