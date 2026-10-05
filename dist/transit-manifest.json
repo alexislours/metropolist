@@ -1,7 +1,140 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-09-28T09:07:42.739Z",
+  "updatedAt": "2026-10-05T09:49:17.089Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202610050948,
+      "generatedAt": "2026-10-05T09:48:20.087Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-10-05-0949/transit-v1-202610050948.store",
+      "byteSize": 9166848,
+      "sha256": "e1dabc4c7972dad006a19535f6d49b09222e723047d74149686c9e56626e38ad",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 101892,
+        "lines": 2000,
+        "routeVariants": 5872,
+        "stations": 15331,
+        "transfers": 13072
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 0,
+          "linesRemoved": 1,
+          "linesModified": 13,
+          "stationsAdded": 14,
+          "stationsRemoved": 8,
+          "stationsModified": 351,
+          "routeVariantsChanged": 248,
+          "transfersChanged": 12
+        },
+        "highlights": [
+          {
+            "kind": "lineRemoved",
+            "label": "1229"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Rond Point CD148 - CD17",
+            "detail": "Rond point CD148 - CD17"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Trou Grillon",
+            "detail": "Trou Grillon / Chemin de Brie"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Hôpital - Rue Bernard Février",
+            "detail": "Hôpital"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Mairie / Val d'Osne",
+            "detail": "Mairie / Val D'Osne"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Aubervilliers - Pantin - Quatre Chemins",
+            "detail": "Aubervilliers-Pantin Quatre Chemins"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Val",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Yvette",
+            "detail": "Palaiseau"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Cent Marches",
+            "detail": "Igny"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Jean Allemane",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Clos de Villaine",
+            "detail": "Massy"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Olivier de Serres",
+            "detail": "Paris"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Boulevard Rose",
+            "detail": "Poissy"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Grande Ceinture",
+            "detail": "Poissy"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Grand Creilly",
+            "detail": "Lorrez-le-Bocage-Préaux"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Centre Commercial",
+            "detail": "Massy"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Lions",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Quai du Génie",
+            "detail": "Herblay-sur-Seine"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Route des Lacs",
+            "detail": "Paris"
+          },
+          {
+            "kind": "stationAdded",
+            "label": "Route de la Muette",
+            "detail": "Paris"
+          }
+        ],
+        "summary": {
+          "en": "1 line removed, 14 stops added, 8 stops removed, 351 stops updated",
+          "fr": "1 ligne supprimée, 14 arrêts ajoutés, 8 arrêts supprimés, 351 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202609280906,
@@ -264,131 +397,6 @@
         "summary": {
           "en": "1 line added, 10 stops added, 8 stops removed, 184 stops updated",
           "fr": "1 ligne ajoutée, 10 arrêts ajoutés, 8 arrêts supprimés, 184 arrêts mis à jour"
-        }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202609140816,
-      "generatedAt": "2026-09-14T08:16:17.734Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-14-0817/transit-v1-202609140816.store",
-      "byteSize": 9084928,
-      "sha256": "88b427b73fc03c2780efd482ff79a519a6c62c42128b212eb67de8a56c1d3ebb",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 100632,
-        "lines": 1999,
-        "routeVariants": 5854,
-        "stations": 15317,
-        "transfers": 13053
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 0,
-          "linesRemoved": 1,
-          "linesModified": 10,
-          "stationsAdded": 4,
-          "stationsRemoved": 15,
-          "stationsModified": 72,
-          "routeVariantsChanged": 245,
-          "transfersChanged": 5
-        },
-        "highlights": [
-          {
-            "kind": "lineRemoved",
-            "label": "TàD"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "La Borne Blanche",
-            "detail": "La Borne Blanche (Gare)"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Charles de Gaulle / Guy Môquet",
-            "detail": "Charles de Gaulle"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Pasteur - Campus",
-            "detail": "École Normale"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Sous-Préfecture",
-            "detail": "Sous Préfecture"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Place de Presles",
-            "detail": "Place"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Les Échabots",
-            "detail": "Les Echabots"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Centre Pénitentiaire / Maison de retraite",
-            "detail": "Centre Pénitentiaire"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Foch",
-            "detail": "Herblay-sur-Seine"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Coquelicots",
-            "detail": "Montfermeil"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Fondation Louis Vuitton",
-            "detail": "Paris"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Porte de Madrid",
-            "detail": "Paris"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Val"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Zone Commerciale"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Yvette"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Cent Marches"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Boulevard Pasteur"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Jean Allemane"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "Rue du Professeur Calmette"
-          },
-          {
-            "kind": "stationRemoved",
-            "label": "La Chapelle"
-          }
-        ],
-        "summary": {
-          "en": "1 line removed, 4 stops added, 15 stops removed, 72 stops updated",
-          "fr": "1 ligne supprimée, 4 arrêts ajoutés, 15 arrêts supprimés, 72 arrêts mis à jour"
         }
       }
     }
