@@ -1,7 +1,141 @@
 {
   "manifestVersion": 1,
-  "updatedAt": "2026-10-05T09:49:17.089Z",
+  "updatedAt": "2026-10-12T10:00:05.118Z",
   "datasets": [
+    {
+      "schemaVersion": 1,
+      "dataVersion": 202610120959,
+      "generatedAt": "2026-10-12T09:59:09.545Z",
+      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-10-12-1000/transit-v1-202610120959.store",
+      "byteSize": 9187328,
+      "sha256": "e3795d2f939cfad25877d2abe4b0d89c52796a280c03777e23f5409eb0e4968b",
+      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
+      "counts": {
+        "lineStops": 102270,
+        "lines": 2000,
+        "routeVariants": 5888,
+        "stations": 15343,
+        "transfers": 13118
+      },
+      "changes": {
+        "delta": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "linesModified": 55,
+          "stationsAdded": 29,
+          "stationsRemoved": 17,
+          "stationsModified": 139,
+          "routeVariantsChanged": 530,
+          "transfersChanged": 90
+        },
+        "highlights": [
+          {
+            "kind": "stationRenamed",
+            "label": "Artois / Cornouailles",
+            "detail": "Artois / Cornouailles / Bouvin"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Cimetière",
+            "detail": "Coeur de Bourg / Cimetière"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Prairie de Chaâge",
+            "detail": "Prairie de Chaâge / Avenue Frot"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Armand Peugeot",
+            "detail": "Bonnin / Verdun / Cimetière"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Le Golf",
+            "detail": "Le Golf / Pointe Ringale"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Hôpital",
+            "detail": "P. et M. Curie"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Rustic / Place du Marché au Blé",
+            "detail": "Rustic"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Square Siegfried",
+            "detail": "Square Siegfried / Plein Ciel"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Montaigu",
+            "detail": "Montaigu / Lorient"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Collège Jean Vilar",
+            "detail": "Collège Jean Vilar / Lycée Sonia Delaunay"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Place du Gué",
+            "detail": "Mairie Annexe"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Olof Palme",
+            "detail": "Olof Palme / Suède"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Le Clocher",
+            "detail": "Collège la Grange du Bois / Le Clocher"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Droits de l'Homme",
+            "detail": "Droits de l'Homme / Victor Schoelcher"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Pivoines",
+            "detail": "Pivoines / Roseraie"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Le Fresne",
+            "detail": "Le Fresne / Quatre Saisons"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Centre",
+            "detail": "Centre / Place du 14 Juillet"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Hôtel de Ville",
+            "detail": "Batelière / Hôtel de Ville"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Place Beltrame",
+            "detail": "George Sand"
+          },
+          {
+            "kind": "stationRenamed",
+            "label": "Explorer",
+            "detail": "Hôtels du Val de France / Explorer"
+          }
+        ],
+        "summary": {
+          "en": "29 stops added, 17 stops removed, 139 stops updated",
+          "fr": "29 arrêts ajoutés, 17 arrêts supprimés, 139 arrêts mis à jour"
+        }
+      }
+    },
     {
       "schemaVersion": 1,
       "dataVersion": 202610050948,
@@ -263,140 +397,6 @@
         "summary": {
           "en": "1 line added, 15 stops added, 9 stops removed, 394 stops updated",
           "fr": "1 ligne ajoutée, 15 arrêts ajoutés, 9 arrêts supprimés, 394 arrêts mis à jour"
-        }
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "dataVersion": 202609210821,
-      "generatedAt": "2026-09-21T08:21:09.381Z",
-      "url": "https://github.com/alexislours/metropolist/releases/download/data-2026-09-21-0821/transit-v1-202609210821.store",
-      "byteSize": 9121792,
-      "sha256": "c6e562930ad90ea05418cb97db3f92fd07f89b1292302a3d689aaee8deea41c8",
-      "modelHash": "810415d7ecc9f7047d57a458ee46194e92c9e5f760a2c0d8b8aed78db2a3fa5e",
-      "counts": {
-        "lineStops": 101268,
-        "lines": 2000,
-        "routeVariants": 5869,
-        "stations": 15319,
-        "transfers": 13057
-      },
-      "changes": {
-        "delta": {
-          "linesAdded": 1,
-          "linesRemoved": 0,
-          "linesModified": 7,
-          "stationsAdded": 10,
-          "stationsRemoved": 8,
-          "stationsModified": 184,
-          "routeVariantsChanged": 222,
-          "transfersChanged": 16
-        },
-        "highlights": [
-          {
-            "kind": "lineAdded",
-            "label": "TàD",
-            "detail": "TàD Goêle"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Cité Aéronautique",
-            "detail": "Cité Technique"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Le Plessis Picard - Centre Pénitentiaire",
-            "detail": "Le Plessis Picard"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Collège Jeanne Bonnardel-Béguin",
-            "detail": "Collège Jeanne Bonnardel Béguin"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Collège Albert Camus",
-            "detail": "CES Albert Camus"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Chemin de la Saussaie / Les Grandes Vallées",
-            "detail": "Chemin de la Saussay / Les Grandes Vallées"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Malcolm X",
-            "detail": "Malcolm X - Descartes"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "14 rue Jean Jaurès",
-            "detail": "14 rue Jean Jaurès / Moimont"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Ferme de Cottinville",
-            "detail": "Clos la Garenne / Ferme de Cottinville"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Gabrielle de Guerchy",
-            "detail": "Gabrielle De Guerchy"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Défense - Égalité",
-            "detail": "Défense - Egalité"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Émile Zola - Javel",
-            "detail": "Emile Zola - Javel"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Reims - Pitet / Curnonsky",
-            "detail": "Reims-Pitet / Curnonsky"
-          },
-          {
-            "kind": "stationRenamed",
-            "label": "Pierre Sémard - Indépendance",
-            "detail": "Pierre Sémard / Pierre Sémard - Indépendance / Bobigny Pabl…"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Val",
-            "detail": "Herblay-sur-Seine"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Zone Commerciale",
-            "detail": "Saint-Mard"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Jean Allemane",
-            "detail": "Herblay-sur-Seine"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Maison de retraite",
-            "detail": "Réau"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Clos la Garenne",
-            "detail": "Fresnes"
-          },
-          {
-            "kind": "stationAdded",
-            "label": "Moimont",
-            "detail": "Marly-la-Ville"
-          }
-        ],
-        "summary": {
-          "en": "1 line added, 10 stops added, 8 stops removed, 184 stops updated",
-          "fr": "1 ligne ajoutée, 10 arrêts ajoutés, 8 arrêts supprimés, 184 arrêts mis à jour"
         }
       }
     }
